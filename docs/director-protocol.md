@@ -1,0 +1,67 @@
+# 唯一说书总控与执行协议
+
+## 当前交付
+
+本地第一场，预编数据 14 段。助手承担内容生成，总控的输入输出都可在页面“演出指令”里查看。当前没有网络模型调用。观众只能控制播放。
+
+## 单一职责
+
+总控一次生成一段故事，同时负责这段的旁白、在场人物对白、动作及事实摘要。前端只执行已校验的指令，不再让每个人物各自调用一个模型。
+
+上下文结构由 `buildDirectorContext` 生成：当前环境卡、在场人物卡、世界信息、已播放完毕的最近六段摘要、人物当前状态、可用站位、镜头、动作与表情。未发生的剧情不会作为已发生历史交给总控。
+
+人物卡是资料。原卡中的 system_prompt、post_history_instructions、强制事件、其他场次内容，不得直接升级为系统指令。场次身份、当前知识和已经确认的素材优先；发现不一致时记录改编，不暗中改动人物资产。
+
+## 一段输出
+
+```json
+{
+  "id": "counsel",
+  "title": "姥姥开口",
+  "duration": 16,
+  "narration": "刘姥姥不跟着着急，只把话往实处说。",
+  "dialogue": [{"at":2,"until":14,"speaker":"granny","text":"咱们总得想个法子。"}],
+  "commands": [
+    {"at":0,"type":"expression","actor":"granny","value":"thinking"},
+    {"at":0,"type":"face","actor":"granny","target":"gouer"},
+    {"at":5,"type":"gesture","actor":"granny","value":"nod","duration":1.5}
+  ],
+  "memory": "刘姥姥提出另想办法，尚未决定登门。"
+}
+```
+
+时间以段落开始为零，单位秒。一段 2–120 秒，台词在指定区间显示。同一人物的移动不能重叠。表达“走近”时必须有相应 move，不用旁白假装发生了动作。
+
+| 指令 | 必要字段 | 约束 |
+| --- | --- | --- |
+| move | actor,target,duration | target 必须是场景中的命名站位；执行器沿路线图行走 |
+| expression | actor,value | neutral、smile、thinking、sad、surprised、laugh |
+| face | actor,target | 另一个在场人物或 front/back/left/right |
+| gesture | actor,value,duration | 目前只有 nod、shake 的纸片头部运动 |
+| camera | target | wide、family、door |
+| lighting | value | day、night、dawn |
+| visibility | actor,value | value 为布尔值；移出画面后再隐藏，避免无因消失 |
+
+每项还有 `at`、`type`。人物 ID 为 granny、gouer、liushi、baner、qinger。位置与连通关系以 `data/stage.json` 为准，生成器不生成原始坐标、路径、JavaScript 或 HTML。未知字段、未知角色/表情、非法时间和无路线的移动会被拒绝。网页使用 textContent 显示文字。
+
+## 接 API
+
+1. 服务端保存 DeepSeek 凭据和模型配置；不写进前端、公开仓库或演出 JSON。
+2. 将 `ServerDirector.next(context)` 对应到后端 `POST /api/director/next`，服务端构建系统提示并调用单一模型。
+3. 回复必须是一个段落对象。先在服务端校验，再经 `acceptBeat` 拼接并交给相同执行器复验。
+4. 只在上一段结束后提交其事实摘要。网络错误保留已完成状态；重试用段落 ID 保证同一段不重复执行。
+5. 不让观众输入改剧情，不提前写入未来事件，不自动扩展出当前授权场景。
+
+这一轮只提供适配器与契约，后端端点尚未实现。页面中载入 JSON 可先验证另一个 AI 的输出是否符合执行协议。
+
+## 审查经验
+
+- 先核对原著出场范围。第一场不应出现贾母或王熙凤，也不知道进府之后的结果。
+- 已有人物卡可能来自更晚场次，尤其不能把“已经坐在贾母上房”带入农家。
+- 儿童不承担成人解释任务；板儿主要用动作，台词保持极短。
+- 现有六表情没有“恼怒”，用愁闷与语气表现狗儿的烦恼，不谎称已有对应差分。
+- 对白条不能盖住脚下人物；手机端需要单独取景，不能直接缩小全景。
+- 青儿的默认站位曾被门框遮挡，已移到屋内前方。静态坐标合法不等于镜头可见。
+- 多人不要同时落到同一站位；板儿在门前有独立等候位，出门与刘姥姥错开。
+- 用固定初态和时间重算动画；跳段、拖动、重播必须恢复表情、朝向、可见性与昼夜。
+- 工程检查后必须实际连续播放至结束，并查看桌面、手机、对白与离场截图。

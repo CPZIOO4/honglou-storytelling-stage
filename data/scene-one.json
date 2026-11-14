@@ -1,0 +1,665 @@
+{
+  "version": 1,
+  "id": "scene-one-authored-v1",
+  "title": "寒家谋生",
+  "scene": "gouer-home",
+  "mode": "assistant-authored",
+  "summary": "从过冬的难处说起，到刘姥姥带板儿出门为止。",
+  "initial": {
+    "camera": "wide",
+    "lighting": "day",
+    "actors": {
+      "granny": {
+        "anchor": "granny_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "gouer": {
+        "anchor": "gouer_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "liushi": {
+        "anchor": "liushi_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "baner": {
+        "anchor": "baner_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "qinger": {
+        "anchor": "qinger_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      }
+    }
+  },
+  "beats": [
+    {
+      "id": "winter",
+      "title": "冬事未办",
+      "duration": 11,
+      "narration": "秋尽冬初，风已带了寒意。京郊这间小屋里，过冬的衣食还没置办齐。狗儿为生计发愁，刘氏守着灶边，两个孩子只管挨着大人。",
+      "dialogue": [],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "wide"
+        },
+        {
+          "at": 1,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "sad"
+        },
+        {
+          "at": 2,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
+        }
+      ],
+      "memory": "一家尚无过冬的办法。"
+    },
+    {
+      "id": "worry",
+      "title": "愁来踱步",
+      "duration": 15,
+      "narration": "狗儿在屋里走了两步，话说得急，脚下却没个去处。刘姥姥看着他，等他把这口气说完。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 13,
+          "speaker": "gouer",
+          "text": "眼看天冷了，家里样样要钱。我在外头忙一日，回来还是这个样子。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_pace",
+          "duration": 3
+        },
+        {
+          "at": 4,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 7,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_home",
+          "duration": 3
+        },
+        {
+          "at": 10,
+          "type": "gesture",
+          "actor": "gouer",
+          "value": "shake",
+          "duration": 1.4
+        }
+      ],
+      "memory": "狗儿把生计的烦恼说出来，尚未提出办法。"
+    },
+    {
+      "id": "counsel",
+      "title": "姥姥开口",
+      "duration": 16,
+      "narration": "刘姥姥不跟着着急，只把话往实处说。屋里的人渐渐都看向她。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 14,
+          "speaker": "granny",
+          "text": "姑爷，光在家里生气，银子也不会自己进门。咱们离城不远，总得想个法子。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 1,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 5,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 1.5
+        },
+        {
+          "at": 10,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        }
+      ],
+      "memory": "刘姥姥提出应该另想办法。"
+    },
+    {
+      "id": "connection",
+      "title": "想起旧亲",
+      "duration": 18,
+      "narration": "她想起一门多年不走动的旧亲。那条线虽远，总还值得问一问。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 16,
+          "speaker": "granny",
+          "text": "你们家从前同王家连过宗。如今那位姑太太在荣国府，听说还肯怜贫惜老。去问个安，也许念着旧情。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
+        },
+        {
+          "at": 1,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_listen",
+          "duration": 2.4
+        },
+        {
+          "at": 4,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 8,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "surprised"
+        }
+      ],
+      "memory": "刘姥姥提起与王家的联宗旧情及王夫人，尚不知道是否会得到帮助。"
+    },
+    {
+      "id": "hesitation",
+      "title": "女儿的顾虑",
+      "duration": 15,
+      "narration": "刘氏听见这话，心里动了一动，又担心母亲到了门前受人轻慢。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 13,
+          "speaker": "liushi",
+          "text": "娘，这样的人家，咱们怎么好上门？只怕还没见着人，先叫门上的挡回来了。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "sad"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "liushi_near",
+          "duration": 1.8
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 8,
+          "type": "gesture",
+          "actor": "liushi",
+          "value": "shake",
+          "duration": 1.3
+        }
+      ],
+      "memory": "刘氏担心求助受阻，尤其担心母亲难堪。"
+    },
+    {
+      "id": "chance",
+      "title": "狗儿动了心",
+      "duration": 14,
+      "narration": "狗儿听到有这条门路，方才的急躁松了些。他转过身来，认真接住了话。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 12,
+          "speaker": "gouer",
+          "text": "姥姥当年见过那位姑太太。要不，明日先去问一问？成不成，总比在家干等着强。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        },
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 7,
+          "type": "gesture",
+          "actor": "gouer",
+          "value": "nod",
+          "duration": 1.4
+        }
+      ],
+      "memory": "狗儿希望刘姥姥试着登门。"
+    },
+    {
+      "id": "deepgate",
+      "title": "侯门难进",
+      "duration": 15,
+      "narration": "刘姥姥嘴上说得明白，真要登门，心里也有踌躇。她想了想，没有立刻应下。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 13,
+          "speaker": "granny",
+          "text": "侯门深似海。我这张老脸，多少年没在人家跟前露过了。去了，未必有人认得。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "granny",
+          "value": "sad"
+        },
+        {
+          "at": 3,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "shake",
+          "duration": 1.5
+        },
+        {
+          "at": 10,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        }
+      ],
+      "memory": "刘姥姥承认自己也担忧被拒。"
+    },
+    {
+      "id": "zhourui",
+      "title": "找谁通个信",
+      "duration": 16,
+      "narration": "狗儿又想起父亲从前的旧交。这回说的，是到了门口先找谁。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 14,
+          "speaker": "gouer",
+          "text": "先找周瑞。他跟我父亲从前有过交情。姥姥带着板儿去，只求他给通个信。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "neutral"
+        },
+        {
+          "at": 1,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 7,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 11,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 1.2
+        }
+      ],
+      "memory": "求助的第一条线索是周瑞，计划让板儿同行。"
+    },
+    {
+      "id": "resolve",
+      "title": "舍这一回老脸",
+      "duration": 18,
+      "narration": "话到这里，刘姥姥终于拿定主意。她看了看女儿，又看了看两个孩子，语气反倒轻快起来。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 16,
+          "speaker": "granny",
+          "text": "也罢，我去碰一碰。真有些照应，大家都好；便是没有，也算见一回世面。你们在家，把日子照常过着。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "granny",
+          "value": "smile"
+        },
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 6,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 1.6
+        },
+        {
+          "at": 10,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "smile"
+        },
+        {
+          "at": 11,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "smile"
+        }
+      ],
+      "memory": "刘姥姥决定次日带板儿进城；能否求得帮助仍未可知。"
+    },
+    {
+      "id": "children",
+      "title": "孩子只听见进城",
+      "duration": 12,
+      "narration": "大人的难处，板儿并没听懂。他只听见明日可以跟姥姥进城，便往她身边挪。青儿静静待在屋里。",
+      "dialogue": [
+        {
+          "at": 5,
+          "until": 9,
+          "speaker": "baner",
+          "text": "去！"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "baner",
+          "value": "smile"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "baner",
+          "target": "baner_near",
+          "duration": 2
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "baner",
+          "target": "granny"
+        },
+        {
+          "at": 3,
+          "type": "gesture",
+          "actor": "baner",
+          "value": "nod",
+          "duration": 1.2
+        },
+        {
+          "at": 6,
+          "type": "face",
+          "actor": "qinger",
+          "target": "liushi"
+        }
+      ],
+      "memory": "板儿愿意随姥姥出门，青儿留在家中。"
+    },
+    {
+      "id": "night",
+      "title": "一夜过去",
+      "duration": 11,
+      "narration": "一家把明日的事商量妥当。夜里无话，到了天色将明，刘姥姥便已收拾停当。门外的小院，透进一层清冷的晨光。",
+      "dialogue": [],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "wide"
+        },
+        {
+          "at": 1,
+          "type": "lighting",
+          "value": "night"
+        },
+        {
+          "at": 7,
+          "type": "lighting",
+          "value": "dawn"
+        },
+        {
+          "at": 8,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
+        }
+      ],
+      "memory": "时间推进到次日清晨，准备出门。"
+    },
+    {
+      "id": "instructions",
+      "title": "临行嘱咐",
+      "duration": 16,
+      "narration": "临出门，刘姥姥把板儿叫到近前。先教孩子几句话，才好带他走这一遭。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 14,
+          "speaker": "granny",
+          "text": "跟紧姥姥，不许乱跑。见了人，等我教你称呼。人家问你，你别只顾着看热闹。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "granny",
+          "target": "baner"
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 6,
+          "type": "gesture",
+          "actor": "baner",
+          "value": "nod",
+          "duration": 1.4
+        },
+        {
+          "at": 8,
+          "type": "expression",
+          "actor": "baner",
+          "value": "neutral"
+        },
+        {
+          "at": 12,
+          "type": "expression",
+          "actor": "granny",
+          "value": "smile"
+        }
+      ],
+      "memory": "刘姥姥叮嘱板儿跟紧自己、不要乱跑。"
+    },
+    {
+      "id": "farewell",
+      "title": "家里等信",
+      "duration": 16,
+      "narration": "刘氏送了两步，停在屋里。许多担心，到嘴边只剩一句。",
+      "dialogue": [
+        {
+          "at": 2,
+          "until": 9,
+          "speaker": "liushi",
+          "text": "娘，路上慢些。真进不去，也早些回来。"
+        },
+        {
+          "at": 10,
+          "until": 15,
+          "speaker": "granny",
+          "text": "知道了，安心等着。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "granny",
+          "target": "door_inside",
+          "duration": 5
+        },
+        {
+          "at": 2.3,
+          "type": "move",
+          "actor": "baner",
+          "target": "baner_door_wait",
+          "duration": 5.2
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
+        },
+        {
+          "at": 5,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 11,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 1.2
+        },
+        {
+          "at": 13,
+          "type": "camera",
+          "target": "door"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "liushi_home",
+          "duration": 1
+        }
+      ],
+      "memory": "家人在屋内送行，祖孙来到门前。"
+    },
+    {
+      "id": "depart",
+      "title": "祖孙出门",
+      "duration": 18,
+      "narration": "刘姥姥带着板儿穿过小院，朝城里的方向去了。门内还是这一家人的日子，门外会遇到什么，此刻谁也不知道。第一场，就说到这里。",
+      "dialogue": [],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "door"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "granny",
+          "target": "yard_end",
+          "duration": 7.5
+        },
+        {
+          "at": 2.2,
+          "type": "move",
+          "actor": "baner",
+          "target": "yard_end",
+          "duration": 8.5
+        },
+        {
+          "at": 8,
+          "type": "visibility",
+          "actor": "granny",
+          "value": false
+        },
+        {
+          "at": 11,
+          "type": "visibility",
+          "actor": "baner",
+          "value": false
+        },
+        {
+          "at": 12,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "neutral"
+        }
+      ],
+      "memory": "祖孙离开狗儿家，准备进城。演出在进入宁荣街之前结束。"
+    }
+  ]
+}

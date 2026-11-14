@@ -1,0 +1,244 @@
+{
+  "id": "gouer-home",
+  "model": "assets/scene/gouer-home.glb",
+  "coordinates": "Blender Z-up; renderer converts to glTF Y-up",
+  "anchors": {
+    "granny_home": [
+      -1.3,
+      -0.65,
+      0.025
+    ],
+    "gouer_home": [
+      -0.3,
+      0.55,
+      0.025
+    ],
+    "gouer_pace": [
+      0.65,
+      0.55,
+      0.025
+    ],
+    "gouer_listen": [
+      -0.1,
+      0.1,
+      0.025
+    ],
+    "liushi_home": [
+      1.05,
+      -0.35,
+      0.025
+    ],
+    "liushi_near": [
+      0.85,
+      -0.65,
+      0.025
+    ],
+    "baner_home": [
+      0.15,
+      -1.6,
+      0.025
+    ],
+    "baner_near": [
+      -0.45,
+      -1.35,
+      0.025
+    ],
+    "qinger_home": [
+      -1.1,
+      -1.8,
+      0.025
+    ],
+    "qinger_mother": [
+      0.95,
+      -1.55,
+      0.025
+    ],
+    "room_center": [
+      0.15,
+      -0.65,
+      0.025
+    ],
+    "door_inside": [
+      1.75,
+      -1.25,
+      0.025
+    ],
+    "door_threshold": [
+      2.43,
+      -1.25,
+      0.06
+    ],
+    "yard_entry": [
+      3.25,
+      -1.25,
+      0.025
+    ],
+    "yard_end": [
+      4.75,
+      -1.25,
+      0.025
+    ],
+    "baner_door_wait": [
+      1.0,
+      -1.65,
+      0.025
+    ]
+  },
+  "edges": [
+    [
+      "granny_home",
+      "room_center"
+    ],
+    [
+      "gouer_home",
+      "gouer_pace"
+    ],
+    [
+      "gouer_home",
+      "gouer_listen"
+    ],
+    [
+      "gouer_listen",
+      "room_center"
+    ],
+    [
+      "liushi_home",
+      "liushi_near"
+    ],
+    [
+      "liushi_near",
+      "room_center"
+    ],
+    [
+      "baner_home",
+      "baner_near"
+    ],
+    [
+      "baner_near",
+      "room_center"
+    ],
+    [
+      "qinger_home",
+      "baner_near"
+    ],
+    [
+      "baner_home",
+      "qinger_mother"
+    ],
+    [
+      "room_center",
+      "door_inside"
+    ],
+    [
+      "baner_home",
+      "door_inside"
+    ],
+    [
+      "door_inside",
+      "door_threshold"
+    ],
+    [
+      "door_threshold",
+      "yard_entry"
+    ],
+    [
+      "yard_entry",
+      "yard_end"
+    ],
+    [
+      "baner_home",
+      "baner_door_wait"
+    ],
+    [
+      "baner_door_wait",
+      "door_inside"
+    ]
+  ],
+  "obstacles": [
+    {
+      "id": "kang",
+      "min": [
+        -3.95,
+        0.37
+      ],
+      "max": [
+        -1.18,
+        2.24
+      ]
+    },
+    {
+      "id": "table",
+      "min": [
+        -3.3,
+        -1.0
+      ],
+      "max": [
+        -2.1,
+        -0.18
+      ]
+    },
+    {
+      "id": "stove",
+      "min": [
+        0.63,
+        1.16
+      ],
+      "max": [
+        2.14,
+        2.27
+      ]
+    },
+    {
+      "id": "stool",
+      "min": [
+        -2.17,
+        -1.05
+      ],
+      "max": [
+        -1.6,
+        -0.53
+      ]
+    }
+  ],
+  "cameras": {
+    "wide": {
+      "position": [
+        8.5,
+        -15.5,
+        9.6
+      ],
+      "target": [
+        0.25,
+        0.05,
+        1.0
+      ],
+      "scale": 12.1
+    },
+    "family": {
+      "position": [
+        5.7,
+        -13,
+        7.7
+      ],
+      "target": [
+        -0.45,
+        -0.1,
+        1.15
+      ],
+      "scale": 8.9
+    },
+    "door": {
+      "position": [
+        8.5,
+        -13,
+        8
+      ],
+      "target": [
+        2.6,
+        -0.4,
+        1.05
+      ],
+      "scale": 8.4
+    }
+  }
+}
