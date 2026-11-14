@@ -1,4 +1,4 @@
-param([switch]$NoBrowser)
+﻿param([switch]$NoBrowser)
 $ErrorActionPreference='Stop'
 $projectRoot=$PSScriptRoot
 $runtimeDir=Join-Path $projectRoot '.runtime'

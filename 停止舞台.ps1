@@ -1,4 +1,4 @@
-$ErrorActionPreference='Stop'
+﻿$ErrorActionPreference='Stop'
 $stateFile=Join-Path $PSScriptRoot '.runtime/server.json'
 if(-not (Test-Path -LiteralPath $stateFile)){Write-Output '没有本脚本启动的舞台服务。';return}
 $state=Get-Content -LiteralPath $stateFile -Raw | ConvertFrom-Json
