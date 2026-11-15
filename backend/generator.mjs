@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {compileStory,stateAt,buildDirectorContext,personalKnowledge,along,distance} from '../src/engine.js';
 import {readCredential,hasCredential} from './credentials.mjs';
 import {NARRATIVE_VERSION,nodeFor,validatePlan,buildHandoff,nextNodeContext,stageScriptBeat,validateScreenplay} from './narrative.mjs';
+import {defaultPresentation} from '../src/presentation.js';
 export const MODEL='deepseek-flash';
 const ORIGIN='https://api.deepseek.com';
 const load=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -145,6 +146,7 @@ export function createGenerator(root){
     }catch(e){if(attempt===2)throw Error('场末决定尚未落实：'+e.message);rejectedResolution=resolution;handoffErrors=e.message;}
    }
    story.narrative.handoff=handoff;story.narrative.handoffReview=handoffReview;
+   story.presentation=defaultPresentation(story);
    await save(join(dir,job.id,'next-node-context.json'),nextNodeContext(handoff,storyline,cards));
    story.generation={provider:'DeepSeek',model:MODEL,generatedAt:new Date().toISOString(),source:'live-api',jobId:job.id,calls:job.calls.map(c=>({responseId:c.responseId,model:c.model,phase:c.phase,usage:c.usage})),validation:{...audit,semanticReview:review}};
    await save(join(dir,job.id,'approved.json'),story);const temp=join(root,'.runtime/latest-story.tmp');await save(temp,story);await rename(temp,join(root,'.runtime/latest-story.json'));

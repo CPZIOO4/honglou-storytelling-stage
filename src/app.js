@@ -1,12 +1,13 @@
 import {compileStory,stateAt,buildDirectorContext} from './engine.js';
 import {StageView} from './stage.js';
 import {RecordedDirector} from './director.js';
+import {compilePresentation,presentationAt,presentationTimeForStory} from './presentation.js';
 const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const names={};let story,stage,characters,cards,compiled,view,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,ready=false,raf;
+const names={};let story,stage,characters,cards,compiled,presentation,view,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
-function chapters(){const list=$('chapters');list.replaceChildren();compiled.beats.forEach((b,i)=>{const li=document.createElement('li'),btn=document.createElement('button'),number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');btn.append(number,document.createTextNode(b.title));btn.onclick=()=>seek(b.start);li.append(btn);list.append(li);});$('scrubber').max=compiled.duration;$('total').textContent=format(compiled.duration);$('segment-count').textContent=compiled.beats.length+' 段';}
-function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:story.mode,generation:story.generation,...lastState.beat}:buildDirectorContext(cards,compiled,time),null,2);}
-function installStory(next){const validated=compileStory(next,stage,characters);story=next;compiled=validated;playing=false;time=0;lastBeat=-1;chapters();document.querySelector('h1').textContent=story.title||'寒家谋生';$('source-status').textContent=story.mode==='deepseek-generated'?'由 DeepSeek Flash 生成 · 已检查后播放':'助手预编示例';document.querySelector('#ending h2').textContent='这一场，暂且说到这里。';document.querySelector('.cast-note p').innerHTML='家中生计，从这一刻说起。<br>观众只需控制播放。';draw();}
+function chapters(){const list=$('chapters');list.replaceChildren();compiled.beats.forEach((b,i)=>{const li=document.createElement('li'),btn=document.createElement('button'),number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');btn.append(number,document.createTextNode(b.title));btn.onclick=()=>seek(presentation.beatStarts[b.id]);li.append(btn);list.append(li);});$('scrubber').max=presentation.duration;$('total').textContent=format(presentation.duration);$('segment-count').textContent=compiled.beats.length+' 段';}
+function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:story.mode,generation:story.generation,...lastState.beat}:buildDirectorContext(cards,compiled,presentState?.storyTime||0),null,2);}
+function installStory(next){const validated=compileStory(next,stage,characters);const timeline=compilePresentation(next,validated);story=next;compiled=validated;presentation=timeline;playing=false;time=0;lastBeat=-1;chapters();document.querySelector('h1').textContent=story.title||'寒家谋生';$('source-status').textContent=story.mode==='deepseek-generated'?'由 DeepSeek Flash 生成 · 已检查后播放':'助手预编示例';document.querySelector('#ending h2').textContent='这一场，暂且说到这里。';draw();}
 let generationTimer=null;
 async function pollGeneration(id){
  try{const job=await json('/api/director/jobs/'+id);$('generation-status').textContent=job.message;
@@ -25,10 +26,7 @@ async function connectLocalDirector(){
 }
 function placeBubble(dialogue){
  const el=$('dialogue');el.classList.toggle('hidden',!dialogue);if(!dialogue)return;
- const recipients=dialogue.to.map(id=>names[id]).join('、');const mode={normal:'对',whisper:'悄悄对',call:'喊向'}[dialogue.mode];
- $('speaker').textContent=`${names[dialogue.speaker]} ${mode} ${recipients}说`;$('dialogue-text').textContent=dialogue.text;
- let audience=$('dialogue-audience');if(!audience){audience=document.createElement('small');audience.id='dialogue-audience';el.append(audience);}
- const others=dialogue.heardBy.filter(id=>id!==dialogue.speaker);audience.textContent=(dialogue.mode==='whisper'?'低语 · ':'听见：')+others.map(id=>names[id]).join('、')+(dialogue.mode==='whisper'?'可闻':'');el.classList.toggle('whisper',dialogue.mode==='whisper');
+ $('dialogue-text').textContent=dialogue.text;el.classList.toggle('whisper',dialogue.mode==='whisper');
  const head=view.headScreen(dialogue.speaker);if(!head)return;const w=el.offsetWidth,h=el.offsetHeight;
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const top=clamp(head.y-h-25,8,view.height-h-15);
  const candidates=[head.x-w/2,head.x-w+35,head.x-35].map(x=>clamp(x,8,view.width-w-8));
@@ -38,31 +36,37 @@ function placeBubble(dialogue){
  el.dataset.speaker=dialogue.speaker;el.dataset.to=dialogue.to.join(',');el.dataset.mode=dialogue.mode;
 }
 function draw(){
-  if(!ready)return;const state=stateAt(compiled,time);lastState=state;view.update(state);
+  if(!ready)return;presentState=presentationAt(presentation,time);const raw=stateAt(compiled,presentState.storyTime);
+  const obscured=presentState.obscured&&!presentState.finished;
+  const state={...raw,lighting:presentState.lighting||raw.lighting,dialogue:obscured?null:raw.dialogue,finished:presentState.finished,presentationObscured:obscured};lastState=state;view.update(state);
   $('elapsed').textContent=format(time);$('scrubber').value=time;$('play').textContent=playing?'Ⅱ 暂停':'▶ 播放';$('play').setAttribute('aria-label',playing?'暂停演出':'播放演出');
-  $('narration-text').textContent=state.beat.narration;$('beat-number').textContent=`${String(state.index+1).padStart(2,'0')} / ${compiled.beats.length}　${state.beat.title}`;
-  $('moment').textContent=({day:'傍晚',night:'夜里',dawn:'次日清晨'}[state.lighting])+' · 狗儿家';
-  placeBubble(state.dialogue);
+  const overlay=$('scene-overlay'),opening=presentState.kind==='opening';overlay.classList.toggle('hidden',!obscured);overlay.classList.toggle('opening',opening);overlay.classList.toggle('bridge',!opening);overlay.classList.toggle('text-ready',presentState.showText);
+  $('opening-title').textContent=opening?presentState.title:'';$('opening-subtitle').textContent=opening?presentState.subtitle:'';$('bridge-text').textContent=opening?'':presentState.text||'';
+  $('stage').classList.toggle('veiled',obscured);$('camera-reset').classList.toggle('hidden',obscured);placeBubble(state.dialogue);
+  if(state.dialogue){const el=$('dialogue'),left=parseFloat(el.style.left),top=parseFloat(el.style.top),right=left+el.offsetWidth,bottom=top+el.offsetHeight;
+   for(const actor of view.actors.values()){if(actor.label.hidden)continue;const x=parseFloat(actor.label.style.left),y=parseFloat(actor.label.style.top);if(x+30>left&&x-30<right&&y>top&&y-26<bottom)actor.label.hidden=true;}
+  }
   $('ending').classList.toggle('hidden',!state.finished);
   if(state.index!==lastBeat){lastBeat=state.index;[...$('chapters').querySelectorAll('button')].forEach((b,i)=>{b.classList.toggle('active',i===state.index);b.classList.toggle('past',i<state.index);if(i===state.index)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});inspect();}
-  const currentCast=Object.entries(state.actors).filter(([,a])=>a.visible).map(([id])=>names[id]).join('|');if($('cast').dataset.cast!==currentCast){$('cast').replaceChildren(...currentCast.split('|').filter(Boolean).map(n=>{const s=document.createElement('span');s.textContent=n;return s;}));$('cast').dataset.cast=currentCast;}
 }
-function seek(t){time=Math.max(0,Math.min(compiled.duration,t));if(time===compiled.duration)playing=false;draw();inspect();}
-function toggle(){if(!ready)return;if(time>=compiled.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
-function tick(now){if(ready&&playing){const dt=Math.min(.1,(now-lastFrame)/1000);time=Math.min(compiled.duration,time+dt*speed);if(time>=compiled.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
+
+function seek(t){time=Math.max(0,Math.min(presentation.duration,t));if(time===presentation.duration)playing=false;draw();inspect();}
+function toggle(){if(!ready)return;if(time>=presentation.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
+function tick(now){if(ready&&playing){const dt=Math.min(.1,(now-lastFrame)/1000);time=Math.min(presentation.duration,time+dt*speed);if(time>=presentation.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
 $('play').onclick=toggle;$('restart').onclick=()=>{playing=false;seek(0);};$('ending-replay').onclick=()=>{seek(0);playing=true;};
-$('prev').onclick=()=>seek(compiled.beats[Math.max(0,lastState.index-1)].start);$('next').onclick=()=>seek(lastState.index<compiled.beats.length-1?compiled.beats[lastState.index+1].start:compiled.duration);
+$('prev').onclick=()=>seek(presentation.beatStarts[compiled.beats[Math.max(0,lastState.index-1)].id]);$('next').onclick=()=>seek(lastState.index<compiled.beats.length-1?presentation.beatStarts[compiled.beats[lastState.index+1].id]:presentation.duration);
+$('skip-overlay').onclick=()=>seek(presentState.end);
 $('scrubber').oninput=e=>seek(Number(e.target.value));$('speed').onchange=e=>speed=Number(e.target.value);$('camera-reset').onclick=()=>{view?.showWide();draw();};
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.performance').requestFullscreen();}catch{$('fullscreen').textContent='当前窗口不支持全屏';}};
 $('open-inspector').onclick=()=>{$('inspector').showModal();inspect();};$('close-inspector').onclick=()=>$('inspector').close();
 function switchTab(v){tab=v;$('tab-beat').classList.toggle('active',v==='beat');$('tab-context').classList.toggle('active',v==='context');inspect();}$('tab-beat').onclick=()=>switchTab('beat');$('tab-context').onclick=()=>switchTab('context');
 $('download-script').onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.stringify(story,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=u;a.download='honglou-scene-one.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);};
-$('import-script').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('演出数据超过 500 KB');const candidate=JSON.parse(await file.text());const result=compileStory(candidate,stage,characters);story=candidate;compiled=result;playing=false;lastBeat=-1;chapters();seek(0);$('import-status').textContent='数据检查通过，已载入。';}catch(err){$('import-status').textContent='未载入，保留当前演出：\n'+err.message;}finally{e.target.value='';}};
+$('import-script').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('演出数据超过 500 KB');const candidate=JSON.parse(await file.text());installStory(candidate);$('import-status').textContent='数据检查通过，已载入。';}catch(err){$('import-status').textContent='未载入，保留当前演出：\n'+err.message;}finally{e.target.value='';}};
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','BUTTON','SELECT','TEXTAREA'].includes(document.activeElement.tagName)&&!$('inspector').open){e.preventDefault();toggle();}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){playing=false;draw();}});
 window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(generationTimer);view?.dispose();});
 try{
  [story,stage,characters,cards]=await Promise.all([new RecordedDirector().load(new URLSearchParams(location.search).has('demo')?'data/scene-one.json':null),json('data/stage.json'),json('data/characters.json'),json('data/cards.json')]);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
  view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;installStory(story);raf=requestAnimationFrame(tick);await connectLocalDirector();
- if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek,play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,time)};
+ if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
 }catch(err){console.error(err);$('load-status').textContent=err.message;$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;}

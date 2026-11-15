@@ -27,8 +27,9 @@ export class StageView{
       const back=new THREE.Mesh(geo,material(tex.back));back.position.y=center;back.visible=false;group.add(back);
       this.scene.add(group);
       const shadow=new THREE.Mesh(new THREE.CircleGeometry(.24,32),new THREE.MeshBasicMaterial({color:0x263728,transparent:true,opacity:.15,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.scale.y=.56;this.scene.add(shadow);
-      const label=document.createElement('span');label.className='actor-label';label.textContent=c.name;this.container.append(label);
-      this.actors.set(c.id,{group,body,head,pivot,back,shadow,label,tex,height:c.height,expression:null});
+      const cue=new THREE.Mesh(new THREE.RingGeometry(.25,.28,48),new THREE.MeshBasicMaterial({color:0xe6c78a,transparent:true,opacity:.7,depthWrite:false,side:THREE.DoubleSide}));cue.rotation.x=-Math.PI/2;cue.scale.y=.65;this.scene.add(cue);
+      const label=document.createElement('span');label.className='actor-label';label.dataset.actor=c.id;label.textContent=c.name;this.container.append(label);
+      this.actors.set(c.id,{group,body,head,pivot,back,shadow,cue,label,tex,height:c.height,expression:null});
       done++;this.progress(`人物 ${done} / ${this.characters.length} 已就位`);
     }
     this.resize();
@@ -37,22 +38,36 @@ export class StageView{
   applyCamera(id){let c=this.stage.cameras[id];if(this.width<600&&id==='wide'&&!this.override)c={...this.stage.cameras.family,scale:7.7};this.currentCamera=id;const aspect=(this.width||800)/(this.height||450);const half=c.scale/2;Object.assign(this.camera,{left:-half,right:half,top:half/aspect,bottom:-half/aspect});this.camera.position.copy(convert(c.position));this.camera.lookAt(convert(c.target));this.camera.updateProjectionMatrix();}
   showWide(){this.override=this.currentCamera==='wide'?'family':'wide';this.applyCamera(this.override);}
   headScreen(id){const a=this.actors.get(id);if(!a?.group.visible)return null;const p=a.group.position.clone();p.y+=a.height+.05;p.project(this.camera);return {x:(p.x*.5+.5)*this.width,y:(-p.y*.5+.5)*this.height};}
+  faceRects(){return [...this.actors].filter(([,a])=>a.group.visible).map(([id,a])=>{const p=this.headScreen(id),height=a.height/(this.camera.top-this.camera.bottom)*this.height;return {id,left:p.x-height*.18,right:p.x+height*.18,top:p.y+height*.06,bottom:p.y+height*.34};});}
+  layoutNames(){
+    const faces=this.faceRects(),placed=[];const overlap=(a,b)=>Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+    for(const [id,a] of this.actors){if(a.label.hidden)continue;const h=this.headScreen(id),w=a.label.offsetWidth,height=a.label.offsetHeight,y=parseFloat(a.label.style.top),offset=Math.min(18,w*.3);
+      const choices=[h.x,h.x-offset,h.x+offset].map(x=>Math.max(w/2+5,Math.min(this.width-w/2-5,x))).map(x=>({x,left:x-w/2,right:x+w/2,top:y-height,bottom:y}));
+      const score=r=>faces.filter(f=>f.id!==id).reduce((n,f)=>n+overlap(r,f)*10,0)+placed.reduce((n,f)=>n+overlap(r,f)*8,0)+Math.abs(r.x-h.x);
+      const best=choices.sort((a,b)=>score(a)-score(b))[0];a.label.style.left=best.x+'px';placed.push(best);
+    }
+  }
   update(state){
     if(state.camera!==this.cameraId){this.cameraId=state.camera;this.override=null;this.applyCamera(state.camera);}else if(!this.currentCamera)this.applyCamera(state.camera);
     const light={day:[2,3.1,1.4,1.6],night:[.75,.55,.35,1.25],dawn:[1.7,2.4,1.9,1.5]}[state.lighting];this.ambient.intensity=light[0];this.sun.intensity=light[1];this.fill.intensity=light[2];this.renderer.toneMappingExposure=light[3];
     for(const [id,a]of this.actors){
-      const s=state.actors[id];a.group.visible=s.visible;a.shadow.visible=s.visible;a.label.hidden=!s.visible;
+      const s=state.actors[id];const speaking=state.dialogue?.speaker===id,receiving=!!s.addressedBy;const covered=state.presentationObscured;
+      a.group.visible=s.visible;a.shadow.visible=s.visible;a.label.hidden=!s.visible||speaking||covered;
       const pos=convert(s.position);a.group.position.copy(pos);a.group.position.y+=s.moving?Math.abs(Math.sin(state.time*8))*.021:0;
       a.group.rotation.y=Math.atan2(this.camera.position.x-pos.x,this.camera.position.z-pos.z);
       a.group.scale.x=s.facing==='left'?-1:1;
+      const focus=s.addressedBy||s.facingTarget;
+      if(state.actors[focus]){const target=convert(state.actors[focus].position).project(this.camera),self=pos.clone().project(this.camera);a.group.scale.x=target.x<self.x?-1:1;}
       const rear=s.facing==='back';a.body.visible=!rear;a.pivot.visible=!rear;a.back.visible=rear;
       if(a.expression!==s.expression){a.head.material.map=a.tex['head-'+s.expression];a.head.material.needsUpdate=true;a.expression=s.expression;}
       a.pivot.rotation.z=0;a.pivot.rotation.y=0;
       if(s.gesture){const v=Math.sin(s.gesture.progress*Math.PI*4)*Math.sin(s.gesture.progress*Math.PI);if(s.gesture.kind==='nod')a.pivot.rotation.z=v*.065;else a.pivot.rotation.y=v*.18;}
       a.shadow.position.set(pos.x,pos.y+.009,pos.z);a.shadow.material.opacity=state.dialogue?.speaker===id ? .21:.14;
-      const projected=pos.clone().project(this.camera);a.label.style.left=`${(projected.x*.5+.5)*this.width}px`;a.label.style.top=`${(-projected.y*.5+.5)*this.height+8}px`;a.label.classList.toggle('speaking',state.dialogue?.speaker===id);a.label.classList.toggle('receiving',!!s.addressedBy);
+      a.cue.visible=s.visible&&!covered&&(speaking||receiving);a.cue.position.set(pos.x,pos.y+.016,pos.z);a.cue.material.color.set(speaking?0xfff4d5:0xd8b36b);a.cue.material.opacity=speaking?.65:.48;
+      const tint=state.dialogue&&!speaking&&!receiving ? .93 : 1;for(const mesh of [a.body,a.head,a.back])mesh.material.color.setRGB(tint,tint,tint);
+      const head=this.headScreen(id);if(head){a.label.style.left=`${Math.max(34,Math.min(this.width-34,head.x))}px`;a.label.style.top=`${Math.max(25,head.y+3)}px`;}else a.label.hidden=true;a.label.classList.toggle('speaking',speaking);a.label.classList.toggle('receiving',receiving);a.label.dataset.speaking=String(speaking);a.label.dataset.receiving=String(receiving);
     }
-    this.renderer.render(this.scene,this.camera);
+    this.layoutNames();this.renderer.render(this.scene,this.camera);
   }
   dispose(){this.resizeObserver.disconnect();this.scene.traverse(o=>{o.geometry?.dispose();const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats)if(m){m.map?.dispose();m.dispose();}});this.renderer.dispose();}
 }
