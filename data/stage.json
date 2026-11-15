@@ -82,6 +82,11 @@
       1.0,
       -1.65,
       0.025
+    ],
+    "whisper_guest": [
+      -0.55,
+      -0.3,
+      0.025
     ]
   },
   "edges": [
@@ -152,6 +157,10 @@
     [
       "baner_door_wait",
       "door_inside"
+    ],
+    [
+      "room_center",
+      "whisper_guest"
     ]
   ],
   "obstacles": [
@@ -240,5 +249,47 @@
       ],
       "scale": 8.4
     }
+  },
+  "acoustics": {
+    "ranges": {
+      "normal": 4.5,
+      "whisper": 0.9,
+      "call": 9
+    },
+    "zones": [
+      {
+        "id": "room",
+        "min": [
+          -4.1,
+          -2.5
+        ],
+        "max": [
+          2.3,
+          2.5
+        ]
+      },
+      {
+        "id": "yard",
+        "min": [
+          2.3,
+          -3.0
+        ],
+        "max": [
+          6,
+          3
+        ]
+      }
+    ],
+    "portals": [
+      {
+        "zones": [
+          "room",
+          "yard"
+        ],
+        "open": true,
+        "name": "院门"
+      }
+    ],
+    "note": "舞台规则：普通话与低语不跨声区，呼喊可经开启的院门跨区；距离是项目演出参数，不是声学测量。"
   }
 }

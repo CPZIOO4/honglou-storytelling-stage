@@ -8,7 +8,12 @@
       "at": 2,
       "until": 14,
       "speaker": "granny",
-      "text": "姑爷，光在家里生气，银子也不会自己进门。咱们离城不远，总得想个法子。"
+      "text": "姑爷，光在家里生气，银子也不会自己进门。咱们离城不远，总得想个法子。",
+      "to": [
+        "gouer",
+        "liushi"
+      ],
+      "mode": "normal"
     }
   ],
   "commands": [
@@ -42,6 +47,12 @@
       "type": "expression",
       "actor": "gouer",
       "value": "thinking"
+    },
+    {
+      "at": 2,
+      "type": "face",
+      "actor": "granny",
+      "target": "gouer"
     }
   ],
   "memory": "刘姥姥提出应该另想办法。"

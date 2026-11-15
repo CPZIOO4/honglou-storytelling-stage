@@ -6,12 +6,26 @@ const names={};let story,stage,characters,cards,compiled,view,playing=false,time
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
 function chapters(){const list=$('chapters');list.replaceChildren();compiled.beats.forEach((b,i)=>{const li=document.createElement('li'),btn=document.createElement('button'),number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');btn.append(number,document.createTextNode(b.title));btn.onclick=()=>seek(b.start);li.append(btn);list.append(li);});$('scrubber').max=compiled.duration;$('total').textContent=format(compiled.duration);$('segment-count').textContent=compiled.beats.length+' 段';}
 function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:'assistant-authored',...lastState.beat}:buildDirectorContext(cards,compiled,time),null,2);}
+function placeBubble(dialogue){
+ const el=$('dialogue');el.classList.toggle('hidden',!dialogue);if(!dialogue)return;
+ const recipients=dialogue.to.map(id=>names[id]).join('、');const mode={normal:'对',whisper:'悄悄对',call:'喊向'}[dialogue.mode];
+ $('speaker').textContent=`${names[dialogue.speaker]} ${mode} ${recipients}说`;$('dialogue-text').textContent=dialogue.text;
+ let audience=$('dialogue-audience');if(!audience){audience=document.createElement('small');audience.id='dialogue-audience';el.append(audience);}
+ const others=dialogue.heardBy.filter(id=>id!==dialogue.speaker);audience.textContent=(dialogue.mode==='whisper'?'低语 · ':'听见：')+others.map(id=>names[id]).join('、')+(dialogue.mode==='whisper'?'可闻':'');el.classList.toggle('whisper',dialogue.mode==='whisper');
+ const head=view.headScreen(dialogue.speaker);if(!head)return;const w=el.offsetWidth,h=el.offsetHeight;
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const top=clamp(head.y-h-25,8,view.height-h-15);
+ const candidates=[head.x-w/2,head.x-w+35,head.x-35].map(x=>clamp(x,8,view.width-w-8));
+ const heads=characters.filter(c=>c.id!==dialogue.speaker).map(c=>view.headScreen(c.id)).filter(Boolean);
+ const score=x=>heads.reduce((sum,p)=>sum+Math.max(0,Math.min(x+w,p.x+28)-Math.max(x,p.x-28))*Math.max(0,Math.min(top+h,p.y+32)-Math.max(top,p.y-18)),0);
+ const left=candidates.sort((a,b)=>score(a)-score(b))[0];el.style.left=`${left}px`;el.style.top=`${top}px`;el.style.setProperty('--tail-x',`${clamp(head.x-left,18,w-18)}px`);
+ el.dataset.speaker=dialogue.speaker;el.dataset.to=dialogue.to.join(',');el.dataset.mode=dialogue.mode;
+}
 function draw(){
   if(!ready)return;const state=stateAt(compiled,time);lastState=state;view.update(state);
   $('elapsed').textContent=format(time);$('scrubber').value=time;$('play').textContent=playing?'Ⅱ 暂停':'▶ 播放';$('play').setAttribute('aria-label',playing?'暂停演出':'播放演出');
   $('narration-text').textContent=state.beat.narration;$('beat-number').textContent=`${String(state.index+1).padStart(2,'0')} / ${compiled.beats.length}　${state.beat.title}`;
   $('moment').textContent=({day:'傍晚',night:'夜里',dawn:'次日清晨'}[state.lighting])+' · 狗儿家';
-  $('dialogue').classList.toggle('hidden',!state.dialogue);if(state.dialogue){$('speaker').textContent=names[state.dialogue.speaker];$('dialogue-text').textContent=state.dialogue.text;}
+  placeBubble(state.dialogue);
   $('ending').classList.toggle('hidden',!state.finished);
   if(state.index!==lastBeat){lastBeat=state.index;[...$('chapters').querySelectorAll('button')].forEach((b,i)=>{b.classList.toggle('active',i===state.index);b.classList.toggle('past',i<state.index);if(i===state.index)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});inspect();}
   const currentCast=Object.entries(state.actors).filter(([,a])=>a.visible).map(([id])=>names[id]).join('|');if($('cast').dataset.cast!==currentCast){$('cast').replaceChildren(...currentCast.split('|').filter(Boolean).map(n=>{const s=document.createElement('span');s.textContent=n;return s;}));$('cast').dataset.cast=currentCast;}

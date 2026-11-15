@@ -79,7 +79,11 @@
           "at": 2,
           "until": 13,
           "speaker": "gouer",
-          "text": "眼看天冷了，家里样样要钱。我在外头忙一日，回来还是这个样子。"
+          "text": "眼看天冷了，家里样样要钱。我在外头忙一日，回来还是这个样子。",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -114,6 +118,12 @@
           "actor": "gouer",
           "value": "shake",
           "duration": 1.4
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
         }
       ],
       "memory": "狗儿把生计的烦恼说出来，尚未提出办法。"
@@ -128,7 +138,12 @@
           "at": 2,
           "until": 14,
           "speaker": "granny",
-          "text": "姑爷，光在家里生气，银子也不会自己进门。咱们离城不远，总得想个法子。"
+          "text": "姑爷，光在家里生气，银子也不会自己进门。咱们离城不远，总得想个法子。",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -162,6 +177,12 @@
           "type": "expression",
           "actor": "gouer",
           "value": "thinking"
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
         }
       ],
       "memory": "刘姥姥提出应该另想办法。"
@@ -176,7 +197,12 @@
           "at": 2,
           "until": 16,
           "speaker": "granny",
-          "text": "你们家从前同王家连过宗。如今那位姑太太在荣国府，听说还肯怜贫惜老。去问个安，也许念着旧情。"
+          "text": "你们家从前同王家连过宗。如今那位姑太太在荣国府，听说还肯怜贫惜老。去问个安，也许念着旧情。",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -204,6 +230,12 @@
           "type": "expression",
           "actor": "liushi",
           "value": "surprised"
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
         }
       ],
       "memory": "刘姥姥提起与王家的联宗旧情及王夫人，尚不知道是否会得到帮助。"
@@ -218,7 +250,11 @@
           "at": 2,
           "until": 13,
           "speaker": "liushi",
-          "text": "娘，这样的人家，咱们怎么好上门？只怕还没见着人，先叫门上的挡回来了。"
+          "text": "娘，这样的人家，咱们怎么好上门？只怕还没见着人，先叫门上的挡回来了。",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -247,9 +283,95 @@
           "actor": "liushi",
           "value": "shake",
           "duration": 1.3
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
         }
       ],
       "memory": "刘氏担心求助受阻，尤其担心母亲难堪。"
+    },
+    {
+      "id": "private-care",
+      "title": "靠近说句私话",
+      "duration": 22,
+      "narration": "狗儿往屋内另一侧走了两步，刘氏也走到母亲近旁。两人停下后，她压低了声音。",
+      "dialogue": [
+        {
+          "at": 5,
+          "until": 13,
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "whisper",
+          "text": "娘，若真有人给您脸色看，您就回来。别为了我们，硬撑着受委屈。"
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "whisper_guest",
+          "duration": 4
+        },
+        {
+          "at": 4.1,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 4.1,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
+        },
+        {
+          "at": 9,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 1.3
+        },
+        {
+          "at": 15,
+          "type": "move",
+          "actor": "liushi",
+          "target": "liushi_near",
+          "duration": 4
+        },
+        {
+          "at": 19,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_pace",
+          "duration": 2
+        },
+        {
+          "at": 19,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_listen",
+          "duration": 2.5
+        }
+      ],
+      "memory": "刘氏靠近母亲低声表达关切，只有刘姥姥听清；其他人没有获得这段话的内容。"
     },
     {
       "id": "chance",
@@ -261,7 +383,11 @@
           "at": 2,
           "until": 12,
           "speaker": "gouer",
-          "text": "姥姥当年见过那位姑太太。要不，明日先去问一问？成不成，总比在家干等着强。"
+          "text": "姥姥当年见过那位姑太太。要不，明日先去问一问？成不成，总比在家干等着强。",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -283,6 +409,12 @@
           "actor": "gouer",
           "value": "nod",
           "duration": 1.4
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
         }
       ],
       "memory": "狗儿希望刘姥姥试着登门。"
@@ -297,7 +429,12 @@
           "at": 2,
           "until": 13,
           "speaker": "granny",
-          "text": "侯门深似海。我这张老脸，多少年没在人家跟前露过了。去了，未必有人认得。"
+          "text": "侯门深似海。我这张老脸，多少年没在人家跟前露过了。去了，未必有人认得。",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -319,6 +456,12 @@
           "type": "expression",
           "actor": "granny",
           "value": "thinking"
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
         }
       ],
       "memory": "刘姥姥承认自己也担忧被拒。"
@@ -333,7 +476,11 @@
           "at": 2,
           "until": 14,
           "speaker": "gouer",
-          "text": "先找周瑞。他跟我父亲从前有过交情。姥姥带着板儿去，只求他给通个信。"
+          "text": "先找周瑞。他跟我父亲从前有过交情。姥姥带着板儿去，只求他给通个信。",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -361,6 +508,12 @@
           "actor": "granny",
           "value": "nod",
           "duration": 1.2
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
         }
       ],
       "memory": "求助的第一条线索是周瑞，计划让板儿同行。"
@@ -375,7 +528,12 @@
           "at": 2,
           "until": 16,
           "speaker": "granny",
-          "text": "也罢，我去碰一碰。真有些照应，大家都好；便是没有，也算见一回世面。你们在家，把日子照常过着。"
+          "text": "也罢，我去碰一碰。真有些照应，大家都好；便是没有，也算见一回世面。你们在家，把日子照常过着。",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -409,6 +567,12 @@
           "type": "expression",
           "actor": "gouer",
           "value": "smile"
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
         }
       ],
       "memory": "刘姥姥决定次日带板儿进城；能否求得帮助仍未可知。"
@@ -423,7 +587,11 @@
           "at": 5,
           "until": 9,
           "speaker": "baner",
-          "text": "去！"
+          "text": "去！",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -458,6 +626,12 @@
           "type": "face",
           "actor": "qinger",
           "target": "liushi"
+        },
+        {
+          "at": 5,
+          "type": "face",
+          "actor": "baner",
+          "target": "granny"
         }
       ],
       "memory": "板儿愿意随姥姥出门，青儿留在家中。"
@@ -503,7 +677,11 @@
           "at": 2,
           "until": 14,
           "speaker": "granny",
-          "text": "跟紧姥姥，不许乱跑。见了人，等我教你称呼。人家问你，你别只顾着看热闹。"
+          "text": "跟紧姥姥，不许乱跑。见了人，等我教你称呼。人家问你，你别只顾着看热闹。",
+          "to": [
+            "baner"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -542,6 +720,12 @@
           "type": "expression",
           "actor": "granny",
           "value": "smile"
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "granny",
+          "target": "baner"
         }
       ],
       "memory": "刘姥姥叮嘱板儿跟紧自己、不要乱跑。"
@@ -556,13 +740,21 @@
           "at": 2,
           "until": 9,
           "speaker": "liushi",
-          "text": "娘，路上慢些。真进不去，也早些回来。"
+          "text": "娘，路上慢些。真进不去，也早些回来。",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal"
         },
         {
           "at": 10,
           "until": 15,
           "speaker": "granny",
-          "text": "知道了，安心等着。"
+          "text": "知道了，安心等着。",
+          "to": [
+            "liushi"
+          ],
+          "mode": "normal"
         }
       ],
       "commands": [
@@ -610,6 +802,18 @@
           "actor": "liushi",
           "target": "liushi_home",
           "duration": 1
+        },
+        {
+          "at": 2,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 10,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
         }
       ],
       "memory": "家人在屋内送行，祖孙来到门前。"
@@ -661,5 +865,6 @@
       ],
       "memory": "祖孙离开狗儿家，准备进城。演出在进入宁荣街之前结束。"
     }
-  ]
+  ],
+  "communicationVersion": 1
 }

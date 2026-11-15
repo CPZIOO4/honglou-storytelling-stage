@@ -36,6 +36,7 @@ export class StageView{
   resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.width=width;this.height=height;this.renderer.setSize(width,height);if(this.currentCamera)this.applyCamera(this.currentCamera);}
   applyCamera(id){let c=this.stage.cameras[id];if(this.width<600&&id==='wide'&&!this.override)c={...this.stage.cameras.family,scale:7.7};this.currentCamera=id;const aspect=(this.width||800)/(this.height||450);const half=c.scale/2;Object.assign(this.camera,{left:-half,right:half,top:half/aspect,bottom:-half/aspect});this.camera.position.copy(convert(c.position));this.camera.lookAt(convert(c.target));this.camera.updateProjectionMatrix();}
   showWide(){this.override=this.currentCamera==='wide'?'family':'wide';this.applyCamera(this.override);}
+  headScreen(id){const a=this.actors.get(id);if(!a?.group.visible)return null;const p=a.group.position.clone();p.y+=a.height+.05;p.project(this.camera);return {x:(p.x*.5+.5)*this.width,y:(-p.y*.5+.5)*this.height};}
   update(state){
     if(state.camera!==this.cameraId){this.cameraId=state.camera;this.override=null;this.applyCamera(state.camera);}else if(!this.currentCamera)this.applyCamera(state.camera);
     const light={day:[2,3.1,1.4,1.6],night:[.75,.55,.35,1.25],dawn:[1.7,2.4,1.9,1.5]}[state.lighting];this.ambient.intensity=light[0];this.sun.intensity=light[1];this.fill.intensity=light[2];this.renderer.toneMappingExposure=light[3];
@@ -49,7 +50,7 @@ export class StageView{
       a.pivot.rotation.z=0;a.pivot.rotation.y=0;
       if(s.gesture){const v=Math.sin(s.gesture.progress*Math.PI*4)*Math.sin(s.gesture.progress*Math.PI);if(s.gesture.kind==='nod')a.pivot.rotation.z=v*.065;else a.pivot.rotation.y=v*.18;}
       a.shadow.position.set(pos.x,pos.y+.009,pos.z);a.shadow.material.opacity=state.dialogue?.speaker===id ? .21:.14;
-      const projected=pos.clone().project(this.camera);a.label.style.left=`${(projected.x*.5+.5)*this.width}px`;a.label.style.top=`${(-projected.y*.5+.5)*this.height+8}px`;a.label.classList.toggle('speaking',state.dialogue?.speaker===id);
+      const projected=pos.clone().project(this.camera);a.label.style.left=`${(projected.x*.5+.5)*this.width}px`;a.label.style.top=`${(-projected.y*.5+.5)*this.height+8}px`;a.label.classList.toggle('speaking',state.dialogue?.speaker===id);a.label.classList.toggle('receiving',!!s.addressedBy);
     }
     this.renderer.render(this.scene,this.camera);
   }

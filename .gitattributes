@@ -4,3 +4,4 @@
 *.glb binary
 *.blend binary
 vendor/** -whitespace
+cards/environment/*.md -text

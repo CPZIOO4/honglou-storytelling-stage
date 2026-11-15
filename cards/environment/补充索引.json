@@ -1,0 +1,838 @@
+{
+  "scope": "第一次进荣国府六组场景；保留用户提供的其他九场资料",
+  "newCards": [
+    {
+      "file": "10_狗儿家.md",
+      "scene": {
+        "scene_id": "SC10_GEJ",
+        "display_name": "狗儿家",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "炕前",
+            "desc": "能看见屋中家人，靠炕的人并不自动拥有决定权。",
+            "capacity": 3,
+            "layer": "room"
+          },
+          {
+            "id": "A2",
+            "name": "桌旁",
+            "desc": "放茶碗、听人说话，桌凳占地不能穿过。",
+            "capacity": 2,
+            "layer": "room"
+          },
+          {
+            "id": "A3",
+            "name": "屋中",
+            "desc": "家人商量事情的空处，正常说话同屋可闻。",
+            "capacity": 3,
+            "layer": "room"
+          },
+          {
+            "id": "A4",
+            "name": "低声交谈处",
+            "desc": "屋中相邻的两个独立站位；两人靠近后才能低声说。",
+            "capacity": 2,
+            "layer": "room"
+          },
+          {
+            "id": "A5",
+            "name": "门内",
+            "desc": "可与屋里答话，也可看见小院。",
+            "capacity": 2,
+            "layer": "room"
+          },
+          {
+            "id": "A6",
+            "name": "小院",
+            "desc": "屋里只见门口这一带，低声话不传入屋。",
+            "capacity": 3,
+            "layer": "yard"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC01_JM",
+            "via": "院门，经城外道路到宁荣街",
+            "gate": "有人决定出门且实际走到出口",
+            "hidden": false
+          }
+        ],
+        "capacity": 15,
+        "ambient": {
+          "light": "窗纸透进散光，院门带来较亮的一条光；夜里若点灯，只照到近处。",
+          "sound": [
+            "风擦窗纸",
+            "碗放在木桌上的轻响"
+          ],
+          "smell": [
+            "灶灰",
+            "旧柴"
+          ],
+          "temp": "门边通风，炕边相对暖；具体天气随场次变化。"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "窗纸遇风",
+            "then": "窗纸轻响，不强制任何人开口",
+            "once": false
+          },
+          {
+            "id": "T2",
+            "when": "有人跨过院门",
+            "then": "更新室内外位置和可听范围",
+            "once": false
+          }
+        ],
+        "props": [
+          {
+            "name": "土炕",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "桌凳",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶碗",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "被褥",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "灶台",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "水缸",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "院门",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          }
+        ],
+        "camera": {
+          "entry": "先交代入口与可活动的空处",
+          "focus": [
+            "炕前",
+            "桌旁"
+          ]
+        },
+        "art_ref": "ENV10_GEJ",
+        "communication": {
+          "normal": "同声区内按距离、门帘与墙体判定听众",
+          "whisper": "先靠近至有效低语距离并停步、相向，再发话；附近旁人若实际可闻也应记录",
+          "recipients": "显式列出对话对象，不等同全部实际听众",
+          "memory": "只把人物实际听见的话写入其个人记忆"
+        }
+      }
+    },
+    {
+      "file": "11_荣府后街.md",
+      "scene": {
+        "scene_id": "SC11_HJ",
+        "display_name": "荣府后街",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "街口",
+            "desc": "从角门方向绕来，能看见后门及摊担。",
+            "capacity": 3,
+            "layer": "street"
+          },
+          {
+            "id": "A2",
+            "name": "食物摊前",
+            "desc": "可看商品；摊担与炉子是固定障碍。",
+            "capacity": 2,
+            "layer": "street"
+          },
+          {
+            "id": "A3",
+            "name": "玩具摊前",
+            "desc": "能看见摊上物件，不自动触发购买。",
+            "capacity": 2,
+            "layer": "street"
+          },
+          {
+            "id": "A4",
+            "name": "孩子活动处",
+            "desc": "与摊位留开距离，街边的人可看见。",
+            "capacity": 5,
+            "layer": "street"
+          },
+          {
+            "id": "A5",
+            "name": "后门外",
+            "desc": "询问或等待；门开时可看见内巷。",
+            "capacity": 3,
+            "layer": "edge"
+          },
+          {
+            "id": "A6",
+            "name": "后门内巷",
+            "desc": "通向住处，转角后看不见大部分街面。",
+            "capacity": 3,
+            "layer": "lane"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC01_JM",
+            "via": "沿后街原路绕回",
+            "gate": "人物选择返回",
+            "hidden": false
+          },
+          {
+            "to": "SC12_ZRZ",
+            "via": "后门内巷",
+            "gate": "已确认要找的住处且获得可执行路线",
+            "hidden": false
+          }
+        ],
+        "capacity": 18,
+        "ambient": {
+          "light": "街面受天光，摊棚下较暗，门内的墙面反射少量散光。",
+          "sound": [
+            "摊担器物轻响",
+            "孩子脚步与交谈",
+            "街上来往声"
+          ],
+          "smell": [
+            "蒸面食",
+            "炉火"
+          ],
+          "temp": "街口有风，棚下略能避风。"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "器物被取放",
+            "then": "相应摊担发出轻响",
+            "once": false
+          },
+          {
+            "id": "T2",
+            "when": "人物转入内巷",
+            "then": "街面普通话的可闻程度按声区规则重新计算",
+            "once": false
+          }
+        ],
+        "props": [
+          {
+            "name": "摊担",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "竹筐",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "蒸笼",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶壶",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "玩具托盘",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "后门",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          }
+        ],
+        "camera": {
+          "entry": "先交代入口与可活动的空处",
+          "focus": [
+            "街口",
+            "食物摊前"
+          ]
+        },
+        "art_ref": "ENV11_HJ",
+        "communication": {
+          "normal": "同声区内按距离、门帘与墙体判定听众",
+          "whisper": "先靠近至有效低语距离并停步、相向，再发话；附近旁人若实际可闻也应记录",
+          "recipients": "显式列出对话对象，不等同全部实际听众",
+          "memory": "只把人物实际听见的话写入其个人记忆"
+        }
+      }
+    },
+    {
+      "file": "12_周瑞妻子住处.md",
+      "scene": {
+        "scene_id": "SC12_ZRZ",
+        "display_name": "周瑞妻子住处",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "院门外",
+            "desc": "来客可呼唤，屋内不自动听清低语。",
+            "capacity": 3,
+            "layer": "lane"
+          },
+          {
+            "id": "A2",
+            "name": "院门内",
+            "desc": "主人迎客或送客的位置。",
+            "capacity": 3,
+            "layer": "court"
+          },
+          {
+            "id": "A3",
+            "name": "屋门边",
+            "desc": "可以通报，不能挡住出入。",
+            "capacity": 2,
+            "layer": "edge"
+          },
+          {
+            "id": "A4",
+            "name": "桌前客位",
+            "desc": "主人示意后可以落座；不强制出现坐姿。",
+            "capacity": 2,
+            "layer": "room"
+          },
+          {
+            "id": "A5",
+            "name": "主人侧位",
+            "desc": "与客位能相对交谈。",
+            "capacity": 2,
+            "layer": "room"
+          },
+          {
+            "id": "A6",
+            "name": "屋内低语处",
+            "desc": "两个独立近距站位，远处的人只能看到靠近动作。",
+            "capacity": 2,
+            "layer": "room"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC11_HJ",
+            "via": "院门及仆役巷道",
+            "gate": "可自行离开",
+            "hidden": false
+          },
+          {
+            "to": "SC13_DT",
+            "via": "巷道前往候见倒厅",
+            "gate": "需要实际获得引见或通行条件",
+            "hidden": false
+          }
+        ],
+        "capacity": 14,
+        "ambient": {
+          "light": "院中天光较亮，屋内光从门与窗进入，门帘落下后明暗分开。",
+          "sound": [
+            "院门开合",
+            "斟茶",
+            "巷道远处脚步"
+          ],
+          "smell": [
+            "茶水",
+            "炭灰"
+          ],
+          "temp": "院内通风，屋内可避冷。"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "门帘被掀开",
+            "then": "门边光线变化并发出布帘轻响",
+            "once": false
+          },
+          {
+            "id": "T2",
+            "when": "茶碗被放下",
+            "then": "桌上传出轻响；不替人物解释动机",
+            "once": false
+          }
+        ],
+        "props": [
+          {
+            "name": "院门",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "门帘",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "桌椅",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶壶",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶碗",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          }
+        ],
+        "camera": {
+          "entry": "先交代入口与可活动的空处",
+          "focus": [
+            "院门外",
+            "院门内"
+          ]
+        },
+        "art_ref": "ENV12_ZRZ",
+        "communication": {
+          "normal": "同声区内按距离、门帘与墙体判定听众",
+          "whisper": "先靠近至有效低语距离并停步、相向，再发话；附近旁人若实际可闻也应记录",
+          "recipients": "显式列出对话对象，不等同全部实际听众",
+          "memory": "只把人物实际听见的话写入其个人记忆"
+        }
+      }
+    },
+    {
+      "file": "13_候见倒厅与院落.md",
+      "scene": {
+        "scene_id": "SC13_DT",
+        "display_name": "候见倒厅",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "倒厅外",
+            "desc": "来客到达，能看见等候处。",
+            "capacity": 3,
+            "layer": "outer"
+          },
+          {
+            "id": "A2",
+            "name": "等候位",
+            "desc": "停留等消息，不能据远处动静编造内室谈话。",
+            "capacity": 3,
+            "layer": "outer"
+          },
+          {
+            "id": "A3",
+            "name": "影壁旁",
+            "desc": "转折处，视线被墙遮挡。",
+            "capacity": 2,
+            "layer": "turn"
+          },
+          {
+            "id": "A4",
+            "name": "院门外",
+            "desc": "通报返回时会经过，可向来客交代答复。",
+            "capacity": 3,
+            "layer": "edge"
+          },
+          {
+            "id": "A5",
+            "name": "院内廊下",
+            "desc": "获准后进入，仍不是正房内室。",
+            "capacity": 3,
+            "layer": "court"
+          },
+          {
+            "id": "A6",
+            "name": "回话近位",
+            "desc": "两个人相邻站立，低语只向近旁听众开放。",
+            "capacity": 2,
+            "layer": "edge"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC12_ZRZ",
+            "via": "原路返回",
+            "gate": "可以选择离开",
+            "hidden": false
+          },
+          {
+            "to": "SC14_FJZF",
+            "via": "院门与正房门",
+            "gate": "需要通行条件已满足",
+            "hidden": false
+          }
+        ],
+        "capacity": 16,
+        "ambient": {
+          "light": "院中天光与倒厅阴影相邻，转过影壁才看到另一片亮处。",
+          "sound": [
+            "往来脚步",
+            "门帘轻响",
+            "隔院不清楚的说话声"
+          ],
+          "smell": [
+            "木器",
+            "少量炭火"
+          ],
+          "temp": "廊下避风，院中较凉。"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "人物绕过影壁",
+            "then": "更新可见范围，不公开墙后已经发生的对话",
+            "once": false
+          },
+          {
+            "id": "T2",
+            "when": "通报者回到等候位",
+            "then": "只允许转述其实际收到的消息，不自动创造答复",
+            "once": false
+          }
+        ],
+        "props": [
+          {
+            "name": "影壁",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "院门",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "廊柱",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "门帘",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "等候凳",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          }
+        ],
+        "camera": {
+          "entry": "先交代入口与可活动的空处",
+          "focus": [
+            "倒厅外",
+            "等候位"
+          ]
+        },
+        "art_ref": "ENV13_DT",
+        "communication": {
+          "normal": "同声区内按距离、门帘与墙体判定听众",
+          "whisper": "先靠近至有效低语距离并停步、相向，再发话；附近旁人若实际可闻也应记录",
+          "recipients": "显式列出对话对象，不等同全部实际听众",
+          "memory": "只把人物实际听见的话写入其个人记忆"
+        }
+      }
+    },
+    {
+      "file": "14_王熙凤正房.md",
+      "scene": {
+        "scene_id": "SC14_FJZF",
+        "display_name": "凤姐正房",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "正房门外",
+            "desc": "候传或通报，不能默认听清所有内室话。",
+            "capacity": 3,
+            "layer": "outer"
+          },
+          {
+            "id": "A2",
+            "name": "堂屋",
+            "desc": "连接两边房间，脚步可被邻近人听到。",
+            "capacity": 4,
+            "layer": "hall"
+          },
+          {
+            "id": "A3",
+            "name": "东间候客位",
+            "desc": "可等候或用饭，桌子须存在才可使用。",
+            "capacity": 3,
+            "layer": "east"
+          },
+          {
+            "id": "A4",
+            "name": "会客炕前",
+            "desc": "来客与主事者答话，身份不自动决定每句回应。",
+            "capacity": 3,
+            "layer": "reception"
+          },
+          {
+            "id": "A5",
+            "name": "主事者位置",
+            "desc": "王熙凤处理来访与家事，未在场时保持空位。",
+            "capacity": 1,
+            "layer": "reception"
+          },
+          {
+            "id": "A6",
+            "name": "侍立与递茶位",
+            "desc": "平儿等候、递茶和进退的位置。",
+            "capacity": 2,
+            "layer": "reception"
+          },
+          {
+            "id": "A7",
+            "name": "帘边低语处",
+            "desc": "两名角色靠近后可私下交代，仍按声区和距离判定听众。",
+            "capacity": 2,
+            "layer": "hall"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC13_DT",
+            "via": "正房门与院落",
+            "gate": "按实际告退或通行状态离开",
+            "hidden": false
+          }
+        ],
+        "capacity": 18,
+        "ambient": {
+          "light": "窗光落在炕沿，帘后较暗；器物只在入镜或被使用时点明。",
+          "sound": [
+            "自鸣钟机声",
+            "茶盘与碗盏",
+            "帘外脚步"
+          ],
+          "smell": [
+            "茶水",
+            "手炉炭火"
+          ],
+          "temp": "屋内较暖，开帘时会带入冷气。"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "钟机实际到达报时状态",
+            "then": "钟响；由人物自行决定是否回应",
+            "once": false
+          },
+          {
+            "id": "T2",
+            "when": "有人掀帘",
+            "then": "更新门帘遮挡与可听范围",
+            "once": false
+          },
+          {
+            "id": "T3",
+            "when": "有人提出请求",
+            "then": "记录请求对象和内容，不自动批准或拒绝",
+            "once": false
+          }
+        ],
+        "props": [
+          {
+            "name": "门帘",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "炕沿",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "坐褥",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶盘",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "茶碗",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "手炉",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "自鸣钟",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          },
+          {
+            "name": "可搬动餐桌",
+            "react": [
+              "未使用",
+              "被使用"
+            ]
+          }
+        ],
+        "camera": {
+          "entry": "先交代入口与可活动的空处",
+          "focus": [
+            "正房门外",
+            "堂屋"
+          ]
+        },
+        "art_ref": "ENV14_FJZF",
+        "communication": {
+          "normal": "同声区内按距离、门帘与墙体判定听众",
+          "whisper": "先靠近至有效低语距离并停步、相向，再发话；附近旁人若实际可闻也应记录",
+          "recipients": "显式列出对话对象，不等同全部实际听众",
+          "memory": "只把人物实际听见的话写入其个人记忆"
+        }
+      }
+    }
+  ],
+  "originalFiles": {
+    "00_环境卡模板.md": "76412ad43c21baaa7eeed5b01a2a341d3cb329b8da4ad5fcc7fd221617b4927c",
+    "01_荣府角门.md": "cbbb068eb7381cf23cd29cf6ee162012e94e5bff4d684311adbd12b74af68b2c",
+    "02_贾母上房.md": "aa91ca1e884c7abe2ef722f7cfc7dbc251b8e51c47534f9b73abdc0b459bfb34",
+    "03_潇湘馆.md": "766f00df3c66c0f4159bbf0a844f9d3338cd7ddaf2037b34e41e1b0a12f60b4c",
+    "04_秋爽斋.md": "b0313e3389e16b04f909089003b1f4d698e7f90a0642604b9484b79e41ae7c9c",
+    "05_蘅芜苑.md": "a44942b89649c32f65fcc199e8830319f22f200c226bc942e1e0a38dc36778e5",
+    "06_缀锦阁.md": "efab65814197261db70e6bdd258b293d17dd454c577db5ab31cbf4f9184d89f8",
+    "07_栊翠庵.md": "410d1f9c1ced650754cb7c4bb6fbb5ade8d4e7dd0cb007d0b6e8881c11cfcf39",
+    "08_怡红院.md": "50d5e42d51f1389de224bdfeefbbe7b8799c52375490ff5048aa0527fb68d8f7",
+    "09_沁芳亭·迷路.md": "d2df5f85105ef9e49ab9338d9584550e15a79f088e56b1eeee762bda116641f5"
+  },
+  "runtimeOverride": {
+    "generation": "先生成并校验整场或分段，再播放；不强制实时生成",
+    "storyAuthority": "卡片与当前上下文；模板中的原著必然发生和旧场次不自动执行",
+    "nameAlias": {
+      "周瑞家的": "周瑞妻子"
+    },
+    "SC01_JM": {
+      "scenario": "首次登门询问；只在宁荣街与角门，不预设携瓜果谢恩，不让平儿自动出现在倒厅。",
+      "exits": [
+        {
+          "to": "SC11_HJ",
+          "via": "街外绕到后街",
+          "gate": "确认方向后由人物自行选择"
+        },
+        {
+          "to": "SC10_GEJ",
+          "via": "原路返家",
+          "gate": "人物选择离去"
+        }
+      ],
+      "triggersPolicy": "原卡 T4/T5 与平儿让坐不在角门场强制触发；须切换到候见/正房后按实际互动决定。"
+    }
+  },
+  "originalArchiveSha256": "0a3b03189be5dbab58f24048518fc9c68d182dc2a63473ae39ad629abacd4ff6"
+}
