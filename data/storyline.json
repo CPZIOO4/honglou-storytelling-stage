@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "id": "first-rongguo-visit",
+  "source": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
+  "policy": "原著提供人物关系、社会处境和可遇见的问题；节点规定需要面对的事情，不规定逐句台词、固定同行者或必然获助。节点与物理场景分别建模。",
+  "entryNode": "household-decision",
+  "nodes": [
+    {
+      "id": "household-decision",
+      "title": "家中拿出一条可行动的办法",
+      "scenes": ["SC10_GEJ"],
+      "question": "冬事未办，谁愿意采取什么办法，谁同行，向谁开口？",
+      "requiredChange": "把争论变成具体决定；至少交代办法、行动者、同行者、目的地和出发条件。若不去，必须出现新的实质阻碍及替代行动，不能以明早再说敷衍收场。",
+      "openChoices": ["刘氏、狗儿、板儿或其他有理由的人是否同行", "求临时周济、找活计、托人引荐或其他合乎身份的办法", "谁提出、谁反对、谁妥协", "出发时机与留家分工"],
+      "next": ["gate-access", "backstreet-contact", "household-decision"],
+      "forbiddenAssumptions": ["默认板儿必然同行", "默认刘氏绝不能出门", "把门房是否放行或周瑞妻子是否答应当成已知事实"]
+    },
+    {
+      "id": "gate-access",
+      "title": "在荣府门前找到能接话的人",
+      "scenes": ["SC01_JM"],
+      "question": "来访者怎样说明来意，门上愿不愿搭话？",
+      "requiredChange": "得到可用的引路信息、通报机会，或一个需要应对的具体阻碍。",
+      "openChoices": ["谁开口与谁帮腔", "陪笑、据理说明旧交、等待或另寻门路", "门人的态度与愿意帮忙的理由"],
+      "next": ["backstreet-contact", "intermediary", "household-decision"]
+    },
+    {
+      "id": "backstreet-contact",
+      "title": "确认周瑞妻子的住处与接触办法",
+      "scenes": ["SC11_HJ"],
+      "question": "谁认得路，怎样找到愿意带路或传话的人？",
+      "requiredChange": "确认有效住处及通路，或因明确障碍改变寻找办法。已在上场获得可靠路线时可以缩短或跳过此节点。",
+      "openChoices": ["向谁问路", "同行者如何帮助或惹出麻烦", "问路时暴露多少来意"],
+      "next": ["intermediary", "gate-access", "household-decision"]
+    },
+    {
+      "id": "intermediary",
+      "title": "与周瑞妻子谈出下一步",
+      "scenes": ["SC12_ZRZ"],
+      "question": "旧交能换来怎样的帮助，对方愿意承担到哪一步？",
+      "requiredChange": "说清实际请求，得到引见、转话、活计线索或拒绝等具体回应。",
+      "openChoices": ["以何种情分开口", "周瑞妻子如何衡量面子、人情与麻烦", "先找活计还是请求引见", "承诺与人情债"],
+      "next": ["audience-window", "household-decision"]
+    },
+    {
+      "id": "audience-window",
+      "title": "争取能够说上话的时机",
+      "scenes": ["SC13_DT"],
+      "question": "能否获准见面，等待时如何应对规矩和临时变化？",
+      "requiredChange": "获得会面许可、改约、转达结果或明确拒绝。",
+      "openChoices": ["谁传话", "等待期间的交谈", "同行者不同带来的礼数与误会", "是否调整请求"],
+      "next": ["make-case", "intermediary", "household-decision"]
+    },
+    {
+      "id": "make-case",
+      "title": "把实际难处说出口并得到回应",
+      "scenes": ["SC14_FJZF"],
+      "question": "面对掌事者，来访者怎样开口，对方怎样处置？",
+      "requiredChange": "产生可追踪的结果：帮助、条件、承诺、转介或拒绝，以及由此产生的人情关系。",
+      "openChoices": ["诉苦、求活、借助旧情等表达方式", "帮助的种类与数量", "是否附带条件", "中途插曲与应对"],
+      "next": ["intermediary", "household-decision"],
+      "forbiddenAssumptions": ["固定得到二十两银子", "遇到任何分支仍重置为原著祖孙二人", "把未来回报自动写成已完成"]
+    }
+  ],
+  "continuity": {
+    "carry": ["实际行动者与同行者", "目的和对外说法", "已作出的承诺与条件", "物品钱财的实际变化", "关系变化", "每人分别知道的事实", "未解决的阻碍"],
+    "rule": "计划不等于事实。只有已演出的对白和动作可形成已发生记录；人物只继承亲耳听见或明确观察到的内容，不能自动获得总控摘要。换场保留同行名单，不从原著恢复默认阵容。"
+  }
+}
