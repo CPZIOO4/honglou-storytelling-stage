@@ -1,7 +1,8 @@
 import {compileStory,buildDirectorContext} from './engine.js';
 /** Current provider: assistant authored, deterministic and fully offline after loading. */
 export class RecordedDirector {
-  async load(url='data/scene-one.json'){
+  async load(url=null){
+    if(!url){const catalog=await fetch('data/catalog.json');if(!catalog.ok)throw Error('无法读取演出目录');url=(await catalog.json()).default;}
     const r=await fetch(url);if(!r.ok)throw Error('无法读取预编说书数据');return r.json();
   }
   context(cards,compiled,time){return buildDirectorContext(cards,compiled,time);}

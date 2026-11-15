@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
+import {auditGeneratedStory,generationContext} from '../backend/generator.mjs';
+import {compileStory,stateAt} from '../src/engine.js';
+const j=n=>JSON.parse(readFileSync(new URL('../data/'+n+'.json',import.meta.url),'utf8'));const stage=j('stage'),cards=j('cards'),characters=j('characters'),seed=j('scene-one');
+const story=()=>({...seed,beats:[{id:'model-first',title:'家中问话',duration:16,narration:'刘姥姥转向狗儿。',dialogue:[{at:2,until:13,speaker:'granny',to:['gouer'],mode:'normal',text:'姑爷，今日有什么难处？',knowledgeRefs:[]}],commands:[{at:0,type:'face',actor:'granny',target:'gouer'}],memory:'刘姥姥向狗儿询问。'}]});
+test('a model packet passes the same renderer and generation audit',()=>{assert(auditGeneratedStory(story(),stage,characters).passed);});
+test('unknown knowledge cannot be cited by a generated speaker',()=>{const s=story();s.beats[0].dialogue[0].knowledgeRefs=['private-secret:0'];assert.throws(()=>auditGeneratedStory(s,stage,characters),/没有听见/);});
+test('speaking while walking is rejected even for normal dialogue',()=>{const s=story();s.beats[0].commands.push({at:3,type:'move',actor:'granny',target:'room_center',duration:3});assert.throws(()=>auditGeneratedStory(s,stage,characters),/仍在移动/);});
+test('no canned future story is sent in the initial generation context',()=>{const c=generationContext(cards,stage,characters,{...seed,beats:[]});assert.deepEqual(c.narratorHistory,[]);assert(c.characterViews.granny.heardUtterances.length===0);assert(!JSON.stringify(c).includes('private-care:0'));assert.equal(c.scene.id,'gouer-home');});
+test('only finished actual speech enters the next generation request',()=>{const c=generationContext(cards,stage,characters,story());assert(c.characterViews.gouer.heardUtterances.some(e=>e.speaker==='granny'));assert.equal(c.narratorHistory.length,1);});
+test('director receives the actual current anchor after movement',()=>{const s=story();s.beats[0].dialogue=[];s.beats[0].commands=[{at:0,type:'move',actor:'gouer',target:'gouer_pace',duration:3}];const c=compileStory(s,stage,characters);assert.equal(stateAt(c,1).actors.gouer.anchor,null);assert.equal(stateAt(c,4).actors.gouer.anchor,'gouer_pace');assert.equal(generationContext(cards,stage,characters,s).currentState.actors.gouer.anchor,'gouer_pace');});

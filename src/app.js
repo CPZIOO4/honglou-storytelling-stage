@@ -5,7 +5,24 @@ const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/6
 const names={};let story,stage,characters,cards,compiled,view,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,ready=false,raf;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
 function chapters(){const list=$('chapters');list.replaceChildren();compiled.beats.forEach((b,i)=>{const li=document.createElement('li'),btn=document.createElement('button'),number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');btn.append(number,document.createTextNode(b.title));btn.onclick=()=>seek(b.start);li.append(btn);list.append(li);});$('scrubber').max=compiled.duration;$('total').textContent=format(compiled.duration);$('segment-count').textContent=compiled.beats.length+' 段';}
-function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:'assistant-authored',...lastState.beat}:buildDirectorContext(cards,compiled,time),null,2);}
+function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:story.mode,generation:story.generation,...lastState.beat}:buildDirectorContext(cards,compiled,time),null,2);}
+function installStory(next){const validated=compileStory(next,stage,characters);story=next;compiled=validated;playing=false;time=0;lastBeat=-1;chapters();document.querySelector('h1').textContent=story.title||'寒家谋生';$('source-status').textContent=story.mode==='deepseek-generated'?'由 DeepSeek Flash 生成 · 已检查后播放':'助手预编示例';document.querySelector('#ending h2').textContent='这一场，暂且说到这里。';document.querySelector('.cast-note p').innerHTML='家中生计，从这一刻说起。<br>观众只需控制播放。';draw();}
+let generationTimer=null;
+async function pollGeneration(id){
+ try{const job=await json('/api/director/jobs/'+id);$('generation-status').textContent=job.message;
+  if(job.phase==='ready'){installStory(await json('/api/director/latest'));$('generate-story').disabled=false;$('generate-story').textContent='重新生成';delete $('generate-story').dataset.resume;return;}
+  if(job.phase==='failed'){$('generate-story').disabled=false;$('generate-story').textContent=job.completed?'继续修订':'重新生成';if(job.completed)$('generate-story').dataset.resume=job.id;return;}
+  generationTimer=setTimeout(()=>pollGeneration(id),2000);
+ }catch(e){$('generation-status').textContent='无法读取任务进度：'+e.message;$('generate-story').disabled=false;}
+}
+$('generate-story').onclick=async()=>{playing=false;draw();$('generate-story').disabled=true;$('generation-status').textContent='正在请 Flash 编排第一场……';try{const r=await fetch('/api/director/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({beats:8,...($('generate-story').dataset.resume?{resumeFrom:$('generate-story').dataset.resume}:{})})});const job=await r.json();if(!r.ok)throw Error(job.error);delete $('generate-story').dataset.resume;pollGeneration(job.id);}catch(e){$('generation-status').textContent=e.message;$('generate-story').disabled=false;}};
+async function connectLocalDirector(){
+ if(!['127.0.0.1','localhost'].includes(location.hostname))return;
+ try{const status=await json('/api/director/status');$('generation-panel').classList.remove('hidden');$('generate-story').disabled=!status.configured;$('generation-status').textContent=status.configured?'可根据人物卡、环境卡和个人听闻生成新一场':'请在本机配置 DeepSeek 密钥';
+  if(new URLSearchParams(location.search).has('demo'))return;
+  if(status.active){$('generate-story').disabled=true;pollGeneration(status.active.id);}else if(status.latest){installStory(await json('/api/director/latest'));$('generation-status').textContent='已载入上次检查通过的 Flash 演出';$('generate-story').textContent='重新生成';}
+ }catch{/* Static preview is still available without a local API server. */}
+}
 function placeBubble(dialogue){
  const el=$('dialogue');el.classList.toggle('hidden',!dialogue);if(!dialogue)return;
  const recipients=dialogue.to.map(id=>names[id]).join('、');const mode={normal:'对',whisper:'悄悄对',call:'喊向'}[dialogue.mode];
@@ -43,9 +60,9 @@ $('download-script').onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.str
 $('import-script').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('演出数据超过 500 KB');const candidate=JSON.parse(await file.text());const result=compileStory(candidate,stage,characters);story=candidate;compiled=result;playing=false;lastBeat=-1;chapters();seek(0);$('import-status').textContent='数据检查通过，已载入。';}catch(err){$('import-status').textContent='未载入，保留当前演出：\n'+err.message;}finally{e.target.value='';}};
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','BUTTON','SELECT','TEXTAREA'].includes(document.activeElement.tagName)&&!$('inspector').open){e.preventDefault();toggle();}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){playing=false;draw();}});
-window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);view?.dispose();});
+window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(generationTimer);view?.dispose();});
 try{
- [story,stage,characters,cards]=await Promise.all([new RecordedDirector().load(),json('data/stage.json'),json('data/characters.json'),json('data/cards.json')]);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
- view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;chapters();draw();raf=requestAnimationFrame(tick);
+ [story,stage,characters,cards]=await Promise.all([new RecordedDirector().load(new URLSearchParams(location.search).has('demo')?'data/scene-one.json':null),json('data/stage.json'),json('data/characters.json'),json('data/cards.json')]);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
+ view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;installStory(story);raf=requestAnimationFrame(tick);await connectLocalDirector();
  if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek,play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,time)};
 }catch(err){console.error(err);$('load-status').textContent=err.message;$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;}

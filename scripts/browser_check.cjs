@@ -3,7 +3,7 @@ const fs=require('node:fs');const path=require('node:path');const assert=require
 (async()=>{let browser;const errors=[];const failed=[];const results=[];try{
  browser=await chromium.launch({channel:'msedge',headless:true,args:['--disable-gpu-sandbox']});
  const page=await browser.newPage({viewport:{width:1440,height:1120},deviceScaleFactor:1});page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push([r.url(),r.status()]);});
- const base=process.env.STAGE_BASE_URL||'http://127.0.0.1:4173/';await page.goto(base+'?qa=1',{waitUntil:'networkidle',timeout:90000});await page.waitForFunction(()=>window.__STAGE_TEST__?.state().ready,null,{timeout:90000});
+ const base=process.env.STAGE_BASE_URL||'http://127.0.0.1:4173/';await page.goto(base+'?qa=1&demo=1',{waitUntil:'networkidle',timeout:90000});await page.waitForFunction(()=>window.__STAGE_TEST__?.state().ready,null,{timeout:90000});
  await page.screenshot({path:'qa/01-desktop-initial.png',fullPage:true});results.push({check:'3D scene and five actors loaded',...await page.evaluate(()=>({ready:__STAGE_TEST__.state().ready,drawCalls:__STAGE_TEST__.state().drawCalls,triangles:__STAGE_TEST__.state().triangles}))});
  await page.getByRole('button',{name:'播放演出',exact:true}).click();await page.waitForTimeout(1700);const t1=await page.evaluate(()=>__STAGE_TEST__.state().time);assert(t1>1);
  await page.getByRole('button',{name:'暂停演出',exact:true}).click();const paused=await page.evaluate(()=>__STAGE_TEST__.state().time);await page.waitForTimeout(700);assert.equal(await page.evaluate(()=>__STAGE_TEST__.state().time),paused);results.push({check:'play and pause',passed:true});

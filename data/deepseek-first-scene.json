@@ -1,0 +1,999 @@
+{
+  "version": 1,
+  "communicationVersion": 1,
+  "id": "12a3ba4d-c1fb-4c86-b778-3ab7e0634a28",
+  "title": "寒家谋生",
+  "scene": "gouer-home",
+  "mode": "deepseek-generated",
+  "summary": "DeepSeek Flash 根据当前人物、环境与个人听闻生成的第一场。",
+  "initial": {
+    "camera": "wide",
+    "lighting": "day",
+    "actors": {
+      "granny": {
+        "anchor": "granny_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "gouer": {
+        "anchor": "gouer_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "liushi": {
+        "anchor": "liushi_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "baner": {
+        "anchor": "baner_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "qinger": {
+        "anchor": "qinger_home",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      }
+    }
+  },
+  "beats": [
+    {
+      "id": "first",
+      "title": "寒屋生计",
+      "duration": 24,
+      "narration": "窗纸被风顶得轻响，屋中一时没人先开口。狗儿挪到屋中靠前处，抬眼望向炕前。",
+      "dialogue": [
+        {
+          "at": 7,
+          "until": 17,
+          "speaker": "gouer",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘，这冬衣冬粮还没着落，您老说，咱还能寻哪条路？",
+          "knowledgeRefs": []
+        },
+        {
+          "at": 18,
+          "until": 23,
+          "speaker": "granny",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "路是人走出来的，先别愁断气。",
+          "knowledgeRefs": [
+            "first:0"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "wide"
+        },
+        {
+          "at": 2,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_listen",
+          "duration": 4
+        },
+        {
+          "at": 6.2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 6.4,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "sad"
+        },
+        {
+          "at": 17.4,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 17.6,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        }
+      ],
+      "memory": "狗儿当众问刘姥姥家中过冬无着落还能寻哪条路；刘姥姥答路是人走出来的，劝先别愁。"
+    },
+    {
+      "id": "second",
+      "title": "低声商量",
+      "duration": 24,
+      "narration": "狗儿走到屋中右后侧，刘氏走到母亲近旁。两人停下脚步后，刘氏压低了声音。",
+      "dialogue": [
+        {
+          "at": 6,
+          "until": 19,
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "whisper",
+          "text": "娘，您可认识什么人，能替咱们递句话？",
+          "knowledgeRefs": []
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_pace",
+          "duration": 3
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "whisper_guest",
+          "duration": 4
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 4.5,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 19.5,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        }
+      ],
+      "memory": "刘氏压低声音问刘姥姥：可有认识的人能替家里递句话。"
+    },
+    {
+      "id": "third",
+      "title": "低声问路",
+      "duration": 24,
+      "narration": "刘氏留在母亲近旁，刘姥姥转向她答话。狗儿站在屋中右后侧，看着母女俩低语。",
+      "dialogue": [
+        {
+          "at": 5,
+          "until": 14,
+          "speaker": "granny",
+          "to": [
+            "liushi"
+          ],
+          "mode": "whisper",
+          "text": "门房也是人，咱们礼数到了，话总说得进去。",
+          "knowledgeRefs": [
+            "second:0"
+          ]
+        },
+        {
+          "at": 15,
+          "until": 23,
+          "speaker": "gouer",
+          "to": [
+            "granny",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "娘，您方才说的路，到底谁去？总不能空口白话就寻上门。",
+          "knowledgeRefs": [
+            "first:0",
+            "first:1"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 0.5,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 14.5,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 14.5,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        },
+        {
+          "at": 3,
+          "type": "camera",
+          "target": "family"
+        }
+      ],
+      "memory": "刘姥姥低声回应刘氏托人递话的询问；狗儿没有听见私语，另向母亲公开询问该由谁去。"
+    },
+    {
+      "id": "fourth",
+      "title": "谁去登门",
+      "duration": 22,
+      "narration": "狗儿的问话落下，刘氏仍立在刘姥姥近旁，声音压得更低；狗儿站在屋中右后侧，等着一句明白话。",
+      "dialogue": [
+        {
+          "at": 5,
+          "until": 13,
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "whisper",
+          "text": "娘，您要肯走一趟，我给您拾掇件干净衣裳。",
+          "knowledgeRefs": [
+            "third:1"
+          ]
+        },
+        {
+          "at": 15,
+          "until": 21,
+          "speaker": "granny",
+          "to": [
+            "liushi"
+          ],
+          "mode": "whisper",
+          "text": "我去不怕，只别把话说满，成不成都得留个退步。",
+          "knowledgeRefs": [
+            "third:0",
+            "third:1"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 0,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
+        },
+        {
+          "at": 14.5,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        }
+      ],
+      "memory": "刘氏低声说愿替刘姥姥拾掇干净衣裳；刘姥姥低声应下肯去，但叮嘱别把话说满、留退步。"
+    },
+    {
+      "id": "fifth",
+      "title": "应下与留步",
+      "duration": 26,
+      "narration": "狗儿从屋中右后侧走到靠前的交谈位，站定看向刘姥姥。",
+      "dialogue": [
+        {
+          "at": 6,
+          "until": 15,
+          "speaker": "gouer",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘，您若真肯走一趟，家里总得有人送您到城根，别让您一个人摸路。",
+          "knowledgeRefs": [
+            "first:1"
+          ]
+        },
+        {
+          "at": 17,
+          "until": 25,
+          "speaker": "granny",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "送不送再议，衣裳先拾掇利落，话到嘴边留三分，成不成都不怨谁。",
+          "knowledgeRefs": [
+            "fourth:0",
+            "fourth:1"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_listen",
+          "duration": 4
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 5,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        },
+        {
+          "at": 15,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 16,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
+        },
+        {
+          "at": 25,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
+        }
+      ],
+      "memory": "狗儿提出若刘姥姥肯走一趟，要有人送到城根；刘姥姥说送不送再议，先拾掇衣裳、说话留三分。"
+    },
+    {
+      "id": "sixth",
+      "title": "衣裳与退步",
+      "duration": 26,
+      "narration": "刘氏从母亲身旁走回屋中右侧，刘姥姥仍站在原处。窗纸又轻响一声。",
+      "dialogue": [
+        {
+          "at": 6,
+          "until": 15,
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘，衣裳我这就去翻，您看还缺什么，我一并拾掇。",
+          "knowledgeRefs": [
+            "fifth:1",
+            "fourth:0"
+          ]
+        },
+        {
+          "at": 17,
+          "until": 25,
+          "speaker": "granny",
+          "to": [
+            "liushi",
+            "gouer"
+          ],
+          "mode": "normal",
+          "text": "缺倒不缺，只把话说在前头：成不成，回来都别埋怨谁。",
+          "knowledgeRefs": [
+            "fifth:1",
+            "fifth:0"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "liushi_near",
+          "duration": 4
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 16,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        }
+      ],
+      "memory": "刘氏表示打算准备衣裳，并询问还缺什么；刘姥姥重申事情成不成都不埋怨谁。准备衣裳只是提议，画面没有执行取衣动作。"
+    },
+    {
+      "id": "seventh",
+      "title": "临行前的分派",
+      "duration": 24,
+      "narration": "刘氏走到母亲近旁，狗儿走向屋中右后侧，让开中间的位置。",
+      "memory": "刘氏表示愿意先备衣裳；刘姥姥公开说明去不去、何时去，等天亮再定。",
+      "dialogue": [
+        {
+          "at": 6,
+          "until": 15,
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘，我把您那件干净衣裳翻出来，明早要走也从容些。",
+          "knowledgeRefs": [
+            "sixth:0",
+            "sixth:1"
+          ]
+        },
+        {
+          "at": 16,
+          "until": 23,
+          "speaker": "granny",
+          "to": [
+            "liushi",
+            "gouer"
+          ],
+          "mode": "normal",
+          "text": "行，衣裳先备着；去不去、几时去，等天亮再定。",
+          "knowledgeRefs": [
+            "sixth:1"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "liushi",
+          "target": "whisper_guest",
+          "duration": 4
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "gouer_pace",
+          "duration": 3
+        },
+        {
+          "at": 4.5,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        },
+        {
+          "at": 5,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 6,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "neutral"
+        },
+        {
+          "at": 16,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 2
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        }
+      ]
+    },
+    {
+      "id": "eighth",
+      "title": "衣裳备着，天亮再定",
+      "duration": 22,
+      "narration": "窗纸又轻响一声，狗儿挪到门内站定。屋里话音渐落，刘姥姥仍守在炕前。",
+      "memory": "一家人商定衣裳先备着，去不去、几时去等天亮再定，谁也不埋怨谁。",
+      "dialogue": [
+        {
+          "at": 5,
+          "until": 14,
+          "speaker": "gouer",
+          "to": [
+            "granny",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "那就这么定，天亮再看天时；娘歇着，我去院里看看。",
+          "knowledgeRefs": [
+            "seventh:1",
+            "sixth:1"
+          ]
+        },
+        {
+          "at": 15,
+          "until": 21,
+          "speaker": "granny",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "去吧，我守着孩子。衣裳备着心就定了，天亮再说。",
+          "knowledgeRefs": [
+            "seventh:1",
+            "eighth:0"
+          ]
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "gouer",
+          "target": "door_inside",
+          "duration": 4
+        },
+        {
+          "at": 4.2,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 0,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "neutral"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 14.5,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 14.5,
+          "type": "expression",
+          "actor": "granny",
+          "value": "smile"
+        }
+      ]
+    }
+  ],
+  "generation": {
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "source": "live-api",
+    "generatedAt": "2026-11-15T02:06:59.922Z",
+    "jobId": "12a3ba4d-c1fb-4c86-b778-3ab7e0634a28",
+    "calls": [
+      {
+        "responseId": "08c9e9a3-3ec5-4ae6-a20f-54fd3380a89c",
+        "model": "deepseek-flash",
+        "phase": "beat-1",
+        "usage": {
+          "prompt_tokens": 4989,
+          "completion_tokens": 331,
+          "total_tokens": 5320,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 4477
+        }
+      },
+      {
+        "responseId": "29e223ec-94e2-48f0-b84c-18093e6b0af3",
+        "model": "deepseek-flash",
+        "phase": "beat-2",
+        "usage": {
+          "prompt_tokens": 5621,
+          "completion_tokens": 288,
+          "total_tokens": 5909,
+          "prompt_tokens_details": {
+            "cached_tokens": 3200
+          },
+          "prompt_cache_hit_tokens": 3200,
+          "prompt_cache_miss_tokens": 2421
+        }
+      },
+      {
+        "responseId": "0d8b9253-b584-4613-9ec7-45f9691cc3c0",
+        "model": "deepseek-flash",
+        "phase": "beat-3",
+        "usage": {
+          "prompt_tokens": 5779,
+          "completion_tokens": 335,
+          "total_tokens": 6114,
+          "prompt_tokens_details": {
+            "cached_tokens": 3200
+          },
+          "prompt_cache_hit_tokens": 3200,
+          "prompt_cache_miss_tokens": 2579
+        }
+      },
+      {
+        "responseId": "d310cc78-19db-4068-b4ac-abeb6ef4682c",
+        "model": "deepseek-flash",
+        "phase": "beat-3-repair-1",
+        "usage": {
+          "prompt_tokens": 6169,
+          "completion_tokens": 320,
+          "total_tokens": 6489,
+          "prompt_tokens_details": {
+            "cached_tokens": 5760
+          },
+          "prompt_cache_hit_tokens": 5760,
+          "prompt_cache_miss_tokens": 409
+        }
+      },
+      {
+        "responseId": "693964ac-d5ee-4821-a8b2-4fb6eac570fb",
+        "model": "deepseek-flash",
+        "phase": "beat-4",
+        "usage": {
+          "prompt_tokens": 6135,
+          "completion_tokens": 325,
+          "total_tokens": 6460,
+          "prompt_tokens_details": {
+            "cached_tokens": 3200
+          },
+          "prompt_cache_hit_tokens": 3200,
+          "prompt_cache_miss_tokens": 2935
+        }
+      },
+      {
+        "responseId": "a696dffd-3753-4414-9769-c38d8cd2e9c6",
+        "model": "deepseek-flash",
+        "phase": "beat-4-repair-1",
+        "usage": {
+          "prompt_tokens": 6543,
+          "completion_tokens": 301,
+          "total_tokens": 6844,
+          "prompt_tokens_details": {
+            "cached_tokens": 6016
+          },
+          "prompt_cache_hit_tokens": 6016,
+          "prompt_cache_miss_tokens": 527
+        }
+      },
+      {
+        "responseId": "cc4b2e02-d3aa-4c14-9b95-f8213f2f06aa",
+        "model": "deepseek-flash",
+        "phase": "beat-4-repair-2",
+        "usage": {
+          "prompt_tokens": 6492,
+          "completion_tokens": 297,
+          "total_tokens": 6789,
+          "prompt_tokens_details": {
+            "cached_tokens": 6016
+          },
+          "prompt_cache_hit_tokens": 6016,
+          "prompt_cache_miss_tokens": 476
+        }
+      },
+      {
+        "responseId": "463be5e0-0679-468f-a2e5-7dc97ea50eae",
+        "model": "deepseek-flash",
+        "phase": "beat-5",
+        "usage": {
+          "prompt_tokens": 6366,
+          "completion_tokens": 295,
+          "total_tokens": 6661,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "prompt_cache_hit_tokens": 3328,
+          "prompt_cache_miss_tokens": 3038
+        }
+      },
+      {
+        "responseId": "a7227786-b76b-4577-9e75-bfbf4e0efca0",
+        "model": "deepseek-flash",
+        "phase": "beat-5-repair-1",
+        "usage": {
+          "prompt_tokens": 6740,
+          "completion_tokens": 351,
+          "total_tokens": 7091,
+          "prompt_tokens_details": {
+            "cached_tokens": 6272
+          },
+          "prompt_cache_hit_tokens": 6272,
+          "prompt_cache_miss_tokens": 468
+        }
+      },
+      {
+        "responseId": "cef680b5-8eae-44b2-8129-e94ed3bbd04d",
+        "model": "deepseek-flash",
+        "phase": "beat-6",
+        "usage": {
+          "prompt_tokens": 6973,
+          "completion_tokens": 299,
+          "total_tokens": 7272,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "prompt_cache_hit_tokens": 3328,
+          "prompt_cache_miss_tokens": 3645
+        }
+      },
+      {
+        "responseId": "e77e3895-7e67-499c-b75f-34a685bb55b8",
+        "model": "deepseek-flash",
+        "phase": "beat-7",
+        "usage": {
+          "prompt_tokens": 7486,
+          "completion_tokens": 362,
+          "total_tokens": 7848,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "prompt_cache_hit_tokens": 3328,
+          "prompt_cache_miss_tokens": 4158
+        }
+      },
+      {
+        "responseId": "76d7a134-4ff7-46d5-b01f-6e6ba622dbb4",
+        "model": "deepseek-flash",
+        "phase": "beat-7-repair-1",
+        "usage": {
+          "prompt_tokens": 7886,
+          "completion_tokens": 362,
+          "total_tokens": 8248,
+          "prompt_tokens_details": {
+            "cached_tokens": 7424
+          },
+          "prompt_cache_hit_tokens": 7424,
+          "prompt_cache_miss_tokens": 462
+        }
+      },
+      {
+        "responseId": "bd444bb8-20aa-43e6-9d9a-1ffa17d968b8",
+        "model": "deepseek-flash",
+        "phase": "beat-8",
+        "usage": {
+          "prompt_tokens": 7962,
+          "completion_tokens": 277,
+          "total_tokens": 8239,
+          "prompt_tokens_details": {
+            "cached_tokens": 3200
+          },
+          "prompt_cache_hit_tokens": 3200,
+          "prompt_cache_miss_tokens": 4762
+        }
+      },
+      {
+        "responseId": "f36f9aca-321e-4e65-9ece-c4a35170ee89",
+        "model": "deepseek-flash",
+        "phase": "beat-8-repair-1",
+        "usage": {
+          "prompt_tokens": 8280,
+          "completion_tokens": 333,
+          "total_tokens": 8613,
+          "prompt_tokens_details": {
+            "cached_tokens": 7936
+          },
+          "prompt_cache_hit_tokens": 7936,
+          "prompt_cache_miss_tokens": 344
+        }
+      },
+      {
+        "responseId": "b09175de-e1ef-4489-8acb-a35198462d64",
+        "model": "deepseek-flash",
+        "phase": "beat-8-repair-2",
+        "usage": {
+          "prompt_tokens": 8336,
+          "completion_tokens": 340,
+          "total_tokens": 8676,
+          "prompt_tokens_details": {
+            "cached_tokens": 7936
+          },
+          "prompt_cache_hit_tokens": 7936,
+          "prompt_cache_miss_tokens": 400
+        }
+      },
+      {
+        "responseId": "ca296193-01f8-47e0-bc85-861ef3560986",
+        "model": "deepseek-flash",
+        "phase": "semantic-review",
+        "usage": {
+          "prompt_tokens": 40386,
+          "completion_tokens": 252,
+          "total_tokens": 40638,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 40386
+        }
+      },
+      {
+        "responseId": "a1a2b6c6-ec1c-4b55-832e-e55a513dd436",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-0",
+        "usage": {
+          "prompt_tokens": 41831,
+          "completion_tokens": 9,
+          "total_tokens": 41840,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 41831
+        }
+      },
+      {
+        "responseId": "75562f95-0030-495a-8b58-0a9c632d9017",
+        "model": "deepseek-flash",
+        "phase": "semantic-repair-0",
+        "usage": {
+          "prompt_tokens": 39507,
+          "completion_tokens": 388,
+          "total_tokens": 39895,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 39507
+        }
+      },
+      {
+        "responseId": "69f487a5-789a-430e-b961-2fbb5badecbd",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-1",
+        "usage": {
+          "prompt_tokens": 41793,
+          "completion_tokens": 153,
+          "total_tokens": 41946,
+          "prompt_tokens_details": {
+            "cached_tokens": 2560
+          },
+          "prompt_cache_hit_tokens": 2560,
+          "prompt_cache_miss_tokens": 39233
+        }
+      },
+      {
+        "responseId": "45f1f7cf-8732-4d54-a1c8-0ec5e4b14806",
+        "model": "deepseek-flash",
+        "phase": "semantic-repair-1",
+        "usage": {
+          "prompt_tokens": 39385,
+          "completion_tokens": 59,
+          "total_tokens": 39444,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 38745
+        }
+      },
+      {
+        "responseId": "71439aca-5bc6-476d-9cfa-03fafc588d5b",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-2",
+        "usage": {
+          "prompt_tokens": 41803,
+          "completion_tokens": 275,
+          "total_tokens": 42078,
+          "prompt_tokens_details": {
+            "cached_tokens": 3328
+          },
+          "prompt_cache_hit_tokens": 3328,
+          "prompt_cache_miss_tokens": 38475
+        }
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "beats": 8,
+      "duration": 192,
+      "dialogues": 15,
+      "moves": 8,
+      "whispers": 4,
+      "semanticReview": {
+        "passed": true,
+        "reviewer": "Codex",
+        "findings": [
+          "逐句核对八段15句台词与个人听闻：狗儿对刘姥姥出门已改为条件句，不再复述未听见的承诺；刘氏第二段仅询问母亲是否有认识的人，没有预知王家。",
+          "四处低语均在母女到位、相向后进行，狗儿在有效低语距离外。",
+          "逐项对照八个move、face、gesture：校正第二、三、五、六、七段的空间或动作措辞，没有增加舞台不支持的动作。",
+          "最后停在家中商议，是否及何时出门等天亮再定；没有进入其他场景或预知接待结果。"
+        ]
+      }
+    },
+    "editorialReview": {
+      "passed": true,
+      "reviewer": "Codex",
+      "findings": [
+        "逐句核对八段15句台词与个人听闻：狗儿对刘姥姥出门已改为条件句，不再复述未听见的承诺；刘氏第二段仅询问母亲是否有认识的人，没有预知王家。",
+        "四处低语均在母女到位、相向后进行，狗儿在有效低语距离外。",
+        "逐项对照八个move、face、gesture：校正第二、三、五、六、七段的空间或动作措辞，没有增加舞台不支持的动作。",
+        "最后停在家中商议，是否及何时出门等天亮再定；没有进入其他场景或预知接待结果。"
+      ],
+      "changes": [
+        {
+          "beatId": "second",
+          "narration": "狗儿走到屋中右后侧，刘氏走到母亲近旁。两人停下脚步后，刘氏压低了声音。"
+        },
+        {
+          "beatId": "third",
+          "narration": "刘氏留在母亲近旁，刘姥姥转向她答话。狗儿站在屋中右后侧，看着母女俩低语。",
+          "memory": "刘姥姥低声回应刘氏托人递话的询问；狗儿没有听见私语，另向母亲公开询问该由谁去。"
+        },
+        {
+          "beatId": "fifth",
+          "narration": "狗儿从屋中右后侧走到靠前的交谈位，站定看向刘姥姥。"
+        },
+        {
+          "beatId": "sixth",
+          "narration": "刘氏从母亲身旁走回屋中右侧，刘姥姥仍站在原处。窗纸又轻响一声。",
+          "memory": "刘氏表示打算准备衣裳，并询问还缺什么；刘姥姥重申事情成不成都不埋怨谁。准备衣裳只是提议，画面没有执行取衣动作。"
+        },
+        {
+          "beatId": "seventh",
+          "narration": "刘氏走到母亲近旁，狗儿走向屋中右后侧，让开中间的位置。",
+          "memory": "刘氏表示愿意先备衣裳；刘姥姥公开说明去不去、何时去，等天亮再定。"
+        }
+      ]
+    }
+  }
+}

@@ -89,6 +89,7 @@ export function stateAt(compiled,time){
     if(e.type==='move'){
       a.facingTarget=null;
       const p=Math.min(1,(time-e.time)/e.duration);a.position=along(e.path,p);a.moving=p<1;
+      a.anchor=p>=1?e.target:null;
       if(p<1){const future=along(e.path,Math.min(1,p+.025));a.facing=Math.abs(future[0]-a.position[0])>=Math.abs(future[1]-a.position[1])?(future[0]>a.position[0]?'right':'left'):(future[1]>a.position[1]?'back':'front');}
       else a.facing='front';
     }else if(e.type==='expression')a.expression=e.value;

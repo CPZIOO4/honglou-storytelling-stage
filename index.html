@@ -4,6 +4,7 @@
 <header class="masthead"><a class="brand" href="./"><span class="seal">红楼</span><span>说书舞台<small>一进荣国府</small></span></a><div class="edition"><span class="dot"></span>第一场 · 本地演出</div><button id="open-inspector" class="quiet">演出指令</button></header>
 <main>
  <section class="story-head"><div><p class="eyebrow">第一场　/　京郊 · 狗儿家</p><h1>寒家谋生</h1><p class="subtitle">一间寒舍，一门旧亲，一条还未走过的路。</p></div><div class="scene-stamp">秋尽<br><span>冬初</span></div></section>
+ <div id="generation-panel" class="generation-panel hidden"><div><strong>DeepSeek Flash</strong><span id="generation-status" role="status">准备生成第一场</span></div><button id="generate-story">生成第一场</button></div>
  <section class="player-layout">
   <div class="performance">
    <section class="narration" aria-label="说书内容"><div class="narration-label"><span>说书人</span><span id="beat-number">第一折</span></div><p id="narration-text">正在备好场景……</p></section>
@@ -13,7 +14,7 @@
   </div>
   <aside class="chapter-panel"><div class="chapter-heading"><p class="eyebrow">本场说书</p><span id="segment-count">十四段</span></div><ol id="chapters"></ol><div class="cast-note"><span>此刻在场</span><div id="cast"></div><p>从家中商议，到祖孙出门。<br>观众只需控制播放。</p></div></aside>
  </section>
- <footer><span>据《红楼梦》第六回改编 · 文字说书版</span><span>当前段落由助手预编，暂未接入在线模型。</span></footer>
+ <footer><span>红楼人物与环境卡 · 文字说书舞台</span><span id="source-status">助手预编示例</span></footer>
 </main>
 <dialog id="inspector"><div class="inspector-head"><div><p class="eyebrow">说书总控 · 数据查看</p><h2>一段话，也是一组动作</h2></div><button id="close-inspector" class="icon-button" aria-label="关闭演出指令">×</button></div><p class="inspector-note">这里展示正在播放的结构化指令，以及交给下一次生成的角色、环境和上下文。当前使用预编数据，换成 API 后仍由同一执行器播放。</p><div class="tabs"><button id="tab-beat" class="active">当前段落</button><button id="tab-context">总控上下文</button></div><pre id="instruction-json"></pre><div class="inspector-actions"><button id="download-script">下载本场 JSON</button><label class="upload">载入同格式演出<input id="import-script" type="file" accept="application/json,.json"></label></div><p id="import-status" role="status"></p></dialog>
 <script type="module" src="./src/app.js"></script>

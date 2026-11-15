@@ -1,0 +1,11 @@
+/** Explicit operator review of a terminal generated draft; never calls the model. */
+import {readFile,writeFile,rename} from 'node:fs/promises';import {resolve,join} from 'node:path';import {auditGeneratedStory,MODEL} from '../backend/generator.mjs';
+const [id,reviewFile]=process.argv.slice(2);if(!/^[a-f0-9-]{36}$/.test(id||'')||!reviewFile)throw Error('Usage: node scripts/review_generated.mjs <job-id> <review-json>');
+const root=resolve(import.meta.dirname,'..'),dir=join(root,'.runtime/generations',id);const json=async p=>JSON.parse(await readFile(p,'utf8'));
+const job=await json(join(dir,'status.json'));if(!['failed','ready'].includes(job.phase))throw Error('任务尚未结束，不能复核');
+const review=await json(resolve(reviewFile));if(review.passed!==true||typeof review.reviewer!=='string'||!Array.isArray(review.changes)||!Array.isArray(review.findings))throw Error('缺少明确的审查结论与证据');
+const story=await json(join(dir,'draft.json'));for(const p of review.changes){const b=story.beats.find(b=>b.id===p.beatId);if(!b)throw Error('未知段落');for(const key of ['narration','memory'])if(p[key]!==undefined){if(typeof p[key]!=='string')throw Error('修改字段不合法');b[key]=p[key];}}
+const stage=await json(join(root,'data/stage.json')),characters=await json(join(root,'data/characters.json'));const audit=auditGeneratedStory(story,stage,characters);if(audit.moves<1)throw Error('没有实际移动');
+story.id=id;story.generation={provider:'DeepSeek',model:MODEL,source:'live-api',generatedAt:new Date().toISOString(),jobId:id,calls:job.calls.map(c=>({responseId:c.responseId,model:c.model,phase:c.phase,usage:c.usage})),validation:{...audit,semanticReview:{passed:true,reviewer:review.reviewer,findings:review.findings}},editorialReview:review};
+await writeFile(join(dir,'operator-review.json'),JSON.stringify(review,null,2));await writeFile(join(dir,'approved.json'),JSON.stringify(story,null,2));await writeFile(join(root,'.runtime/latest-story.tmp'),JSON.stringify(story,null,2));await rename(join(root,'.runtime/latest-story.tmp'),join(root,'.runtime/latest-story.json'));
+job.phase='ready';job.message='已按实际指令逐句复核并校正旁白，可以播放';job.validation=story.generation.validation;job.operatorReviewed=true;await writeFile(join(dir,'status.json'),JSON.stringify(job,null,2));console.log(JSON.stringify(audit));
