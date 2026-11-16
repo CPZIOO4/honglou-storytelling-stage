@@ -16,6 +16,8 @@ node server.mjs
 
 Windows 用户也可运行 `启动舞台.ps1`，用 `停止舞台.ps1` 停止该脚本启动的专用本地进程。它不会停止其他 Node 服务。
 
+剧情连续性、原文性格校订、high 思考与两层记忆见 [连续性与记忆](docs/continuity-and-memory.md)。
+
 ## 当前功能
 
 - 实际 GLB 三维场景；五个纸片人物，头部与身体分层。

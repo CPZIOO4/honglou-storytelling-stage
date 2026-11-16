@@ -18,6 +18,10 @@ const server=http.createServer(async(req,res)=>{
       if(req.method==='GET'&&path==='/api/director/latest'){const result=await generator.latest();return respond(res,result?200:404,result||{error:'尚无通过检查的模型生成版本'});}
       if(req.method==='GET'&&path==='/api/director/next-context'){const result=await generator.nextContext();return respond(res,result?200:404,result||{error:'尚无通过审核的场末决定'});}
       if(req.method==='GET'&&path.startsWith('/api/director/jobs/')){const job=await generator.job(path.split('/').at(-1));return respond(res,job?200:404,job||{error:'任务不存在'});}
+      if(req.method==='POST'&&path==='/api/director/complete'){
+        let body='';for await(const chunk of req){body+=chunk;if(body.length>200)return respond(res,413,{error:'请求过大'});}
+        try{return respond(res,200,await generator.complete(JSON.parse(body).storyId));}catch(e){return respond(res,409,{error:e.message});}
+      }
       if(req.method==='POST'&&path==='/api/director/generate'){
         let body='';for await(const chunk of req){body+=chunk;if(body.length>1024)return respond(res,413,{error:'请求过大'});}
         try{return respond(res,202,await generator.start(body?JSON.parse(body):{}));}catch(e){return respond(res,409,{error:e.message});}

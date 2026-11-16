@@ -1,0 +1,17 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const base=process.env.STAGE_BASE_URL||'http://127.0.0.1:4173';
+const story=JSON.parse(await readFile('.runtime/latest-story.json','utf8'));
+const r=await fetch(base+'/api/director/next-context');assert(r.ok);const context=await r.json();
+assert.equal(context.status,'accepted','先运行完整自然播放检查，确认由前端提交记忆');
+assert.equal(context.branchId,story.id);assert.deepEqual(context.cast,story.narrative.handoff.decision.party);
+assert(context.prompt.includes(story.contextMemory.summary));
+for(const id of context.cast)if(story.contextMemory.characters[id])assert(context.prompt.includes(story.contextMemory.characters[id]));
+assert(!context.prompt.includes('"commands"'));assert(!context.prompt.includes('heardUtterances'));assert(!context.prompt.includes('reasoning_content'));
+const old=await readFile(`.runtime/campaigns/${story.id}/accepted.json`,'utf8');
+const again=await fetch(base+'/api/director/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({storyId:story.id})});assert(again.ok);
+assert.equal(await readFile(`.runtime/campaigns/${story.id}/accepted.json`,'utf8'),old);
+const bad=await fetch(base+'/api/director/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({storyId:'00000000-0000-0000-0000-000000000000'})});assert.equal(bad.status,409);
+assert.equal((await fetch(base+'/.runtime/campaigns/'+story.id+'/accepted.json')).status,403);
+const result={passed:true,storyId:story.id,nextNodeId:context.nextNodeId,sceneId:context.sceneId,cast:context.cast,promptCharacters:context.prompt.length,summaryCharacters:story.contextMemory.summary.length,personalMemoryLengths:Object.fromEntries(Object.entries(story.contextMemory.characters).map(([id,t])=>[id,t.length])),idempotent:true};
+await writeFile('qa/memory-flow.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));

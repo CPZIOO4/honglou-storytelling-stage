@@ -7,7 +7,9 @@ import {NARRATIVE_VERSION,nodeFor,validatePlan,buildHandoff,nextNodeContext,stag
 import {defaultPresentation,compilePresentation} from '../src/presentation.js';
 import {compileSoundtrack} from '../src/soundtrack.js';
 import {validateFactRefs,runtimeCards,scriptEvidence} from './card-context.mjs';
-export const MODEL='deepseek-flash';
+import {MODEL,THINKING,MODEL_TIMEOUT_MS,modelRequest} from './model-config.mjs';
+import {buildWritingContext,memoryEvidence,validateMemoryUpdate,mergeMemory,commitMemory,acceptedMemory,nextWritingContext} from './story-memory.mjs';
+export {MODEL};
 const ORIGIN='https://api.deepseek.com';
 const load=async p=>JSON.parse(await readFile(p,'utf8'));
 const save=async(p,v)=>writeFile(p,JSON.stringify(v,null,2),'utf8');
@@ -44,7 +46,8 @@ export function auditGeneratedStory(story,stage,characters,cards=null){
    if(cards)validateFactRefs(d,cards);
    if(d.text.length>90)errors.push(`${b.id} 台词超过90字`);
    if(d.until-d.at<d.text.length/5+1)errors.push(`${b.id}:${i} 台词${d.text.length}字，至少需要${Math.ceil(d.text.length/5+1)}秒；当前at=${d.at},until=${d.until}只有${d.until-d.at}秒。延长until并顺延后续对白/转向及本段duration，不要改短其他句子。`);
-   if(d.speaker==='baner'&&d.text.length>2)errors.push(`${b.id} 板儿台词超过两个字`);
+   if(d.speaker==='baner'&&d.text.length>18)errors.push(`${b.id} 板儿只说眼前具体事情的短句，最多18字`);
+   if(/[:：]/.test(d.text))errors.push(`${b.id} 口语对白不能含冒号或提纲标签`);
    if(d.speaker==='qinger')errors.push(`${b.id} 青儿本场不承担对白`);
    if(!Array.isArray(d.knowledgeRefs))errors.push(`${b.id} 缺少 knowledgeRefs`);
    const allowed=new Set(personalKnowledge(compiled,b.start+d.at)[d.speaker].map(e=>e.eventId));
@@ -65,33 +68,36 @@ export function createGenerator(root){
  let active=null;let controller=null;const jobs=new Map();const dir=join(root,'.runtime/generations');
  async function latest(){try{return await load(join(root,'.runtime/latest-story.json'));}catch{return null;}}
  async function callModel(key,system,input,job,phase){
-  const callId=randomUUID();await save(join(dir,job.id,callId+'-request.json'),{phase,model:MODEL,system,input});
-  const abort=new AbortController();const timeout=setTimeout(()=>abort.abort(),90000);const onAbort=()=>abort.abort();controller?.signal.addEventListener('abort',onAbort,{once:true});
+  const skill=job.skills[phase.startsWith('memory-')?'honglou-character-evolution':'honglou-scene-pacing'];
+  system+='\n'+skill;
+  if(phase.startsWith('scene-plan')||phase==='script-rewrite')system+='\n首场严格最多3段、8句。同行商议集中在最后一段最多3句，不分两段反复确认。末段完成决定就结束，不再复述。两位儿童不必安排对白。';
+  const callId=randomUUID();await save(join(dir,job.id,callId+'-request.json'),{phase,model:MODEL,...THINKING,system,input});
+  const abort=new AbortController();const timeout=setTimeout(()=>abort.abort(),MODEL_TIMEOUT_MS);const onAbort=()=>abort.abort();controller?.signal.addEventListener('abort',onAbort,{once:true});
   try{
-   const response=await fetch(ORIGIN+'/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,messages:[{role:'system',content:system},{role:'user',content:JSON.stringify(input)}],thinking:{type:'disabled'},response_format:{type:'json_object'},temperature:.8,max_tokens:6000,stream:false}),signal:abort.signal});
+   const response=await fetch(ORIGIN+'/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(modelRequest(system,input)),signal:abort.signal});
    const data=await response.json();if(!response.ok)throw Error(`DeepSeek HTTP ${response.status} (${data.error?.code||'request_failed'})`);
-   const receipt={phase,responseId:data.id,model:data.model,usage:data.usage,finishReason:data.choices?.[0]?.finish_reason,content:data.choices?.[0]?.message?.content};job.calls.push({phase,responseId:data.id,model:data.model,usage:data.usage});await save(join(dir,job.id,callId+'-response.json'),receipt);
+   const receipt={phase,...THINKING,responseId:data.id,model:data.model,usage:data.usage,finishReason:data.choices?.[0]?.finish_reason,content:data.choices?.[0]?.message?.content};job.calls.push({phase,responseId:data.id,model:data.model,...THINKING,usage:data.usage});await save(join(dir,job.id,callId+'-response.json'),receipt);
    if(receipt.finishReason!=='stop')throw Error('模型输出未完整结束，未自动重放请求');
    return JSON.parse(receipt.content);
   }catch(e){if(e.name==='AbortError')throw Error('模型请求超时或被取消；请求结果不确定，未自动重试');throw e;}
   finally{clearTimeout(timeout);controller?.signal.removeEventListener('abort',onAbort);}
  }
- async function persist(job){await save(join(dir,job.id,'status.json'),job);}
+ async function persist(job){const {skills,...status}=job;await save(join(dir,job.id,'status.json'),status);}
  async function run(job){
   try{
    const [rawCards,stage,characters,seed,storyline,audioLibrary]=await Promise.all(['cards','stage','characters','scene-one','storyline','audio-library'].map(n=>load(join(root,'data',n+'.json'))));
-   const cards=runtimeCards(rawCards);const key=await readCredential();job.inputs={cardsHash:hash(rawCards),stageHash:hash(stage),storylineHash:hash(storyline),narrativeVersion:NARRATIVE_VERSION};
+   job.skills=Object.fromEntries(await Promise.all(['honglou-scene-pacing','honglou-character-evolution'].map(async name=>[name,await readFile(join(root,'skills',name,'SKILL.md'),'utf8')])));const cards=runtimeCards(rawCards);const key=await readCredential();job.inputs={cardsHash:hash(rawCards),stageHash:hash(stage),storylineHash:hash(storyline),narrativeVersion:NARRATIVE_VERSION,skillsHash:hash(job.skills)};
    const story=job.resumeFrom?await load(join(dir,job.resumeFrom,job.resumeFile||'draft.json')):{version:1,communicationVersion:1,id:job.id,title:'寒家谋生',scene:stage.id,mode:'deepseek-generated',summary:'DeepSeek Flash 根据当前人物、环境与个人听闻生成的第一场。',initial:seed.initial,beats:[]};story.id=job.id;delete story.generation;
    const node=nodeFor(storyline,storyline.entryNode);
    if(!story.narrative){
     job.phase='planning';job.message='先规划本场怎样从困境推进到行动决定';await persist(job);
     let plan=validatePlan(await callModel(key,`你是唯一说书总控，先写完整一场戏，再交程序编排动作。依据人物卡、环境卡与当前故事节点，输出JSON {"endingAim":"本场实际形成的决定","beats":[{"id":"短英文ID","title":"短标题","question":"本段要处理的问题","change":"本段对白已经带来的新变化，作为事实摘要","intention":"谁对谁想达到什么","dialogue":[{"speaker":"id","to":["id"],"mode":"normal/whisper/call","text":"原创对白<=65字","knowledgeRefs":["已听见事件ID"],"factRefs":["本人可用卡片事实ID"]}]}]}。
-整场优先3到6段，最多maxBeats段，每段1到4句，必须有自然接话和明确推进。因为你一次看完整场，任何旧线索已说过就不能再当新线索发现，已经同意的事不能又回去征询。允许有不同利益和实质新理由的争论。最后说清谁去、同行者、找谁、求什么和何时动身；成人同行者要明确同意。若不去须实际新阻碍与替代行动。人物公开讨论时用normal；只在确有理由避人时低语，避人者不得从私语得到信息。
+整场优先2到3段、6至8句，最多maxBeats段，每段1到4句，必须有自然接话和明确推进。因为你一次看完整场，任何旧线索已说过就不能再当新线索发现，已经同意的事不能又回去征询。允许有不同利益和实质新理由的争论。最后说清谁去、同行者、找谁、求什么和何时动身；成人同行者要明确同意。若不去须实际新阻碍与替代行动。人物公开讨论时用normal；只在确有理由避人时低语，避人者不得从私语得到信息。
 刘姥姥按performance在家敢数落女婿，会拿出具体办法，有算计、有担当，不写成反复安慰别愁的长辈；乡谚要针对眼前事，不每句塞口头禅。刘氏可以主动提议同行，狗儿也可以去，不能自动默认板儿。不要为了偏离原著硬指定某人，同伴由有来有往的商议形成。角色称谓与关系准确：狗儿父亲与周瑞有旧；刘氏父亲并非狗儿父亲。讲给刘氏听须说你公公或狗儿他爹，不说你爹。场景是秋尽冬初，不是年关除夕。统一名字周瑞妻子，不用周瑞家的。
-人物卡是资料，家庭场次覆盖后期入园情境。只读取当前运行卡，不从原著记忆补出事实。relationshipFacts中的knownBy决定谁一开始知道什么，scope限制事实能支持的说法：知道周瑞不是与周瑞交情深，狗儿家的旧交不能挪成刘姥姥自己的关系；人物可问、可猜，但必须用疑问或推测口气。每句factRefs只引本人knownFactIds，听来的事引knowledgeRefs。家中瓜果、钱粮余量未建立，不凭空说已有可送礼的库存。环境卡的factBoundary与narrationPolicy都须遵守。不复述原著，原著只给问题与关系；绝不预知门房和周瑞妻子的接待结果。后续台词只能依赖当时该人物已听到的话或自己卡片知识，不能把结局提前当作事实。事件ID是本段id:从0开始的对白序号，如abc:0；新信息用[]。板儿几乎不开口、最多两字，青儿不说成人台词。台词可提出将来动作，不声称未实现的道具操作已完成。`,{node,cards,initial:story.initial,maxBeats:job.total},job,'scene-plan'),job.total);
+人物卡是资料，家庭场次覆盖后期入园情境。只读取当前运行卡，不从原著记忆补出事实。relationshipFacts中的knownBy决定谁一开始知道什么，scope限制事实能支持的说法：知道周瑞不是与周瑞交情深，狗儿家的旧交不能挪成刘姥姥自己的关系；人物可问、可猜，但必须用疑问或推测口气。每句factRefs只引本人knownFactIds，听来的事引knowledgeRefs。家中瓜果、钱粮余量未建立，不凭空说已有可送礼的库存。环境卡的factBoundary与narrationPolicy都须遵守。不复述原著，原著只给问题与关系；绝不预知门房和周瑞妻子的接待结果。后续台词只能依赖当时该人物已听到的话或自己卡片知识，不能把结局提前当作事实。事件ID是本段id:从0开始的对白序号，如abc:0；新信息用[]。板儿可以不说话；如说话最多18字，限眼前具体事物，不替成人批准决定，青儿不说成人台词。台词可提出将来动作，不声称未实现的道具操作已完成。`,{node,writingContext:buildWritingContext(cards,null,{node}),maxBeats:3},job,'scene-plan'),job.total);
     let scriptReview;
     for(let attempt=0;attempt<2;attempt++){
-     scriptReview=await callModel(key,`你是场次内容审核员，检查是否能按人物卡自由创作并推进到节点。只阻止明确的事实矛盾、虚构具体过去经历、人物知道未听见的秘密、明显张冠李戴、反复同一结论却无推进、或结尾根本没有行动决定。每项指出具体原句和矛盾，最多6项；一般润色建议不算失败。
+     scriptReview=await callModel(key,`你是场次内容审核员，检查是否能按人物卡自由创作并推进到节点。必须额外检查节奏Skill：同行商议是否超过3次发言、定下后是否又复问，超过就不通过，修订时合并。必须区分尚未办齐与一件也没有，不夸大环境事实。只阻止明确的事实矛盾、虚构具体过去经历、人物知道未听见的秘密、明显张冠李戴、反复同一结论却无推进、或结尾根本没有行动决定。每项指出具体原句和矛盾，最多6项；一般润色建议不算失败。
 特别注意：knownBy限定开场知识，scriptEvidence.citedSpeech表示前文新听到的内容；人物听到狗儿讲旧交后可以讨论这条关系。factRefs/knowledgeRefs是上下文依据，不要求每个引用分别证明整句话，也不因引用稍宽就否决。提议、询问、推测、承诺准备东西，均不等于声称事情已完成或已获帮助。人物可以提出卡片未列出的新办法。父母商议同意带孩子就够，不要求孩子签约，不默认板儿同行不等于禁止选择板儿。不要求照原著顺序或原话说。
 仍须严格检查：不能凭空说自己曾受过谁的恩惠、拥有谁家的旧交，不能编造具体旧日荒年经历或确知尚未知的库存、府中接待结果；不能让人物在未听见前就知道秘密。回顾整场是否有新信息、不同反应、可行动的决定。输出JSON {"passed":true或false,"issues":["具体实质问题"]}；没有实质问题时passed=true且issues=[]。`,{cards,node,plan,scriptEvidence:scriptEvidence(plan)},job,'script-review-'+attempt);
      if(scriptReview.passed===true&&Array.isArray(scriptReview.issues)&&scriptReview.issues.length===0)break;
@@ -112,7 +118,7 @@ export function createGenerator(root){
    const protocol={beatShape:{id:'唯一字符串',title:'短标题',duration:'12到55的数字',narration:'一到两句字符串',memory:'字符串',dialogue:[{at:5,until:14,speaker:'人物id',to:['对话对象id'],mode:'normal',text:'模型原创台词',knowledgeRefs:[]}],commands:[]},expression:['neutral','smile','thinking','sad','surprised','laugh'],commands:{move:['at','type','actor','target','duration'],face:['at','type','actor','target'],expression:['at','type','actor','value'],gesture:['at','type','actor','value','duration'],camera:['at','type','target'],lighting:['at','type','value'],visibility:['at','type','actor','value']},gestures:['nod','shake'],lighting:['day','night','dawn'],cameras:Object.keys(stage.cameras),anchors:stage.anchors,anchorDescriptions:{granny_home:'炕前偏右的家人站位',gouer_home:'屋中后侧、炕的右方',gouer_pace:'屋中右后侧，远离低语的母女',gouer_listen:'屋中靠前的交谈位',liushi_home:'屋中右侧，靠近门边',liushi_near:'屋中右侧交谈位，不是桌旁',whisper_guest:'刘姥姥旁的独立低语位，与granny_home间距约0.83米',room_center:'屋中活动空地',baner_near:'靠近刘姥姥的孩子站位',door_inside:'院门内侧',yard_entry:'门外小院',yard_end:'小院远端'},edges:stage.edges,acoustics:stage.acoustics};
    for(let i=story.beats.length;i<job.total;i++){
     if(controller.signal.aborted)throw Error('已取消生成');job.phase='generating';job.message=`Flash 正在生成第 ${i+1} / ${job.total} 段`;await persist(job);
-    const context=generationContext(cards,stage,characters,story);const input={context,protocol,node,scenePlan:story.narrative.plan,planStep:story.narrative.plan.beats[i],segment:i+1,totalSegments:job.total,request:i===0?'从真实初态开场，把困境具体化。':i===job.total-1?'形成可交给下一节点的具体决定，同行成人须听见并回应；不自动切场。':'根据已发生的对白，实现本段的新变化；不要重复已经谈妥的问题。',quality:'走位应服务人物目的，不以走动或低语填时长。人物互相答话，可以反驳、讨价还价、拿定主意。'};
+    const actual=generationContext(cards,stage,characters,story);const context={scene:cards.scene,currentState:actual.currentState,recentStory:story.beats.map(b=>b.memory).join('。'),characters:cards.characters};const input={context,protocol,node,scenePlan:story.narrative.plan,planStep:story.narrative.plan.beats[i],segment:i+1,totalSegments:job.total,request:i===0?'从真实初态开场，把困境具体化。':i===job.total-1?'形成可交给下一节点的具体决定，同行成人须听见并回应；不自动切场。':'根据已发生的对白，实现本段的新变化；不要重复已经谈妥的问题。',quality:'走位应服务人物目的，不以走动或低语填时长。人物互相答话，可以反驳、讨价还价、拿定主意。'};
     let output=await callModel(key,SYSTEM,input,job,`beat-${i+1}`);let accepted=false;
     for(let attempt=0;attempt<3;attempt++){
      try{const normalized=stageScriptBeat(story.narrative.plan.beats[i],output.blocking);if(normalized?.id!==story.narrative.plan.beats[i].id)throw Error('本段ID必须使用planStep.id');const candidate={...story,beats:[...story.beats,normalized]};auditGeneratedStory(candidate,stage,characters,cards);story.beats.push(normalized);accepted=true;break;}
@@ -124,9 +130,9 @@ export function createGenerator(root){
    let review=null;
    for(let reviewPass=0;reviewPass<3;reviewPass++){
     const compiled=compileStory(story,stage,characters);
-    const knowledgeAtEachBeat=compiled.beats.map(b=>({id:b.id,heardAtStart:personalKnowledge(compiled,b.start)}));
+    const knowledgeAtEachBeat=compiled.beats.map(b=>({id:b.id,heardAtStart:Object.fromEntries(Object.entries(personalKnowledge(compiled,b.start)).map(([id,events])=>[id,events.map(e=>e.eventId)]))}));
     const executionFacts=compiled.beats.map(b=>({beatId:b.id,moves:compiled.events.filter(e=>e.beatId===b.id&&e.type==='move').map(e=>({actor:e.actor,to:e.target,description:protocol.anchorDescriptions[e.target],distance:e.path.slice(1).reduce((n,p,i)=>n+distance(e.path[i],p),0)})),noMoveActors:characters.map(c=>c.id).filter(id=>!b.commands.some(c=>c.type==='move'&&c.actor===id)),heard:b.dialogue.map(d=>({speaker:d.speaker,to:d.to,text:d.text,heardBy:stateAt(compiled,b.start+d.at+.001).dialogue?.heardBy}))}));
-    review=reviewPass===0&&job.reviewNotes?.length?{passed:false,issues:job.reviewNotes}:await callModel(key,`你是剧情审查员。只审核输入，不补剧情。先读完整场，人物可以在后段回应前段安排，不要求每句都有立即答应。issues只放最终确认的实质矛盾，撤回的疑虑、润色建议和正常创作选择不得放进去。只报明确矛盾和无法执行的内容；提议、询问和准备的承诺不等于既成事实，人物可用自己刚听到的知识。引用稍宽或普通创作选择不是错误；父母同意即可决定孩子同行。核对executionFacts：noMoveActors中的人物本段没有走动，旁白不得声称他走了、挪了、退了。逐句检查relationshipFacts的关系归属及scope，factRefs不得张冠李戴、不得把知道写成熟交；环境factBoundary未知的库存与接待结果不可当成事实。核对白话中是否肯定知道自己未听见的私语，是否描写未支持的手部/坐姿动作，是否超出人物卡。还要检查叙事质量：每段是否带来新信息/冲突/选择，重复叮嘱衣裳、成败免责或明早再谈是否造成停滞；刘姥姥是否按performance在家拿办法而非泛泛劝解。整场须落实节点requiredChange，交代谁去、找谁、求什么、同行者与出发条件，或有实质阻碍的替代行动。不合格就报错，不能只检查动作能播放。区分条件句和已知事实：“若您肯去”“明早要走的话”是在假设，不等于已知道决定，不应因此误判。普通可见表情、合理推测和环境底噪可用，不必逐个都变成动作。输出JSON {"passed":true或false,"issues":[{"beatId":"...","reason":"..."}]}。没有问题issues为空。`,{cards,node,story:{beats:story.beats},knowledgeAtEachBeat,executionFacts},job,'semantic-review-'+reviewPass);
+    review=reviewPass===0&&job.reviewNotes?.length?{passed:false,issues:job.reviewNotes}:await callModel(key,`你是剧情审查员。只审核输入，不补剧情。先读完整场，人物可以在后段回应前段安排，不要求每句都有立即答应。issues只放最终确认的实质矛盾，撤回的疑虑、润色建议和正常创作选择不得放进去。只报明确矛盾和无法执行的内容；提议、询问和准备的承诺不等于既成事实，人物可用自己刚听到的知识。引用稍宽或普通创作选择不是错误；父母同意即可决定孩子同行。核对executionFacts：noMoveActors中的人物本段没有走动，旁白不得声称他走了、挪了、退了。逐句检查relationshipFacts的关系归属及scope，factRefs不得张冠李戴、不得把知道写成熟交；环境factBoundary未知的库存与接待结果不可当成事实。核对白话中是否肯定知道自己未听见的私语，是否描写未支持的手部/坐姿动作，是否超出人物卡。还要检查叙事质量：每段是否带来新信息/冲突/选择，重复叮嘱衣裳、成败免责或明早再谈是否造成停滞；刘姥姥是否按performance在家拿办法而非泛泛劝解。整场须落实节点requiredChange，交代谁去、找谁、求什么、同行者与出发条件，或有实质阻碍的替代行动。不合格就报错，不能只检查动作能播放。区分条件句和已知事实：“若您肯去”“明早要走的话”是在假设，不等于已知道决定，不应因此误判。普通可见表情、合理推测和环境底噪可用，不必逐个都变成动作。输出JSON {"passed":true或false,"issues":[{"beatId":"...","reason":"..."}]}。没有问题issues为空。`,{cards,node,story:{beats:story.beats.map(({id,narration,memory,dialogue})=>({id,narration,memory,dialogue}))},knowledgeAtEachBeat,executionFacts},job,'semantic-review-'+reviewPass);
     await save(join(dir,job.id,'semantic-review.json'),review);
     if(review.passed===true&&Array.isArray(review.issues)&&review.issues.length===0)break;
     if(reviewPass===2)throw Error('内容审核未通过：'+JSON.stringify(review.issues||[]));
@@ -138,7 +144,7 @@ export function createGenerator(root){
     }
     auditGeneratedStory(story,stage,characters,cards);await save(join(dir,job.id,'draft.json'),story);
    }
-   const audit=auditGeneratedStory(story,stage,characters,cards);if(audit.moves<1)throw Error('整场没有实际走位');
+   const audit=auditGeneratedStory(story,stage,characters,cards);
    job.message='提取本场实际决定与下一节点的个人记忆';await persist(job);
    const actualEvents=story.beats.flatMap(b=>b.dialogue.map((d,i)=>({eventId:b.id+':'+i,speaker:d.speaker,text:d.text})));
    let handoff, handoffReview, rejectedResolution=null, handoffErrors=null;
@@ -147,7 +153,7 @@ export function createGenerator(root){
     try{
      handoff=buildHandoff(story,stage,characters,storyline,resolution);
      if(handoff.facts.some(f=>f.kind==='resource'))throw Error('本场没有道具交易执行，未来食物衣服只能记plan或promise，不能记resource库存');
-     handoffReview=await callModel(key,`核对交接记录与actualEvents原句的实质一致性。这里所有decision字段都是已商议的未来计划：status=depart表示决定要出发，不是已经出发；departureCondition是计划时间和前提，写明早不等于声称已到明早；plan、promise也明确未完成。父母同意安排孩子同行足够，孩子说“去”就是愿意，不要求成人合同式措辞。party仅指到达下一节点的人员，半程送行后返回的人不能混入。检查名单与请求是否确有对话依据，是否凭空改成另一人，是否将承诺改成已经拿到钱或完成交易。不要纠缠一般润色、没有立即应答或句子措辞，后文的承诺可支持前文分工。只输出JSON {"passed":true或false,"issues":["最多4项具体实质矛盾"]}。无实质矛盾则passed=true、issues=[]。`,{actualEvents,handoff:{transition:handoff.transition,nextNodeId:handoff.nextNodeId,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),facts:handoff.facts.map(({knownBy,...f})=>f)}},job,'handoff-review-'+attempt);
+     handoffReview=await callModel(key,`核对交接记录与actualEvents原句的实质一致性。这里所有decision字段都是已商议的未来计划：status=depart表示决定要出发，不是已经出发；departureCondition是计划时间和前提，写明早不等于声称已到明早；plan、promise也明确未完成。父母同意安排孩子同行足够，不要给孩子安排正式表决，不要求儿童发言。party仅指到达下一节点的人员，半程送行后返回的人不能混入。检查名单与请求是否确有对话依据，是否凭空改成另一人，是否将承诺改成已经拿到钱或完成交易。不要纠缠一般润色、没有立即应答或句子措辞，后文的承诺可支持前文分工。只输出JSON {"passed":true或false,"issues":["最多4项具体实质矛盾"]}。无实质矛盾则passed=true、issues=[]。`,{actualEvents,handoff:{transition:handoff.transition,nextNodeId:handoff.nextNodeId,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),facts:handoff.facts.map(({knownBy,...f})=>f)}},job,'handoff-review-'+attempt);
      if(handoffReview.passed!==true||!Array.isArray(handoffReview.issues)||handoffReview.issues.length)throw Error(JSON.stringify(handoffReview.issues));
      break;
     }catch(e){if(attempt===2)throw Error('场末决定尚未落实：'+e.message);rejectedResolution=resolution;handoffErrors=e.message;}
@@ -165,20 +171,33 @@ export function createGenerator(root){
     }catch(e){if(attempt===1)throw e;musicErrors=e.message;}
    }
 
-   await save(join(dir,job.id,'next-node-context.json'),nextNodeContext(handoff,storyline,cards));
-   story.generation={authoring:{dialogue:'DeepSeek Flash 原始生成及模型自动修订，无人工改写台词',cardsRevision:cards.revision,cardHash:hash(rawCards)},provider:'DeepSeek',model:MODEL,generatedAt:new Date().toISOString(),source:'live-api',jobId:job.id,calls:job.calls.map(c=>({responseId:c.responseId,model:c.model,phase:c.phase,usage:c.usage})),validation:{...audit,semanticReview:review}};
+   job.message='压缩剧情摘要与各人的新经历，核对个人听闻';await persist(job);
+   const evidence=memoryEvidence(story,stage,characters);let memoryUpdate,memoryReview,memoryErrors=null;
+   for(let attempt=0;attempt<2;attempt++){
+    memoryUpdate=await callModel(key,'生成本场待确认记忆。只输出JSON {"summary":"900字内剧情因果与未兑现承诺","evidenceRefs":["本场事件id"],"characters":[{"id":"人物id","memory":"240字内本人动态经历","evidenceRefs":["本人确实听见的本场事件id"]}]}。无新经历的人省略。保留姓名与既定性格，仅补经历。新分支没有旧经历，不得复制其他演出版。', {cards,previousMemory:null,evidence,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),validationErrors:memoryErrors},job,'memory-update-'+attempt);
+    try{
+     validateMemoryUpdate(memoryUpdate,evidence,cards);
+     memoryReview=await callModel(key,'审核摘要与动态卡，逐条对照真实对白。检查同行者、拒绝范围、改变原因、计划未完成、儿童理解能力、私语边界。不能把只送村口写成进府，也不能将总控摘要泄露到不知情人物卡。输出JSON {"passed":true或false,"issues":["具体问题"]}。', {cards,evidence,update:memoryUpdate,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy'))},job,'memory-review-'+attempt);
+     if(memoryReview.passed!==true||!Array.isArray(memoryReview.issues)||memoryReview.issues.length)throw Error(JSON.stringify(memoryReview.issues));break;
+    }catch(e){if(attempt===1)throw e;memoryErrors=e.message;}
+   }
+   story.contextMemory=mergeMemory(null,memoryUpdate,story);story.memoryReview=memoryReview;
+   await save(join(dir,job.id,'memory-evidence.json'),{update:memoryUpdate,evidence});
+   await save(join(dir,job.id,'next-node-context.json'),{status:'pending-playback',...await nextWritingContext(root,cards,storyline,handoff,story.contextMemory)});
+   story.generation={authoring:{dialogue:'DeepSeek Flash 原始生成及模型自动修订，无人工改写台词',cardsRevision:cards.revision,cardHash:hash(rawCards)},provider:'DeepSeek',model:MODEL,...THINKING,generatedAt:new Date().toISOString(),source:'live-api',jobId:job.id,calls:job.calls.map(c=>({responseId:c.responseId,model:c.model,phase:c.phase,thinking:c.thinking,reasoning_effort:c.reasoning_effort,usage:c.usage})),validation:{...audit,semanticReview:review}};
    await save(join(dir,job.id,'approved.json'),story);const temp=join(root,'.runtime/latest-story.tmp');await save(temp,story);await rename(temp,join(root,'.runtime/latest-story.json'));
    job.phase='ready';job.message='整场生成与检查完成，可以播放';job.validation=audit;await persist(job);
   }catch(e){job.phase='failed';job.message=String(e.message).slice(0,1500);await persist(job);}
   finally{active=null;controller=null;}
  }
  return {
-  async status(){const saved=await latest();return {configured:hasCredential(),model:MODEL,active:active?jobs.get(active):null,latest:saved?{id:saved.id,generatedAt:saved.generation.generatedAt,beats:saved.beats.length}:null};},
-  async start({beats=8,resumeFrom=null,reviewNotes=[]}={}){if(active)throw Error('已有生成任务在进行');if(!Number.isInteger(beats)||beats<6||beats>12)throw Error('段落数须为6至12');if(!hasCredential())throw Error('尚未配置本地密钥');if(!Array.isArray(reviewNotes)||reviewNotes.length>12||reviewNotes.some(n=>typeof n.beatId!=='string'||typeof n.reason!=='string'||n.reason.length>1000))throw Error('复核说明格式无效');let previous=null,resumeFile='draft.json';if(resumeFrom){if(!/^[a-f0-9-]{36}$/.test(resumeFrom))throw Error('任务ID无效');previous=await load(join(dir,resumeFrom,'status.json'));if(previous.phase!=='failed'&&!(previous.phase==='ready'&&reviewNotes.length))throw Error('只允许继续已终止任务或明确复核已生成版本');const currentCards=await load(join(root,'data/cards.json'));const currentStage=await load(join(root,'data/stage.json'));const currentStoryline=await load(join(root,'data/storyline.json'));if(previous.inputs.narrativeVersion!==NARRATIVE_VERSION||previous.inputs.storylineHash!==hash(currentStoryline)||previous.inputs.cardsHash!==hash(currentCards)||previous.inputs.stageHash!==hash(currentStage))throw Error('卡片或场景已改变，不能沿用旧草稿');if(previous.phase==='ready')resumeFile='approved.json';await load(join(dir,resumeFrom,resumeFile));beats=previous.total;if(reviewNotes.length){const saved=await latest();if(saved?.id===resumeFrom)await rename(join(root,'.runtime/latest-story.json'),join(dir,resumeFrom,'withheld-latest.json'));}}
+  async status(){const saved=await latest();const {skills,...publicJob}=jobs.get(active)||{};return {configured:hasCredential(),model:MODEL,active:active?publicJob:null,latest:saved?{id:saved.id,generatedAt:saved.generation.generatedAt,beats:saved.beats.length}:null};},
+  async start({beats=4,resumeFrom=null,reviewNotes=[]}={}){if(active)throw Error('已有生成任务在进行');if(!Number.isInteger(beats)||beats<2||beats>12)throw Error('段落预算须为2至12');if(!hasCredential())throw Error('尚未配置本地密钥');if(!Array.isArray(reviewNotes)||reviewNotes.length>12||reviewNotes.some(n=>typeof n.beatId!=='string'||typeof n.reason!=='string'||n.reason.length>1000))throw Error('复核说明格式无效');let previous=null,resumeFile='draft.json';if(resumeFrom){if(!/^[a-f0-9-]{36}$/.test(resumeFrom))throw Error('任务ID无效');previous=await load(join(dir,resumeFrom,'status.json'));if(previous.phase!=='failed'&&!(previous.phase==='ready'&&reviewNotes.length))throw Error('只允许继续已终止任务或明确复核已生成版本');const currentCards=await load(join(root,'data/cards.json'));const currentStage=await load(join(root,'data/stage.json'));const currentStoryline=await load(join(root,'data/storyline.json'));if(previous.inputs.narrativeVersion!==NARRATIVE_VERSION||previous.inputs.storylineHash!==hash(currentStoryline)||previous.inputs.cardsHash!==hash(currentCards)||previous.inputs.stageHash!==hash(currentStage))throw Error('卡片或场景已改变，不能沿用旧草稿');if(previous.phase==='ready')resumeFile='approved.json';await load(join(dir,resumeFrom,resumeFile));const currentSkills=Object.fromEntries(await Promise.all(['honglou-scene-pacing','honglou-character-evolution'].map(async name=>[name,await readFile(join(root,'skills',name,'SKILL.md'),'utf8')])));if(previous.inputs.skillsHash!==hash(currentSkills))throw Error('技能已改变，须开启新分支');beats=previous.total;if(reviewNotes.length){const saved=await latest();if(saved?.id===resumeFrom)await rename(join(root,'.runtime/latest-story.json'),join(dir,resumeFrom,'withheld-latest.json'));}}
    const job={id:randomUUID(),phase:'queued',total:beats,completed:previous?.completed||0,createdAt:new Date().toISOString(),message:previous?'继续检查已生成草稿':'准备生成',calls:previous?.calls||[],resumeFrom,resumeFile,reviewNotes};jobs.set(job.id,job);active=job.id;controller=new AbortController();await mkdir(join(dir,job.id),{recursive:true});await persist(job);void run(job);return job;},
-  async job(id){if(jobs.has(id))return jobs.get(id);if(!/^[a-f0-9-]{36}$/.test(id))return null;try{const j=await load(join(dir,id,'status.json'));if(!['ready','failed'].includes(j.phase)){j.phase='failed';j.message='服务曾中断，本任务未自动重放';}return j;}catch{return null;}},
+  async job(id){if(jobs.has(id)){const {skills,...publicJob}=jobs.get(id);return publicJob;}if(!/^[a-f0-9-]{36}$/.test(id))return null;try{const j=await load(join(dir,id,'status.json'));if(!['ready','failed'].includes(j.phase)){j.phase='failed';j.message='服务曾中断，本任务未自动重放';}return j;}catch{return null;}},
   latest,
-  async nextContext(){const story=await latest();if(!story?.narrative?.handoff)return null;const [line,cards]=await Promise.all([load(join(root,'data/storyline.json')),load(join(root,'data/cards.json'))]);return nextNodeContext(story.narrative.handoff,line,cards);},
+  async complete(storyId){const story=await latest();if(story?.id!==storyId)throw Error('只能确认当前通过审核的版本');return commitMemory(root,story);},
+  async nextContext(){const story=await latest();if(!story?.narrative?.handoff)return null;const memory=await acceptedMemory(root,story.id);if(!memory)return {status:'pending-playback',message:'当前版本尚未播放完成，未写入已演剧情。'};const [line,raw]=await Promise.all([load(join(root,'data/storyline.json')),load(join(root,'data/cards.json'))]);const cards=runtimeCards(raw);return {status:'accepted',branchId:story.id,...await nextWritingContext(root,cards,line,story.narrative.handoff,memory)};},
   cancel(){controller?.abort();},
  };
 }

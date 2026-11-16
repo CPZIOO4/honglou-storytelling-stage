@@ -18,7 +18,7 @@ async function pollGeneration(id){
   generationTimer=setTimeout(()=>pollGeneration(id),2000);
  }catch(e){$('generation-status').textContent='无法读取任务进度：'+e.message;$('generate-story').disabled=false;}
 }
-$('generate-story').onclick=async()=>{playing=false;draw();$('generate-story').disabled=true;$('generation-status').textContent='正在请 Flash 编排第一场……';try{const r=await fetch('/api/director/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({beats:8,...($('generate-story').dataset.resume?{resumeFrom:$('generate-story').dataset.resume}:{})})});const job=await r.json();if(!r.ok)throw Error(job.error);delete $('generate-story').dataset.resume;pollGeneration(job.id);}catch(e){$('generation-status').textContent=e.message;$('generate-story').disabled=false;}};
+$('generate-story').onclick=async()=>{playing=false;draw();$('generate-story').disabled=true;$('generation-status').textContent='正在请 Flash 编排第一场……';try{const r=await fetch('/api/director/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({beats:4,...($('generate-story').dataset.resume?{resumeFrom:$('generate-story').dataset.resume}:{})})});const job=await r.json();if(!r.ok)throw Error(job.error);delete $('generate-story').dataset.resume;pollGeneration(job.id);}catch(e){$('generation-status').textContent=e.message;$('generate-story').disabled=false;}};
 async function connectLocalDirector(){
  if(!['127.0.0.1','localhost'].includes(location.hostname))return;
  try{const status=await json('/api/director/status');$('generation-panel').classList.remove('hidden');$('generate-story').disabled=!status.configured;$('generation-status').textContent=status.configured?'可根据人物卡、环境卡和个人听闻生成新一场':'请在本机配置 DeepSeek 密钥';
@@ -54,7 +54,9 @@ function draw(){
 
 function seek(t){sound?.resetSeek();time=Math.max(0,Math.min(presentation.duration,t));if(time===presentation.duration)playing=false;draw();inspect();}
 function toggle(){if(!ready)return;void sound.unlock();if(time>=presentation.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
-function tick(now){if(ready&&playing){const dt=Math.max(0,Math.min(.1,(now-lastFrame)/1000));time=Math.max(0,Math.min(presentation.duration,time+dt*speed));if(time>=presentation.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
+const committedStories=new Set();
+async function confirmPlayedStory(){const id=story.id;if(committedStories.has(id)||!story.contextMemory||!['127.0.0.1','localhost'].includes(location.hostname))return;committedStories.add(id);try{const r=await fetch('/api/director/complete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({storyId:id})});if(!r.ok)throw Error();$('generation-status').textContent='本场已演完，剧情摘要和人物经历已保存';}catch{committedStories.delete(id);$('generation-status').textContent='剧情记忆保存失败，重播完成后可重试';}}
+function tick(now){if(ready&&playing){const dt=Math.max(0,Math.min(.1,(now-lastFrame)/1000));time=Math.max(0,Math.min(presentation.duration,time+dt*speed));if(time>=presentation.duration){playing=false;void confirmPlayedStory();}}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
 $('audio-mute').onclick=()=>{void sound.unlock();sound.setMuted(!sound.muted);$('audio-mute').textContent=sound.muted?'开启声音':'静音';$('audio-mute').setAttribute('aria-pressed',String(sound.muted));};
 $('music-volume').oninput=e=>{sound.musicVolume=Number(e.target.value);sound.settings();};$('voice-volume').oninput=e=>{sound.voiceVolume=Number(e.target.value);sound.settings();};
 $('play').onclick=toggle;$('restart').onclick=()=>{playing=false;seek(0);};$('ending-replay').onclick=()=>{void sound.unlock();seek(0);playing=true;};
