@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {loadResource} from './resource-loader.js';
 const convert=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 export class StageView{
   constructor(container,stage,characters,onProgress){
@@ -12,11 +13,11 @@ export class StageView{
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);
   }
   async load(){
-    const gltf=await new GLTFLoader().loadAsync(this.stage.model);this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入五位人物');
+    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入五位人物');
     const loader=new THREE.TextureLoader();let done=0;
     for(const c of this.characters){
       const prefix=`assets/characters/${c.id}/`;const tex={};
-      await Promise.all(['body','back',...c.expressions.map(x=>'head-'+x)].map(async k=>{tex[k]=await loader.loadAsync(prefix+k+'.png');tex[k].colorSpace=THREE.SRGBColorSpace;tex[k].magFilter=THREE.LinearFilter;tex[k].minFilter=THREE.LinearMipmapLinearFilter;}));
+      await Promise.all(['body','back',...c.expressions.map(x=>'head-'+x)].map(async k=>{tex[k]=await loadResource(`${c.name}的${k==='body'?'正面':k==='back'?'背面':'表情'}图片`,prefix+k+'.png',url=>loader.loadAsync(url));tex[k].colorSpace=THREE.SRGBColorSpace;tex[k].magFilter=THREE.LinearFilter;tex[k].minFilter=THREE.LinearMipmapLinearFilter;}));
       const bottom=(c.canvasHeight-c.alphaBounds[3])/c.canvasHeight,top=(c.canvasHeight-c.alphaBounds[1])/c.canvasHeight;
       const ph=c.height/(top-bottom),pw=ph*c.width/c.canvasHeight,center=ph/2-bottom*ph,neck=(1-435/c.canvasHeight-bottom)*ph;
       const group=new THREE.Group();const geo=new THREE.PlaneGeometry(pw,ph);
