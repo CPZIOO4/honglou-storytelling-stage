@@ -48,11 +48,11 @@ test('next scene receives the actual environment and selected companions with bo
  const next=await nextWritingContext(fileURLToPath(new URL('../',import.meta.url)),runtimeCards(cards),line,handoff,mergeMemory(null,update,story));
  assert.equal(next.sceneId,'SC01_JM');assert.deepEqual(next.cast,['granny','liushi']);assert(next.prompt.includes('荣府角门'));assert(next.prompt.includes(update.summary));assert(next.prompt.includes(update.characters[0].memory));assert(!next.prompt.includes('"title":"寒家谋生"'));assert(!next.prompt.includes('## system_prompt'));
 });
-test('screenplay rejects colon-style reports and the configured line budget',()=>{
+test('screenplay rejects report-style dialogue without an eight-line scene cap',()=>{
  const d={speaker:'granny',to:['gouer'],mode:'normal',text:'明早：我去。',knowledgeRefs:[],factRefs:[]};
  const plan={endingAim:'决定',beats:[1,2].map(i=>({id:'b'+i,question:'问'+i,change:'变'+i,intention:'问',dialogue:[{...d}]}))};
  assert.throws(()=>validateScreenplay(plan,cards.characters,4,runtimeCards(cards)),/冒号/);
  for(const b of plan.beats)b.dialogue=Array.from({length:4},()=>({...d,text:'我去。'}));
  plan.beats.push({...plan.beats[0],id:'b3',change:'第三变'});
- assert.throws(()=>validateScreenplay(plan,cards.characters,4,runtimeCards(cards)),/最多8句/);
+ assert.equal(validateScreenplay(plan,cards.characters,4,runtimeCards(cards)).beats.flatMap(b=>b.dialogue).length,12);
 });

@@ -1,6 +1,6 @@
 # 刘姥姥
 
-运行数据源：data/cards.json（first-visit-2026-11-16-continuity）
+运行数据源：data/cards.json（first-visit-2026-11-16-conversation）
 
 狗儿的岳母、刘氏的母亲，帮女儿女婿照看孩子。
 

@@ -1,0 +1,174 @@
+{
+  "sourceStoryId": "0fefa442-e76d-42a5-84b7-05f7e15d9e65",
+  "turns": [
+    {
+      "speaker": "granny",
+      "to": [
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "光坐着叹气，冬衣能从墙缝里掉出来？得寻条门路，哪怕舍回老脸。",
+      "knowledgeRefs": [],
+      "factRefs": [
+        "winter_need"
+      ],
+      "at": 1,
+      "until": 8,
+      "id": "b1:0",
+      "respondsTo": []
+    },
+    {
+      "speaker": "gouer",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "王家那门亲早疏了。倒是我爹与周瑞办过事，去问周瑞，许有条路。",
+      "knowledgeRefs": [
+        "b1:0"
+      ],
+      "factRefs": [
+        "gouer_zhou_connection",
+        "wang_old_kinship"
+      ],
+      "at": 9,
+      "until": 16,
+      "id": "b1:1",
+      "respondsTo": [
+        "b1:0"
+      ]
+    },
+    {
+      "speaker": "liushi",
+      "to": [
+        "granny",
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "上门容易，门上人先给冷脸，娘受得住么？",
+      "knowledgeRefs": [
+        "b1:1"
+      ],
+      "factRefs": [
+        "winter_need",
+        "family_roles"
+      ],
+      "at": 17,
+      "until": 22,
+      "id": "b1:2",
+      "respondsTo": [
+        "b1:1"
+      ]
+    },
+    {
+      "speaker": "granny",
+      "to": [
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "周瑞我听说过，多年不走动，得有人递话。",
+      "knowledgeRefs": [
+        "b1:1"
+      ],
+      "factRefs": [
+        "granny_zhou_awareness"
+      ],
+      "at": 1,
+      "until": 6,
+      "id": "b2:0",
+      "respondsTo": [
+        "b1:1"
+      ]
+    },
+    {
+      "speaker": "gouer",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "找我爹旧交周瑞，托他递话，求个临时周济先把冬事支应过去。",
+      "knowledgeRefs": [
+        "b2:0"
+      ],
+      "factRefs": [
+        "gouer_zhou_connection",
+        "winter_need"
+      ],
+      "at": 7,
+      "until": 14,
+      "id": "b2:1",
+      "respondsTo": [
+        "b2:0"
+      ]
+    },
+    {
+      "speaker": "liushi",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "娘，我陪你进城，孩子让狗儿看一天。",
+      "knowledgeRefs": [
+        "b2:1"
+      ],
+      "factRefs": [
+        "family_roles",
+        "winter_need"
+      ],
+      "at": 1,
+      "until": 6,
+      "id": "b3:0",
+      "respondsTo": [
+        "b2:1"
+      ]
+    },
+    {
+      "speaker": "granny",
+      "to": [
+        "liushi",
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "你别去，两个孩子离不得娘。狗儿送我到城门口，我进城寻周瑞递话。",
+      "knowledgeRefs": [
+        "b3:0",
+        "b2:1"
+      ],
+      "factRefs": [
+        "family_roles",
+        "granny_zhou_awareness"
+      ],
+      "at": 7,
+      "until": 15,
+      "id": "b3:1",
+      "respondsTo": [
+        "b3:0",
+        "b2:1"
+      ]
+    },
+    {
+      "speaker": "gouer",
+      "to": [
+        "granny",
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "成，明早我送你到城门口，孩子他娘留家看着。",
+      "knowledgeRefs": [
+        "b3:0",
+        "b3:1"
+      ],
+      "factRefs": [
+        "family_roles",
+        "gouer_zhou_connection"
+      ],
+      "at": 16,
+      "until": 22,
+      "id": "b3:2",
+      "respondsTo": [
+        "b3:0",
+        "b3:1"
+      ]
+    }
+  ]
+}

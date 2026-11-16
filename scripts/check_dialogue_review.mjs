@@ -1,0 +1,14 @@
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {randomUUID} from 'node:crypto';
+import {readCredential} from '../backend/credentials.mjs';
+import {modelRequest,THINKING,MODEL_TIMEOUT_MS} from '../backend/model-config.mjs';
+import {REVIEW_CONVERSATION,transcript,validateDialogueReview} from '../backend/conversation.mjs';
+import {runtimeCards} from '../backend/card-context.mjs';
+const load=async p=>JSON.parse(await readFile(p,'utf8')),cards=runtimeCards(await load('data/cards.json')),fixture=await load('tests/fixtures/disconnected-dialogue.json');
+const dir='.runtime/dialogue-regression/'+randomUUID();await mkdir(dir,{recursive:true});
+const system=REVIEW_CONVERSATION+'\n'+await readFile('skills/honglou-scene-pacing/SKILL.md','utf8'),input={characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(fixture,cards)};
+await writeFile(dir+'/request.json',JSON.stringify({...THINKING,system,input},null,2));
+const key=await readCredential(),response=await fetch('https://api.deepseek.com/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(modelRequest(system,input)),signal:AbortSignal.timeout(MODEL_TIMEOUT_MS)});
+if(!response.ok)throw Error('DeepSeek HTTP '+response.status);const r=await response.json(),c=r.choices?.[0];await writeFile(dir+'/response.json',JSON.stringify({responseId:r.id,...THINKING,usage:r.usage,finishReason:c?.finish_reason,content:c?.message?.content},null,2));if(c?.finish_reason!=='stop')throw Error('回归审核未完整结束');
+const review=validateDialogueReview(JSON.parse(c.message.content),fixture);const passed=review.passed===false&&review.checks.find(c=>c.kind==='responsiveness')?.passed===false;
+await writeFile('qa/dialogue-regression.json',JSON.stringify({passed,sourceStoryId:fixture.sourceStoryId,receiptDirectory:dir,review},null,2));console.log(JSON.stringify({passed,review},null,2));if(!passed)throw Error('新审核仍放过旧版接话断裂');

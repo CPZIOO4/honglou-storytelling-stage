@@ -1,6 +1,6 @@
 # 狗儿
 
-运行数据源：data/cards.json（first-visit-2026-11-16-continuity）
+运行数据源：data/cards.json（first-visit-2026-11-16-conversation）
 
 刘氏的丈夫，板儿与青儿的父亲，以务农和零散生计养家。
 
@@ -33,3 +33,5 @@
 原文：https://zh.wikisource.org/zh-hans/紅樓夢/第006回
 
 动态经历由 honglou-character-evolution 在当前剧情分支内补充，不覆盖本卡。
+
+周瑞是荣国府王夫人的陪房，狗儿可提出托他向王夫人递话或引见；具体接待结果与是否在家未知。依据原文第六回，运行事实ID为 zhou_household_role。

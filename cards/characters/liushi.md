@@ -1,6 +1,6 @@
 # 刘氏
 
-运行数据源：data/cards.json（first-visit-2026-11-16-continuity）
+运行数据源：data/cards.json（first-visit-2026-11-16-conversation）
 
 狗儿之妻、刘姥姥之女，操持家务。
 

@@ -1,10 +1,10 @@
 import {compileStory,personalKnowledge} from '../src/engine.js';
 import {validateFactRefs} from './card-context.mjs';
 
-export const NARRATIVE_VERSION=5;
+export const NARRATIVE_VERSION=6;
 export function nodeFor(storyline,id){const n=storyline.nodes.find(n=>n.id===id);if(!n)throw Error('未知故事节点 '+id);return n;}
 export function validatePlan(plan,maxBeats=8){
- if(!plan||!Array.isArray(plan.beats)||plan.beats.length<2||plan.beats.length>maxBeats)throw Error('场次提纲须为2到预算上限段，不为凑满段数拖延');
+ if(!plan||!Array.isArray(plan.beats)||plan.beats.length<1||plan.beats.length>maxBeats)throw Error('场次提纲须为1到预算上限段，不为凑满段数拖延');
  const ids=new Set(),changes=new Set();
  for(const b of plan.beats){
   if(typeof b.id!=='string'||!b.id||ids.has(b.id))throw Error('提纲段落ID须唯一');ids.add(b.id);
@@ -15,9 +15,9 @@ export function validatePlan(plan,maxBeats=8){
  return plan;
 }
 export function validateScreenplay(plan,characters,maxBeats=8,cards=null){
- validatePlan(plan,maxBeats);if(cards?.pacing&&plan.beats.flatMap(b=>b.dialogue||[]).length>cards.pacing.maxLines)throw Error(`本场最多${cards.pacing.maxLines}句，请合并重复商议`);const ids=new Set(characters.map(c=>c.id)),past=new Set();
+ validatePlan(plan,maxBeats);const ids=new Set(characters.map(c=>c.id)),past=new Set();
  for(const b of plan.beats){
-  if(!Array.isArray(b.dialogue)||b.dialogue.length<1||b.dialogue.length>4)throw Error(`${b.id} 必须有1到4句对白`);
+  if(!Array.isArray(b.dialogue)||b.dialogue.length<1||b.dialogue.length>8)throw Error(`${b.id} 必须有1到8句对白`);
   for(const [i,d] of b.dialogue.entries()){
    if(cards)validateFactRefs(d,cards);
    if(!ids.has(d.speaker)||!Array.isArray(d.to)||!d.to.length||d.to.some(id=>!ids.has(id)||id===d.speaker))throw Error(`${b.id}:${i} 发话人与对象不合法`);
@@ -35,7 +35,7 @@ export function validateScreenplay(plan,characters,maxBeats=8,cards=null){
 // Dialogue stays fixed while the stage compiles timing. Models do not calculate
 // reading durations or re-author a conversation to repair a movement constraint.
 export function stageScriptBeat(step,blocking){
- if(!Array.isArray(step.dialogue)||!step.dialogue.length||step.dialogue.length>4)throw Error('剧本每段须有1到4句对白');
+ if(!Array.isArray(step.dialogue)||!step.dialogue.length||step.dialogue.length>8)throw Error('剧本每段须有1到8句对白');
  if(typeof blocking.narration!=='string')throw Error('缺少与动作一致的旁白');
  const commands=[];const moved=new Set();
  for(const m of blocking.moves||[]){if(moved.has(m.actor))throw Error('同段不能反复搬动同一人物');moved.add(m.actor);commands.push({at:0,type:'move',actor:m.actor,target:m.target,duration:4});}
@@ -45,6 +45,7 @@ export function stageScriptBeat(step,blocking){
  const dialogue=step.dialogue.map(d=>{
   if(typeof d.text!=='string'||!Array.isArray(d.to)||!d.to.length)throw Error('剧本对白格式无效');
   commands.push({at:cursor-.2,type:'face',actor:d.speaker,target:d.to[0]});
+  if(['nod','shake'].includes(d.actionIntent))commands.push({at:cursor-.2,type:'gesture',actor:d.speaker,value:d.actionIntent,duration:.6});
   if(d.mode==='whisper')commands.push({at:cursor-.2,type:'face',actor:d.to[0],target:d.speaker});
   const line={...d,at:cursor,until:cursor+Math.max(4,Math.ceil(d.text.length/5+1))};cursor=line.until+1;return line;
  });
