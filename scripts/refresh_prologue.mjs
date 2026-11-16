@@ -1,0 +1,22 @@
+import {readFile,writeFile,rename} from 'node:fs/promises';
+import {randomUUID,createHash} from 'node:crypto';
+import {readCredential} from '../backend/credentials.mjs';
+import {MODEL_TIMEOUT_MS,THINKING,modelRequest} from '../backend/model-config.mjs';
+import {composePrologue} from '../backend/prologue.mjs';
+import {runtimeCards} from '../backend/card-context.mjs';
+import {compileStory} from '../src/engine.js';
+import {defaultPresentation,compilePresentation} from '../src/presentation.js';
+import {compileSoundtrack} from '../src/soundtrack.js';
+const load=async p=>JSON.parse(await readFile(p,'utf8'));
+const [story,cards,stage,characters,library]=await Promise.all(['.runtime/latest-story.json','data/cards.json','data/stage.json','data/characters.json','data/audio-library.json'].map(load));
+const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex'),before=hash(story.beats),key=await readCredential(),dir='.runtime/generations/'+story.generation.jobId;
+const skill=await readFile('skills/honglou-scene-pacing/SKILL.md','utf8');
+story.prologue=await composePrologue({cards:runtimeCards(cards),ask:async(system,input,phase)=>{
+ system+='\n'+skill;const id=randomUUID();await writeFile(dir+'/'+id+'-request.json',JSON.stringify({phase,...THINKING,system,input},null,2));
+ const response=await fetch('https://api.deepseek.com/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify(modelRequest(system,input)),signal:AbortSignal.timeout(MODEL_TIMEOUT_MS)});
+ if(!response.ok)throw Error('DeepSeek HTTP '+response.status);const r=await response.json(),c=r.choices?.[0];await writeFile(dir+'/'+id+'-response.json',JSON.stringify({phase,...THINKING,responseId:r.id,model:r.model,usage:r.usage,finishReason:c?.finish_reason,content:c?.message?.content},null,2));if(c?.finish_reason!=='stop')throw Error('开场响应未完成');
+ story.generation.calls.push({phase,...THINKING,responseId:r.id,model:r.model,usage:r.usage});return JSON.parse(c.message.content);
+}});
+story.presentation={...story.presentation,prologue:defaultPresentation(story).prologue};compileSoundtrack(story,compilePresentation(story,compileStory(story,stage,characters)),library);
+if(hash(story.beats)!==before)throw Error('对白动作被改变');if((await load('.runtime/latest-story.json')).id!==story.id)throw Error('已有更新版本，未覆盖');
+story.generation.prologueRevision={source:'live-api',dialogueAndActionHash:before};await writeFile(dir+'/approved.json',JSON.stringify(story,null,2));await writeFile('.runtime/latest-story.tmp',JSON.stringify(story,null,2));await rename('.runtime/latest-story.tmp','.runtime/latest-story.json');console.log(JSON.stringify({passed:true,id:story.id,prologue:story.prologue.text,unchangedDialogue:true}));

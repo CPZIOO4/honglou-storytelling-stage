@@ -10,6 +10,7 @@ import {validateFactRefs,runtimeCards} from './card-context.mjs';
 import {MODEL,THINKING,MODEL_TIMEOUT_MS,modelRequest} from './model-config.mjs';
 import {buildWritingContext,memoryEvidence,validateMemoryUpdate,mergeMemory,commitMemory,acceptedMemory,nextWritingContext} from './story-memory.mjs';
 import {composeConversation,assertDialoguePreserved} from './conversation.mjs';
+import {composePrologue} from './prologue.mjs';
 export {MODEL};
 const ORIGIN='https://api.deepseek.com';
 const load=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -95,7 +96,7 @@ export function createGenerator(root){
    await save(join(dir,job.id,'draft.json'),story);
    const protocol={beatShape:{id:'唯一字符串',title:'短标题',duration:'12到55的数字',narration:'一到两句字符串',memory:'字符串',dialogue:[{at:5,until:14,speaker:'人物id',to:['对话对象id'],mode:'normal',text:'模型原创台词',knowledgeRefs:[]}],commands:[]},expression:['neutral','smile','thinking','sad','surprised','laugh'],commands:{move:['at','type','actor','target','duration'],face:['at','type','actor','target'],expression:['at','type','actor','value'],gesture:['at','type','actor','value','duration'],camera:['at','type','target'],lighting:['at','type','value'],visibility:['at','type','actor','value']},gestures:['nod','shake'],lighting:['day','night','dawn'],cameras:Object.keys(stage.cameras),anchors:stage.anchors,anchorDescriptions:{granny_home:'炕前偏右的家人站位',gouer_home:'屋中后侧、炕的右方',gouer_pace:'屋中右后侧，远离低语的母女',gouer_listen:'屋中靠前的交谈位',liushi_home:'屋中右侧，靠近门边',liushi_near:'屋中右侧交谈位，不是桌旁',whisper_guest:'刘姥姥旁的独立低语位，与granny_home间距约0.83米',room_center:'屋中活动空地',baner_near:'靠近刘姥姥的孩子站位',door_inside:'院门内侧',yard_entry:'门外小院',yard_end:'小院远端'},edges:stage.edges,acoustics:stage.acoustics};
    let review=null;
-   for(let productionPass=0;productionPass<2;productionPass++){
+   for(let productionPass=0;productionPass<3;productionPass++){
    for(let i=story.beats.length;i<job.total;i++){
     if(controller.signal.aborted)throw Error('已取消生成');job.phase='generating';job.message=`Flash 正在生成第 ${i+1} / ${job.total} 段`;await persist(job);
     const actual=generationContext(cards,stage,characters,story);const context={scene:cards.scene,currentState:actual.currentState,recentStory:story.beats.map(b=>b.memory).join('。'),characters:cards.characters};const input={context,protocol,node,scenePlan:story.narrative.plan,planStep:story.narrative.plan.beats[i],segment:i+1,totalSegments:job.total,request:i===0?'从真实初态开场，把困境具体化。':i===job.total-1?'形成可交给下一节点的具体决定，同行成人须听见并回应；不自动切场。':'根据已发生的对白，实现本段的新变化；不要重复已经谈妥的问题。',quality:'走位应服务人物目的，不以走动或低语填时长。人物互相答话，可以反驳、讨价还价、拿定主意。'};
@@ -109,15 +110,15 @@ export function createGenerator(root){
    assertDialoguePreserved(story.narrative.conversation,story);
    job.phase='reviewing';job.message='对白锁定，核对实际听闻与动作呈现';await persist(job);
    const compiled=compileStory(story,stage,characters);
-   const executionFacts=compiled.beats.map(b=>({beatId:b.id,narration:b.narration,moves:b.commands.filter(c=>c.type==='move'),dialogue:b.dialogue.map(d=>({speaker:d.speaker,text:d.text,to:d.to,heardBy:stateAt(compiled,b.start+d.at+.001).dialogue?.heardBy}))}));
-   review=await callModel(key,'仅审核执行后的事实与知识边界。连续对白已独立审核，不能任意润色或压缩。检查旁白是否声称未执行的移动、坐下、拿物，发话是否使用未听见的秘密或错误归属的关系。未来打算不是已经执行，修辞责备不代表实际坐姿。输出JSON {"passed":true或false,"issues":[{"beatId":"id","scope":"narration或dialogue","reason":"具体错误"}],"narrationPatches":[{"beatId":"id","narration":"只修正不符动作的旁白"}]}。无问题issues为空。不得用旁白修补缺失的决定或人物回应。', {cards,executionFacts},job,'execution-review-'+productionPass);
+   const executionFacts=compiled.beats.map(b=>({beatId:b.id,narration:b.narration,moves:b.commands.filter(c=>c.type==='move').map(m=>({...m,targetDescription:protocol.anchorDescriptions[m.target],distanceToOthers:characters.filter(c=>c.id!==m.actor).map(c=>({actor:c.id,before:distance(stateAt(compiled,b.start).actors[m.actor].position,stateAt(compiled,b.start).actors[c.id].position),after:distance(stateAt(compiled,b.start+m.at+m.duration+.001).actors[m.actor].position,stateAt(compiled,b.start+m.at+m.duration+.001).actors[c.id].position)}))})),gestures:b.commands.filter(c=>c.type==='gesture'),expressions:b.commands.filter(c=>c.type==='expression'),dialogue:b.dialogue.map(d=>({speaker:d.speaker,text:d.text,to:d.to,heardBy:stateAt(compiled,b.start+d.at+.001).dialogue?.heardBy}))}));
+   review=await callModel(key,'仅审核执行后的事实与知识边界。moves含站位描述与实际到他人距离的变化，距离减小即可以说走近，不要求站位ID含人名；gestures的nod/shake就是已执行的点头/摇头，不能因moves里没有而否认。连续对白已独立审核，不能任意润色或压缩。检查旁白是否声称未执行的移动、坐下、拿物，发话是否使用未听见的秘密或错误归属的关系。未来打算不是已经执行，修辞责备不代表实际坐姿。输出JSON {"passed":true或false,"issues":[{"beatId":"id","scope":"narration或dialogue","reason":"具体错误"}],"narrationPatches":[{"beatId":"id","narration":"只修正不符动作的旁白"}]}。无问题issues为空。不得用旁白修补缺失的决定或人物回应。', {cards,executionFacts},job,'execution-review-'+productionPass);
    await save(join(dir,job.id,'execution-review.json'),review);
    if(review.passed===true&&Array.isArray(review.issues)&&!review.issues.length)break;
    if(!Array.isArray(review.issues)||!review.issues.length)throw Error('执行审核格式错误');
    if(review.issues.every(i=>i.scope==='narration')&&Array.isArray(review.narrationPatches)&&review.narrationPatches.length){
     for(const patch of review.narrationPatches){const b=story.beats.find(b=>b.id===patch.beatId);if(!b||typeof patch.narration!=='string')throw Error('旁白修订无效');b.narration=patch.narration;}
     auditGeneratedStory(story,stage,characters,cards);assertDialoguePreserved(story.narrative.conversation,story);
-    if(productionPass===1)throw Error('旁白修订仍需复核，未发布');
+    if(productionPass===2)throw Error('旁白修订仍需复核，未发布');
     await save(join(dir,job.id,'draft.json'),story);continue;
    }
    if(productionPass===1)throw Error('执行后的内容未通过：'+JSON.stringify(review.issues));
@@ -141,11 +142,13 @@ export function createGenerator(root){
     }catch(e){if(attempt===2)throw Error('场末决定尚未落实：'+e.message);rejectedResolution=resolution;handoffErrors=e.message;}
    }
    story.narrative.handoff=handoff;story.narrative.handoffReview=handoffReview;
+   job.message='为第一场写开场背景';await persist(job);
+   story.prologue=await composePrologue({cards,ask:(system,input,phase)=>callModel(key,system,input,job,phase)});
    story.presentation=defaultPresentation(story);
    job.message='总控正在选择配乐、留白与过场';await persist(job);
    let musicErrors=null;
    for(let attempt=0;attempt<2;attempt++){
-    const scoring=await callModel(key,`你是同一说书总控的声音编排环节。依据环境、实际剧情和音库标签选择国风纯音乐，可播放、暂停、续播或停止，也可有意留白。输出JSON {"cues":[{"section":"opening或某个beat.id或bridge","offset":0,"action":"play/pause/resume/stop","track":"仅play时填库内id","volume":0.22,"reason":"结合本段具体情境的选择理由"}],"bridgeText":"若有时间过场，用一句到两句交代略去时间，不总结对白，不宣称未演出的动作已做完；无过场填空字符串"}。pause保留曲目进度，resume续播，stop清空；无旧曲不能resume。最多8条指令，不按每句台词切歌，不在寒舍愁生计时配欢庆曲。曲目可一直延续，紧要对白可暂停；volume为0.12至0.28左右。桥段section仅当presentation确实有interludes时可用。不要输出URL，禁止人声朗读。`,{cards:cards.scene,story,presentation:story.presentation,audioLibrary,validationErrors:musicErrors},job,'soundtrack-'+attempt);
+    const scoring=await callModel(key,`你是同一说书总控的声音编排环节。依据环境、实际剧情和音库标签选择国风纯音乐，可播放、暂停、续播或停止，也可有意留白。输出JSON {"cues":[{"section":"opening或prologue或某个beat.id或bridge","offset":0,"action":"play/pause/resume/stop","track":"仅play时填库内id","volume":0.22,"reason":"结合本段具体情境的选择理由"}],"bridgeText":"若有时间过场，用一句到两句交代略去时间，不总结对白，不宣称未演出的动作已做完；无过场填空字符串"}。pause保留曲目进度，resume续播，stop清空；无旧曲不能resume。最多8条指令，不按每句台词切歌，不在寒舍愁生计时配欢庆曲。曲目可一直延续，紧要对白可暂停；volume为0.12至0.28左右。桥段section仅当presentation确实有interludes时可用。不要输出URL，禁止人声朗读。`,{cards:cards.scene,story,presentation:story.presentation,audioLibrary,validationErrors:musicErrors},job,'soundtrack-'+attempt);
     try{
      story.soundtrack={version:1,cues:scoring.cues};
      if(story.presentation.interludes.length&&scoring.bridgeText){if(typeof scoring.bridgeText!=='string'||scoring.bridgeText.length>55)throw Error('过场文本须为55字内字符串');story.presentation.interludes[0].text=scoring.bridgeText;}

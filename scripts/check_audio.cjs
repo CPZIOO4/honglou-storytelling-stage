@@ -16,7 +16,7 @@ const fs=require('node:fs'),assert=require('node:assert/strict');
  }
  const capture=await page.evaluate(()=>__STAGE_TEST__.stopAudioCapture());fs.writeFileSync('qa/live-audio.webm',Buffer.from(capture));assert(capture.length>1000);
  await page.click('#play');const paused=await page.evaluate(()=>__STAGE_TEST__.audio());await page.waitForTimeout(350);const still=await page.evaluate(()=>__STAGE_TEST__.audio());assert.equal(still.beeps,paused.beeps);assert(still.musicPaused);assert(still.rms<.00001);
- const timeline=await page.evaluate(()=>__STAGE_TEST__.presentation());const beginOf=section=>section==='opening'?0:timeline.segments.find(s=>s.beatId===section&&s.kind==='performance').start;
+ const timeline=await page.evaluate(()=>__STAGE_TEST__.presentation());const beginOf=section=>section==='opening'?0:section==='prologue'?timeline.segments.find(s=>s.kind==='prologue').start:section==='bridge'?timeline.segments.find(s=>s.kind==='interlude').start:timeline.segments.find(s=>s.beatId===section&&s.kind==='performance').start;
  const pause=story.soundtrack.cues.find(c=>c.action==='pause'),resume=story.soundtrack.cues.find(c=>c.action==='resume');let resumed=null;if(pause&&resume){
  await page.evaluate(t=>__STAGE_TEST__.seekPresentation(t),beginOf(pause.section)+.1);await page.click('#play');await page.waitForTimeout(250);assert((await page.evaluate(()=>__STAGE_TEST__.audio())).musicPaused);
  await page.evaluate(t=>__STAGE_TEST__.seekPresentation(t),beginOf(resume.section)+.2);await page.waitForTimeout(1200);resumed=await page.evaluate(()=>__STAGE_TEST__.audio());assert(!resumed.musicPaused&&resumed.musicPosition>0,JSON.stringify(resumed));}

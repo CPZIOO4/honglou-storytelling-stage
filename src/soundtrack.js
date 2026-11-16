@@ -2,7 +2,7 @@ export function compileSoundtrack(story,presentation,library){
  const cues=story.soundtrack?.cues||[],tracks=new Set(library.tracks.map(t=>t.id));
  if(!Array.isArray(cues)||cues.length>24)throw Error('配乐指令过多或格式不正确');
  const result=cues.map((cue,i)=>{
-  const segment=presentation.segments.find(s=>cue.section==='opening'?s.kind==='opening':cue.section===`bridge:${s.beatId||''}`?s.kind==='interlude':s.kind==='performance'&&s.beatId===cue.section)||
+  const segment=presentation.segments.find(s=>cue.section==='opening'?s.kind==='opening':cue.section==='prologue'?s.kind==='prologue':cue.section===`bridge:${s.beatId||''}`?s.kind==='interlude':s.kind==='performance'&&s.beatId===cue.section)||
    (cue.section==='bridge'?presentation.segments.find(s=>s.kind==='interlude'):null);
   if(!segment)throw Error('配乐指令引用不存在的演出段 '+cue.section);
   if(!['play','pause','resume','stop'].includes(cue.action))throw Error('未知配乐操作');

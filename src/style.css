@@ -22,3 +22,6 @@
 .loading #load-status{max-width:min(480px,85%);text-align:center;line-height:1.8;overflow-wrap:anywhere}.loading button{font-size:14px;padding:9px 18px}
 .stage-shell>.dialogue{width:min(280px,calc(100% - 20px));padding:9px 12px}.stage-shell>.dialogue p{font-size:16px;line-height:1.55}
 @media(max-width:760px){.stage-shell>.dialogue{width:min(230px,calc(100% - 18px));padding:8px 10px}.stage-shell>.dialogue p{font-size:15px;line-height:1.5}}
+
+.scene-overlay.prologue #bridge-text{font-size:22px;line-height:1.9;letter-spacing:.6px;text-align:left;max-width:620px}
+@media(max-width:760px){.scene-overlay.prologue #bridge-text{font-size:18px;line-height:1.85;letter-spacing:.3px}}

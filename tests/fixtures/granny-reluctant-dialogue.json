@@ -1,0 +1,256 @@
+{
+  "sourceStoryId": "7f0271e4-5944-4184-855e-4fd087f49866",
+  "turns": [
+    {
+      "id": "t1",
+      "speaker": "gouer",
+      "to": [
+        "granny",
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "这日子眼看着冷了，柴米还没着落，光坐着愁能愁出米来？",
+      "knowledgeRefs": [],
+      "factRefs": [
+        "winter_need"
+      ],
+      "respondsTo": [],
+      "actionIntent": "none"
+    },
+    {
+      "id": "t2",
+      "speaker": "granny",
+      "to": [
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "你倒会发急。你祖上跟金陵王家连过宗，这层旧亲你就想不起来？",
+      "knowledgeRefs": [
+        "t1"
+      ],
+      "factRefs": [
+        "wang_old_kinship"
+      ],
+      "respondsTo": [
+        "t1"
+      ],
+      "actionIntent": "turn"
+    },
+    {
+      "id": "t3",
+      "speaker": "gouer",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "连过宗又怎样，这些年走动都断了。我爹倒跟荣府里周瑞办过事，那是王夫人的陪房。",
+      "knowledgeRefs": [
+        "t2"
+      ],
+      "factRefs": [
+        "gouer_zhou_connection",
+        "zhou_household_role"
+      ],
+      "respondsTo": [
+        "t2"
+      ],
+      "actionIntent": "none"
+    },
+    {
+      "id": "t4",
+      "speaker": "granny",
+      "to": [
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "周瑞我听说过，可多年没来往。求他递话，人家凭什么认咱这门子旧交？",
+      "knowledgeRefs": [
+        "t3"
+      ],
+      "factRefs": [
+        "granny_zhou_awareness"
+      ],
+      "respondsTo": [
+        "t3"
+      ],
+      "actionIntent": "none"
+    },
+    {
+      "id": "t5",
+      "speaker": "liushi",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "娘，那年您带我去王家，二小姐不是挺和气？如今她做了王夫人，兴许还记着旧。",
+      "knowledgeRefs": [
+        "t4"
+      ],
+      "factRefs": [
+        "granny_wang_visit"
+      ],
+      "respondsTo": [
+        "t4"
+      ],
+      "actionIntent": "approach"
+    },
+    {
+      "id": "t6",
+      "speaker": "granny",
+      "to": [
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "记着旧是一说，门房让不让进又是一说。我这身旧衣裳站到那门口，人家先就嫌。",
+      "knowledgeRefs": [
+        "t5"
+      ],
+      "factRefs": [
+        "granny_wang_visit"
+      ],
+      "respondsTo": [
+        "t5"
+      ],
+      "actionIntent": "shake"
+    },
+    {
+      "id": "t7",
+      "speaker": "gouer",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "娘这话在理。可总得有人去。我这张脸拉不下去，您老去，倒还像替小辈跑一趟。",
+      "knowledgeRefs": [
+        "t6"
+      ],
+      "factRefs": [
+        "winter_need"
+      ],
+      "respondsTo": [
+        "t6"
+      ],
+      "actionIntent": "turn"
+    },
+    {
+      "id": "t8",
+      "speaker": "granny",
+      "to": [
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "合着难处都推给我了。我去试，先说清，只去问周瑞能不能给王夫人递个话，求些过冬的帮衬，成不成不敢包。",
+      "knowledgeRefs": [
+        "t7",
+        "t3",
+        "t5"
+      ],
+      "factRefs": [
+        "granny_zhou_awareness",
+        "granny_wang_visit"
+      ],
+      "respondsTo": [
+        "t7"
+      ],
+      "actionIntent": "none"
+    },
+    {
+      "id": "t9",
+      "speaker": "liushi",
+      "to": [
+        "granny"
+      ],
+      "mode": "normal",
+      "text": "娘一个人去我不放心。明早我陪您到荣府那条街口，您能进去就说话，我在外头等着。",
+      "knowledgeRefs": [
+        "t8"
+      ],
+      "factRefs": [
+        "family_roles"
+      ],
+      "respondsTo": [
+        "t8"
+      ],
+      "actionIntent": "approach"
+    },
+    {
+      "id": "t10",
+      "speaker": "granny",
+      "to": [
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "你去了，孩子谁看？板儿青儿丢给谁？",
+      "knowledgeRefs": [
+        "t9"
+      ],
+      "factRefs": [
+        "family_roles"
+      ],
+      "respondsTo": [
+        "t9"
+      ],
+      "actionIntent": "none"
+    },
+    {
+      "id": "t11",
+      "speaker": "liushi",
+      "to": [
+        "granny",
+        "gouer"
+      ],
+      "mode": "normal",
+      "text": "狗儿在家看着孩子，我送您到街口就回，家里不耽搁。",
+      "knowledgeRefs": [
+        "t10"
+      ],
+      "factRefs": [
+        "family_roles"
+      ],
+      "respondsTo": [
+        "t10"
+      ],
+      "actionIntent": "turn"
+    },
+    {
+      "id": "t12",
+      "speaker": "gouer",
+      "to": [
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "我看孩子就我看孩子。明早你们早些动身，日头高了那门里人更多，更不好说话。",
+      "knowledgeRefs": [
+        "t11"
+      ],
+      "factRefs": [
+        "family_roles"
+      ],
+      "respondsTo": [
+        "t11"
+      ],
+      "actionIntent": "nod"
+    },
+    {
+      "id": "t13",
+      "speaker": "granny",
+      "to": [
+        "gouer",
+        "liushi"
+      ],
+      "mode": "normal",
+      "text": "那就这么定。先寻周瑞，他肯给王夫人递话最好；不肯，我也只好空手回来，不兴埋怨。",
+      "knowledgeRefs": [
+        "t12",
+        "t8"
+      ],
+      "factRefs": [
+        "granny_zhou_awareness"
+      ],
+      "respondsTo": [
+        "t12"
+      ],
+      "actionIntent": "none"
+    }
+  ]
+}

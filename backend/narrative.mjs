@@ -1,7 +1,7 @@
 import {compileStory,personalKnowledge} from '../src/engine.js';
 import {validateFactRefs} from './card-context.mjs';
 
-export const NARRATIVE_VERSION=6;
+export const NARRATIVE_VERSION=7;
 export function nodeFor(storyline,id){const n=storyline.nodes.find(n=>n.id===id);if(!n)throw Error('未知故事节点 '+id);return n;}
 export function validatePlan(plan,maxBeats=8){
  if(!plan||!Array.isArray(plan.beats)||plan.beats.length<1||plan.beats.length>maxBeats)throw Error('场次提纲须为1到预算上限段，不为凑满段数拖延');

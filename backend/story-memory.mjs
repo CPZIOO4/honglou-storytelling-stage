@@ -47,7 +47,12 @@ export async function nextWritingContext(root,cards,line,handoff,memory){
   scene={id:sceneId,title:section('name'),description:section('description').replaceAll('周瑞家的','周瑞妻子'),atmosphere:section('personality'),boundary:'下一场的候选环境；尚未到达。只承接已确认分支，不执行来源卡的预定剧情。'};
  }
  const active=handoff.decision.status==='depart'?handoff.decision.party:cards.characters.map(c=>c.id);
- const nextCards={...cards,scene,characters:cards.characters.filter(c=>active.includes(c.id))};
+ const nextCards={...cards,scene,characters:cards.characters.filter(c=>active.includes(c.id)).map(c=>{
+  if(node.id===line.entryNode)return c;
+  // These roles describe the household scene. The next node inherits character
+  // identity and experience, not a renewed instruction to decide who sets out.
+  const {sceneRole,...stable}=c;const {atHome,agency,...performance}=stable.performance||{};return {...stable,performance};
+ })};
  return {nextNodeId:node.id,sceneId,cast:active,prompt:buildWritingContext(nextCards,memory,{node,handoff})};
 }
 export async function commitMemory(root,story){

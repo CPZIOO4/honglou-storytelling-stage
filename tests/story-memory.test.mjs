@@ -47,6 +47,7 @@ test('next scene receives the actual environment and selected companions with bo
  const handoff={nextNodeId:'gate-access',decision:{status:'depart',party:['granny','liushi'],purpose:'问活计',approach:'询问周瑞',departureCondition:'明早'},facts:[]};
  const next=await nextWritingContext(fileURLToPath(new URL('../',import.meta.url)),runtimeCards(cards),line,handoff,mergeMemory(null,update,story));
  assert.equal(next.sceneId,'SC01_JM');assert.deepEqual(next.cast,['granny','liushi']);assert(next.prompt.includes('荣府角门'));assert(next.prompt.includes(update.summary));assert(next.prompt.includes(update.characters[0].memory));assert(!next.prompt.includes('"title":"寒家谋生"'));assert(!next.prompt.includes('## system_prompt'));
+ assert(!next.prompt.includes('"sceneRole"'));
 });
 test('screenplay rejects report-style dialogue without an eight-line scene cap',()=>{
  const d={speaker:'granny',to:['gouer'],mode:'normal',text:'明早：我去。',knowledgeRefs:[],factRefs:[]};
