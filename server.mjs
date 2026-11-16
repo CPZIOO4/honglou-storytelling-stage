@@ -7,7 +7,7 @@ const root=fileURLToPath(new URL('.',import.meta.url));
 const port=Number(process.env.PORT||4173);
 const generator=createGenerator(root);
 const respond=(res,status,data)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));};
-const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.glb':'model/gltf-binary','.md':'text/plain; charset=utf-8'};
+const mime={'.mp3':'audio/mpeg','.wav':'audio/wav','.ogg':'audio/ogg','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.glb':'model/gltf-binary','.md':'text/plain; charset=utf-8'};
 const server=http.createServer(async(req,res)=>{
   try{
     const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
@@ -29,7 +29,13 @@ const server=http.createServer(async(req,res)=>{
     const file=resolve(root,'.'+(path==='/'?'/index.html':path));
     if(!file.startsWith(resolve(root)+sep)||path.split(/[\\/]/).some(p=>p.startsWith('.'))){res.writeHead(403);return res.end('Forbidden');}
     if(!(await stat(file)).isFile()){res.writeHead(404);return res.end('Not found');}
-    const bytes=await readFile(file);res.writeHead(200,{'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Content-Length':bytes.length});res.end(req.method==='HEAD'?undefined:bytes);
+    const bytes=await readFile(file),headers={'Content-Type':mime[extname(file)]||'application/octet-stream','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff','Accept-Ranges':'bytes'};
+    if(req.headers.range){const match=/^bytes=(\d*)-(\d*)$/.exec(req.headers.range);let start=0,end=bytes.length-1;
+      if(match&&(match[1]||match[2])){if(match[1]){start=Number(match[1]);if(match[2])end=Math.min(end,Number(match[2]));}else start=Math.max(0,bytes.length-Number(match[2]));}
+      if(!match||(!match[1]&&!match[2])||start>end||start>=bytes.length){res.writeHead(416,{...headers,'Content-Range':`bytes */${bytes.length}`});return res.end();}
+      res.writeHead(206,{...headers,'Content-Range':`bytes ${start}-${end}/${bytes.length}`,'Content-Length':end-start+1});return res.end(req.method==='HEAD'?undefined:bytes.subarray(start,end+1));
+    }
+    res.writeHead(200,{...headers,'Content-Length':bytes.length});res.end(req.method==='HEAD'?undefined:bytes);
   }catch{res.writeHead(404);res.end('Not found');}
 });
 server.listen(port,'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${port}`));

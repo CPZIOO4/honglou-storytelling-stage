@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "taohua",
+      "title": "Taohua · 家常与转机",
+      "url": "assets/music/PerituneMaterial_Taohua_melodyoff.mp3",
+      "source": "https://peritune.com/music/PerituneMaterial_Taohua_melodyoff.mp3",
+      "page": "https://peritune.com/blog/2021/03/03/taohua/",
+      "moods": "平静、家常、温和转机",
+      "avoid": "激烈争执、重大悲痛",
+      "author": "PeriTune / Sei Mutsuki",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "bytes": 4135680,
+      "sha256": "7ac2aa892d9078d530271eadbfa3ba0f739f02f875f5e09707274a9270db924f",
+      "duration": 172.25327083333335
+    },
+    {
+      "id": "wuxia_plucked",
+      "title": "Wuxia2 · 筝琵琶",
+      "url": "assets/music/PerituneMaterial_Wuxia2_Guzheng_Pipa.mp3",
+      "source": "https://peritune.com/music/PerituneMaterial_Wuxia2_Guzheng_Pipa.mp3",
+      "page": "https://peritune.com/blog/2018/10/13/wuxia2/",
+      "moods": "商议、试探、前行",
+      "avoid": "喜庆、无事闲聊全程铺满",
+      "author": "PeriTune / Sei Mutsuki",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "bytes": 6147760,
+      "sha256": "74277b4db3ee1332188d78dec9fd52a0507ad3cdd49f88f9868e91d39eb5846b",
+      "duration": 256.0815625
+    },
+    {
+      "id": "shenxian",
+      "title": "Shenxian · 府中礼序",
+      "url": "assets/music/PerituneMaterial_Shenxian_Drumless.mp3",
+      "source": "https://peritune.com/music/PerituneMaterial_Shenxian_Drumless.mp3",
+      "page": "https://peritune.com/blog/2020/06/05/shenxian/",
+      "moods": "府中、礼仪、庄重",
+      "avoid": "寒舍困窘、滑稽",
+      "author": "PeriTune / Sei Mutsuki",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "bytes": 6999552,
+      "sha256": "e5440d441c22ad2317bfa51a41775eb98003bddc55e687c1299e837caaf7f769",
+      "duration": 291.586625
+    },
+    {
+      "id": "folk_chinese",
+      "title": "Folk Chinese · 街巷轻快",
+      "url": "assets/music/PerituneMaterial_Folk_Chinese.mp3",
+      "source": "https://peritune.com/music/PerituneMaterial_Folk_Chinese.mp3",
+      "page": "https://peritune.com/blog/2018/01/14/folk_chinese/",
+      "moods": "街市、轻快、热闹",
+      "avoid": "贫寒焦虑、低语、悲伤",
+      "author": "PeriTune / Sei Mutsuki",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "bytes": 3210552,
+      "sha256": "deaf0c9efe47e7ef7fd1986bebfe02db33250b5bae7c440005a4099049c3bcee",
+      "duration": 133.70666666666668
+    }
+  ],
+  "voices": {
+    "granny": {
+      "label": "刘姥姥：温厚略沙",
+      "frequency": 175,
+      "wave": "triangle",
+      "grit": 0.15,
+      "duration": 0.065,
+      "rate": 9
+    },
+    "gouer": {
+      "label": "狗儿：低沉短促",
+      "frequency": 120,
+      "wave": "square",
+      "grit": 0.19,
+      "duration": 0.045,
+      "rate": 11
+    },
+    "liushi": {
+      "label": "刘氏：柔和清楚",
+      "frequency": 255,
+      "wave": "sine",
+      "grit": 0.035,
+      "duration": 0.06,
+      "rate": 10
+    },
+    "baner": {
+      "label": "板儿：轻亮短音",
+      "frequency": 425,
+      "wave": "triangle",
+      "grit": 0.02,
+      "duration": 0.045,
+      "rate": 8
+    },
+    "qinger": {
+      "label": "青儿：轻细高音，没台词不发声",
+      "frequency": 515,
+      "wave": "sine",
+      "grit": 0.01,
+      "duration": 0.04,
+      "rate": 8
+    }
+  },
+  "policy": "只从本库选曲，也可留白；按剧情转折选择，不按每句台词换歌。贫寒焦虑不配欢庆曲。对白时自动压低背景音乐。pause保留进度，resume续播，stop清空。"
+}

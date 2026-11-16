@@ -1,6 +1,7 @@
 import {compileStory,personalKnowledge} from '../src/engine.js';
+import {validateFactRefs} from './card-context.mjs';
 
-export const NARRATIVE_VERSION=3;
+export const NARRATIVE_VERSION=4;
 export function nodeFor(storyline,id){const n=storyline.nodes.find(n=>n.id===id);if(!n)throw Error('未知故事节点 '+id);return n;}
 export function validatePlan(plan,maxBeats=8){
  if(!plan||!Array.isArray(plan.beats)||plan.beats.length<3||plan.beats.length>maxBeats)throw Error('场次提纲须为3到预算上限段，不为凑满段数拖延');
@@ -13,11 +14,12 @@ export function validatePlan(plan,maxBeats=8){
  if(typeof plan.endingAim!=='string'||!plan.endingAim.trim())throw Error('提纲缺少本场要形成的具体决定');
  return plan;
 }
-export function validateScreenplay(plan,characters,maxBeats=8){
+export function validateScreenplay(plan,characters,maxBeats=8,cards=null){
  validatePlan(plan,maxBeats);const ids=new Set(characters.map(c=>c.id)),past=new Set();
  for(const b of plan.beats){
   if(!Array.isArray(b.dialogue)||b.dialogue.length<1||b.dialogue.length>4)throw Error(`${b.id} 必须有1到4句对白`);
   for(const [i,d] of b.dialogue.entries()){
+   if(cards)validateFactRefs(d,cards);
    if(!ids.has(d.speaker)||!Array.isArray(d.to)||!d.to.length||d.to.some(id=>!ids.has(id)||id===d.speaker))throw Error(`${b.id}:${i} 发话人与对象不合法`);
    if(typeof d.text!=='string'||d.text.length>80)throw Error(`${b.id}:${i} 台词最多80字，当前${d.text?.length}字`);
    if(/周瑞家的/.test(d.text))throw Error('人物名统一周瑞妻子');
@@ -46,6 +48,16 @@ export function stageScriptBeat(step,blocking){
   const line={...d,at:cursor,until:cursor+Math.max(4,Math.ceil(d.text.length/5+1))};cursor=line.until+1;return line;
  });
  return {id:step.id,title:step.title||step.question,duration:Math.ceil(cursor+1),narration:blocking.narration,dialogue,commands,memory:step.change};
+}
+export function applyModelPatches(story,fixes,issues=[]){
+ if(!Array.isArray(fixes.patches)||fixes.patches.length>story.beats.length)throw Error('修订格式不合法');
+ const out=structuredClone(story);
+ for(const patch of fixes.patches){const index=out.beats.findIndex(b=>b.id===patch.beatId);if(index<0)throw Error('修订引用未知段落');const b=out.beats[index];
+  for(const k of ['narration','memory'])if(patch[k]!==undefined){if(typeof patch[k]!=='string')throw Error('修订文字须为字符串');b[k]=patch[k];}
+  const local=issues.filter(i=>i.beatId===b.id),narrationOnly=local.length&&local.every(i=>i.scope==='narration'||/不要动对白/.test(i.reason));
+  for(const d of narrationOnly?[]:patch.dialogue||[]){if(!Number.isInteger(d.index)||!b.dialogue[d.index])throw Error(`${b.id} 可修改句子index仅有0到${b.dialogue.length-1}，禁止增加新句子`);if(typeof d.text!=='string'||!Array.isArray(d.knowledgeRefs))throw Error('修订台词缺字段');Object.assign(b.dialogue[d.index],{text:d.text,knowledgeRefs:d.knowledgeRefs,...(d.factRefs?{factRefs:d.factRefs}:{})});}
+  out.beats[index]=stageScriptBeat({...b,change:b.memory}, {narration:b.narration,moves:b.commands.filter(c=>c.type==='move').map(({actor,target})=>({actor,target})),expressions:b.commands.filter(c=>c.type==='expression').map(({actor,value})=>({actor,value})),camera:b.commands.find(c=>c.type==='camera')?.target});
+ }return out;
 }
 
 // The carryover ledger is built from executed speech, not model-declared audiences.

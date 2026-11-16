@@ -1,7 +1,7 @@
 {
   "version": 1,
   "communicationVersion": 1,
-  "id": "94e22c7d-deea-43c2-aa5a-6e6bf3d65475",
+  "id": "995e8458-1253-4f9c-a357-f4fd2bcec12b",
   "title": "寒家谋生",
   "scene": "gouer-home",
   "mode": "deepseek-generated",
@@ -45,31 +45,131 @@
   "beats": [
     {
       "id": "b1",
-      "title": "点破困局",
-      "duration": 28,
-      "narration": "窗纸被风顶得轻响，刘姥姥在炕前开了口，狗儿停住脚，皱着眉回话。",
+      "title": "狗儿泄气",
+      "duration": 19,
+      "narration": "狗儿在屋中后侧摊手抱怨冬衣冬粮无着，刘姥姥在炕前偏右数落他光发愁不想法子。",
       "dialogue": [
+        {
+          "speaker": "gouer",
+          "to": [
+            "liushi",
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。",
+          "knowledgeRefs": [],
+          "factRefs": [
+            "winter_need"
+          ],
+          "at": 1,
+          "until": 8
+        },
         {
           "speaker": "granny",
           "to": [
             "gouer"
           ],
           "mode": "normal",
-          "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。",
-          "knowledgeRefs": [],
-          "at": 4.5,
-          "until": 14.5
+          "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。",
+          "knowledgeRefs": [
+            "b1:0"
+          ],
+          "factRefs": [
+            "family_roles"
+          ],
+          "at": 9,
+          "until": 17
+        }
+      ],
+      "commands": [
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "gouer",
+          "value": "sad"
         },
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0.8,
+          "type": "face",
+          "actor": "gouer",
+          "target": "liushi"
+        },
+        {
+          "at": 8.8,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        }
+      ],
+      "memory": "狗儿把难处摊开，却只叹气不动身；刘姥姥当面数落他光愁不谋。"
+    },
+    {
+      "id": "b2",
+      "title": "旧亲旧交",
+      "duration": 39,
+      "narration": "狗儿转述旧交，刘姥姥掂量旧情，刘氏在旁提醒年久难认。",
+      "dialogue": [
         {
           "speaker": "gouer",
           "to": [
             "granny"
           ],
           "mode": "normal",
-          "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。",
-          "knowledgeRefs": [],
-          "at": 15.5,
-          "until": 25.5
+          "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。",
+          "knowledgeRefs": [
+            "b1:1"
+          ],
+          "factRefs": [
+            "gouer_zhou_connection",
+            "wang_old_kinship"
+          ],
+          "at": 4.5,
+          "until": 13.5
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。",
+          "knowledgeRefs": [
+            "b2:0"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness",
+            "granny_wang_visit"
+          ],
+          "at": 14.5,
+          "until": 27.5
+        },
+        {
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。",
+          "knowledgeRefs": [
+            "b2:1"
+          ],
+          "factRefs": [
+            "granny_wang_visit"
+          ],
+          "at": 28.5,
+          "until": 36.5
         }
       ],
       "commands": [
@@ -83,6 +183,112 @@
         {
           "at": 4.1,
           "type": "expression",
+          "actor": "gouer",
+          "value": "thinking"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "granny",
+          "value": "thinking"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "sad"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 4.3,
+          "type": "face",
+          "actor": "gouer",
+          "target": "granny"
+        },
+        {
+          "at": 14.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "gouer"
+        },
+        {
+          "at": 28.3,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
+        }
+      ],
+      "memory": "狗儿想起祖上与王家连过宗，又想起父亲与周瑞有旧；刘姥姥说出自己早年随女儿去过王家，记得二小姐如今是王夫人。"
+    },
+    {
+      "id": "b3",
+      "title": "谁去开口",
+      "duration": 36,
+      "narration": "刘姥姥把话揽到自己身上；狗儿听着，脸色松了些；刘氏转向母亲，抬手止住话头。",
+      "dialogue": [
+        {
+          "speaker": "granny",
+          "to": [
+            "gouer",
+            "liushi"
+          ],
+          "mode": "normal",
+          "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。",
+          "knowledgeRefs": [
+            "b2:1",
+            "b2:2"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "at": 4.5,
+          "until": 14.5
+        },
+        {
+          "speaker": "gouer",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。",
+          "knowledgeRefs": [
+            "b3:0"
+          ],
+          "factRefs": [],
+          "at": 15.5,
+          "until": 23.5
+        },
+        {
+          "speaker": "liushi",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。",
+          "knowledgeRefs": [
+            "b3:0",
+            "b3:1"
+          ],
+          "factRefs": [],
+          "at": 24.5,
+          "until": 33.5
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "granny",
+          "target": "room_center",
+          "duration": 4
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
           "actor": "granny",
           "value": "thinking"
         },
@@ -90,7 +296,13 @@
           "at": 4.1,
           "type": "expression",
           "actor": "gouer",
-          "value": "sad"
+          "value": "neutral"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "liushi",
+          "value": "thinking"
         },
         {
           "at": 0,
@@ -108,15 +320,21 @@
           "type": "face",
           "actor": "gouer",
           "target": "granny"
+        },
+        {
+          "at": 24.3,
+          "type": "face",
+          "actor": "liushi",
+          "target": "granny"
         }
       ],
-      "memory": "刘姥姥点出王家旧亲，狗儿提出父亲与周瑞有旧，可先找周瑞探口风，但担心受冷遇。"
+      "memory": "刘姥姥自请先去后街找周瑞妻子探口风，只求通个信儿；狗儿承认自己去反倒抹不开脸。"
     },
     {
-      "id": "b2",
-      "title": "谁去谁留",
-      "duration": 37,
-      "narration": "刘氏从门边走近，对母亲和丈夫说出同行打算；狗儿应承留家看青儿，刘氏又低头问板儿，板儿说去。",
+      "id": "b4",
+      "title": "同行分工",
+      "duration": 38,
+      "narration": "刘氏提出自己跟去、青儿无人看；刘姥姥安排刘氏留家备干粮，带板儿同行；狗儿应下清早送一程，又点头让板儿跟去，板儿应声。",
       "dialogue": [
         {
           "speaker": "liushi",
@@ -125,43 +343,61 @@
             "gouer"
           ],
           "mode": "normal",
-          "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。",
-          "knowledgeRefs": [],
+          "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。",
+          "knowledgeRefs": [
+            "b3:2"
+          ],
+          "factRefs": [
+            "family_roles"
+          ],
           "at": 4.5,
-          "until": 15.5
+          "until": 12.5
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "liushi",
+            "gouer"
+          ],
+          "mode": "normal",
+          "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。",
+          "knowledgeRefs": [
+            "b4:0"
+          ],
+          "factRefs": [
+            "family_roles"
+          ],
+          "at": 13.5,
+          "until": 21.5
         },
         {
           "speaker": "gouer",
           "to": [
+            "granny",
             "liushi"
           ],
           "mode": "normal",
-          "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。",
-          "knowledgeRefs": [],
-          "at": 16.5,
-          "until": 23.5
-        },
-        {
-          "speaker": "liushi",
-          "to": [
-            "baner"
+          "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。",
+          "knowledgeRefs": [
+            "b4:1"
           ],
-          "mode": "normal",
-          "text": "板儿，明儿跟姥姥和娘出门，你去不去？",
-          "knowledgeRefs": [],
-          "at": 24.5,
-          "until": 29.5
+          "factRefs": [],
+          "at": 22.5,
+          "until": 30.5
         },
         {
           "speaker": "baner",
           "to": [
-            "liushi"
+            "granny"
           ],
           "mode": "normal",
           "text": "去。",
-          "knowledgeRefs": [],
-          "at": 30.5,
-          "until": 34.5
+          "knowledgeRefs": [
+            "b4:1"
+          ],
+          "factRefs": [],
+          "at": 31.5,
+          "until": 35.5
         }
       ],
       "commands": [
@@ -173,10 +409,23 @@
           "duration": 4
         },
         {
+          "at": 0,
+          "type": "move",
+          "actor": "baner",
+          "target": "baner_near",
+          "duration": 4
+        },
+        {
           "at": 4.1,
           "type": "expression",
           "actor": "liushi",
           "value": "thinking"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
         },
         {
           "at": 4.1,
@@ -188,7 +437,7 @@
           "at": 4.1,
           "type": "expression",
           "actor": "baner",
-          "value": "neutral"
+          "value": "smile"
         },
         {
           "at": 0,
@@ -202,94 +451,31 @@
           "target": "granny"
         },
         {
-          "at": 16.3,
+          "at": 13.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "liushi"
+        },
+        {
+          "at": 22.3,
           "type": "face",
           "actor": "gouer",
-          "target": "liushi"
+          "target": "granny"
         },
         {
-          "at": 24.3,
-          "type": "face",
-          "actor": "liushi",
-          "target": "baner"
-        },
-        {
-          "at": 30.3,
+          "at": 31.3,
           "type": "face",
           "actor": "baner",
-          "target": "liushi"
-        }
-      ],
-      "memory": "刘氏走近，提出自己可同行照应，狗儿表示留家看青儿；板儿是否跟去由刘氏询问后，板儿说愿跟。"
-    },
-    {
-      "id": "b3",
-      "title": "求什么怎么求",
-      "duration": 25,
-      "narration": "刘姥姥转向狗儿与刘氏，把登门的分寸说清；刘氏接话，提出带上地里新收的枣儿倭瓜。两人都留在原处。",
-      "dialogue": [
-        {
-          "speaker": "granny",
-          "to": [
-            "gouer",
-            "liushi"
-          ],
-          "mode": "normal",
-          "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。",
-          "knowledgeRefs": [],
-          "at": 1,
-          "until": 13
-        },
-        {
-          "speaker": "liushi",
-          "to": [
-            "granny"
-          ],
-          "mode": "normal",
-          "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。",
-          "knowledgeRefs": [],
-          "at": 14,
-          "until": 23
-        }
-      ],
-      "commands": [
-        {
-          "at": 0.6,
-          "type": "expression",
-          "actor": "granny",
-          "value": "thinking"
-        },
-        {
-          "at": 0.6,
-          "type": "expression",
-          "actor": "liushi",
-          "value": "thinking"
-        },
-        {
-          "at": 0,
-          "type": "camera",
-          "target": "family"
-        },
-        {
-          "at": 0.8,
-          "type": "face",
-          "actor": "granny",
-          "target": "gouer"
-        },
-        {
-          "at": 13.8,
-          "type": "face",
-          "actor": "liushi",
           "target": "granny"
         }
       ],
-      "memory": "刘姥姥定下先托周瑞探口风、相机引见王夫人，不成再诉苦求帮；刘氏提议带些地里新收的枣儿倭瓜，不空手上门。"
+      "memory": "刘氏提议自己跟去照应，可青儿没人看；议定刘姥姥带板儿，刘氏留家备干粮，狗儿清早送到岔路口。"
     },
     {
-      "id": "b4",
-      "title": "定下行期",
-      "duration": 30,
-      "narration": "刘姥姥拍板行期，狗儿应承烙饼，刘氏答应照应板儿。",
+      "id": "b5",
+      "title": "定下动身",
+      "duration": 22,
+      "narration": "刘姥姥把动身的话定下来，转向狗儿、刘氏交代分寸；刘氏点头应下备干粮的事。",
       "dialogue": [
         {
           "speaker": "granny",
@@ -298,33 +484,29 @@
             "liushi"
           ],
           "mode": "normal",
-          "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。",
-          "knowledgeRefs": [],
+          "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。",
+          "knowledgeRefs": [
+            "b4:2"
+          ],
+          "factRefs": [
+            "wang_old_kinship"
+          ],
           "at": 1,
           "until": 11
         },
         {
-          "speaker": "gouer",
-          "to": [
-            "granny",
-            "liushi"
-          ],
-          "mode": "normal",
-          "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。",
-          "knowledgeRefs": [],
-          "at": 12,
-          "until": 20
-        },
-        {
           "speaker": "liushi",
           "to": [
             "granny"
           ],
           "mode": "normal",
-          "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。",
-          "knowledgeRefs": [],
-          "at": 21,
-          "until": 28
+          "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。",
+          "knowledgeRefs": [
+            "b5:0"
+          ],
+          "factRefs": [],
+          "at": 12,
+          "until": 20
         }
       ],
       "commands": [
@@ -337,14 +519,8 @@
         {
           "at": 0.6,
           "type": "expression",
-          "actor": "gouer",
-          "value": "thinking"
-        },
-        {
-          "at": 0.6,
-          "type": "expression",
           "actor": "liushi",
-          "value": "smile"
+          "value": "thinking"
         },
         {
           "at": 0,
@@ -360,58 +536,165 @@
         {
           "at": 11.8,
           "type": "face",
-          "actor": "gouer",
-          "target": "granny"
-        },
-        {
-          "at": 20.8,
-          "type": "face",
           "actor": "liushi",
           "target": "granny"
         }
       ],
-      "memory": "定下明早天亮动身，刘姥姥、刘氏带板儿同去，狗儿留家看青儿并备好干粮；刘氏答应照应板儿。"
+      "memory": "定明早动身，刘姥姥只带板儿，先探周瑞妻子的口风，不把话说满；刘氏连夜备干粮。"
     }
   ],
   "narrative": {
-    "version": 3,
+    "version": 4,
     "nodeId": "household-decision",
     "plan": {
-      "endingAim": "刘姥姥提出联宗旧亲，狗儿提出周瑞这条线索，一家议定去荣府后街探问门路，刘氏主动提出同行照看，狗儿同意留家看青儿并备干粮；板儿经刘氏询问后表示愿跟，最终定下次日清早动身，先托周瑞引见王夫人，不成再相机诉苦求帮。",
+      "endingAim": "一家人议定：刘姥姥带板儿明日一早进城，先到荣府后街找周瑞妻子探问门路，只求通个信儿见王夫人；刘氏留家看青儿并备干粮，狗儿清早送一程至岔路口后回来看家。",
       "beats": [
         {
           "id": "b1",
-          "title": "点破困局",
-          "question": "家中冬事无着，谁先开口拿出办法？",
-          "change": "刘姥姥点出王家旧亲，狗儿提出父亲与周瑞有旧，可先找周瑞探口风，但担心受冷遇。",
-          "intention": "刘姥姥催狗儿想办法；狗儿提出自己家与周瑞的旧交线索，同时顾及脸面。",
+          "title": "狗儿泄气",
+          "question": "过冬无着，狗儿只会发愁还是拿办法？",
+          "change": "狗儿把难处摊开，却只叹气不动身；刘姥姥当面数落他光愁不谋。",
+          "intention": "狗儿想让家人知道难处；刘姥姥要逼出个活路。",
           "dialogue": [
+            {
+              "speaker": "gouer",
+              "to": [
+                "liushi",
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。",
+              "knowledgeRefs": [],
+              "factRefs": [
+                "winter_need"
+              ]
+            },
             {
               "speaker": "granny",
               "to": [
                 "gouer"
               ],
               "mode": "normal",
-              "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。",
-              "knowledgeRefs": []
-            },
-            {
-              "speaker": "gouer",
-              "to": [
-                "granny"
+              "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。",
+              "knowledgeRefs": [
+                "b1:0"
               ],
-              "mode": "normal",
-              "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。",
-              "knowledgeRefs": []
+              "factRefs": [
+                "family_roles"
+              ]
             }
           ]
         },
         {
           "id": "b2",
-          "title": "谁去谁留",
-          "question": "刘姥姥一人去还是有人同行？狗儿去不去？",
-          "change": "刘氏走近，提出自己可同行照应，狗儿表示留家看青儿；板儿是否跟去由刘氏询问后，板儿说愿跟。",
-          "intention": "刘氏想护着母亲，又怕她一人受轻慢；狗儿想避脸面，顺水推舟留家。",
+          "title": "旧亲旧交",
+          "question": "哪条门路能开口？",
+          "change": "狗儿想起祖上与王家连过宗，又想起父亲与周瑞有旧；刘姥姥说出自己早年随女儿去过王家，记得二小姐如今是王夫人。",
+          "intention": "狗儿想找一条体面的门路；刘姥姥要掂量这旧情还值不值钱。",
+          "dialogue": [
+            {
+              "speaker": "gouer",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。",
+              "knowledgeRefs": [
+                "b1:1"
+              ],
+              "factRefs": [
+                "gouer_zhou_connection",
+                "wang_old_kinship"
+              ]
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "gouer",
+                "liushi"
+              ],
+              "mode": "normal",
+              "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。",
+              "knowledgeRefs": [
+                "b2:0"
+              ],
+              "factRefs": [
+                "granny_zhou_awareness",
+                "granny_wang_visit"
+              ]
+            },
+            {
+              "speaker": "liushi",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。",
+              "knowledgeRefs": [
+                "b2:1"
+              ],
+              "factRefs": [
+                "granny_wang_visit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b3",
+          "title": "谁去开口",
+          "question": "这趟谁去、求什么？",
+          "change": "刘姥姥自请先去后街找周瑞妻子探口风，只求通个信儿；狗儿承认自己去反倒抹不开脸。",
+          "intention": "刘姥姥要接下这差事；狗儿怕受冷遇，愿让岳母出面。",
+          "dialogue": [
+            {
+              "speaker": "granny",
+              "to": [
+                "gouer",
+                "liushi"
+              ],
+              "mode": "normal",
+              "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。",
+              "knowledgeRefs": [
+                "b2:1",
+                "b2:2"
+              ],
+              "factRefs": [
+                "granny_zhou_awareness"
+              ]
+            },
+            {
+              "speaker": "gouer",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。",
+              "knowledgeRefs": [
+                "b3:0"
+              ],
+              "factRefs": []
+            },
+            {
+              "speaker": "liushi",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。",
+              "knowledgeRefs": [
+                "b3:0",
+                "b3:1"
+              ],
+              "factRefs": []
+            }
+          ]
+        },
+        {
+          "id": "b4",
+          "title": "同行分工",
+          "question": "谁同行、谁留家？",
+          "change": "刘氏提议自己跟去照应，可青儿没人看；议定刘姥姥带板儿，刘氏留家备干粮，狗儿清早送到岔路口。",
+          "intention": "刘氏想护着母亲；刘姥姥要个能跑腿又不碍事的孩子；狗儿愿送一程。",
           "dialogue": [
             {
               "speaker": "liushi",
@@ -420,82 +703,28 @@
                 "gouer"
               ],
               "mode": "normal",
-              "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。",
-              "knowledgeRefs": []
-            },
-            {
-              "speaker": "gouer",
-              "to": [
-                "liushi"
+              "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。",
+              "knowledgeRefs": [
+                "b3:2"
               ],
-              "mode": "normal",
-              "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。",
-              "knowledgeRefs": []
+              "factRefs": [
+                "family_roles"
+              ]
             },
-            {
-              "speaker": "liushi",
-              "to": [
-                "baner"
-              ],
-              "mode": "normal",
-              "text": "板儿，明儿跟姥姥和娘出门，你去不去？",
-              "knowledgeRefs": []
-            },
-            {
-              "speaker": "baner",
-              "to": [
-                "liushi"
-              ],
-              "mode": "normal",
-              "text": "去。",
-              "knowledgeRefs": []
-            }
-          ]
-        },
-        {
-          "id": "b3",
-          "title": "求什么怎么求",
-          "question": "登门向周瑞求什么？先求引见还是直接诉苦？",
-          "change": "刘姥姥定下先托周瑞探口风、相机引见王夫人，不成再诉苦求帮；刘氏提议带些地里新收的枣儿倭瓜，不空手上门。",
-          "intention": "刘姥姥想借旧情探路，不空手上门，也不一开口就讨赏。",
-          "dialogue": [
             {
               "speaker": "granny",
               "to": [
-                "gouer",
-                "liushi"
+                "liushi",
+                "gouer"
               ],
               "mode": "normal",
-              "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。",
-              "knowledgeRefs": []
-            },
-            {
-              "speaker": "liushi",
-              "to": [
-                "granny"
+              "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。",
+              "knowledgeRefs": [
+                "b4:0"
               ],
-              "mode": "normal",
-              "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。",
-              "knowledgeRefs": []
-            }
-          ]
-        },
-        {
-          "id": "b4",
-          "title": "定下行期",
-          "question": "何时动身？家里怎么安排？",
-          "change": "定下明早天亮动身，刘姥姥、刘氏带板儿同去，狗儿留家看青儿并备好干粮；刘氏答应照应板儿。",
-          "intention": "刘姥姥拍板行期，狗儿应承后勤。",
-          "dialogue": [
-            {
-              "speaker": "granny",
-              "to": [
-                "gouer",
-                "liushi"
-              ],
-              "mode": "normal",
-              "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。",
-              "knowledgeRefs": []
+              "factRefs": [
+                "family_roles"
+              ]
             },
             {
               "speaker": "gouer",
@@ -504,8 +733,47 @@
                 "liushi"
               ],
               "mode": "normal",
-              "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。",
-              "knowledgeRefs": []
+              "text": "成，明儿一早我送你们到岔路口，认完道我就回来，家里也离不得人。",
+              "knowledgeRefs": [
+                "b4:1"
+              ],
+              "factRefs": []
+            },
+            {
+              "speaker": "baner",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "去。",
+              "knowledgeRefs": [
+                "b4:1"
+              ],
+              "factRefs": []
+            }
+          ]
+        },
+        {
+          "id": "b5",
+          "title": "定下动身",
+          "question": "何时动身、带什么话？",
+          "change": "定明早动身，刘姥姥只带板儿，先探周瑞妻子的口风，不把话说满；刘氏连夜备干粮。",
+          "intention": "刘姥姥要把话说到分寸上；刘氏要落实家中准备。",
+          "dialogue": [
+            {
+              "speaker": "granny",
+              "to": [
+                "gouer",
+                "liushi"
+              ],
+              "mode": "normal",
+              "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。",
+              "knowledgeRefs": [
+                "b4:2"
+              ],
+              "factRefs": [
+                "wang_old_kinship"
+              ]
             },
             {
               "speaker": "liushi",
@@ -513,8 +781,11 @@
                 "granny"
               ],
               "mode": "normal",
-              "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。",
-              "knowledgeRefs": []
+              "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。",
+              "knowledgeRefs": [
+                "b5:0"
+              ],
+              "factRefs": []
             }
           ]
         }
@@ -526,7 +797,7 @@
     },
     "handoff": {
       "version": 1,
-      "sourceStoryId": "94e22c7d-deea-43c2-aa5a-6e6bf3d65475",
+      "sourceStoryId": "995e8458-1253-4f9c-a357-f4fd2bcec12b",
       "sourceNodeId": "household-decision",
       "nextNodeId": "backstreet-contact",
       "nextSceneCandidates": [
@@ -537,23 +808,19 @@
         "status": "depart",
         "party": [
           "granny",
-          "liushi",
           "baner"
         ],
-        "purpose": "去荣府后街找与狗儿家有旧交的周瑞探口风，看能否引见王夫人；先请安，不成再诉苦求帮",
-        "approach": "先托周瑞探探口风，说咱是连过宗的穷亲戚来请安；带些地里新收的枣儿倭瓜，不空手上门，也不一进门就伸手",
-        "departureCondition": "明早天亮就走，趁城门开了好赶路；狗儿留家看青儿并烙两张饼路上垫饥",
+        "purpose": "明儿一早进城，先到荣府后街寻周瑞妻子探问门路，只求通个信儿见王夫人；狗儿送到岔路口认完道即回。",
+        "approach": "刘姥姥先问周瑞妻子在不在，只探口风、只求通个信儿，见了王夫人只问安、说难处，不把话说满，不一开口就提要钱。",
+        "departureCondition": "明儿一早动身；刘氏连夜备下干粮给刘姥姥与板儿路上吃；狗儿清早送一程至岔路口，认完道便回家看家。",
         "evidenceRefs": [
-          "b1:0",
-          "b2:0",
-          "b2:1",
-          "b2:2",
-          "b2:3",
           "b3:0",
-          "b3:1",
-          "b4:0",
+          "b3:2",
           "b4:1",
-          "b4:2"
+          "b4:2",
+          "b4:3",
+          "b5:0",
+          "b5:1"
         ],
         "knownBy": [
           "granny",
@@ -566,11 +833,9 @@
       "facts": [
         {
           "kind": "plan",
-          "text": "明早天亮动身去荣府后街找周瑞，先探口风、相机引见王夫人，不成再诉苦求帮",
+          "text": "刘姥姥自请先去后街寻周瑞妻子问清门路，只求她通个信儿见王夫人，成不成另说。",
           "evidenceRefs": [
-            "b1:0",
-            "b3:0",
-            "b4:0"
+            "b3:0"
           ],
           "knownBy": [
             "granny",
@@ -582,11 +847,24 @@
         },
         {
           "kind": "plan",
-          "text": "刘氏与板儿同行，狗儿留家看青儿",
+          "text": "议定刘氏留家看青儿并备干粮，刘姥姥带板儿同行，板儿应声愿去。",
           "evidenceRefs": [
-            "b2:0",
-            "b2:1",
-            "b2:3",
+            "b4:0",
+            "b4:1",
+            "b4:3"
+          ],
+          "knownBy": [
+            "granny",
+            "gouer",
+            "liushi",
+            "baner",
+            "qinger"
+          ]
+        },
+        {
+          "kind": "plan",
+          "text": "狗儿应下明儿一早送刘姥姥与板儿到岔路口，认完道就回来。",
+          "evidenceRefs": [
             "b4:2"
           ],
           "knownBy": [
@@ -599,8 +877,38 @@
         },
         {
           "kind": "plan",
-          "text": "打算带些地里新收的枣儿倭瓜上门，不空手",
+          "text": "定明儿一早动身，先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满；刘氏连夜备干粮。",
           "evidenceRefs": [
+            "b5:0",
+            "b5:1"
+          ],
+          "knownBy": [
+            "granny",
+            "gouer",
+            "liushi",
+            "baner",
+            "qinger"
+          ]
+        },
+        {
+          "kind": "obstacle",
+          "text": "刘氏指出王家那门旧亲是多少年前的事，人家如今还认不认难说。",
+          "evidenceRefs": [
+            "b2:2"
+          ],
+          "knownBy": [
+            "granny",
+            "gouer",
+            "liushi",
+            "baner",
+            "qinger"
+          ]
+        },
+        {
+          "kind": "obstacle",
+          "text": "周瑞多年没走动，不知如今怎样；狗儿怕门房给冷脸，自己去会顶起来。",
+          "evidenceRefs": [
+            "b2:1",
             "b3:1"
           ],
           "knownBy": [
@@ -612,11 +920,24 @@
           ]
         },
         {
-          "kind": "promise",
-          "text": "狗儿应承烙两张饼给路上垫饥",
+          "kind": "relationship",
+          "text": "狗儿之父与周瑞有旧交，祖上也与金陵王家连过宗，只是多年不走动。",
           "evidenceRefs": [
-            "b4:0",
-            "b4:1"
+            "b2:0"
+          ],
+          "knownBy": [
+            "granny",
+            "gouer",
+            "liushi",
+            "baner",
+            "qinger"
+          ]
+        },
+        {
+          "kind": "relationship",
+          "text": "刘姥姥早年随刘氏去过王家，记得王家二小姐待人爽快，如今是王夫人。",
+          "evidenceRefs": [
+            "b2:1"
           ],
           "knownBy": [
             "granny",
@@ -631,58 +952,50 @@
         "granny": [
           {
             "eventId": "b1:0",
+            "speaker": "gouer",
+            "to": [
+              "liushi",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。"
+          },
+          {
+            "eventId": "b1:1",
             "speaker": "granny",
             "to": [
               "gouer"
             ],
             "mode": "normal",
-            "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
+            "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。"
           },
           {
-            "eventId": "b1:1",
+            "eventId": "b2:0",
             "speaker": "gouer",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-          },
-          {
-            "eventId": "b2:0",
-            "speaker": "liushi",
-            "to": [
-              "granny",
-              "gouer"
-            ],
-            "mode": "normal",
-            "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。"
+            "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。"
           },
           {
             "eventId": "b2:1",
-            "speaker": "gouer",
+            "speaker": "granny",
             "to": [
+              "gouer",
               "liushi"
             ],
             "mode": "normal",
-            "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。"
+            "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。"
           },
           {
             "eventId": "b2:2",
             "speaker": "liushi",
             "to": [
-              "baner"
+              "granny"
             ],
             "mode": "normal",
-            "text": "板儿，明儿跟姥姥和娘出门，你去不去？"
-          },
-          {
-            "eventId": "b2:3",
-            "speaker": "baner",
-            "to": [
-              "liushi"
-            ],
-            "mode": "normal",
-            "text": "去。"
+            "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。"
           },
           {
             "eventId": "b3:0",
@@ -692,102 +1005,132 @@
               "liushi"
             ],
             "mode": "normal",
-            "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
+            "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。"
           },
           {
             "eventId": "b3:1",
+            "speaker": "gouer",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。"
+          },
+          {
+            "eventId": "b3:2",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。"
+            "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。"
           },
           {
             "eventId": "b4:0",
-            "speaker": "granny",
+            "speaker": "liushi",
             "to": [
-              "gouer",
-              "liushi"
+              "granny",
+              "gouer"
             ],
             "mode": "normal",
-            "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。"
+            "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。"
           },
           {
             "eventId": "b4:1",
+            "speaker": "granny",
+            "to": [
+              "liushi",
+              "gouer"
+            ],
+            "mode": "normal",
+            "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。"
+          },
+          {
+            "eventId": "b4:2",
             "speaker": "gouer",
             "to": [
               "granny",
               "liushi"
             ],
             "mode": "normal",
-            "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。"
+            "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。"
           },
           {
-            "eventId": "b4:2",
+            "eventId": "b4:3",
+            "speaker": "baner",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "去。"
+          },
+          {
+            "eventId": "b5:0",
+            "speaker": "granny",
+            "to": [
+              "gouer",
+              "liushi"
+            ],
+            "mode": "normal",
+            "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。"
+          },
+          {
+            "eventId": "b5:1",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。"
+            "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。"
           }
         ],
         "gouer": [
           {
             "eventId": "b1:0",
+            "speaker": "gouer",
+            "to": [
+              "liushi",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。"
+          },
+          {
+            "eventId": "b1:1",
             "speaker": "granny",
             "to": [
               "gouer"
             ],
             "mode": "normal",
-            "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
+            "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。"
           },
           {
-            "eventId": "b1:1",
+            "eventId": "b2:0",
             "speaker": "gouer",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-          },
-          {
-            "eventId": "b2:0",
-            "speaker": "liushi",
-            "to": [
-              "granny",
-              "gouer"
-            ],
-            "mode": "normal",
-            "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。"
+            "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。"
           },
           {
             "eventId": "b2:1",
-            "speaker": "gouer",
+            "speaker": "granny",
             "to": [
+              "gouer",
               "liushi"
             ],
             "mode": "normal",
-            "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。"
+            "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。"
           },
           {
             "eventId": "b2:2",
             "speaker": "liushi",
             "to": [
-              "baner"
+              "granny"
             ],
             "mode": "normal",
-            "text": "板儿，明儿跟姥姥和娘出门，你去不去？"
-          },
-          {
-            "eventId": "b2:3",
-            "speaker": "baner",
-            "to": [
-              "liushi"
-            ],
-            "mode": "normal",
-            "text": "去。"
+            "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。"
           },
           {
             "eventId": "b3:0",
@@ -797,102 +1140,132 @@
               "liushi"
             ],
             "mode": "normal",
-            "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
+            "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。"
           },
           {
             "eventId": "b3:1",
+            "speaker": "gouer",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。"
+          },
+          {
+            "eventId": "b3:2",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。"
+            "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。"
           },
           {
             "eventId": "b4:0",
-            "speaker": "granny",
+            "speaker": "liushi",
             "to": [
-              "gouer",
-              "liushi"
+              "granny",
+              "gouer"
             ],
             "mode": "normal",
-            "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。"
+            "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。"
           },
           {
             "eventId": "b4:1",
+            "speaker": "granny",
+            "to": [
+              "liushi",
+              "gouer"
+            ],
+            "mode": "normal",
+            "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。"
+          },
+          {
+            "eventId": "b4:2",
             "speaker": "gouer",
             "to": [
               "granny",
               "liushi"
             ],
             "mode": "normal",
-            "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。"
+            "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。"
           },
           {
-            "eventId": "b4:2",
+            "eventId": "b4:3",
+            "speaker": "baner",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "去。"
+          },
+          {
+            "eventId": "b5:0",
+            "speaker": "granny",
+            "to": [
+              "gouer",
+              "liushi"
+            ],
+            "mode": "normal",
+            "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。"
+          },
+          {
+            "eventId": "b5:1",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。"
+            "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。"
           }
         ],
         "liushi": [
           {
             "eventId": "b1:0",
+            "speaker": "gouer",
+            "to": [
+              "liushi",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。"
+          },
+          {
+            "eventId": "b1:1",
             "speaker": "granny",
             "to": [
               "gouer"
             ],
             "mode": "normal",
-            "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
+            "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。"
           },
           {
-            "eventId": "b1:1",
+            "eventId": "b2:0",
             "speaker": "gouer",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-          },
-          {
-            "eventId": "b2:0",
-            "speaker": "liushi",
-            "to": [
-              "granny",
-              "gouer"
-            ],
-            "mode": "normal",
-            "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。"
+            "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。"
           },
           {
             "eventId": "b2:1",
-            "speaker": "gouer",
+            "speaker": "granny",
             "to": [
+              "gouer",
               "liushi"
             ],
             "mode": "normal",
-            "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。"
+            "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。"
           },
           {
             "eventId": "b2:2",
             "speaker": "liushi",
             "to": [
-              "baner"
+              "granny"
             ],
             "mode": "normal",
-            "text": "板儿，明儿跟姥姥和娘出门，你去不去？"
-          },
-          {
-            "eventId": "b2:3",
-            "speaker": "baner",
-            "to": [
-              "liushi"
-            ],
-            "mode": "normal",
-            "text": "去。"
+            "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。"
           },
           {
             "eventId": "b3:0",
@@ -902,102 +1275,132 @@
               "liushi"
             ],
             "mode": "normal",
-            "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
+            "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。"
           },
           {
             "eventId": "b3:1",
+            "speaker": "gouer",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。"
+          },
+          {
+            "eventId": "b3:2",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。"
+            "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。"
           },
           {
             "eventId": "b4:0",
-            "speaker": "granny",
+            "speaker": "liushi",
             "to": [
-              "gouer",
-              "liushi"
+              "granny",
+              "gouer"
             ],
             "mode": "normal",
-            "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。"
+            "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。"
           },
           {
             "eventId": "b4:1",
+            "speaker": "granny",
+            "to": [
+              "liushi",
+              "gouer"
+            ],
+            "mode": "normal",
+            "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。"
+          },
+          {
+            "eventId": "b4:2",
             "speaker": "gouer",
             "to": [
               "granny",
               "liushi"
             ],
             "mode": "normal",
-            "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。"
+            "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。"
           },
           {
-            "eventId": "b4:2",
+            "eventId": "b4:3",
+            "speaker": "baner",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "去。"
+          },
+          {
+            "eventId": "b5:0",
+            "speaker": "granny",
+            "to": [
+              "gouer",
+              "liushi"
+            ],
+            "mode": "normal",
+            "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。"
+          },
+          {
+            "eventId": "b5:1",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。"
+            "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。"
           }
         ],
         "baner": [
           {
             "eventId": "b1:0",
+            "speaker": "gouer",
+            "to": [
+              "liushi",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。"
+          },
+          {
+            "eventId": "b1:1",
             "speaker": "granny",
             "to": [
               "gouer"
             ],
             "mode": "normal",
-            "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
+            "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。"
           },
           {
-            "eventId": "b1:1",
+            "eventId": "b2:0",
             "speaker": "gouer",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-          },
-          {
-            "eventId": "b2:0",
-            "speaker": "liushi",
-            "to": [
-              "granny",
-              "gouer"
-            ],
-            "mode": "normal",
-            "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。"
+            "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。"
           },
           {
             "eventId": "b2:1",
-            "speaker": "gouer",
+            "speaker": "granny",
             "to": [
+              "gouer",
               "liushi"
             ],
             "mode": "normal",
-            "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。"
+            "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。"
           },
           {
             "eventId": "b2:2",
             "speaker": "liushi",
             "to": [
-              "baner"
+              "granny"
             ],
             "mode": "normal",
-            "text": "板儿，明儿跟姥姥和娘出门，你去不去？"
-          },
-          {
-            "eventId": "b2:3",
-            "speaker": "baner",
-            "to": [
-              "liushi"
-            ],
-            "mode": "normal",
-            "text": "去。"
+            "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。"
           },
           {
             "eventId": "b3:0",
@@ -1007,102 +1410,132 @@
               "liushi"
             ],
             "mode": "normal",
-            "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
+            "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。"
           },
           {
             "eventId": "b3:1",
+            "speaker": "gouer",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。"
+          },
+          {
+            "eventId": "b3:2",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。"
+            "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。"
           },
           {
             "eventId": "b4:0",
-            "speaker": "granny",
+            "speaker": "liushi",
             "to": [
-              "gouer",
-              "liushi"
+              "granny",
+              "gouer"
             ],
             "mode": "normal",
-            "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。"
+            "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。"
           },
           {
             "eventId": "b4:1",
+            "speaker": "granny",
+            "to": [
+              "liushi",
+              "gouer"
+            ],
+            "mode": "normal",
+            "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。"
+          },
+          {
+            "eventId": "b4:2",
             "speaker": "gouer",
             "to": [
               "granny",
               "liushi"
             ],
             "mode": "normal",
-            "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。"
+            "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。"
           },
           {
-            "eventId": "b4:2",
+            "eventId": "b4:3",
+            "speaker": "baner",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "去。"
+          },
+          {
+            "eventId": "b5:0",
+            "speaker": "granny",
+            "to": [
+              "gouer",
+              "liushi"
+            ],
+            "mode": "normal",
+            "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。"
+          },
+          {
+            "eventId": "b5:1",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。"
+            "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。"
           }
         ],
         "qinger": [
           {
             "eventId": "b1:0",
+            "speaker": "gouer",
+            "to": [
+              "liushi",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "这日子怎么过？冬衣冬粮都没影儿，我愁得睡不着，你们倒稳当。"
+          },
+          {
+            "eventId": "b1:1",
             "speaker": "granny",
             "to": [
               "gouer"
             ],
             "mode": "normal",
-            "text": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
+            "text": "愁能把粮愁进缸里？你光坐着叹气，倒不如说说，你爹在世时跟城里谁有来往。"
           },
           {
-            "eventId": "b1:1",
+            "eventId": "b2:0",
             "speaker": "gouer",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-          },
-          {
-            "eventId": "b2:0",
-            "speaker": "liushi",
-            "to": [
-              "granny",
-              "gouer"
-            ],
-            "mode": "normal",
-            "text": "娘一个人去，我不放心。我跟你同去，路上有个照应；狗儿留家看青儿。板儿还小，带不带，我问问他。"
+            "text": "我爹跟周瑞办过事，有旧交。再往上说，咱祖上也跟金陵王家连过宗，只是多年不走动了。"
           },
           {
             "eventId": "b2:1",
-            "speaker": "gouer",
+            "speaker": "granny",
             "to": [
+              "gouer",
               "liushi"
             ],
             "mode": "normal",
-            "text": "你同去也好，家里我看得住。板儿要跟，就让他跟着，路上别撒手。"
+            "text": "周瑞这名字我听过，多年没走动，不知如今怎样。倒是王家二小姐，我早年跟你媳妇去过，记得她待人爽快，如今是王夫人了。"
           },
           {
             "eventId": "b2:2",
             "speaker": "liushi",
             "to": [
-              "baner"
+              "granny"
             ],
             "mode": "normal",
-            "text": "板儿，明儿跟姥姥和娘出门，你去不去？"
-          },
-          {
-            "eventId": "b2:3",
-            "speaker": "baner",
-            "to": [
-              "liushi"
-            ],
-            "mode": "normal",
-            "text": "去。"
+            "text": "娘，那回我也在，可那是多少年前的事了。人家如今还认不认这门旧亲，难说。"
           },
           {
             "eventId": "b3:0",
@@ -1112,45 +1545,83 @@
               "liushi"
             ],
             "mode": "normal",
-            "text": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
+            "text": "论脸皮，我比你们厚。我先去后街寻周瑞妻子，问清门路，只求她通个信儿见王夫人，成不成另说。"
           },
           {
             "eventId": "b3:1",
+            "speaker": "gouer",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "您去比我强。我这脸拉不下来，万一门房给个冷脸，我当场就得跟人顶起来。"
+          },
+          {
+            "eventId": "b3:2",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "娘这话在理。咱带点地里新收的枣儿倭瓜，不算空手，也显得是走亲戚，不是打秋风。"
+            "text": "娘去可以，可不能空口白话。到了那儿，先问周瑞妻子在不在，别一开口就提要钱。"
           },
           {
             "eventId": "b4:0",
-            "speaker": "granny",
+            "speaker": "liushi",
             "to": [
-              "gouer",
-              "liushi"
+              "granny",
+              "gouer"
             ],
             "mode": "normal",
-            "text": "那就这么定：明早天亮就走，趁城门开了好赶路。狗儿在家把青儿看好，再给我们烙两张饼路上垫饥。"
+            "text": "我陪娘去吧，路上也好有个照应。可青儿离不开人，家里也得留个做饭的。"
           },
           {
             "eventId": "b4:1",
+            "speaker": "granny",
+            "to": [
+              "liushi",
+              "gouer"
+            ],
+            "mode": "normal",
+            "text": "你留下看青儿，把干粮备好。我带板儿去，孩子不碍事，走不动我背一段。"
+          },
+          {
+            "eventId": "b4:2",
             "speaker": "gouer",
             "to": [
               "granny",
               "liushi"
             ],
             "mode": "normal",
-            "text": "行，饼我烙。你们路上小心，到后街先打听准周瑞的住处，别贸然往正门上撞。"
+            "text": "成，明儿一早我送你们到岔路口，板儿跟着娘去也成，认完道我就回来。"
           },
           {
-            "eventId": "b4:2",
+            "eventId": "b4:3",
+            "speaker": "baner",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "去。"
+          },
+          {
+            "eventId": "b5:0",
+            "speaker": "granny",
+            "to": [
+              "gouer",
+              "liushi"
+            ],
+            "mode": "normal",
+            "text": "那就这么定：明儿一早动身，我先探周瑞妻子的口风，见了王夫人只问安、说难处，不把话说满。"
+          },
+          {
+            "eventId": "b5:1",
             "speaker": "liushi",
             "to": [
               "granny"
             ],
             "mode": "normal",
-            "text": "板儿我牵着，娘只管说话。天冷，我给娘把旧棉袄找出来。"
+            "text": "干粮我连夜备下，您跟板儿路上吃。到了城里别硬撑，问不着人就先回来。"
           }
         ]
       }
@@ -1158,357 +1629,6 @@
     "handoffReview": {
       "passed": true,
       "issues": []
-    }
-  },
-  "generation": {
-    "provider": "DeepSeek",
-    "model": "deepseek-flash",
-    "generatedAt": "2026-11-15T02:46:30.213Z",
-    "source": "live-api",
-    "jobId": "94e22c7d-deea-43c2-aa5a-6e6bf3d65475",
-    "calls": [
-      {
-        "responseId": "20aa0bc4-de3d-4bc5-935b-6a173616ce34",
-        "model": "deepseek-flash",
-        "phase": "scene-plan",
-        "usage": {
-          "prompt_tokens": 6773,
-          "completion_tokens": 1277,
-          "total_tokens": 8050,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 6773
-        }
-      },
-      {
-        "responseId": "4192b6ca-0eb7-4f9c-afcf-dd1875142810",
-        "model": "deepseek-flash",
-        "phase": "script-review-0",
-        "usage": {
-          "prompt_tokens": 4183,
-          "completion_tokens": 439,
-          "total_tokens": 4622,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 4183
-        }
-      },
-      {
-        "responseId": "b78a5b95-0d8c-475f-baf1-b935c6068a6e",
-        "model": "deepseek-flash",
-        "phase": "script-rewrite",
-        "usage": {
-          "prompt_tokens": 4599,
-          "completion_tokens": 1391,
-          "total_tokens": 5990,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 4599
-        }
-      },
-      {
-        "responseId": "5961f6fe-4e87-44eb-b566-7ad03650603c",
-        "model": "deepseek-flash",
-        "phase": "script-review-1",
-        "usage": {
-          "prompt_tokens": 4267,
-          "completion_tokens": 9,
-          "total_tokens": 4276,
-          "prompt_tokens_details": {
-            "cached_tokens": 2944
-          },
-          "prompt_cache_hit_tokens": 2944,
-          "prompt_cache_miss_tokens": 1323
-        }
-      },
-      {
-        "responseId": "b186fed0-4ea6-439b-a92e-b1826f565b14",
-        "model": "deepseek-flash",
-        "phase": "beat-1",
-        "usage": {
-          "prompt_tokens": 6165,
-          "completion_tokens": 81,
-          "total_tokens": 6246,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 6165
-        }
-      },
-      {
-        "responseId": "74c543dd-62b3-428c-a1c6-6e088056b13e",
-        "model": "deepseek-flash",
-        "phase": "beat-1-repair-1",
-        "usage": {
-          "prompt_tokens": 6360,
-          "completion_tokens": 81,
-          "total_tokens": 6441,
-          "prompt_tokens_details": {
-            "cached_tokens": 6144
-          },
-          "prompt_cache_hit_tokens": 6144,
-          "prompt_cache_miss_tokens": 216
-        }
-      },
-      {
-        "responseId": "cc2dc5e8-318b-4c97-9a86-e6879f1f5f9c",
-        "model": "deepseek-flash",
-        "phase": "beat-1-repair-2",
-        "usage": {
-          "prompt_tokens": 6360,
-          "completion_tokens": 81,
-          "total_tokens": 6441,
-          "prompt_tokens_details": {
-            "cached_tokens": 6144
-          },
-          "prompt_cache_hit_tokens": 6144,
-          "prompt_cache_miss_tokens": 216
-        }
-      },
-      {
-        "responseId": "f19ebd05-bd39-4311-81df-c04a9f3d931f",
-        "model": "deepseek-flash",
-        "phase": "script-preflight-0",
-        "usage": {
-          "prompt_tokens": 4311,
-          "completion_tokens": 5000,
-          "total_tokens": 9311,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 4311
-        }
-      },
-      {
-        "responseId": "b477ef82-1772-4c01-8743-ab156e149d62",
-        "model": "deepseek-flash",
-        "phase": "beat-1",
-        "usage": {
-          "prompt_tokens": 6132,
-          "completion_tokens": 87,
-          "total_tokens": 6219,
-          "prompt_tokens_details": {
-            "cached_tokens": 4736
-          },
-          "prompt_cache_hit_tokens": 4736,
-          "prompt_cache_miss_tokens": 1396
-        }
-      },
-      {
-        "responseId": "ef4add69-b4cd-4d9c-8bfd-7f008c5b1a40",
-        "model": "deepseek-flash",
-        "phase": "beat-2",
-        "usage": {
-          "prompt_tokens": 7077,
-          "completion_tokens": 103,
-          "total_tokens": 7180,
-          "prompt_tokens_details": {
-            "cached_tokens": 2944
-          },
-          "prompt_cache_hit_tokens": 2944,
-          "prompt_cache_miss_tokens": 4133
-        }
-      },
-      {
-        "responseId": "e8fa56bb-f9fc-430f-989e-f7e32dfe8644",
-        "model": "deepseek-flash",
-        "phase": "beat-3",
-        "usage": {
-          "prompt_tokens": 8063,
-          "completion_tokens": 82,
-          "total_tokens": 8145,
-          "prompt_tokens_details": {
-            "cached_tokens": 2944
-          },
-          "prompt_cache_hit_tokens": 2944,
-          "prompt_cache_miss_tokens": 5119
-        }
-      },
-      {
-        "responseId": "411452ac-70fb-4e66-a085-dbbfd673b4fa",
-        "model": "deepseek-flash",
-        "phase": "beat-4",
-        "usage": {
-          "prompt_tokens": 8851,
-          "completion_tokens": 79,
-          "total_tokens": 8930,
-          "prompt_tokens_details": {
-            "cached_tokens": 3072
-          },
-          "prompt_cache_hit_tokens": 3072,
-          "prompt_cache_miss_tokens": 5779
-        }
-      },
-      {
-        "responseId": "6f2271c6-3ea8-4301-843b-3d48a269dda8",
-        "model": "deepseek-flash",
-        "phase": "semantic-review-0",
-        "usage": {
-          "prompt_tokens": 25560,
-          "completion_tokens": 9,
-          "total_tokens": 25569,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 25560
-        }
-      },
-      {
-        "responseId": "3383171d-3fc5-41e4-a7dc-bfa58b36ac38",
-        "model": "deepseek-flash",
-        "phase": "scene-handoff",
-        "usage": {
-          "prompt_tokens": 3903,
-          "completion_tokens": 545,
-          "total_tokens": 4448,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 3903
-        }
-      },
-      {
-        "responseId": "e8de55ae-a54a-4f08-bf1f-4e7e4a424e7d",
-        "model": "deepseek-flash",
-        "phase": "semantic-repair-0",
-        "usage": {
-          "prompt_tokens": 22549,
-          "completion_tokens": 169,
-          "total_tokens": 22718,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 22549
-        }
-      },
-      {
-        "responseId": "b992d861-cc79-4b80-a5a0-59dd44b143cd",
-        "model": "deepseek-flash",
-        "phase": "semantic-review-1",
-        "usage": {
-          "prompt_tokens": 25577,
-          "completion_tokens": 9,
-          "total_tokens": 25586,
-          "prompt_tokens_details": {
-            "cached_tokens": 3072
-          },
-          "prompt_cache_hit_tokens": 3072,
-          "prompt_cache_miss_tokens": 22505
-        }
-      },
-      {
-        "responseId": "b7ab9367-8719-41d9-bd60-9f2237a7cc71",
-        "model": "deepseek-flash",
-        "phase": "scene-handoff",
-        "usage": {
-          "prompt_tokens": 3916,
-          "completion_tokens": 529,
-          "total_tokens": 4445,
-          "prompt_tokens_details": {
-            "cached_tokens": 256
-          },
-          "prompt_cache_hit_tokens": 256,
-          "prompt_cache_miss_tokens": 3660
-        }
-      },
-      {
-        "responseId": "e9665d7a-be52-4aaf-85a7-6952e6841837",
-        "model": "deepseek-flash",
-        "phase": "semantic-review-0",
-        "usage": {
-          "prompt_tokens": 25576,
-          "completion_tokens": 9,
-          "total_tokens": 25585,
-          "prompt_tokens_details": {
-            "cached_tokens": 3072
-          },
-          "prompt_cache_hit_tokens": 3072,
-          "prompt_cache_miss_tokens": 22504
-        }
-      },
-      {
-        "responseId": "0105e35c-bda1-4270-8fd6-de4d0d99358e",
-        "model": "deepseek-flash",
-        "phase": "scene-handoff-0",
-        "usage": {
-          "prompt_tokens": 4442,
-          "completion_tokens": 375,
-          "total_tokens": 4817,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 4442
-        }
-      },
-      {
-        "responseId": "34c5d743-5404-4834-827a-b352fc4d1614",
-        "model": "deepseek-flash",
-        "phase": "handoff-review-0",
-        "usage": {
-          "prompt_tokens": 4491,
-          "completion_tokens": 9,
-          "total_tokens": 4500,
-          "prompt_tokens_details": {
-            "cached_tokens": 0
-          },
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 4491
-        }
-      }
-    ],
-    "validation": {
-      "passed": true,
-      "beats": 4,
-      "duration": 126,
-      "dialogues": 11,
-      "moves": 2,
-      "whispers": 0,
-      "semanticReview": {
-        "passed": true,
-        "issues": []
-      }
-    },
-    "presentationRevision": {
-      "reviewer": "Codex",
-      "reason": "按用户反馈调整沉浸式演出节奏，并核对第六回周瑞线索归属；本轮三句对白为人工校订，未调用模型重写。",
-      "source": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
-      "dialogueEdits": [
-        {
-          "eventId": "b1:0",
-          "before": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？我早年认识周瑞，去荣府后街找找他，探探口风，总比你干坐着强。",
-          "after": "你光在屋里转磨磨，冬衣冬粮就能从天上掉下来？你们跟王家连过宗，倒想想有没有能递句话的人。"
-        },
-        {
-          "eventId": "b1:1",
-          "before": "娘说得轻巧，荣府门槛高，人家认不认咱还两说。我爹跟周瑞有旧，可那是老一辈的事，我拉不下脸去碰钉子。",
-          "after": "我爹跟周瑞有旧，倒能先找他探探口风。只是多年不走动，人家还认不认咱？我拉不下脸去碰钉子。"
-        },
-        {
-          "eventId": "b3:0",
-          "before": "咱不能一进门就伸手。先托周瑞探探口风，看能不能引见王夫人，说咱是连过宗的穷亲戚，来请安。她若念旧，自然有周济；不念旧，咱再诉苦求帮。",
-          "after": "周瑞我也知道，只是多年不走动了。先找他探探口风，若能引见王夫人，就说连过宗的穷亲戚来请安，再说冬里的难处。"
-        }
-      ],
-      "checks": {
-        "passed": true,
-        "beats": 4,
-        "duration": 120,
-        "dialogues": 11,
-        "moves": 2,
-        "whispers": 0
-      }
     }
   },
   "presentation": {
@@ -1519,11 +1639,564 @@
     },
     "interludes": [
       {
-        "afterBeat": "b4",
+        "afterBeat": "b5",
         "duration": 5.5,
-        "text": "一夜无话。\n天将明，正是约定动身的时候。",
+        "text": "一夜无话。天将明，正是约定动身的时候。",
         "lighting": "dawn"
       }
     ]
+  },
+  "soundtrack": {
+    "version": 1,
+    "cues": [
+      {
+        "section": "opening",
+        "offset": 0,
+        "action": "play",
+        "track": "wuxia_plucked",
+        "volume": 0.16,
+        "reason": "开场即寒舍生计之忧，筝琵琶低回不喧，衬商议前的沉闷，不用喜庆曲。"
+      },
+      {
+        "section": "b2",
+        "offset": 0,
+        "action": "pause",
+        "volume": 0.14,
+        "reason": "旧亲旧交一段多反复掂量，暂停留白让对白更清。"
+      },
+      {
+        "section": "b4",
+        "offset": 0,
+        "action": "resume",
+        "volume": 0.15,
+        "reason": "分工议定、气氛稍松，续播原曲保持连贯，不另起新调。"
+      },
+      {
+        "section": "bridge",
+        "offset": 0,
+        "action": "stop",
+        "volume": 0.12,
+        "reason": "一夜过场，收束前曲，留静待天明。"
+      }
+    ]
+  },
+  "generation": {
+    "authoring": {
+      "dialogue": "DeepSeek Flash 原始生成及模型自动修订，无人工改写台词",
+      "cardsRevision": "first-visit-2026-11-16",
+      "cardHash": "a4b2aece53ec2e9349829ea380da95904303ad41353fde3b05f8d7ec8ba0a850"
+    },
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "generatedAt": "2026-11-16T03:37:53.358Z",
+    "source": "live-api",
+    "jobId": "995e8458-1253-4f9c-a357-f4fd2bcec12b",
+    "calls": [
+      {
+        "responseId": "836c3575-6efd-46e1-b390-f07be875ecd3",
+        "model": "deepseek-flash",
+        "phase": "scene-plan",
+        "usage": {
+          "prompt_tokens": 3590,
+          "completion_tokens": 1518,
+          "total_tokens": 5108,
+          "prompt_tokens_details": {
+            "cached_tokens": 3456
+          },
+          "prompt_cache_hit_tokens": 3456,
+          "prompt_cache_miss_tokens": 134
+        }
+      },
+      {
+        "responseId": "c7f5526e-b9f0-465c-ac6f-fadef6f7b0e6",
+        "model": "deepseek-flash",
+        "phase": "script-review-0",
+        "usage": {
+          "prompt_tokens": 21029,
+          "completion_tokens": 9,
+          "total_tokens": 21038,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 21029
+        }
+      },
+      {
+        "responseId": "ac25c130-e6d4-416d-8f0c-286f281dc9cc",
+        "model": "deepseek-flash",
+        "phase": "beat-1",
+        "usage": {
+          "prompt_tokens": 5732,
+          "completion_tokens": 79,
+          "total_tokens": 5811,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 5476
+        }
+      },
+      {
+        "responseId": "2aa79f32-2108-4b1e-9137-b32c5f804cb7",
+        "model": "deepseek-flash",
+        "phase": "beat-2",
+        "usage": {
+          "prompt_tokens": 6574,
+          "completion_tokens": 93,
+          "total_tokens": 6667,
+          "prompt_tokens_details": {
+            "cached_tokens": 2176
+          },
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 4398
+        }
+      },
+      {
+        "responseId": "606c6374-dea6-4e55-8515-199c01b2706f",
+        "model": "deepseek-flash",
+        "phase": "beat-3",
+        "usage": {
+          "prompt_tokens": 7530,
+          "completion_tokens": 91,
+          "total_tokens": 7621,
+          "prompt_tokens_details": {
+            "cached_tokens": 2176
+          },
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 5354
+        }
+      },
+      {
+        "responseId": "35065e97-f57a-4390-bde7-920fa8f3001c",
+        "model": "deepseek-flash",
+        "phase": "beat-3-repair-1",
+        "usage": {
+          "prompt_tokens": 7671,
+          "completion_tokens": 91,
+          "total_tokens": 7762,
+          "prompt_tokens_details": {
+            "cached_tokens": 7424
+          },
+          "prompt_cache_hit_tokens": 7424,
+          "prompt_cache_miss_tokens": 247
+        }
+      },
+      {
+        "responseId": "3d3a36c5-fdc9-4868-a0aa-7bf02aaeb91e",
+        "model": "deepseek-flash",
+        "phase": "beat-3-repair-2",
+        "usage": {
+          "prompt_tokens": 7671,
+          "completion_tokens": 95,
+          "total_tokens": 7766,
+          "prompt_tokens_details": {
+            "cached_tokens": 7424
+          },
+          "prompt_cache_hit_tokens": 7424,
+          "prompt_cache_miss_tokens": 247
+        }
+      },
+      {
+        "responseId": "769f71ac-dc77-4d65-ab12-3b3d5b590363",
+        "model": "deepseek-flash",
+        "phase": "beat-3",
+        "usage": {
+          "prompt_tokens": 7530,
+          "completion_tokens": 97,
+          "total_tokens": 7627,
+          "prompt_tokens_details": {
+            "cached_tokens": 7296
+          },
+          "prompt_cache_hit_tokens": 7296,
+          "prompt_cache_miss_tokens": 234
+        }
+      },
+      {
+        "responseId": "49c1ca8a-22f5-4611-92ac-73136c00e8a9",
+        "model": "deepseek-flash",
+        "phase": "beat-4",
+        "usage": {
+          "prompt_tokens": 8511,
+          "completion_tokens": 134,
+          "total_tokens": 8645,
+          "prompt_tokens_details": {
+            "cached_tokens": 2176
+          },
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 6335
+        }
+      },
+      {
+        "responseId": "f1da29e5-7a87-4e2e-9c4b-cfd6599a7e7b",
+        "model": "deepseek-flash",
+        "phase": "beat-5",
+        "usage": {
+          "prompt_tokens": 9473,
+          "completion_tokens": 71,
+          "total_tokens": 9544,
+          "prompt_tokens_details": {
+            "cached_tokens": 2304
+          },
+          "prompt_cache_hit_tokens": 2304,
+          "prompt_cache_miss_tokens": 7169
+        }
+      },
+      {
+        "responseId": "043207e1-3c09-4c56-a3f0-16225eedd0e6",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-0",
+        "usage": {
+          "prompt_tokens": 29229,
+          "completion_tokens": 170,
+          "total_tokens": 29399,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 29229
+        }
+      },
+      {
+        "responseId": "ab114c11-6951-419a-9b8b-87e57c4a6ab8",
+        "model": "deepseek-flash",
+        "phase": "semantic-repair-0",
+        "usage": {
+          "prompt_tokens": 26446,
+          "completion_tokens": 96,
+          "total_tokens": 26542,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 26446
+        }
+      },
+      {
+        "responseId": "862828ae-c3c9-4821-b8fb-17c37168bc78",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-1",
+        "usage": {
+          "prompt_tokens": 29223,
+          "completion_tokens": 249,
+          "total_tokens": 29472,
+          "prompt_tokens_details": {
+            "cached_tokens": 3968
+          },
+          "prompt_cache_hit_tokens": 3968,
+          "prompt_cache_miss_tokens": 25255
+        }
+      },
+      {
+        "responseId": "dd372c6b-7ef2-4a0c-99c4-bc8acff7aca8",
+        "model": "deepseek-flash",
+        "phase": "semantic-repair-1",
+        "usage": {
+          "prompt_tokens": 26520,
+          "completion_tokens": 297,
+          "total_tokens": 26817,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 25496
+        }
+      },
+      {
+        "responseId": "cad255fb-d1de-401d-a320-735230f4a46b",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-0",
+        "usage": {
+          "prompt_tokens": 14773,
+          "completion_tokens": 87,
+          "total_tokens": 14860,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 14773
+        }
+      },
+      {
+        "responseId": "61162bac-b0d8-4518-bbbb-4dc9b60d297a",
+        "model": "deepseek-flash",
+        "phase": "semantic-repair-0",
+        "usage": {
+          "prompt_tokens": 11898,
+          "completion_tokens": 116,
+          "total_tokens": 12014,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 11898
+        }
+      },
+      {
+        "responseId": "712b1b28-8327-4179-ba8d-9f694910f21f",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-1",
+        "usage": {
+          "prompt_tokens": 14795,
+          "completion_tokens": 9,
+          "total_tokens": 14804,
+          "prompt_tokens_details": {
+            "cached_tokens": 4352
+          },
+          "prompt_cache_hit_tokens": 4352,
+          "prompt_cache_miss_tokens": 10443
+        }
+      },
+      {
+        "responseId": "45b52fb2-17f7-4984-a383-4cd01cf16658",
+        "model": "deepseek-flash",
+        "phase": "scene-handoff-0",
+        "usage": {
+          "prompt_tokens": 5657,
+          "completion_tokens": 585,
+          "total_tokens": 6242,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 5401
+        }
+      },
+      {
+        "responseId": "99019a46-ea94-417e-9168-10ae310196e0",
+        "model": "deepseek-flash",
+        "phase": "handoff-review-0",
+        "usage": {
+          "prompt_tokens": 5626,
+          "completion_tokens": 708,
+          "total_tokens": 6334,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 5626
+        }
+      },
+      {
+        "responseId": "479da84f-bbf4-4e32-9b8a-f8b6e64acbea",
+        "model": "deepseek-flash",
+        "phase": "scene-handoff-1",
+        "usage": {
+          "prompt_tokens": 6949,
+          "completion_tokens": 802,
+          "total_tokens": 7751,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "prompt_cache_hit_tokens": 5632,
+          "prompt_cache_miss_tokens": 1317
+        }
+      },
+      {
+        "responseId": "b9ac4154-675e-4fc2-9d9d-1808705ca6a2",
+        "model": "deepseek-flash",
+        "phase": "handoff-review-1",
+        "usage": {
+          "prompt_tokens": 5723,
+          "completion_tokens": 512,
+          "total_tokens": 6235,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 5083
+        }
+      },
+      {
+        "responseId": "a8c76c58-edaf-4a85-b5c6-e16c00c5332d",
+        "model": "deepseek-flash",
+        "phase": "scene-handoff-2",
+        "usage": {
+          "prompt_tokens": 6826,
+          "completion_tokens": 674,
+          "total_tokens": 7500,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "prompt_cache_hit_tokens": 5632,
+          "prompt_cache_miss_tokens": 1194
+        }
+      },
+      {
+        "responseId": "64cce125-531a-49be-98d8-f3737efaf8f1",
+        "model": "deepseek-flash",
+        "phase": "handoff-review-2",
+        "usage": {
+          "prompt_tokens": 5736,
+          "completion_tokens": 775,
+          "total_tokens": 6511,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 5096
+        }
+      },
+      {
+        "responseId": "ba68a150-0604-4cf9-abee-2d69170cd938",
+        "model": "deepseek-flash",
+        "phase": "semantic-review-0",
+        "usage": {
+          "prompt_tokens": 14795,
+          "completion_tokens": 9,
+          "total_tokens": 14804,
+          "prompt_tokens_details": {
+            "cached_tokens": 14592
+          },
+          "prompt_cache_hit_tokens": 14592,
+          "prompt_cache_miss_tokens": 203
+        }
+      },
+      {
+        "responseId": "f7b75399-b616-454c-b48f-79663c33b759",
+        "model": "deepseek-flash",
+        "phase": "scene-handoff-0",
+        "usage": {
+          "prompt_tokens": 5655,
+          "completion_tokens": 592,
+          "total_tokens": 6247,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 5399
+        }
+      },
+      {
+        "responseId": "ae6ffc76-a98e-4b31-b8b1-dbed6eafa408",
+        "model": "deepseek-flash",
+        "phase": "handoff-review-0",
+        "usage": {
+          "prompt_tokens": 1425,
+          "completion_tokens": 9,
+          "total_tokens": 1434,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1425
+        }
+      },
+      {
+        "responseId": "9fb0581e-01d8-4685-a941-c70e0401d166",
+        "model": "deepseek-flash",
+        "phase": "soundtrack-0",
+        "usage": {
+          "prompt_tokens": 10779,
+          "completion_tokens": 180,
+          "total_tokens": 10959,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 10779
+        }
+      },
+      {
+        "phase": "soundtrack-refresh",
+        "responseId": "6560ad9a-d624-4e67-b238-aae401092a81",
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 4962,
+          "completion_tokens": 198,
+          "total_tokens": 5160,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 4962
+        }
+      },
+      {
+        "phase": "handoff-scope",
+        "responseId": "c1633035-ea79-479d-a405-8c9a5abc8075",
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 1100,
+          "completion_tokens": 162,
+          "total_tokens": 1262,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1100
+        }
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "beats": 5,
+      "duration": 154,
+      "dialogues": 14,
+      "moves": 4,
+      "whispers": 0,
+      "semanticReview": {
+        "passed": true,
+        "issues": []
+      }
+    },
+    "audioRevision": {
+      "id": "c4d3ca55-c034-4e05-bc00-80a0f3f9a977",
+      "source": "live-api",
+      "dialogueAndActionHashBefore": "0576c5ca83a7e837b9db648cc6f206eb845a2459872244b8757435b664817af2",
+      "dialogueAndActionHashAfter": "0576c5ca83a7e837b9db648cc6f206eb845a2459872244b8757435b664817af2"
+    },
+    "handoffScopeReview": {
+      "source": "live-api",
+      "party": [
+        "granny",
+        "baner"
+      ],
+      "explanations": [
+        {
+          "actor": "granny",
+          "scope": "到下一节点",
+          "evidenceRefs": [
+            "b3:0",
+            "b4:1",
+            "b5:0"
+          ]
+        },
+        {
+          "actor": "baner",
+          "scope": "到下一节点",
+          "evidenceRefs": [
+            "b4:1",
+            "b4:2",
+            "b4:3"
+          ]
+        },
+        {
+          "actor": "gouer",
+          "scope": "半程送行",
+          "evidenceRefs": [
+            "b4:2"
+          ]
+        },
+        {
+          "actor": "liushi",
+          "scope": "留家",
+          "evidenceRefs": [
+            "b4:0",
+            "b4:1",
+            "b5:1"
+          ]
+        },
+        {
+          "actor": "qinger",
+          "scope": "留家",
+          "evidenceRefs": [
+            "b4:0",
+            "b4:1"
+          ]
+        }
+      ],
+      "dialogueAndActionHash": "0576c5ca83a7e837b9db648cc6f206eb845a2459872244b8757435b664817af2"
+    }
   }
 }

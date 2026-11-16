@@ -15,3 +15,5 @@
 @media(prefers-reduced-motion:reduce){#stage,.overlay-copy{transition:none}}
 .performance:fullscreen .dialogue{min-height:0}
 @media(max-width:760px){.actor-label{font-size:12px;padding:3px 6px;letter-spacing:.4px}}
+
+.typed-pending{visibility:hidden}.audio-settings{background:#f8f6ed;border-top:1px solid var(--line);padding:10px 23px;color:#727b70;font-size:12px}.audio-settings summary{cursor:pointer;width:max-content}.audio-settings-body{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:12px}.audio-settings-body label{display:flex;align-items:center;gap:8px}.audio-settings-body input{width:95px;accent-color:var(--green)}.audio-settings-body button{font-size:12px;padding:6px 12px}.audio-settings-body a{color:var(--green);font-size:11px}#audio-status{font-size:11px}.performance:fullscreen .audio-settings{flex-shrink:0}

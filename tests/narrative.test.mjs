@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {validatePlan,validateScreenplay,buildHandoff,nextNodeContext,stageScriptBeat} from '../backend/narrative.mjs';
+import {validatePlan,validateScreenplay,buildHandoff,nextNodeContext,stageScriptBeat,applyModelPatches} from '../backend/narrative.mjs';
 const j=n=>JSON.parse(readFileSync(new URL('../data/'+n+'.json',import.meta.url),'utf8'));
 const stage=j('stage'),characters=j('characters'),cards=j('cards'),seed=j('scene-one'),line=j('storyline');
 function branch(companion){
@@ -58,4 +58,10 @@ test('screenplay references cannot use topic names or a future line as heard evi
  p.beats[0].dialogue[0].knowledgeRefs=['周瑞'];assert.throws(()=>validateScreenplay(p,characters),/knowledgeRefs/);
  p.beats[0].dialogue[0].knowledgeRefs=['s2:0'];assert.throws(()=>validateScreenplay(p,characters),/knowledgeRefs/);
  p.beats[0].dialogue[0].knowledgeRefs=[];assert.equal(validateScreenplay(p,characters),p);
+});
+test('model text repairs recompute reading time and invalid additions leave the source intact',()=>{
+ const original=branch('liushi'),snapshot=structuredClone(original);
+ const repaired=applyModelPatches(original,{patches:[{beatId:'decide',dialogue:[{index:0,text:'明早我和刘氏到荣府后街去，先找周瑞妻子问问可有什么活计；咱们自己把话说明白，不先许下做不到的事。',knowledgeRefs:[]}]}]});
+ const d=repaired.beats[0].dialogue;assert(d[0].until-d[0].at>=d[0].text.length/5+1);assert(d[1].at>d[0].until);assert.deepEqual(original,snapshot);
+ assert.throws(()=>applyModelPatches(original,{patches:[{beatId:'decide',dialogue:[{index:2,text:'新加一句',knowledgeRefs:[]}]}]}),/禁止增加/);assert.deepEqual(original,snapshot);
 });

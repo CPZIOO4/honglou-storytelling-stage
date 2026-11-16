@@ -1,7 +1,7 @@
 // Presentation time includes title cards and short, frozen narrative bridges.
 // Story time advances only while characters perform.
 export function defaultPresentation(story){
- const morning=story.narrative?.handoff?.decision.status==='depart'&&/明早|明日|次日|天亮/.test(story.narrative?.handoff?.decision.departureCondition||'');
+ const morning=story.narrative?.handoff?.decision.status==='depart'&&/明早|明日|明儿|明天|次日|翌日|天亮/.test(story.narrative?.handoff?.decision.departureCondition||'');
  return {opening:{title:story.title||'寒家谋生',subtitle:'京郊 · 狗儿家',duration:3.2},interludes:morning?[{afterBeat:story.beats.at(-1).id,duration:5.5,text:'一夜无话。\n天将明，正是约定动身的时候。',lighting:'dawn'}]:[]};
 }
 export function compilePresentation(story,compiled){

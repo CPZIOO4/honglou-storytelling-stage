@@ -1,0 +1,14 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';import {randomUUID,createHash} from 'node:crypto';
+import {readCredential} from '../backend/credentials.mjs';import {buildHandoff} from '../backend/narrative.mjs';
+const root=new URL('../',import.meta.url),read=async p=>JSON.parse(await readFile(new URL(p,root),'utf8'));
+const [story,stage,characters,line]=await Promise.all(['.runtime/latest-story.json','data/stage.json','data/characters.json','data/storyline.json'].map(read));
+const hash=()=>createHash('sha256').update(JSON.stringify(story.beats)).digest('hex'),before=hash();
+const actualEvents=story.beats.flatMap(b=>b.dialogue.map((d,i)=>({id:b.id+':'+i,speaker:d.speaker,text:d.text})));
+const system='只审核下一场入场名单，不写或修改对白。区分到达下一节点的同行者、只送到路口就返回的半程送行者、留家者。party只能含决定到达下一个节点场景的人，不能把半程送行者算进去。只输出JSON {"party":["人物ID"],"explanations":[{"actor":"ID","scope":"到下一节点/半程送行/留家","evidenceRefs":["实际事件ID"]}]}。父母同意安排孩子同行即可，不要求孩子成人合同式应答。';
+const input={nextNode:line.nodes.find(n=>n.id===story.narrative.handoff.nextNodeId),currentDecision:story.narrative.handoff.decision,actualEvents};
+const key=await readCredential(),id=randomUUID(),dir=new URL('.runtime/handoff-scope/'+id+'/',root);await mkdir(dir,{recursive:true});await writeFile(new URL('request.json',dir),JSON.stringify({system,input},null,2));
+const r=await fetch('https://api.deepseek.com/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model:'deepseek-flash',messages:[{role:'system',content:system},{role:'user',content:JSON.stringify(input)}],thinking:{type:'disabled'},response_format:{type:'json_object'},max_tokens:1200,temperature:.2}),signal:AbortSignal.timeout(90000)});
+if(!r.ok)throw Error('DeepSeek HTTP '+r.status);const data=await r.json(),choice=data.choices?.[0];if(choice?.finish_reason!=='stop')throw Error('输出未完成');const result=JSON.parse(choice.message.content);await writeFile(new URL('response.json',dir),JSON.stringify({responseId:data.id,model:data.model,usage:data.usage,result},null,2));
+for(const e of result.explanations||[])if(!characters.some(c=>c.id===e.actor)||!e.evidenceRefs?.length||e.evidenceRefs.some(ref=>!actualEvents.some(v=>v.id===ref)))throw Error('送行范围证据不合法');
+const old=story.narrative.handoff;story.narrative.handoff=buildHandoff(story,stage,characters,line,{...old.decision,party:result.party,nextNodeId:old.nextNodeId,facts:old.facts});
+if(hash()!==before)throw Error('对白动作被意外改动');story.generation.calls.push({phase:'handoff-scope',responseId:data.id,model:data.model,usage:data.usage});story.generation.handoffScopeReview={source:'live-api',...result,dialogueAndActionHash:before};await writeFile(new URL('.runtime/latest-story.json',root),JSON.stringify(story,null,2));console.log(JSON.stringify(result,null,2));

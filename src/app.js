@@ -1,13 +1,15 @@
 import {compileStory,stateAt,buildDirectorContext} from './engine.js';
 import {StageView} from './stage.js';
+import {StageAudio} from './audio.js';
+import {dialogueFrame,compileSoundtrack} from './soundtrack.js';
 import {RecordedDirector} from './director.js';
 import {compilePresentation,presentationAt,presentationTimeForStory} from './presentation.js';
 const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const names={};let story,stage,characters,cards,compiled,presentation,view,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
+const names={};let story,stage,characters,cards,compiled,presentation,view,audioLibrary,sound,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
 async function json(url){const r=await fetch(url);if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
 function chapters(){const list=$('chapters');list.replaceChildren();compiled.beats.forEach((b,i)=>{const li=document.createElement('li'),btn=document.createElement('button'),number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');btn.append(number,document.createTextNode(b.title));btn.onclick=()=>seek(presentation.beatStarts[b.id]);li.append(btn);list.append(li);});$('scrubber').max=presentation.duration;$('total').textContent=format(presentation.duration);$('segment-count').textContent=compiled.beats.length+' 段';}
 function inspect(){if(!$('inspector').open||!lastState)return;$('instruction-json').textContent=JSON.stringify(tab==='beat'?{source:story.mode,generation:story.generation,...lastState.beat}:buildDirectorContext(cards,compiled,presentState?.storyTime||0),null,2);}
-function installStory(next){const validated=compileStory(next,stage,characters);const timeline=compilePresentation(next,validated);story=next;compiled=validated;presentation=timeline;playing=false;time=0;lastBeat=-1;chapters();document.querySelector('h1').textContent=story.title||'寒家谋生';$('source-status').textContent=story.mode==='deepseek-generated'?'由 DeepSeek Flash 生成 · 已检查后播放':'助手预编示例';document.querySelector('#ending h2').textContent='这一场，暂且说到这里。';draw();}
+function installStory(next){const validated=compileStory(next,stage,characters);const timeline=compilePresentation(next,validated);compileSoundtrack(next,timeline,audioLibrary);story=next;compiled=validated;presentation=timeline;sound?.install(story,presentation);playing=false;time=0;lastBeat=-1;chapters();document.querySelector('h1').textContent=story.title||'寒家谋生';$('source-status').textContent=story.mode==='deepseek-generated'?'由 DeepSeek Flash 生成 · 已检查后播放':'助手预编示例';document.querySelector('#ending h2').textContent='这一场，暂且说到这里。';draw();}
 let generationTimer=null;
 async function pollGeneration(id){
  try{const job=await json('/api/director/jobs/'+id);$('generation-status').textContent=job.message;
@@ -24,9 +26,9 @@ async function connectLocalDirector(){
   if(status.active){$('generate-story').disabled=true;pollGeneration(status.active.id);}else if(status.latest){installStory(await json('/api/director/latest'));$('generation-status').textContent='已载入上次检查通过的 Flash 演出';$('generate-story').textContent='重新生成';}
  }catch{/* Static preview is still available without a local API server. */}
 }
-function placeBubble(dialogue){
+function placeBubble(dialogue,frame){
  const el=$('dialogue');el.classList.toggle('hidden',!dialogue);if(!dialogue)return;
- $('dialogue-text').textContent=dialogue.text;el.classList.toggle('whisper',dialogue.mode==='whisper');
+ $('dialogue-text').setAttribute('aria-label',dialogue.text);$('dialogue-visible').textContent=frame.text;$('dialogue-pending').textContent=frame.remaining;el.dataset.fullText=dialogue.text;el.classList.toggle('whisper',dialogue.mode==='whisper');
  const head=view.headScreen(dialogue.speaker);if(!head)return;const w=el.offsetWidth,h=el.offsetHeight;
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const top=clamp(head.y-h-25,8,view.height-h-15);
  const candidates=[head.x-w/2,head.x-w+35,head.x-35].map(x=>clamp(x,8,view.width-w-8));
@@ -42,7 +44,7 @@ function draw(){
   $('elapsed').textContent=format(time);$('scrubber').value=time;$('play').textContent=playing?'Ⅱ 暂停':'▶ 播放';$('play').setAttribute('aria-label',playing?'暂停演出':'播放演出');
   const overlay=$('scene-overlay'),opening=presentState.kind==='opening';overlay.classList.toggle('hidden',!obscured);overlay.classList.toggle('opening',opening);overlay.classList.toggle('bridge',!opening);overlay.classList.toggle('text-ready',presentState.showText);
   $('opening-title').textContent=opening?presentState.title:'';$('opening-subtitle').textContent=opening?presentState.subtitle:'';$('bridge-text').textContent=opening?'':presentState.text||'';
-  $('stage').classList.toggle('veiled',obscured);$('camera-reset').classList.toggle('hidden',obscured);placeBubble(state.dialogue);
+  $('stage').classList.toggle('veiled',obscured);$('camera-reset').classList.toggle('hidden',obscured);const frame=state.dialogue?dialogueFrame(state.dialogue,presentState.storyTime-state.beat.start,audioLibrary.voices[state.dialogue.speaker]):null;placeBubble(state.dialogue,frame);sound.sync({time,playing,speed,dialogue:state.dialogue,frame,finished:state.finished});$('audio-status').textContent=sound.stats.error||(sound.muted?'已静音':sound.ctx?.state==='running'?'配乐随剧情播放':'播放时启用声音');
   if(state.dialogue){const el=$('dialogue'),left=parseFloat(el.style.left),top=parseFloat(el.style.top),right=left+el.offsetWidth,bottom=top+el.offsetHeight;
    for(const actor of view.actors.values()){if(actor.label.hidden)continue;const x=parseFloat(actor.label.style.left),y=parseFloat(actor.label.style.top);if(x+30>left&&x-30<right&&y>top&&y-26<bottom)actor.label.hidden=true;}
   }
@@ -50,10 +52,12 @@ function draw(){
   if(state.index!==lastBeat){lastBeat=state.index;[...$('chapters').querySelectorAll('button')].forEach((b,i)=>{b.classList.toggle('active',i===state.index);b.classList.toggle('past',i<state.index);if(i===state.index)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});inspect();}
 }
 
-function seek(t){time=Math.max(0,Math.min(presentation.duration,t));if(time===presentation.duration)playing=false;draw();inspect();}
-function toggle(){if(!ready)return;if(time>=presentation.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
+function seek(t){sound?.resetSeek();time=Math.max(0,Math.min(presentation.duration,t));if(time===presentation.duration)playing=false;draw();inspect();}
+function toggle(){if(!ready)return;void sound.unlock();if(time>=presentation.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
 function tick(now){if(ready&&playing){const dt=Math.min(.1,(now-lastFrame)/1000);time=Math.min(presentation.duration,time+dt*speed);if(time>=presentation.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
-$('play').onclick=toggle;$('restart').onclick=()=>{playing=false;seek(0);};$('ending-replay').onclick=()=>{seek(0);playing=true;};
+$('audio-mute').onclick=()=>{void sound.unlock();sound.setMuted(!sound.muted);$('audio-mute').textContent=sound.muted?'开启声音':'静音';$('audio-mute').setAttribute('aria-pressed',String(sound.muted));};
+$('music-volume').oninput=e=>{sound.musicVolume=Number(e.target.value);sound.settings();};$('voice-volume').oninput=e=>{sound.voiceVolume=Number(e.target.value);sound.settings();};
+$('play').onclick=toggle;$('restart').onclick=()=>{playing=false;seek(0);};$('ending-replay').onclick=()=>{void sound.unlock();seek(0);playing=true;};
 $('prev').onclick=()=>seek(presentation.beatStarts[compiled.beats[Math.max(0,lastState.index-1)].id]);$('next').onclick=()=>seek(lastState.index<compiled.beats.length-1?presentation.beatStarts[compiled.beats[lastState.index+1].id]:presentation.duration);
 $('skip-overlay').onclick=()=>seek(presentState.end);
 $('scrubber').oninput=e=>seek(Number(e.target.value));$('speed').onchange=e=>speed=Number(e.target.value);$('camera-reset').onclick=()=>{view?.showWide();draw();};
@@ -64,9 +68,9 @@ $('download-script').onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.str
 $('import-script').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>500000)throw Error('演出数据超过 500 KB');const candidate=JSON.parse(await file.text());installStory(candidate);$('import-status').textContent='数据检查通过，已载入。';}catch(err){$('import-status').textContent='未载入，保留当前演出：\n'+err.message;}finally{e.target.value='';}};
 document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','BUTTON','SELECT','TEXTAREA'].includes(document.activeElement.tagName)&&!$('inspector').open){e.preventDefault();toggle();}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){playing=false;draw();}});
-window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(generationTimer);view?.dispose();});
+window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(generationTimer);view?.dispose();sound?.dispose();});
 try{
- [story,stage,characters,cards]=await Promise.all([new RecordedDirector().load(new URLSearchParams(location.search).has('demo')?'data/scene-one.json':null),json('data/stage.json'),json('data/characters.json'),json('data/cards.json')]);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
+ [story,stage,characters,cards,audioLibrary]=await Promise.all([new RecordedDirector().load(new URLSearchParams(location.search).has('demo')?'data/scene-one.json':null),json('data/stage.json'),json('data/characters.json'),json('data/cards.json'),json('data/audio-library.json')]);sound=new StageAudio(audioLibrary);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
  view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;installStory(story);raf=requestAnimationFrame(tick);await connectLocalDirector();
- if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
+ if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,audio:()=>sound.debug(),startAudioCapture:()=>sound.startCapture(),stopAudioCapture:async()=>Array.from(new Uint8Array(await sound.stopCapture())),heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
 }catch(err){console.error(err);$('load-status').textContent=err.message;$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;}
