@@ -1,0 +1,16 @@
+{
+  "home": {
+    "title": "第一场 · 寒家谋生",
+    "stage": "data/stage.json",
+    "characters": "data/characters.json",
+    "cards": "data/cards.json",
+    "story": "data/deepseek-first-scene.json"
+  },
+  "gate": {
+    "title": "第二场 · 荣府问路",
+    "stage": "data/gate-stage.json",
+    "characters": "data/gate-characters.json",
+    "cards": "data/gate-cards.json",
+    "story": "data/deepseek-second-scene.json"
+  }
+}

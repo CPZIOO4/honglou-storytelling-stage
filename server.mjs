@@ -10,17 +10,17 @@ const respond=(res,status,data)=>{res.writeHead(status,{'Content-Type':'applicat
 const mime={'.mp3':'audio/mpeg','.wav':'audio/wav','.ogg':'audio/ogg','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.glb':'model/gltf-binary','.md':'text/plain; charset=utf-8'};
 const server=http.createServer(async(req,res)=>{
   try{
-    const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+    const url=new URL(req.url,'http://localhost');const path=decodeURIComponent(url.pathname);const scene=url.searchParams.get('scene')||'home';
     if(path.startsWith('/api/director/')){
       if(!['127.0.0.1:'+port,'localhost:'+port].includes(req.headers.host))return respond(res,403,{error:'仅本机可访问'});
       const origin=req.headers.origin;if(origin&&!['http://127.0.0.1:'+port,'http://localhost:'+port].includes(origin))return respond(res,403,{error:'不接受其他网站发起的生成请求'});
-      if(req.method==='GET'&&path==='/api/director/status')return respond(res,200,await generator.status());
-      if(req.method==='GET'&&path==='/api/director/latest'){const result=await generator.latest();return respond(res,result?200:404,result||{error:'尚无通过检查的模型生成版本'});}
-      if(req.method==='GET'&&path==='/api/director/next-context'){const result=await generator.nextContext();return respond(res,result?200:404,result||{error:'尚无通过审核的场末决定'});}
+      if(req.method==='GET'&&path==='/api/director/status')return respond(res,200,await generator.status(scene));
+      if(req.method==='GET'&&path==='/api/director/latest'){const result=await generator.latest(scene);return respond(res,result?200:404,result||{error:'尚无通过检查的模型生成版本'});}
+      if(req.method==='GET'&&path==='/api/director/next-context'){const result=await generator.nextContext(scene);return respond(res,result?200:404,result||{error:'尚无通过审核的场末决定'});}
       if(req.method==='GET'&&path.startsWith('/api/director/jobs/')){const job=await generator.job(path.split('/').at(-1));return respond(res,job?200:404,job||{error:'任务不存在'});}
       if(req.method==='POST'&&path==='/api/director/complete'){
         let body='';for await(const chunk of req){body+=chunk;if(body.length>200)return respond(res,413,{error:'请求过大'});}
-        try{return respond(res,200,await generator.complete(JSON.parse(body).storyId));}catch(e){return respond(res,409,{error:e.message});}
+        try{return respond(res,200,await generator.complete(JSON.parse(body).storyId,scene));}catch(e){return respond(res,409,{error:e.message});}
       }
       if(req.method==='POST'&&path==='/api/director/generate'){
         let body='';for await(const chunk of req){body+=chunk;if(body.length>1024)return respond(res,413,{error:'请求过大'});}

@@ -25,3 +25,5 @@
 
 .scene-overlay.prologue #bridge-text{font-size:22px;line-height:1.9;letter-spacing:.6px;text-align:left;max-width:620px}
 @media(max-width:760px){.scene-overlay.prologue #bridge-text{font-size:18px;line-height:1.85;letter-spacing:.3px}}
+
+.scene-navigation{display:flex;gap:1.2rem;flex-wrap:wrap;margin:0 0 1rem}.scene-navigation a,.scene-onward{color:#426455;text-decoration:none;border-bottom:1px solid #b9c5b2;padding:.45rem .2rem}.scene-navigation a[aria-current]{color:#8d4a31;border-color:#8d4a31}.scene-onward{display:inline-block;margin-top:1rem}

@@ -1,0 +1,265 @@
+{
+  "id": "rongfu-gate",
+  "model": "assets/scene/rongfu-gate.glb",
+  "coordinates": "Blender Z-up; renderer converts to glTF Y-up",
+  "anchors": {
+    "street_arrival": [
+      -0.7,
+      -2.4,
+      0.04
+    ],
+    "companion_one": [
+      -1.5,
+      -2.4,
+      0.04
+    ],
+    "companion_two": [
+      -0.7,
+      -3.3,
+      0.04
+    ],
+    "companion_three": [
+      0.2,
+      -3.3,
+      0.04
+    ],
+    "companion_four": [
+      -1.5,
+      -3.3,
+      0.04
+    ],
+    "liu_laolao_ask": [
+      2.05,
+      -0.55,
+      0.04
+    ],
+    "gatekeeper_reply": [
+      4.18,
+      0.35,
+      0.04
+    ],
+    "old_servant_reply": [
+      5.58,
+      0.4,
+      0.04
+    ],
+    "wall_wait": [
+      0.52,
+      0.76,
+      0.04
+    ],
+    "bench_front": [
+      6.2,
+      0.77,
+      0.04
+    ],
+    "gate_outside": [
+      3.2,
+      1.27,
+      0.1
+    ],
+    "backstreet_exit": [
+      7.67,
+      -0.1,
+      0.04
+    ],
+    "old_servant_near": [
+      3.05,
+      -1.2,
+      0.04
+    ]
+  },
+  "edges": [
+    [
+      "street_arrival",
+      "liu_laolao_ask"
+    ],
+    [
+      "liu_laolao_ask",
+      "wall_wait"
+    ],
+    [
+      "liu_laolao_ask",
+      "gatekeeper_reply"
+    ],
+    [
+      "liu_laolao_ask",
+      "old_servant_near"
+    ],
+    [
+      "old_servant_near",
+      "old_servant_reply"
+    ],
+    [
+      "gatekeeper_reply",
+      "old_servant_reply"
+    ],
+    [
+      "gatekeeper_reply",
+      "gate_outside"
+    ],
+    [
+      "old_servant_reply",
+      "bench_front"
+    ],
+    [
+      "bench_front",
+      "backstreet_exit"
+    ],
+    [
+      "companion_one",
+      "street_arrival"
+    ],
+    [
+      "companion_two",
+      "street_arrival"
+    ],
+    [
+      "companion_three",
+      "street_arrival"
+    ],
+    [
+      "companion_four",
+      "street_arrival"
+    ]
+  ],
+  "anchorDescriptions": {
+    "street_arrival": "初到门外街面，距门役较远，须走近才可普通说话",
+    "liu_laolao_ask": "门前问话位，与两门役相距约2.3与3.7米，正常话彼此可闻",
+    "gatekeeper_reply": "角门外门役站位",
+    "old_servant_reply": "门外长凳前老仆站位",
+    "wall_wait": "墙根外等候位，距老仆超过5米；与其说话须靠近或呼喊",
+    "bench_front": "长凳前空地",
+    "gate_outside": "角门外，未获入府许可",
+    "backstreet_exit": "沿墙去后街的街面出口，仍未到周瑞妻子住处",
+    "old_servant_near": "老仆走近来客的独立站位",
+    "companion_one": "来客同行等候位一",
+    "companion_two": "同行等候位二",
+    "companion_three": "同行等候位三",
+    "companion_four": "同行等候位四"
+  },
+  "obstacles": [
+    {
+      "id": "gatewall",
+      "min": [
+        -1.96,
+        2.1
+      ],
+      "max": [
+        2.19,
+        2.6
+      ]
+    },
+    {
+      "id": "gatewall-east",
+      "min": [
+        4.21,
+        2.1
+      ],
+      "max": [
+        8.2,
+        2.6
+      ]
+    },
+    {
+      "id": "bench",
+      "min": [
+        4.98,
+        1.44
+      ],
+      "max": [
+        7.36,
+        1.92
+      ]
+    },
+    {
+      "id": "lion",
+      "min": [
+        -3.03,
+        -0.1
+      ],
+      "max": [
+        -2.09,
+        0.88
+      ]
+    }
+  ],
+  "cameras": {
+    "wide": {
+      "position": [
+        10,
+        -23,
+        12
+      ],
+      "target": [
+        -0.2,
+        1,
+        1.4
+      ],
+      "scale": 20.8
+    },
+    "family": {
+      "position": [
+        6.5,
+        -17,
+        8
+      ],
+      "target": [
+        3.35,
+        0.1,
+        1.3
+      ],
+      "scale": 10.3,
+      "mobile": {
+        "target": [
+          3.1,
+          -0.5,
+          1.1
+        ],
+        "scale": 6.3
+      }
+    },
+    "door": {
+      "position": [
+        7,
+        -17,
+        8
+      ],
+      "target": [
+        3.4,
+        -0.05,
+        1.2
+      ],
+      "scale": 9.4,
+      "mobile": {
+        "target": [
+          3.1,
+          -0.5,
+          1.1
+        ],
+        "scale": 6.3
+      }
+    }
+  },
+  "acoustics": {
+    "ranges": {
+      "normal": 4.5,
+      "whisper": 0.9,
+      "call": 9
+    },
+    "zones": [
+      {
+        "id": "street",
+        "min": [
+          -10,
+          -8
+        ],
+        "max": [
+          10,
+          2
+        ]
+      }
+    ],
+    "portals": []
+  }
+}

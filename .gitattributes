@@ -5,3 +5,4 @@
 *.blend binary
 vendor/** -whitespace
 cards/environment/*.md -text
+cards/characters/source-ch6/*.md -text

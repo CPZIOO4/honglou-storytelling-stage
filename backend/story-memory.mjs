@@ -31,7 +31,7 @@ export function mergeMemory(previous,update,story){
 }
 export function decisionText(handoff){
  if(!handoff)return '';
- const d=handoff.decision;return `本场已商议，尚未实际旅行。前往下一处的人为${d.party.join('、')||'尚未决定'}。目的为${d.purpose}。开口方式为${d.approach}。出发条件为${d.departureCondition}。${handoff.facts.map(f=>f.text).join('；')}`;
+ const d=handoff.decision;return `上次交接时已商议，当时尚未实际旅行；现在是否到达，以当前场景初态为准。前往下一处的人为${d.party.join('、')||'尚未决定'}。目的为${d.purpose}。开口方式为${d.approach}。出发条件为${d.departureCondition}。${handoff.facts.map(f=>f.text).join('；')}`;
 }
 export function buildWritingContext(cards,memory=null,{node=null,handoff=null}={}){
  const topic=[node?.question,node?.requiredChange,cards.scene.initialSituation,memory?.summary].filter(Boolean).join('\n');

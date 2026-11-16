@@ -1,0 +1,2016 @@
+{
+  "version": 1,
+  "communicationVersion": 1,
+  "id": "8f903773-90a6-429f-8896-3786632de51f",
+  "title": "荣府问路",
+  "subtitle": "荣国府 · 门前角门外",
+  "production": "gate",
+  "castIds": [
+    "granny",
+    "gatekeeper",
+    "old_servant"
+  ],
+  "cardsSnapshot": {
+    "format": "honglou-context-v2",
+    "revision": "gate-ch6-2026-11-16",
+    "scene": {
+      "id": "rongfu-gate",
+      "title": "荣府问路",
+      "place": "荣国府 · 门前角门外",
+      "time": "秋尽冬初，白日",
+      "initialSituation": "上一场最终出行安排是：清早出发，狗儿送到村口后返回，刘姥姥独自继续赶路；孩子留在家中由刘氏照看。。场间仅落实其中的出行和半程送返，其他承诺尚未兑现。承接已确定的来访人员：刘姥姥。路途省略，现在到荣府门外。没有改变同行名单。来客尚未与门役交谈，不知道周瑞今日去向或后街路线。",
+      "availableProps": [
+        "荣府大门",
+        "角门",
+        "围墙",
+        "长凳"
+      ],
+      "boundary": "在府外街面问路，不进内宅，不自动见到周瑞妻子或凤姐。",
+      "factBoundary": "只继承实际来访名单与个人经历。没有赠送瓜果、谢恩、府内用膳或获资助。周瑞去向与后街路线仅知情角色掌握。",
+      "narrationPolicy": "开场简短交代省略的路途和门庭初见；不泄露门役尚未说出的路线或去向。",
+      "dramaturgy": {
+        "protagonist": "granny",
+        "initiativeType": "ask-access",
+        "direction": "刘姥姥自己来问路，机敏有礼，遇冷淡仍尽力把事问实；门房仆役有轻慢推诿，老仆尚有体恤。通过具体互动获得门路或可处理的障碍，不重复家庭出行商议。",
+        "pace": "一次说明找谁，遇冷遇做一两句有用回应，获得可靠信息即转向下一步。不得为门役补造必须付钱的规矩。"
+      },
+      "environmentCard": {
+        "name": "荣府角门·首次来访",
+        "description": "高门外的街面与角门相接，门前有门役和长凳；府墙造成内外之隔。青绿瓦面、赭色墙体为舞台造型。",
+        "personality": "陌生来客与豪门门役的身份差异，通过谁愿接话、谁让等候体现。",
+        "scenario": "依实际来访分支到达，先问路，不预设获准入府。",
+        "knowledgeBoundary": {
+          "established": [
+            "门外有门役",
+            "来客可沿街绕向后街"
+          ],
+          "unknown": [
+            "来客是否获准入府",
+            "后续接待与资助结果"
+          ],
+          "allowedInvention": "合乎身份的问答与态度转变；不凭空添加钱物与强制门规。"
+        }
+      },
+      "transition": {
+        "parentStoryId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+        "arrivals": [
+          "granny"
+        ],
+        "rule": "依已确认的出行承诺完成场间路途，不新增同行者、礼物、接见或援助。门役不知来客家中商议。"
+      }
+    },
+    "characters": [
+      {
+        "id": "granny",
+        "name": "刘姥姥",
+        "description": "狗儿的岳母、刘氏的母亲，帮女儿女婿照看孩子。",
+        "personality": "真心帮衬女儿女婿过日子的乡间老人，有生活见识和人情分寸，心疼家人，也敢说女婿的不是。遇难愿拿办法、自己担事；能以自嘲缓和窘迫，既有自尊也肯为家计放下面子。面对豪门会局促，尚不知道对方是否愿帮，但不把家人当成需要预先免责的对象。",
+        "knowledge": [
+          "刘姥姥是刘氏母亲、狗儿岳母；狗儿与刘氏是板儿和青儿的父母。",
+          "狗儿祖上与金陵王家连过宗，不是近亲；多年疏远。",
+          "刘姥姥早年与刘氏去过王家，记得当时二小姐待人爽快，如今是王夫人。",
+          "刘姥姥知道周瑞这个人，但多年不走动，不知道近况。",
+          "秋尽冬初，家中过冬衣食尚未办齐，狗儿烦恼，尚未定下出行办法。"
+        ],
+        "motivation": "让一家人有过冬的着落，护住女儿孩子的日子；发现可试的门路后，自己决定走一趟。",
+        "speech": "对家人直白有烟火气，话里可以带一点刺，但说完能给人出路；责备不能连成全程。自嘲化解自己的尴尬，不拿家人当笑料。对女儿的担心有回应，愿意承担体现为具体办法，不喊牺牲口号、不摆功劳、不先索取免责保证。",
+        "source": "来自用户人物卡_修改版.zip；家庭身份与当前场次覆盖旧的贾母上房情境，外貌以已确认立绘为准。",
+        "knowledgeSources": {
+          "zhouRui": "第六回先由狗儿提出父亲与周瑞的旧交，刘姥姥随后说“我也知道他的”；知道这个人与拥有可用旧交须区别。",
+          "wangFamily": "刘姥姥先提出王家联宗旧亲及早年见过王夫人的经验。"
+        },
+        "sourceMaterial": "原始性格片段存于 cards/characters/source-excerpts.json，仅作考据；当前生成只读取本运行卡。",
+        "knownFactIds": [
+          "family_roles",
+          "wang_old_kinship",
+          "granny_wang_visit",
+          "granny_zhou_awareness",
+          "winter_need"
+        ],
+        "unknownAtStart": [
+          "荣府当日谁在家、是否愿意通报或接见",
+          "当前掌事安排和最终是否给钱、给多少",
+          "本场谁同行及采用何种办法，均须经对白形成"
+        ],
+        "characterCore": {
+          "basis": "第六回写她一心帮趁女儿女婿过活，先提出谋生办法和王家门路；面对豪门有踌躇，最终愿舍老脸去试，并能把窘迫说得让一家笑起来。",
+          "stable": "心疼一家、懂生活、肯担事、能自嘲；会顾脸面但不被脸面困死。",
+          "pressure": "难处来时先想能试的办法；对女婿可说短处，对女儿的牵挂有体谅。顾虑落在门路和礼数上，不落在预先撇清自己责任上。",
+          "change": "可以因实际消息改变办法或承认困难，但不把一场求助写成性格忽然冷硬；在豪门前也不必装成老练万能的人。"
+        },
+        "performance": {
+          "source": "原著第六回人物底色与用户明确的本场主动承担方向分开记录",
+          "atOthersDoor": "懂得陪笑、问话、观察分寸，也会局促；第一次求助不提前搬入后来宴席逗趣的表演。",
+          "avoid": [
+            "被狗儿推出门后才委屈承担",
+            "以成不成不敢包、空手回来别怨我、不兴埋怨等话向家人预先免责",
+            "把刘姥姥写成处处训人、计较谁占便宜或冷硬分配任务的长辈",
+            "为讨喜而变成无所不知、全无顾虑、每句都开导别人的圣人"
+          ]
+        },
+        "sceneRole": "已自愿来访，主动而有礼地问周瑞，遇冷淡可陪笑自嘲、追问实处；不复议谁出发，不向陌生门役训人。",
+        "experiencedMemory": "刘姥姥见家中冬事无着，先止住狗儿发愁，自己提出豁出老脸去荣府走一趟；她早年带刘氏去过王家，记得王夫人待人还和气。听狗儿说两家多年不走动、贸然登门门房未必通传，她便问有无引路人，得知周瑞是王夫人陪房、但与自家多年未往来。她决定一路问着去，寻周瑞把话说明，求他引见王夫人。刘氏担心她独去，她答会问路；狗儿说清早送到村口便回，她答应，并让孩子留家听娘话。"
+      },
+      {
+        "id": "gatekeeper",
+        "name": "门房仆役",
+        "description": "荣府角门处门役群像的一名舞台代表，原文没有单独姓名。",
+        "personality": "仗着大户门庭有些自重，对寒酸陌生来客漫不经心，会推诿或让人白等；不必处处暴怒，也不预设一定索钱。",
+        "motivation": "维持门上的体面和轻省，判断是否值得替来人费事。",
+        "speech": "话短，先打量再问，答得敷衍；不能一开口就交代完整府内人脉，也不辱骂威胁来制造冲突。",
+        "characterCore": {
+          "basis": "门上众人打量、久不理会，叫她往墙角等；老年人说不要误她的事。",
+          "stable": "仗着大户门庭有些自重，对寒酸陌生来客漫不经心，会推诿或让人白等；不必处处暴怒，也不预设一定索钱。",
+          "pressure": "遇坚持询问时可敷衍、拿规矩挡话；被老仆提醒后可以收敛，不硬凹恶人。",
+          "limits": "不知道来客家中具体困境，也不先知道她姓刘；没有受贿、偷懒经历等原文依据，不能补作既成事实。 可以故意推诿，但不能把自己未获知的周瑞今日忙闲或位置作为确知事实；可让她等，不能编造接待承诺。"
+        },
+        "sceneRoles": {
+          "gate-access": "形成门槛与身份差异，让刘姥姥需要说明来意；态度与是否答话由互动推进。"
+        },
+        "knownFactIds": [
+          "gate_zhou_role"
+        ],
+        "knowledge": [
+          "周瑞是王夫人的陪房，在荣府办事。"
+        ],
+        "unknownAtStart": [
+          "未亲眼见或听到的刘姥姥家中商议与私人承诺",
+          "后续尚未发生的接待、资助和交易结果"
+        ],
+        "participation": "第二场实际登场",
+        "sourceEvidence": {
+          "chapter": 6,
+          "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
+          "evidence": "门上众人打量、久不理会，叫她往墙角等；老年人说不要误她的事。",
+          "interpretation": "结合本回实际举止形成的运行解释；无名角色的独立年龄、家世及长期经历不作补造。"
+        },
+        "sourceMaterial": "用户原卡如涉及后期游园场景，仅存档参考，不直接覆盖首次进府。",
+        "performance": {},
+        "sceneRole": "形成门槛与身份差异，让刘姥姥需要说明来意；态度与是否答话由互动推进。",
+        "experiencedMemory": "无来客家中的经历；不知道她姓名、家境、出行分工。"
+      },
+      {
+        "id": "old_servant",
+        "name": "门房老仆",
+        "description": "门役中的一位老年人，原文未给姓名。",
+        "personality": "见惯门上人情，尚存体恤，不愿同伴拿穷老人取乐；帮助有分寸，给一句有用指点，不越权包办接见。",
+        "motivation": "别让来人白等，把知道的路说清。",
+        "speech": "平实直接，先制止耽误人，再说明去哪里问；不长篇说教、不自称救命恩人。",
+        "characterCore": {
+          "basis": "他劝同伴不要误事、何苦耍人，告诉刘姥姥周瑞外出，妻子在家，指向后街后门。",
+          "stable": "见惯门上人情，尚存体恤，不愿同伴拿穷老人取乐；帮助有分寸，给一句有用指点，不越权包办接见。",
+          "pressure": "同伴敷衍时可提醒一句；给指点后不替周瑞妻子或主家作保证。",
+          "limits": "能提供外部住处和周瑞去向，不等于知道凤姐当前所有安排或能直接放人入内。"
+        },
+        "sceneRoles": {
+          "gate-access": "提供与冷淡门役不同的反应；知道的消息须实际说出后才成为来客知识。"
+        },
+        "knownFactIds": [
+          "gate_zhou_role",
+          "gate_zhou_away",
+          "gate_backstreet_route"
+        ],
+        "knowledge": [
+          "周瑞是王夫人的陪房，在荣府办事。",
+          "这一日周瑞往南边办事去了，当前不在府门前。",
+          "周瑞妻子在家；沿外墙绕到后街后门，再问太太的陪房周瑞家，可找她递话。"
+        ],
+        "unknownAtStart": [
+          "未亲眼见或听到的刘姥姥家中商议与私人承诺",
+          "后续尚未发生的接待、资助和交易结果"
+        ],
+        "participation": "第二场实际登场",
+        "sourceEvidence": {
+          "chapter": 6,
+          "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
+          "evidence": "他劝同伴不要误事、何苦耍人，告诉刘姥姥周瑞外出，妻子在家，指向后街后门。",
+          "interpretation": "结合本回实际举止形成的运行解释；无名角色的独立年龄、家世及长期经历不作补造。"
+        },
+        "sourceMaterial": "用户原卡如涉及后期游园场景，仅存档参考，不直接覆盖首次进府。",
+        "performance": {},
+        "sceneRole": "提供与冷淡门役不同的反应；知道的消息须实际说出后才成为来客知识。",
+        "experiencedMemory": "无来客家中的经历；不知道她姓名、家境、出行分工。"
+      }
+    ],
+    "relationshipFacts": [
+      {
+        "id": "family_roles",
+        "claim": "刘姥姥是刘氏母亲、狗儿岳母；狗儿与刘氏是板儿和青儿的父母。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "亲属称呼",
+        "source": "第六回家庭介绍"
+      },
+      {
+        "id": "wang_old_kinship",
+        "claim": "狗儿祖上与金陵王家连过宗，不是近亲；多年疏远。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "可提旧亲，不可夸成亲密往来",
+        "source": "第六回家中商议"
+      },
+      {
+        "id": "granny_wang_visit",
+        "claim": "刘姥姥早年与刘氏去过王家，记得当时二小姐待人爽快，如今是王夫人。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "过去的见闻，不保证现在仍愿接待",
+        "source": "第六回家中商议"
+      },
+      {
+        "id": "granny_zhou_awareness",
+        "claim": "刘姥姥知道周瑞这个人，但多年不走动，不知道近况。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "可以说知道、听说过，不能自行声称周瑞与自己交情深、欠自己恩情或必肯帮自己",
+        "source": "第六回刘姥姥回应"
+      },
+      {
+        "id": "winter_need",
+        "claim": "秋尽冬初，家中过冬衣食尚未办齐，狗儿烦恼，尚未定下出行办法。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "本场初态，新的决定以实际对白覆盖",
+        "source": "本场初始环境"
+      },
+      {
+        "id": "gate_zhou_role",
+        "claim": "周瑞是王夫人的陪房，在荣府办事。",
+        "knownBy": [
+          "gatekeeper",
+          "old_servant"
+        ],
+        "scope": "身份，不等于此刻在家或愿意接待。",
+        "source": "第六回门前问路与周瑞妻子的说明"
+      },
+      {
+        "id": "gate_zhou_away",
+        "claim": "这一日周瑞往南边办事去了，当前不在府门前。",
+        "knownBy": [
+          "old_servant"
+        ],
+        "scope": "第二场本地初态；来客须实际听到才知道，其他门役不自动知道。",
+        "source": "第六回老年门人说明；作为本轮场景初始事实"
+      },
+      {
+        "id": "gate_backstreet_route",
+        "claim": "周瑞妻子在家；沿外墙绕到后街后门，再问太太的陪房周瑞家，可找她递话。",
+        "knownBy": [
+          "old_servant"
+        ],
+        "scope": "街面问路，不等于获准进内宅；不提供未建模的精确室内路线。 只说沿墙绕向后街；没有获知东南西北方位，不得把周瑞往南办事混成去后街的方向。",
+        "source": "第六回老仆指路、后门孩童辨认"
+      }
+    ],
+    "worldbook": [],
+    "knowledgePolicy": "总控摘要非共同知识；新人只见当前来客，须实际听见才知道她的来历与所求。"
+  },
+  "carryover": {
+    "parentStoryId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+    "branchId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+    "parentRevision": 1,
+    "transition": "上一场最终出行安排是：清早出发，狗儿送到村口后返回，刘姥姥独自继续赶路；孩子留在家中由刘氏照看。。场间仅落实其中的出行和半程送返，其他承诺尚未兑现。承接已确定的来访人员：刘姥姥。路途省略，现在到荣府门外。没有改变同行名单。来客尚未与门役交谈，不知道周瑞今日去向或后街路线。"
+  },
+  "scene": "rongfu-gate",
+  "mode": "deepseek-generated",
+  "summary": "DeepSeek Flash 根据当前场景、人物与个人听闻生成的演出。",
+  "initial": {
+    "camera": "wide",
+    "lighting": "day",
+    "actors": {
+      "granny": {
+        "anchor": "street_arrival",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "gatekeeper": {
+        "anchor": "gatekeeper_reply",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "old_servant": {
+        "anchor": "old_servant_reply",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      }
+    }
+  },
+  "beats": [
+    {
+      "id": "gate-access-01",
+      "title": "门前问路",
+      "duration": 82,
+      "narration": "刘姥姥从街面走到门前问话位，向门役问周瑞；门役盘问后让她靠边等。老仆走近说明周瑞出门，指她沿墙去后街寻周瑞家；刘姥姥应下。",
+      "dialogue": [
+        {
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。",
+          "knowledgeRefs": [],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [],
+          "sourceTurnId": "t1",
+          "actionIntent": "approach",
+          "at": 4.5,
+          "until": 13.5
+        },
+        {
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "周瑞？你哪门子亲戚，找他做什么？",
+          "knowledgeRefs": [
+            "gate-access-01:0"
+          ],
+          "factRefs": [
+            "gate_zhou_role"
+          ],
+          "respondsTo": [
+            "gate-access-01:0"
+          ],
+          "sourceTurnId": "t2",
+          "actionIntent": "turn",
+          "at": 14.5,
+          "until": 19.5
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。",
+          "knowledgeRefs": [
+            "gate-access-01:1"
+          ],
+          "factRefs": [
+            "wang_old_kinship",
+            "winter_need",
+            "granny_zhou_awareness",
+            "granny_wang_visit"
+          ],
+          "respondsTo": [
+            "gate-access-01:1"
+          ],
+          "sourceTurnId": "t3",
+          "actionIntent": "none",
+          "at": 20.5,
+          "until": 32.5
+        },
+        {
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。",
+          "knowledgeRefs": [
+            "gate-access-01:2"
+          ],
+          "factRefs": [
+            "gate_zhou_role"
+          ],
+          "respondsTo": [
+            "gate-access-01:2"
+          ],
+          "sourceTurnId": "t4",
+          "actionIntent": "none",
+          "at": 33.5,
+          "until": 40.5
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。",
+          "knowledgeRefs": [
+            "gate-access-01:3"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [
+            "gate-access-01:3"
+          ],
+          "sourceTurnId": "t5",
+          "actionIntent": "none",
+          "at": 41.5,
+          "until": 50.5
+        },
+        {
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。",
+          "knowledgeRefs": [
+            "gate-access-01:4"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "gate-access-01:4"
+          ],
+          "sourceTurnId": "t6",
+          "actionIntent": "none",
+          "at": 51.5,
+          "until": 58.5
+        },
+        {
+          "speaker": "old_servant",
+          "to": [
+            "gatekeeper",
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。",
+          "knowledgeRefs": [
+            "gate-access-01:3",
+            "gate-access-01:4",
+            "gate-access-01:5"
+          ],
+          "factRefs": [
+            "gate_zhou_role",
+            "gate_zhou_away",
+            "gate_backstreet_route"
+          ],
+          "respondsTo": [
+            "gate-access-01:5"
+          ],
+          "sourceTurnId": "t7",
+          "actionIntent": "turn",
+          "at": 59.5,
+          "until": 71.5
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "old_servant",
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。",
+          "knowledgeRefs": [
+            "gate-access-01:6"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [
+            "gate-access-01:6"
+          ],
+          "sourceTurnId": "t8",
+          "actionIntent": "nod",
+          "at": 72.5,
+          "until": 79.5
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "granny",
+          "target": "liu_laolao_ask",
+          "duration": 4
+        },
+        {
+          "at": 0,
+          "type": "move",
+          "actor": "old_servant",
+          "target": "old_servant_near",
+          "duration": 4
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "gatekeeper",
+          "value": "neutral"
+        },
+        {
+          "at": 4.1,
+          "type": "expression",
+          "actor": "old_servant",
+          "value": "neutral"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "door"
+        },
+        {
+          "at": 4.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "gatekeeper"
+        },
+        {
+          "at": 14.3,
+          "type": "face",
+          "actor": "gatekeeper",
+          "target": "granny"
+        },
+        {
+          "at": 20.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "gatekeeper"
+        },
+        {
+          "at": 33.3,
+          "type": "face",
+          "actor": "gatekeeper",
+          "target": "granny"
+        },
+        {
+          "at": 41.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "gatekeeper"
+        },
+        {
+          "at": 51.3,
+          "type": "face",
+          "actor": "gatekeeper",
+          "target": "granny"
+        },
+        {
+          "at": 59.3,
+          "type": "face",
+          "actor": "old_servant",
+          "target": "gatekeeper"
+        },
+        {
+          "at": 72.3,
+          "type": "face",
+          "actor": "granny",
+          "target": "old_servant"
+        },
+        {
+          "at": 72.3,
+          "type": "gesture",
+          "actor": "granny",
+          "value": "nod",
+          "duration": 0.6
+        }
+      ],
+      "memory": "刘姥姥问周瑞，门役盘问后只让她靠边等；老仆说明周瑞出门，改指后街周瑞家，让她找周瑞媳妇递话。"
+    }
+  ],
+  "narrative": {
+    "version": 7,
+    "nodeId": "gate-access",
+    "conversation": {
+      "intentions": [
+        {
+          "actor": "granny",
+          "aim": "问出周瑞或他家的门路，托人递话引见王夫人，求些过冬米粮。",
+          "concern": "门房冷淡推诿，怕白等；头一回来路不熟，周瑞多年不走动，不知还认不认旧。"
+        },
+        {
+          "actor": "gatekeeper",
+          "aim": "守住角门图个轻省，把寒酸来客打发开或让她靠边等。",
+          "concern": "来客纠缠堵门，自己说不清府里人事，不愿替人传话添麻烦。"
+        },
+        {
+          "actor": "old_servant",
+          "aim": "不让老人家白等，把周瑞不在、该去后街寻周瑞妻子递话的实路说明白。",
+          "concern": "门上指路有分寸，只给门路，不越权替主家或周瑞妻子应承。"
+        }
+      ],
+      "turns": [
+        {
+          "id": "t1",
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。",
+          "knowledgeRefs": [],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [],
+          "actionIntent": "approach"
+        },
+        {
+          "id": "t2",
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "周瑞？你哪门子亲戚，找他做什么？",
+          "knowledgeRefs": [
+            "t1"
+          ],
+          "factRefs": [
+            "gate_zhou_role"
+          ],
+          "respondsTo": [
+            "t1"
+          ],
+          "actionIntent": "turn"
+        },
+        {
+          "id": "t3",
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。",
+          "knowledgeRefs": [
+            "t2"
+          ],
+          "factRefs": [
+            "wang_old_kinship",
+            "winter_need",
+            "granny_zhou_awareness",
+            "granny_wang_visit"
+          ],
+          "respondsTo": [
+            "t2"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t4",
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。",
+          "knowledgeRefs": [
+            "t3"
+          ],
+          "factRefs": [
+            "gate_zhou_role"
+          ],
+          "respondsTo": [
+            "t3"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t5",
+          "speaker": "granny",
+          "to": [
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。",
+          "knowledgeRefs": [
+            "t4"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [
+            "t4"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t6",
+          "speaker": "gatekeeper",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。",
+          "knowledgeRefs": [
+            "t5"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "t5"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t7",
+          "speaker": "old_servant",
+          "to": [
+            "gatekeeper",
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。",
+          "knowledgeRefs": [
+            "t4",
+            "t5",
+            "t6"
+          ],
+          "factRefs": [
+            "gate_zhou_role",
+            "gate_zhou_away",
+            "gate_backstreet_route"
+          ],
+          "respondsTo": [
+            "t6"
+          ],
+          "actionIntent": "turn"
+        },
+        {
+          "id": "t8",
+          "speaker": "granny",
+          "to": [
+            "old_servant",
+            "gatekeeper"
+          ],
+          "mode": "normal",
+          "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。",
+          "knowledgeRefs": [
+            "t7"
+          ],
+          "factRefs": [
+            "granny_zhou_awareness"
+          ],
+          "respondsTo": [
+            "t7"
+          ],
+          "actionIntent": "nod"
+        }
+      ],
+      "endingAim": "刘姥姥依老仆指点，决定沿府墙绕到后街后门，寻周瑞妻子递话，求她引见王夫人、周济些过冬米粮；周瑞今日不在门上，后续是否肯帮尚未知。"
+    },
+    "dialogueReview": {
+      "passed": true,
+      "checks": [
+        {
+          "kind": "responsiveness",
+          "passed": true,
+          "evidenceRefs": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5",
+            "t6",
+            "t7",
+            "t8"
+          ],
+          "reason": "t2紧接t1问“你哪门子亲戚，找他做什么”；t3答“女婿家祖上与金陵王家连过宗”并说明“求太太周济些米粮”；t4接住身份说“周瑞是太太的陪房，门上哪能说找就找”并叫“靠边等等”；t5针对“靠边等等”追问“他今儿在不在府里？要等多久”；t6以“里头的事说不清”推回；t7接过话头说“周瑞今儿往南边办事去了”并指路；t8回应t7“原来周瑞大哥出门了。那我寻嫂子去”。每句都在接上一句或明确转向下一步，无凭空换题。"
+        },
+        {
+          "kind": "helpRoute",
+          "passed": true,
+          "evidenceRefs": [
+            "t1",
+            "t3",
+            "t4",
+            "t7"
+          ],
+          "reason": "t1“想寻府里当差的周瑞”点明找谁；t4“周瑞是太太的陪房”说明其与求助对象的关系；t3“托周瑞大哥递句话，求太太周济些米粮”说明请他递话、向太太求米粮；t7“问太太陪房周瑞家，他媳妇在家，能替你递话”给出可执行的下一步。找谁、关系、所求、下一步均有实际对白。"
+        },
+        {
+          "kind": "decision",
+          "passed": true,
+          "evidenceRefs": [
+            "t7",
+            "t8"
+          ],
+          "reason": "t7给出“沿墙绕到后街后门，问太太陪房周瑞家”的实际去处，t8“那我寻嫂子去，劳老伯指得这么明白”当场接受并定下去向，有可追踪的实际选择。"
+        },
+        {
+          "kind": "voice",
+          "passed": true,
+          "evidenceRefs": [
+            "t1",
+            "t3",
+            "t5",
+            "t2",
+            "t4",
+            "t6",
+            "t7"
+          ],
+          "reason": "刘姥姥自称“乡下来的”“您别嫌絮烦”，陪笑而有礼地追问“给句实在话”，不训人、不预先免责；门役“别堵着门”“你爱等就等，不爱等自便”短促敷衍，未辱骂也未索钱；老仆“别耽误人家”平实给指点，不越权包办。各人口吻贴合身份与处境。"
+        },
+        {
+          "kind": "redundancy",
+          "passed": true,
+          "evidenceRefs": [
+            "t4",
+            "t5",
+            "t6"
+          ],
+          "reason": "t4叫“靠边等等”，t5追问“在不在、等多久”，t6推说“说不清、爱等就等”，三者分别提出等待、索取具体信息、拒绝供信息，功能不同，非换词重复；无“愁、怕白跑、明早再说”式的空转。"
+        },
+        {
+          "kind": "agency",
+          "passed": true,
+          "evidenceRefs": [
+            "t1",
+            "t5",
+            "t8"
+          ],
+          "reason": "刘姥姥本场已自到门前，t1“烦您指个门路”主动开口问人，t5继续“给句实在话，我好有个打算”坚持问实，t8自行决定“那我寻嫂子去”，主动承担与问路出自本人，未被推着走，也未向家人预先免责。"
+        },
+        {
+          "kind": "facts",
+          "passed": true,
+          "evidenceRefs": [
+            "t3",
+            "t4",
+            "t7"
+          ],
+          "reason": "t3“女婿家祖上与金陵王家连过宗”把连宗归给狗儿家，范围正确；“家里过冬的衣食没着落”对应冬事未办；“求太太周济些米粮”是她已在场说出的具体请求。t4“周瑞是太太的陪房”属门役已知身份。t7“往南边办事去了”“问太太陪房周瑞家，他媳妇在家”分别对应周瑞外出与后街路线，未把“南边办事”混成后街方向，也未把旧交夸成必能见人。"
+        }
+      ],
+      "initiative": {
+        "volunteerAt": "t1",
+        "delegatedBefore": [],
+        "reason": "本场中刘姥姥自到门前即开口“我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路”，属门前主动问路；本场对白中无人先推她出门，无被推后的应承。"
+      },
+      "connections": [
+        {
+          "turnId": "t2",
+          "connectsTo": [
+            "t1"
+          ],
+          "reason": "接住t1寻找周瑞的请求，反问关系与来意。"
+        },
+        {
+          "turnId": "t3",
+          "connectsTo": [
+            "t2"
+          ],
+          "reason": "答t2所问，交代女婿家连宗及求太太周济米粮的来意。"
+        },
+        {
+          "turnId": "t4",
+          "connectsTo": [
+            "t3"
+          ],
+          "reason": "接住来意，点明周瑞是太太陪房、不能立时找，叫靠边等候。"
+        },
+        {
+          "turnId": "t5",
+          "connectsTo": [
+            "t4"
+          ],
+          "reason": "应t4“靠边等等”，追问在不在、等多久，要一个实在说法。"
+        },
+        {
+          "turnId": "t6",
+          "connectsTo": [
+            "t5"
+          ],
+          "reason": "回应追问，推说只管看门、里头说不清，爱等就等。"
+        },
+        {
+          "turnId": "t7",
+          "connectsTo": [
+            "t5",
+            "t6"
+          ],
+          "reason": "老仆接过被搁置的问话，说周瑞出门去向，并指向后街周瑞家。"
+        },
+        {
+          "turnId": "t8",
+          "connectsTo": [
+            "t7"
+          ],
+          "reason": "接老仆所指，认下周瑞出门，定下寻嫂子并道谢。"
+        }
+      ],
+      "concerns": [
+        {
+          "raisedAt": "t5",
+          "responseAt": [
+            "t6",
+            "t7"
+          ],
+          "kind": "actionable",
+          "status": "answered",
+          "reason": "t5问“他今儿在不在府里？要等多久您给句实在话”；t6推说“里头的事说不清”未答，t7补明“周瑞今儿往南边办事去了，不在门上”并指后街周瑞家，等与不等的问题由后街去处实际解决。"
+        }
+      ],
+      "issues": []
+    },
+    "plan": {
+      "endingAim": "刘姥姥依老仆指点，决定沿府墙绕到后街后门，寻周瑞妻子递话，求她引见王夫人、周济些过冬米粮；周瑞今日不在门上，后续是否肯帮尚未知。",
+      "beats": [
+        {
+          "id": "gate-access-01",
+          "title": "门前问路",
+          "question": "门前问路",
+          "change": "刘姥姥问周瑞，门役盘问后只让她靠边等；老仆说明周瑞出门，改指后街周瑞家，让她找周瑞媳妇递话。",
+          "intention": "刘姥姥想找到周瑞并托他向太太求周济；门役敷衍推脱，老仆帮忙指明可执行的下一步。",
+          "dialogue": [
+            {
+              "speaker": "granny",
+              "to": [
+                "gatekeeper"
+              ],
+              "mode": "normal",
+              "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。",
+              "knowledgeRefs": [],
+              "factRefs": [
+                "granny_zhou_awareness"
+              ],
+              "respondsTo": [],
+              "sourceTurnId": "t1",
+              "actionIntent": "approach"
+            },
+            {
+              "speaker": "gatekeeper",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "周瑞？你哪门子亲戚，找他做什么？",
+              "knowledgeRefs": [
+                "gate-access-01:0"
+              ],
+              "factRefs": [
+                "gate_zhou_role"
+              ],
+              "respondsTo": [
+                "gate-access-01:0"
+              ],
+              "sourceTurnId": "t2",
+              "actionIntent": "turn"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "gatekeeper"
+              ],
+              "mode": "normal",
+              "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。",
+              "knowledgeRefs": [
+                "gate-access-01:1"
+              ],
+              "factRefs": [
+                "wang_old_kinship",
+                "winter_need",
+                "granny_zhou_awareness",
+                "granny_wang_visit"
+              ],
+              "respondsTo": [
+                "gate-access-01:1"
+              ],
+              "sourceTurnId": "t3",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "gatekeeper",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。",
+              "knowledgeRefs": [
+                "gate-access-01:2"
+              ],
+              "factRefs": [
+                "gate_zhou_role"
+              ],
+              "respondsTo": [
+                "gate-access-01:2"
+              ],
+              "sourceTurnId": "t4",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "gatekeeper"
+              ],
+              "mode": "normal",
+              "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。",
+              "knowledgeRefs": [
+                "gate-access-01:3"
+              ],
+              "factRefs": [
+                "granny_zhou_awareness"
+              ],
+              "respondsTo": [
+                "gate-access-01:3"
+              ],
+              "sourceTurnId": "t5",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "gatekeeper",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。",
+              "knowledgeRefs": [
+                "gate-access-01:4"
+              ],
+              "factRefs": [],
+              "respondsTo": [
+                "gate-access-01:4"
+              ],
+              "sourceTurnId": "t6",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "old_servant",
+              "to": [
+                "gatekeeper",
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。",
+              "knowledgeRefs": [
+                "gate-access-01:3",
+                "gate-access-01:4",
+                "gate-access-01:5"
+              ],
+              "factRefs": [
+                "gate_zhou_role",
+                "gate_zhou_away",
+                "gate_backstreet_route"
+              ],
+              "respondsTo": [
+                "gate-access-01:5"
+              ],
+              "sourceTurnId": "t7",
+              "actionIntent": "turn"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "old_servant",
+                "gatekeeper"
+              ],
+              "mode": "normal",
+              "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。",
+              "knowledgeRefs": [
+                "gate-access-01:6"
+              ],
+              "factRefs": [
+                "granny_zhou_awareness"
+              ],
+              "respondsTo": [
+                "gate-access-01:6"
+              ],
+              "sourceTurnId": "t8",
+              "actionIntent": "nod"
+            }
+          ]
+        }
+      ]
+    },
+    "handoff": {
+      "version": 1,
+      "sourceStoryId": "8f903773-90a6-429f-8896-3786632de51f",
+      "sourceNodeId": "gate-access",
+      "nextNodeId": "backstreet-contact",
+      "nextSceneCandidates": [
+        "SC11_HJ"
+      ],
+      "transition": "planned-not-travelled",
+      "decision": {
+        "status": "depart",
+        "party": [
+          "granny"
+        ],
+        "purpose": "沿府墙绕到后街后门，寻太太陪房周瑞家，找周瑞媳妇替自己递话，再求太太周济些过冬米粮。",
+        "approach": "照老仆所指，到后街后门问“太太陪房周瑞家”，寻周瑞媳妇，说明要托她递话。",
+        "departureCondition": "周瑞今日不在门上、其媳妇在家可递话，刘姥姥听完指路后即行动身。",
+        "evidenceRefs": [
+          "gate-access-01:6",
+          "gate-access-01:7"
+        ],
+        "knownBy": [
+          "granny",
+          "gatekeeper",
+          "old_servant"
+        ]
+      },
+      "facts": [
+        {
+          "kind": "obstacle",
+          "text": "门役只让刘姥姥靠边等，推说里头的事说不清，不肯在门上替她找人。",
+          "evidenceRefs": [
+            "gate-access-01:3",
+            "gate-access-01:5"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        },
+        {
+          "kind": "obstacle",
+          "text": "周瑞这一日往南边办事去了，不在府门上。",
+          "evidenceRefs": [
+            "gate-access-01:6"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        },
+        {
+          "kind": "plan",
+          "text": "老仆指刘姥姥沿府墙绕到后街后门，问太太陪房周瑞家；周瑞媳妇在家，可替她递话。",
+          "evidenceRefs": [
+            "gate-access-01:6"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        },
+        {
+          "kind": "relationship",
+          "text": "周瑞是王夫人的陪房，在荣府当差。",
+          "evidenceRefs": [
+            "gate-access-01:3",
+            "gate-access-01:6"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        },
+        {
+          "kind": "plan",
+          "text": "刘姥姥原想托周瑞向太太递话，求些过冬米粮。",
+          "evidenceRefs": [
+            "gate-access-01:2"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        },
+        {
+          "kind": "relationship",
+          "text": "刘姥姥女婿家祖上与金陵王家连过宗。",
+          "evidenceRefs": [
+            "gate-access-01:2"
+          ],
+          "knownBy": [
+            "granny",
+            "gatekeeper",
+            "old_servant"
+          ]
+        }
+      ],
+      "characterKnowledge": {
+        "granny": [
+          {
+            "eventId": "gate-access-01:0",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。"
+          },
+          {
+            "eventId": "gate-access-01:1",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞？你哪门子亲戚，找他做什么？"
+          },
+          {
+            "eventId": "gate-access-01:2",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。"
+          },
+          {
+            "eventId": "gate-access-01:3",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。"
+          },
+          {
+            "eventId": "gate-access-01:4",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。"
+          },
+          {
+            "eventId": "gate-access-01:5",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。"
+          },
+          {
+            "eventId": "gate-access-01:6",
+            "speaker": "old_servant",
+            "to": [
+              "gatekeeper",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。"
+          },
+          {
+            "eventId": "gate-access-01:7",
+            "speaker": "granny",
+            "to": [
+              "old_servant",
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。"
+          }
+        ],
+        "gatekeeper": [
+          {
+            "eventId": "gate-access-01:0",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。"
+          },
+          {
+            "eventId": "gate-access-01:1",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞？你哪门子亲戚，找他做什么？"
+          },
+          {
+            "eventId": "gate-access-01:2",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。"
+          },
+          {
+            "eventId": "gate-access-01:3",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。"
+          },
+          {
+            "eventId": "gate-access-01:4",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。"
+          },
+          {
+            "eventId": "gate-access-01:5",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。"
+          },
+          {
+            "eventId": "gate-access-01:6",
+            "speaker": "old_servant",
+            "to": [
+              "gatekeeper",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。"
+          },
+          {
+            "eventId": "gate-access-01:7",
+            "speaker": "granny",
+            "to": [
+              "old_servant",
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。"
+          }
+        ],
+        "old_servant": [
+          {
+            "eventId": "gate-access-01:0",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。"
+          },
+          {
+            "eventId": "gate-access-01:1",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞？你哪门子亲戚，找他做什么？"
+          },
+          {
+            "eventId": "gate-access-01:2",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。"
+          },
+          {
+            "eventId": "gate-access-01:3",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。"
+          },
+          {
+            "eventId": "gate-access-01:4",
+            "speaker": "granny",
+            "to": [
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。"
+          },
+          {
+            "eventId": "gate-access-01:5",
+            "speaker": "gatekeeper",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。"
+          },
+          {
+            "eventId": "gate-access-01:6",
+            "speaker": "old_servant",
+            "to": [
+              "gatekeeper",
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。"
+          },
+          {
+            "eventId": "gate-access-01:7",
+            "speaker": "granny",
+            "to": [
+              "old_servant",
+              "gatekeeper"
+            ],
+            "mode": "normal",
+            "text": "原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。"
+          }
+        ]
+      }
+    },
+    "handoffReview": {
+      "passed": true,
+      "issues": []
+    }
+  },
+  "prologue": {
+    "text": "清早，狗儿送刘姥姥到村口便折返，刘姥姥独自沿路往城里去。行至荣国府角门外，高墙深院已在眼前，她整整衣襟，在门前站住。",
+    "review": {
+      "passed": true,
+      "issues": []
+    }
+  },
+  "presentation": {
+    "opening": {
+      "title": "荣府问路",
+      "subtitle": "荣国府 · 门前角门外",
+      "duration": 3.2
+    },
+    "prologue": {
+      "text": "清早，狗儿送刘姥姥到村口便折返，刘姥姥独自沿路往城里去。行至荣国府角门外，高墙深院已在眼前，她整整衣襟，在门前站住。",
+      "duration": 13.6
+    },
+    "interludes": []
+  },
+  "soundtrack": {
+    "version": 1,
+    "cues": [
+      {
+        "section": "opening",
+        "offset": 0,
+        "action": "play",
+        "track": "wuxia_plucked",
+        "volume": 0.18,
+        "reason": "刘姥姥初到荣府角门，以筝琵琶轻拨铺出高门前的试探与局促，不喜庆，也不过度哀苦。"
+      },
+      {
+        "section": "gate-access-01",
+        "offset": 33.5,
+        "action": "pause",
+        "volume": 0.12,
+        "reason": "门役让她靠边等、推说里头的事说不清，此处短暂留白，突出刘姥姥被晾在门前的尴尬与身份隔膜。"
+      },
+      {
+        "section": "gate-access-01",
+        "offset": 59.5,
+        "action": "resume",
+        "volume": 0.2,
+        "reason": "老仆说明周瑞出门并指后街可寻周瑞媳妇，问路有了可执行的下一步，音乐续起以接住转机与前行。"
+      },
+      {
+        "section": "gate-access-01",
+        "offset": 79.5,
+        "action": "stop",
+        "volume": 0.12,
+        "reason": "本场门前问路收束，刘姥姥应下去后街寻人，清掉门前音乐，为下一步街面行程留出空间。"
+      }
+    ]
+  },
+  "contextMemory": {
+    "version": 1,
+    "branchId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+    "revision": 2,
+    "sourceStoryId": "8f903773-90a6-429f-8896-3786632de51f",
+    "summary": "秋尽冬初，狗儿家过冬衣食未齐。狗儿先发愁，刘氏想先匀厚被给孩子；刘姥姥不肯光愁，提出自家与金陵王家连过宗，王夫人如今在荣府，她早年带刘氏去过王家，记得太太待人还和气，便自愿豁出老脸走一趟。狗儿提醒两家多年不走动，贸然登门门房未必通传。刘姥姥问有无引路人，得知周瑞是王夫人陪房、但与自家多年未往来，决定一路问着去，寻周瑞把话说明，求他引见王夫人，讨过冬吃食。刘氏担心路远、母亲独去不放心，也怕大户门房难缠、穷亲戚上门门房不肯传话；狗儿提出清早送她到村口，余路她自走，刘姥姥答应，并让家里看好孩子。板儿问姥姥去哪儿、要跟去，刘姥姥只说去讨过冬吃食，让他在家听娘话，回来带糕。场间落实清早狗儿送到村口后返回，刘姥姥独自到荣府门外，孩子留家。本场刘姥姥在角门外向门房仆役自称姓刘、乡下来，寻周瑞，说明女婿家与金陵王家连过宗、家中过冬衣食没着落，想托周瑞递话求太太周济米粮。门房问哪门子亲戚、找周瑞做什么，又说周瑞是太太陪房，门上不能随便找，让她靠边等别堵门；她追问周瑞在不在、要等多久，门房推说只看着门说不清，爱等就等。老仆出言别耽误人家，说明周瑞今日往南边办事不在门上；沿墙绕到后街后门，问太太陪房周瑞家，其媳妇在家能替她递话。刘姥姥谢过，因周瑞今日不在门上，遂按指路改去后街寻周瑞媳妇递话，不再等周瑞本人引见。刘氏先前担心门房难缠、门房不肯替穷亲戚传话，门前果然遇门房推诿，幸得老仆体恤指路，改从后街投问；周瑞今日不在，其妻是否肯替她递话、能否把话递到太太跟前、能否得米粮尚未解决。板儿留家听娘话已在场间落实，刘姥姥回来带糕之约仍未兑现。",
+    "characters": {
+      "granny": "刘姥姥为家中过冬衣食无着，自愿去荣府寻周瑞引见王夫人求周济；狗儿清早送她到村口后返回，她独自到角门外。她向门房自称姓刘、乡下来，寻周瑞，说明女婿家与王家连过宗、家中过冬衣食没着落，想托周瑞递话求太太周济米粮。门房问亲戚、来意，说周瑞是太太陪房，门上不能随便找，让她靠边等；她追问周瑞在不在、要等多久，门房推说说不清、爱等就等。老仆制止，告周瑞今日往南边办事不在门上，沿墙绕到后街后门问太太陪房周瑞家，其媳妇在家能替她递话。刘姥姥谢过，决定去后街寻周瑞媳妇；仍记着给板儿带糕。",
+      "gouer": "狗儿先抱怨天冷、柴米无着；听岳母提出自己去荣府，他提醒两家虽连过宗却多年没走动，贸然登门门房未必肯通传。听岳母问有无当差熟人，他提出周瑞曾与父亲办过事、又是王夫人陪房，但不知是否还认旧。刘氏担心母亲独去，他提出清早送到村口，余路刘姥姥自走；听刘姥姥答应，家中孩子留家照看。周瑞肯不肯帮仍未定。",
+      "liushi": "刘氏先说孩子夜里喊冷，想先把厚被子匀给孩子；听母亲提出去荣府，她担心路远、娘一个人去不放心，又怕大户门房难缠、穷亲戚上门不肯传话。狗儿提出清早送到村口，刘姥姥答应并让家里看好孩子；家中遂由刘氏留家照看孩子。门房是否通传、周瑞是否认旧仍未解决。",
+      "baner": "板儿听见家里说天冷、姥姥要出门，便问姥姥去哪儿，说自己也去；姥姥只说去讨过冬的吃食，让他在家听娘话，回来给他带糕。他只知道姥姥要出门讨吃食并答应带糕，不懂周瑞、门房和求助的门路。",
+      "gatekeeper": "门房仆役在角门听见刘姥姥自称姓刘、乡下来，寻周瑞，说女婿家与金陵王家连过宗、过冬衣食没着落，想托周瑞递话求太太周济米粮。他问哪门子亲戚、找周瑞做什么，又说周瑞是太太陪房，门上不能随便找，让她靠边等别堵门。她追问周瑞在不在、要等多久，他推说只看着门说不清，爱等就等。老仆出言别耽误人家，说明周瑞今日往南边办事不在门上，指她沿墙绕到后街后门问周瑞家，其媳妇能递话。门房仆役由此知道周瑞去向和后街投问处。",
+      "old_servant": "门房老仆听见刘姥姥向门房自称姓刘、乡下来，寻周瑞，说女婿家与金陵王家连过宗、过冬衣食没着落，想托周瑞递话求太太周济米粮。门房问亲戚、来意，又说周瑞是太太陪房，门上不能随便找，让她靠边等；她追问周瑞在不在、等多久，门房推说说不清、爱等就等。老仆出言别耽误人家，告诉她周瑞今日往南边办事不在门上，可沿墙绕到后街后门问太太陪房周瑞家，其媳妇在家能替她递话。刘姥姥谢过，照所指去后街。"
+    },
+    "recentDialogue": "granny说：“这位大哥，给府上道个乏。我姓刘，是乡下来的，想寻府里当差的周瑞，烦您指个门路。”\ngatekeeper说：“周瑞？你哪门子亲戚，找他做什么？”\ngranny说：“我女婿家祖上与金陵王家连过宗。如今天冷了，家里过冬的衣食没着落，想托周瑞大哥递句话，求太太周济些米粮。”\ngatekeeper说：“周瑞是太太的陪房，门上哪能说找就找。你先靠边等等，别堵着门。”\ngranny说：“我头回来，您别嫌絮烦。他今儿在不在府里？要等多久您给句实在话，我好有个打算。”\ngatekeeper说：“我这儿只看着门，里头的事说不清。你爱等就等，不爱等自便。”\nold_servant说：“别耽误人家。周瑞今儿往南边办事去了，不在门上。沿墙绕到后街后门，问太太陪房周瑞家，他媳妇在家，能替你递话。”\ngranny说：“原来周瑞大哥出门了。那我寻嫂子去，劳老伯指得这么明白。”"
+  },
+  "memoryReview": {
+    "passed": true,
+    "issues": []
+  },
+  "generation": {
+    "authoring": {
+      "dialogue": "DeepSeek Flash 原始生成及模型自动修订，无人工改写台词",
+      "cardsRevision": "gate-ch6-2026-11-16",
+      "cardHash": "5ea77a0a985f0fab048037a29837e65d169bc2b2da8f79f53d7bd249c5dfeeb2"
+    },
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "thinking": {
+      "type": "enabled"
+    },
+    "reasoning_effort": "high",
+    "generatedAt": "2026-11-16T14:40:41.159Z",
+    "source": "live-api",
+    "jobId": "8f903773-90a6-429f-8896-3786632de51f",
+    "calls": [
+      {
+        "responseId": "8c53d7be-a983-4f5f-a9c3-8e14bae12bbc",
+        "model": "deepseek-flash",
+        "phase": "conversation-write-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 6192,
+          "completion_tokens": 5220,
+          "total_tokens": 11412,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4218
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 4400
+        }
+      },
+      {
+        "responseId": "32b93688-62ed-4e42-8c57-1f14532cecc0",
+        "model": "deepseek-flash",
+        "phase": "conversation-review-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 5271,
+          "completion_tokens": 8844,
+          "total_tokens": 14115,
+          "prompt_tokens_details": {
+            "cached_tokens": 3072
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 7666
+          },
+          "prompt_cache_hit_tokens": 3072,
+          "prompt_cache_miss_tokens": 2199
+        }
+      },
+      {
+        "responseId": "536e67a1-79aa-4d82-8b5a-a6c91bb4cca5",
+        "model": "deepseek-flash",
+        "phase": "conversation-write-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 8401,
+          "completion_tokens": 2276,
+          "total_tokens": 10677,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1263
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 6609
+        }
+      },
+      {
+        "responseId": "d0501bf3-b96a-4e78-a556-8481a740067a",
+        "model": "deepseek-flash",
+        "phase": "conversation-review-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 5275,
+          "completion_tokens": 7304,
+          "total_tokens": 12579,
+          "prompt_tokens_details": {
+            "cached_tokens": 4736
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5945
+          },
+          "prompt_cache_hit_tokens": 4736,
+          "prompt_cache_miss_tokens": 539
+        }
+      },
+      {
+        "responseId": "eaddc564-7af4-4674-88ad-b1ba0a7e1363",
+        "model": "deepseek-flash",
+        "phase": "conversation-partition-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1756,
+          "completion_tokens": 810,
+          "total_tokens": 2566,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 686
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 604
+        }
+      },
+      {
+        "responseId": "1465d7f0-f6d0-433a-987e-7c7d0e1a6ea9",
+        "model": "deepseek-flash",
+        "phase": "beat-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 6902,
+          "completion_tokens": 844,
+          "total_tokens": 7746,
+          "prompt_tokens_details": {
+            "cached_tokens": 1408
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 702
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 5494
+        }
+      },
+      {
+        "responseId": "7706c9dd-190d-4019-afb9-b881f0ea7372",
+        "model": "deepseek-flash",
+        "phase": "execution-review-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 5141,
+          "completion_tokens": 1994,
+          "total_tokens": 7135,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1977
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 3349
+        }
+      },
+      {
+        "responseId": "775dd353-a76a-4dce-896e-06574248cc64",
+        "model": "deepseek-flash",
+        "phase": "scene-handoff-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 10900,
+          "completion_tokens": 2522,
+          "total_tokens": 13422,
+          "prompt_tokens_details": {
+            "cached_tokens": 1408
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2116
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 9492
+        }
+      },
+      {
+        "responseId": "b312d1da-0361-4fb4-b0cf-0db8220ed6fd",
+        "model": "deepseek-flash",
+        "phase": "handoff-review-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2232,
+          "completion_tokens": 1935,
+          "total_tokens": 4167,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1925
+          },
+          "prompt_cache_hit_tokens": 1280,
+          "prompt_cache_miss_tokens": 952
+        }
+      },
+      {
+        "responseId": "144737a3-3c24-43c9-b5db-f0885b1bd31a",
+        "model": "deepseek-flash",
+        "phase": "prologue-write-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1743,
+          "completion_tokens": 313,
+          "total_tokens": 2056,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 260
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 591
+        }
+      },
+      {
+        "responseId": "90ab336c-006d-48e0-883f-e6b8e919fafc",
+        "model": "deepseek-flash",
+        "phase": "prologue-review-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1782,
+          "completion_tokens": 4724,
+          "total_tokens": 6506,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4618
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 630
+        }
+      },
+      {
+        "responseId": "1ebb4abd-e547-404b-810f-0d2d6452f419",
+        "model": "deepseek-flash",
+        "phase": "prologue-write-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1889,
+          "completion_tokens": 684,
+          "total_tokens": 2573,
+          "prompt_tokens_details": {
+            "cached_tokens": 1664
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 619
+          },
+          "prompt_cache_hit_tokens": 1664,
+          "prompt_cache_miss_tokens": 225
+        }
+      },
+      {
+        "responseId": "d2cbb9f3-bd84-46ec-bed7-55e7584a16be",
+        "model": "deepseek-flash",
+        "phase": "prologue-review-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1794,
+          "completion_tokens": 3281,
+          "total_tokens": 5075,
+          "prompt_tokens_details": {
+            "cached_tokens": 1536
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3271
+          },
+          "prompt_cache_hit_tokens": 1536,
+          "prompt_cache_miss_tokens": 258
+        }
+      },
+      {
+        "responseId": "b0e37f20-ba4f-48f7-990e-23580a873971",
+        "model": "deepseek-flash",
+        "phase": "soundtrack-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13969,
+          "completion_tokens": 1781,
+          "total_tokens": 15750,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1529
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 13841
+        }
+      },
+      {
+        "responseId": "56edbe05-dd8a-4638-893c-48b50f895168",
+        "model": "deepseek-flash",
+        "phase": "memory-update-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 5915,
+          "completion_tokens": 6345,
+          "total_tokens": 12260,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5040
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 5915
+        }
+      },
+      {
+        "responseId": "f02e92a6-9fb7-4bb2-9fb0-fb8d17738268",
+        "model": "deepseek-flash",
+        "phase": "memory-review-0",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 7044,
+          "completion_tokens": 29115,
+          "total_tokens": 36159,
+          "prompt_tokens_details": {
+            "cached_tokens": 768
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 28990
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 6276
+        }
+      },
+      {
+        "responseId": "9fa7c40f-21f0-49f7-9166-f2ebf8002b06",
+        "model": "deepseek-flash",
+        "phase": "memory-update-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 7330,
+          "completion_tokens": 4195,
+          "total_tokens": 11525,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2873
+          },
+          "prompt_cache_hit_tokens": 5632,
+          "prompt_cache_miss_tokens": 1698
+        }
+      },
+      {
+        "responseId": "72444fc4-17ec-4b12-a976-3c6ceaac9dd5",
+        "model": "deepseek-flash",
+        "phase": "memory-review-1",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 7065,
+          "completion_tokens": 11110,
+          "total_tokens": 18175,
+          "prompt_tokens_details": {
+            "cached_tokens": 5376
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 10848
+          },
+          "prompt_cache_hit_tokens": 5376,
+          "prompt_cache_miss_tokens": 1689
+        }
+      },
+      {
+        "responseId": "6d4fce4f-492d-497b-96ff-9b2a5d728dd0",
+        "model": "deepseek-flash",
+        "phase": "memory-update-2",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 7491,
+          "completion_tokens": 3783,
+          "total_tokens": 11274,
+          "prompt_tokens_details": {
+            "cached_tokens": 5632
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2440
+          },
+          "prompt_cache_hit_tokens": 5632,
+          "prompt_cache_miss_tokens": 1859
+        }
+      },
+      {
+        "responseId": "9336a10f-5feb-4e8a-b0d4-669680bc07b1",
+        "model": "deepseek-flash",
+        "phase": "memory-review-2",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 7086,
+          "completion_tokens": 22731,
+          "total_tokens": 29817,
+          "prompt_tokens_details": {
+            "cached_tokens": 5376
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 22721
+          },
+          "prompt_cache_hit_tokens": 5376,
+          "prompt_cache_miss_tokens": 1710
+        }
+      },
+      {
+        "phase": "opening-refresh-prologue-write-0",
+        "responseId": "d47ae1f9-d1b7-415c-b47d-1ce9030de4b5",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1780,
+          "completion_tokens": 256,
+          "total_tokens": 2036,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 202
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1780
+        }
+      },
+      {
+        "phase": "opening-refresh-prologue-review-0",
+        "responseId": "08bc898d-08b3-4332-919f-587508c9bd8e",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 1882,
+          "completion_tokens": 874,
+          "total_tokens": 2756,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 864
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1882
+        }
+      }
+    ],
+    "validation": {
+      "passed": true,
+      "beats": 1,
+      "duration": 82,
+      "dialogues": 8,
+      "moves": 2,
+      "whispers": 0,
+      "semanticReview": {
+        "passed": true,
+        "issues": [],
+        "narrationPatches": []
+      }
+    },
+    "openingRevision": {
+      "reason": "第二场过场承接前场，去掉重复家庭介绍",
+      "modelGenerated": true
+    }
+  }
+}

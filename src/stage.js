@@ -13,13 +13,13 @@ export class StageView{
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);
   }
   async load(){
-    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入五位人物');
+    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入本场人物');
     const loader=new THREE.TextureLoader();let done=0;
     for(const c of this.characters){
       const prefix=`assets/characters/${c.id}/`;const tex={};
       await Promise.all(['body','back',...c.expressions.map(x=>'head-'+x)].map(async k=>{tex[k]=await loadResource(`${c.name}的${k==='body'?'正面':k==='back'?'背面':'表情'}图片`,prefix+k+'.png',url=>loader.loadAsync(url));tex[k].colorSpace=THREE.SRGBColorSpace;tex[k].magFilter=THREE.LinearFilter;tex[k].minFilter=THREE.LinearMipmapLinearFilter;}));
       const bottom=(c.canvasHeight-c.alphaBounds[3])/c.canvasHeight,top=(c.canvasHeight-c.alphaBounds[1])/c.canvasHeight;
-      const ph=c.height/(top-bottom),pw=ph*c.width/c.canvasHeight,center=ph/2-bottom*ph,neck=(1-435/c.canvasHeight-bottom)*ph;
+      const ph=c.height/(top-bottom),pw=ph*c.width/c.canvasHeight,center=ph/2-bottom*ph,neck=(1-(c.neckY??435)/c.canvasHeight-bottom)*ph;
       const group=new THREE.Group();const geo=new THREE.PlaneGeometry(pw,ph);
       const material=map=>new THREE.MeshBasicMaterial({map,transparent:true,alphaTest:.035,side:THREE.DoubleSide,depthWrite:true,toneMapped:false});
       const body=new THREE.Mesh(geo,material(tex.body));body.position.y=center;group.add(body);
@@ -36,7 +36,7 @@ export class StageView{
     this.resize();
   }
   resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.width=width;this.height=height;this.renderer.setSize(width,height);if(this.currentCamera)this.applyCamera(this.currentCamera);}
-  applyCamera(id){let c=this.stage.cameras[id];if(this.width<600&&id==='wide'&&!this.override)c={...this.stage.cameras.family,scale:7.7};this.currentCamera=id;const aspect=(this.width||800)/(this.height||450);const half=c.scale/2;Object.assign(this.camera,{left:-half,right:half,top:half/aspect,bottom:-half/aspect});this.camera.position.copy(convert(c.position));this.camera.lookAt(convert(c.target));this.camera.updateProjectionMatrix();}
+  applyCamera(id){let c=this.stage.cameras[id];if(this.width<600&&id==='wide'&&!this.override)c={...this.stage.cameras.family,scale:7.7};if(this.width<600&&c.mobile&&this.override!=='wide')c={...c,...c.mobile};this.currentCamera=id;const aspect=(this.width||800)/(this.height||450);const half=c.scale/2;Object.assign(this.camera,{left:-half,right:half,top:half/aspect,bottom:-half/aspect});this.camera.position.copy(convert(c.position));this.camera.lookAt(convert(c.target));this.camera.updateProjectionMatrix();}
   showWide(){this.override=this.currentCamera==='wide'?'family':'wide';this.applyCamera(this.override);}
   headScreen(id){const a=this.actors.get(id);if(!a?.group.visible)return null;const p=a.group.position.clone();p.y+=a.height+.05;p.project(this.camera);return {x:(p.x*.5+.5)*this.width,y:(-p.y*.5+.5)*this.height};}
   faceRects(){return [...this.actors].filter(([,a])=>a.group.visible).map(([id,a])=>{const p=this.headScreen(id),height=a.height/(this.camera.top-this.camera.bottom)*this.height;return {id,left:p.x-height*.18,right:p.x+height*.18,top:p.y+height*.06,bottom:p.y+height*.34};});}

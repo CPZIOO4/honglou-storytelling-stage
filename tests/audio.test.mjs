@@ -13,8 +13,8 @@ test('director cannot request external tracks or invalid section/timing',()=>{
 test('typewriter progressively reveals text and seeking gives the same prefix',()=>{
  const d={at:2,until:10,text:'娘，咱们先想个办法。'};const a=dialogueFrame(d,2.2),b=dialogueFrame(d,4);assert(a.count>0&&a.count<b.count);assert.equal(a.text+a.remaining,d.text);assert.equal(dialogueFrame(d,9).text,d.text);assert.deepEqual(dialogueFrame(d,2.2),a);
 });
-test('all five voices differ and have bounded samples without abrupt final edges',()=>{
- const signatures=new Set();for(const v of Object.values(lib.voices)){const s=voiceSamples(v);assert(Math.max(...s.map(Math.abs))<.5);assert(s[0]===0);assert(Math.abs(s.at(-1))<.001);signatures.add(Array.from(s.slice(0,150)).join(','));}assert.equal(signatures.size,5);
+test('all available voices differ and have bounded samples without abrupt final edges',()=>{
+ const signatures=new Set();for(const v of Object.values(lib.voices)){const s=voiceSamples(v);assert(Math.max(...s.map(Math.abs))<.5);assert(s[0]===0);assert(Math.abs(s.at(-1))<.001);signatures.add(Array.from(s.slice(0,150)).join(','));}assert.equal(signatures.size,Object.keys(lib.voices).length);
 });
 test('every library recording exists with source and attribution',()=>{assert(lib.tracks.length>=3);for(const t of lib.tracks){assert.equal(statSync(new URL('../'+t.url,import.meta.url)).size,t.bytes);assert(t.source.startsWith('https://peritune.com/'));assert.equal(t.license,'CC BY 4.0');}});
 test('relationship evidence distinguishes awareness from the other family old connection',()=>{

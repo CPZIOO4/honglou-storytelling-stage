@@ -102,6 +102,22 @@
       "grit": 0.01,
       "duration": 0.04,
       "rate": 8
+    },
+    "gatekeeper": {
+      "label": "门房仆役：低短硬朗",
+      "frequency": 125,
+      "wave": "square",
+      "grit": 0.16,
+      "duration": 0.045,
+      "rate": 11
+    },
+    "old_servant": {
+      "label": "门房老仆：低缓温和",
+      "frequency": 145,
+      "wave": "triangle",
+      "grit": 0.2,
+      "duration": 0.065,
+      "rate": 9
     }
   },
   "policy": "只从本库选曲，也可留白；按剧情转折选择，不按每句台词换歌。贫寒焦虑不配欢庆曲。对白时自动压低背景音乐。pause保留进度，resume续播，stop清空。"

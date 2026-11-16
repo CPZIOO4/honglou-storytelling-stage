@@ -1,0 +1,47 @@
+{
+  "format": "honglou-context-v2",
+  "revision": "gate-ch6-2026-11-16",
+  "scene": {
+    "id": "rongfu-gate",
+    "title": "荣府问路",
+    "place": "荣国府 · 门前角门外",
+    "time": "秋尽冬初，白日",
+    "initialSituation": "由已确认第一场分支动态填入",
+    "availableProps": [
+      "荣府大门",
+      "角门",
+      "围墙",
+      "长凳"
+    ],
+    "boundary": "在府外街面问路，不进内宅，不自动见到周瑞妻子或凤姐。",
+    "factBoundary": "只继承实际来访名单与个人经历。没有赠送瓜果、谢恩、府内用膳或获资助。周瑞去向与后街路线仅知情角色掌握。",
+    "narrationPolicy": "开场简短交代省略的路途和门庭初见；不泄露门役尚未说出的路线或去向。",
+    "dramaturgy": {
+      "protagonist": "granny",
+      "initiativeType": "ask-access",
+      "direction": "刘姥姥自己来问路，机敏有礼，遇冷淡仍尽力把事问实；门房仆役有轻慢推诿，老仆尚有体恤。通过具体互动获得门路或可处理的障碍，不重复家庭出行商议。",
+      "pace": "一次说明找谁，遇冷遇做一两句有用回应，获得可靠信息即转向下一步。不得为门役补造必须付钱的规矩。"
+    },
+    "environmentCard": {
+      "name": "荣府角门·首次来访",
+      "description": "高门外的街面与角门相接，门前有门役和长凳；府墙造成内外之隔。青绿瓦面、赭色墙体为舞台造型。",
+      "personality": "陌生来客与豪门门役的身份差异，通过谁愿接话、谁让等候体现。",
+      "scenario": "依实际来访分支到达，先问路，不预设获准入府。",
+      "knowledgeBoundary": {
+        "established": [
+          "门外有门役",
+          "来客可沿街绕向后街"
+        ],
+        "unknown": [
+          "来客是否获准入府",
+          "后续接待与资助结果"
+        ],
+        "allowedInvention": "合乎身份的问答与态度转变；不凭空添加钱物与强制门规。"
+      }
+    }
+  },
+  "characters": [],
+  "relationshipFacts": [],
+  "worldbook": [],
+  "knowledgePolicy": "总控摘要非共同知识；新人只见当前来客，须实际听见才知道她的来历与所求。"
+}
