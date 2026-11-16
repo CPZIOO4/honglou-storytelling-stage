@@ -54,7 +54,7 @@ function draw(){
 
 function seek(t){sound?.resetSeek();time=Math.max(0,Math.min(presentation.duration,t));if(time===presentation.duration)playing=false;draw();inspect();}
 function toggle(){if(!ready)return;void sound.unlock();if(time>=presentation.duration)time=0;playing=!playing;lastFrame=performance.now();draw();}
-function tick(now){if(ready&&playing){const dt=Math.min(.1,(now-lastFrame)/1000);time=Math.min(presentation.duration,time+dt*speed);if(time>=presentation.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
+function tick(now){if(ready&&playing){const dt=Math.max(0,Math.min(.1,(now-lastFrame)/1000));time=Math.max(0,Math.min(presentation.duration,time+dt*speed));if(time>=presentation.duration)playing=false;}lastFrame=now;if(ready)draw();raf=requestAnimationFrame(tick);}
 $('audio-mute').onclick=()=>{void sound.unlock();sound.setMuted(!sound.muted);$('audio-mute').textContent=sound.muted?'开启声音':'静音';$('audio-mute').setAttribute('aria-pressed',String(sound.muted));};
 $('music-volume').oninput=e=>{sound.musicVolume=Number(e.target.value);sound.settings();};$('voice-volume').oninput=e=>{sound.voiceVolume=Number(e.target.value);sound.settings();};
 $('play').onclick=toggle;$('restart').onclick=()=>{playing=false;seek(0);};$('ending-replay').onclick=()=>{void sound.unlock();seek(0);playing=true;};
