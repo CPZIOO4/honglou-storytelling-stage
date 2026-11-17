@@ -44,6 +44,14 @@
     "stage": "data/returnhome-stage.json",
     "characters": "data/zhouhome-characters.json",
     "cards": "data/returnhome-cards.json",
-    "story": "data/deepseek-sixth-scene.json"
+    "story": "data/deepseek-sixth-scene.json",
+    "next": "reception"
+  },
+  "reception": {
+    "title": "第七场 · 廊下相见",
+    "stage": "data/reception-stage.json",
+    "characters": "data/waiting-characters.json",
+    "cards": "data/reception-cards.json",
+    "story": "data/deepseek-seventh-scene.json"
   }
 }

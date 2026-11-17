@@ -1,8 +1,8 @@
 # 红楼说书舞台
 
-以三维布景和纸片人物播放《红楼梦》故事。当前实现第一次进荣国府故事线的六场：**寒家谋生**、**荣府问路**、**后街寻人**、**旧识相迎**、**廊前递话**与**回屋传信**。第一场保持已确认版本，第二场继承实际分支：刘姥姥独自抵府，狗儿只送到村口后返回。六场均由 DeepSeek Flash high 根据运行卡、个人听闻与剧情文字生成，经内容和舞台检查后播放。
+以三维布景和纸片人物播放《红楼梦》故事。当前实现第一次进荣国府故事线的七场：**寒家谋生**、**荣府问路**、**后街寻人**、**旧识相迎**、**廊前递话**、**回屋传信**与**廊下相见**。第一场保持已确认版本，第二场继承实际分支：刘姥姥独自抵府，狗儿只送到村口后返回。七场均由 DeepSeek Flash high 根据运行卡、个人听闻与剧情文字生成，经内容和舞台检查后播放。
 
-页面上方可切换场次；直接访问 `?scene=returnhome` 观看第六场，`?scene=waiting` 观看第五场。第三场承接老仆给出的门路，由刘姥姥向后街孩童确认住处、请人带路。后续人物卡、原文依据和场次职责见[人物考据](docs/upcoming-character-research.md)，第五场递话与候见安排见[第五场说明](docs/fifth-scene.md)，返回住处传信的实际接续见[第六场说明](docs/sixth-scene.md)。
+页面上方可切换场次；直接访问 `?scene=reception` 观看第七场，`?scene=returnhome` 观看第六场。第三场承接老仆给出的门路，由刘姥姥向后街孩童确认住处、请人带路。后续人物卡、原文依据和场次职责见[人物考据](docs/upcoming-character-research.md)，第五场递话与候见安排见[第五场说明](docs/fifth-scene.md)，返回住处传信见[第六场说明](docs/sixth-scene.md)，三人初次相见与实际传话见[第七场说明](docs/seventh-scene.md)。
 
 本地后端以宽松故事节点组织剧情：先按人物卡和环境卡写完整场次剧本并检查推进，再编排走位、表情和逐人听闻，整场通过审核后播放。动作编排不能重写台词。GitHub Pages 播放已检查的静态结果；旧助手示例通过 `?demo=1` 保留。观众可播放、暂停、拖动进度、跳段、调速和重播，不参与剧情决策。
 
@@ -34,19 +34,19 @@ Windows 用户也可运行 `启动舞台.ps1`，用 `停止舞台.ps1` 停止该
 - `cards/environment/` 保留用户新版卡并补齐首次进府所缺的五张场景卡，字段与旁白卡 v3 模板一致。
 - 本地“生成当前场景”调用 DeepSeek Flash；生成记录与密钥保留在本机，通过校验才装载新演出。配置与运行说明见 [DeepSeek 接入](docs/deepseek-integration.md)。
 
-故事节点与开放分支见 [节点设计](docs/story-nodes.md)。当前支持前六场及其交接资料，后续节点尚未接成可播放演出。
+故事节点与开放分支见 [节点设计](docs/story-nodes.md)。当前支持前七场及其交接资料，后续节点尚未接成可播放演出。
 
 ## 内容来源与当前边界
 
 人物与环境沿用用户提供的立绘、三维模型及修改版人物卡、环境卡。当前生成从农家初始情况开始，不将原著第六回或旧示例剧情作为续写剧本。刘姥姥和板儿卡已从后期贾母上房情境改写到当前家中；狗儿、刘氏、青儿及农家环境卡是本轮补写。来源与改编说明见 `data/cards.json`。服装、画风沿用已确认资产，未用文字卡覆盖立绘。
 
-本轮复用周瑞妻子住处模型，接入返回传话的第六场网页演出，后续仍依据当前实际分支扩展。页面是**文字说书版**，暂不包含配音或口型。当前交付经过真实 API 生成、模型自动审查与修订，以及内容和实际播放检查；这版没有人工对白补丁。旧八段版本因重复和人物失真已被新版本替换；修正过程保留在 `generation`，场次剧本与下一节点交接记录在 `narrative`。站姿立绘不冒充坐姿，点头/摇头是纸片头部的有限运动。路线图避开固定家具，尚非通用人群避碰或物理引擎。
+本轮复用倒厅模型，接入刘姥姥首次与平儿本人相见的第七场网页演出，后续仍依据当前实际分支扩展。页面是**文字说书版**，暂不包含配音或口型。当前交付经过真实 API 生成、模型自动审查与修订，以及内容和实际播放检查；这版没有人工对白补丁。旧八段版本因重复和人物失真已被新版本替换；修正过程保留在 `generation`，场次剧本与下一节点交接记录在 `narrative`。站姿立绘不冒充坐姿，点头/摇头是纸片头部的有限运动。路线图避开固定家具，尚非通用人群避碰或物理引擎。
 
 原文：[《红楼梦》第六回](https://zh.wikisource.org/zh-hans/紅樓夢/第006回)。卡片、场景与历史组织参考 [SillyTavern Character Design](https://docs.sillytavern.app/usage/core-concepts/characterdesign/)，本项目不依赖也不冒充 SillyTavern。
 
 ## 项目结构
 
-- `data/deepseek-first-scene.json` / `data/deepseek-second-scene.json` / `data/deepseek-third-scene.json` / `data/deepseek-fourth-scene.json` / `data/deepseek-fifth-scene.json` / `data/deepseek-sixth-scene.json`：已检查的六场 Flash 演出；`data/productions.json` 绑定各场模型和运行卡。
+- `data/deepseek-first-scene.json` / `data/deepseek-second-scene.json` / `data/deepseek-third-scene.json` / `data/deepseek-fourth-scene.json` / `data/deepseek-fifth-scene.json` / `data/deepseek-sixth-scene.json` / `data/deepseek-seventh-scene.json`：已检查的七场 Flash 演出；`data/productions.json` 绑定各场模型和运行卡。
 - `data/scene-one.json`：保留的旧助手示例。
 - `data/cards.json`：实际角色卡、环境卡、关系事实和知识边界；`cards/characters/` 为可读导出。
 - `data/audio-library.json`、`src/audio.js`、`src/soundtrack.js`：曲库、角色短音及声音时间轴。
