@@ -60,6 +60,14 @@
     "stage": "data/report-stage.json",
     "characters": "data/report-characters.json",
     "cards": "data/report-cards.json",
-    "story": "data/deepseek-eighth-scene.json"
+    "story": "data/deepseek-eighth-scene.json",
+    "next": "invite"
+  },
+  "invite": {
+    "title": "第九场 · 传话引见",
+    "stage": "data/invite-stage.json",
+    "characters": "data/waiting-characters.json",
+    "cards": "data/invite-cards.json",
+    "story": "data/deepseek-ninth-scene.json"
   }
 }

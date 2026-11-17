@@ -1,5 +1,6 @@
 import {validateFactRefs} from './card-context.mjs';
 
+const INVITE_VOICE='当前scene.id=rongfu-invitation，是平儿已问得主人答复后返回传话，不是第五场重新争取许可，也不是第七场初次相见。刘姥姥本场职责是接住消息、主动应下或提出确有必要的顾虑；initiative.volunteerAt可引用她愿随行的回应，不把平儿传邀请当成推派。不得将平儿第八场自己说只领一人说成凤姐禁止周嫂子同行。许可只证明可以相见，不能说米粮已有着落。三两句可说清的事不要拖，避免羞怯、反复感谢、训规矩和再次自我介绍。';
 export const DIALOGUE_CHECKS=['responsiveness','helpRoute','decision','voice','redundancy','agency','facts'];
 const REPORT_VOICE='当前scene.id=fengjie-report，make-case节点在本分支由平儿独自向凤姐转述。刘姥姥与周瑞妻子不在场，不能强求她们发言、当面讨赏或在本场被直接领入。平儿是本场主动回话者，凤姐本轮第一次听此事，先听才知道身份、关系、所求。周嫂子转述的联宗不能升级为太太认下近亲，刘姥姥当面说的米粮请求保留原话语境；不能凭空说家中断粮、孩子病饿、已有几石米等。凤姐可自主安排接见、查询、回绝或帮助，不固定二十两、先问太太或必须接见；听得懂、问得准、作决定体现能干，不需连串盘诘、办事公文或刻薄警告。若让平儿出去传话，实际即时下一步仅平儿去廊下，下一节点audience-window，留候者尚未听到答复，不自动同行。';
 const ARRIVAL_VOICE='当前scene.id=rongfu-reception，是刘姥姥与周瑞妻子已经到倒厅旁、首次见平儿本人。平儿的个人经历已包含第五场来意，不能当作全不知情，也不能知道第六场未听见的原话。不要套第五场周瑞妻子独自来递话的流程，不重复家计、亲属、许可地点等已定内容。刘姥姥本场职责是自然招呼、接话并主动表达眼下实际需要；initiative.volunteerAt可引用这类真实发言，不要求重新自愿出门，不把周嫂子引见当成推派。句子须是活人答话，感谢点到即止，不说规规矩矩站着、别乱走等执行限制。若平儿决定去回禀，决定之后才走向门边，另两人留下；不能凭空接到主人答复，也不能把已同意到此候见偷换为已获准进正房。';
@@ -77,10 +78,10 @@ export async function composeConversation({ask,cards,context,rejected=null,feedb
  let draft=rejected,review,errors=feedback;
  for(let attempt=0;attempt<3;attempt++){
   await onPhase(attempt?'根据接话审核重写完整交谈':'先写人物之间的连续交谈');
-  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
+  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
   try{validateConversation(draft,cards);}catch(e){if(attempt===2)throw e;errors=e.message;continue;}
   await onPhase('独立连读对白，逐句核对回应、门路和决定');
-  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
+  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
   try{validateDialogueReview(review,draft,cards);}catch(e){if(attempt===2)throw e;errors={validationError:e.message,review};continue;}
   if(review.passed===true)break;
   if(attempt===2)throw Error('连续对白未通过：'+JSON.stringify(review.issues));errors=review;
