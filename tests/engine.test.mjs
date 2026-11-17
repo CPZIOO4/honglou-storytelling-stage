@@ -1,7 +1,8 @@
+import {dataFile} from '../shared/data-files.js';
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
 import {compileStory,stateAt,validateStory,route,along,buildDirectorContext} from '../src/engine.js';
-const read=p=>JSON.parse(readFileSync(new URL('../data/'+p,import.meta.url),'utf8'));
-const story=read('scene-one.json'),stage=read('stage.json'),characters=read('characters.json'),cards=read('cards.json');
+const read=p=>JSON.parse(readFileSync(new URL('../'+dataFile(p),import.meta.url),'utf8'));
+const story=read('scene-one.json'),stage=read('stages/home.json'),characters=read('characters/home.json'),cards=read('cards/home.json');
 const compiled=compileStory(story,stage,characters);
 test('all 15 authored beats are executable without a remote API',()=>{assert.equal(compiled.beats.length,15);assert.equal(compiled.duration,233);assert.deepEqual(validateStory(story,stage,characters),[]);});
 test('seeking reconstructs exactly the same state, including after the departure',()=>{for(const t of [0,22,65,110,198,211]){const first=stateAt(compiled,t);stateAt(compiled,120);assert.deepEqual(stateAt(compiled,t),first);}assert.equal(stateAt(compiled,233).actors.granny.visible,false);assert.equal(stateAt(compiled,0).actors.granny.visible,true);});

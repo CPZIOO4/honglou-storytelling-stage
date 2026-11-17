@@ -1,7 +1,8 @@
+import {dataFile} from '../shared/data-files.js';
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
 import {auditGeneratedStory,generationContext} from '../backend/generator.mjs';
 import {compileStory,stateAt} from '../src/engine.js';
-const j=n=>JSON.parse(readFileSync(new URL('../data/'+n+'.json',import.meta.url),'utf8'));const stage=j('stage'),cards=j('cards'),characters=j('characters'),seed=j('scene-one');
+const j=n=>JSON.parse(readFileSync(new URL('../'+dataFile(n),import.meta.url),'utf8'));const stage=j('stage'),cards=j('cards'),characters=j('characters'),seed=j('scene-one');
 const story=()=>({...seed,beats:[{id:'model-first',title:'家中问话',duration:16,narration:'刘姥姥转向狗儿。',dialogue:[{at:2,until:13,speaker:'granny',to:['gouer'],mode:'normal',text:'姑爷，今日有什么难处？',knowledgeRefs:[]}],commands:[{at:0,type:'face',actor:'granny',target:'gouer'}],memory:'刘姥姥向狗儿询问。'}]});
 test('a model packet passes the same renderer and generation audit',()=>{assert(auditGeneratedStory(story(),stage,characters).passed);});
 test('turning from a doorway does not falsely require a walking command',()=>{const s=story();s.beats[0].narration='刘姥姥从炕前转过身来。';assert(auditGeneratedStory(s,stage,characters).passed);s.beats[0].narration='刘姥姥从炕前走到门边。';assert.throws(()=>auditGeneratedStory(s,stage,characters),/move/);});

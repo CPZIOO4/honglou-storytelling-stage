@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,statSync} from 'node:fs';
 import {compileSoundtrack,musicAt,dialogueFrame,voiceSamples} from '../src/soundtrack.js';
 import {validateFactRefs,runtimeCards} from '../backend/card-context.mjs';
-const lib=JSON.parse(readFileSync(new URL('../data/audio-library.json',import.meta.url),'utf8'));
+const lib=JSON.parse(readFileSync(new URL('../data/audio/library.json',import.meta.url),'utf8'));
 const timeline={segments:[{kind:'opening',start:0,duration:3},{kind:'performance',beatId:'a',start:3,duration:10},{kind:'performance',beatId:'b',start:13,duration:10}]};
 test('music pause and resume retain position; seeking backwards reconstructs it',()=>{
  const cues=compileSoundtrack({soundtrack:{cues:[{section:'opening',action:'play',track:'taohua'},{section:'a',action:'pause'},{section:'b',action:'resume'}]}},timeline,lib);
@@ -18,7 +18,7 @@ test('all available voices differ and have bounded samples without abrupt final 
 });
 test('every library recording exists with source and attribution',()=>{assert(lib.tracks.length>=3);for(const t of lib.tracks){assert.equal(statSync(new URL('../'+t.url,import.meta.url)).size,t.bytes);assert(t.source.startsWith('https://peritune.com/'));assert.equal(t.license,'CC BY 4.0');}});
 test('relationship evidence distinguishes awareness from the other family old connection',()=>{
- const cards=JSON.parse(readFileSync(new URL('../data/cards.json',import.meta.url),'utf8'));
+ const cards=JSON.parse(readFileSync(new URL('../data/cards/home.json',import.meta.url),'utf8'));
  assert.throws(()=>validateFactRefs({speaker:'granny',factRefs:['gouer_zhou_connection']},cards));
  validateFactRefs({speaker:'granny',factRefs:['granny_zhou_awareness']},cards);
  validateFactRefs({speaker:'gouer',factRefs:['gouer_zhou_connection']},cards);

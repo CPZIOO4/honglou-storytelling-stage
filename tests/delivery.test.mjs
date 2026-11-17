@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readFile,mkdir,mkdtemp,writeFile,cp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {loadProduction,latestPath,lineageCurrent} from '../backend/productions.mjs';import {commitMemory,memoryEvidence,mergeMemory,validateMemoryUpdate} from '../backend/story-memory.mjs';import {validateFactRefs} from '../backend/card-context.mjs';import {compileStory,stateAt} from '../src/engine.js';import {stageScriptBeat,applyModelPatches} from '../backend/narrative.mjs';
-const read=async p=>JSON.parse(await readFile(p,'utf8')),parent=await read(new URL('../data/deepseek-eleventh-scene.json',import.meta.url));
+const read=async p=>JSON.parse(await readFile(p,'utf8')),parent=await read(new URL('../data/stories/arrange.json',import.meta.url));
 async function fixture(fn){const root=await mkdtemp(join(tmpdir(),'honglou-delivery-'));try{await cp(new URL('../data',import.meta.url),join(root,'data'),{recursive:true});await mkdir(join(root,'.runtime'));await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
 const line={speaker:'ping_er',to:['granny'],mode:'normal',text:'姥姥，接着。',knowledgeRefs:[],factRefs:[]};
 function packet(p){return {version:1,scene:p.stage.id,initial:p.seed.initial,beats:[stageScriptBeat({id:'give',title:'交接',change:'递给来客',dialogue:[line]},{narration:'平儿将米钱交给刘姥姥。',afterTransfers:[{actor:'ping_er',target:'granny',prop:'rice'},{actor:'ping_er',target:'granny',prop:'coins'}]})]};}

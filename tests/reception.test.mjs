@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {readFile,mkdir,mkdtemp,writeFile,cp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {loadProduction,lineageCurrent,latestPath} from '../backend/productions.mjs';import {commitMemory,mergeMemory} from '../backend/story-memory.mjs';
 import {validateFactRefs} from '../backend/card-context.mjs';import {compileStory,stateAt,route,along} from '../src/engine.js';
-const read=async p=>JSON.parse(await readFile(p,'utf8')),sixth=await read(new URL('../data/deepseek-sixth-scene.json',import.meta.url));
+const read=async p=>JSON.parse(await readFile(p,'utf8')),sixth=await read(new URL('../data/stories/returnhome.json',import.meta.url));
 async function fixture(fn){const root=await mkdtemp(join(tmpdir(),'honglou-reception-'));try{await cp(new URL('../data',import.meta.url),join(root,'data'),{recursive:true});await mkdir(join(root,'.runtime'));await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
 test('seventh scene requires accepted sixth and actual two-person arrival',()=>fixture(async root=>{
  await assert.rejects(loadProduction(root,'reception'),/确认第六场/);await commitMemory(root,sixth);const p=await loadProduction(root,'reception');
@@ -17,7 +17,7 @@ test('Ping er remembers fifth-scene information without receiving sixth-scene pr
  validateFactRefs({speaker:'granny',factRefs:['previous_home_0']},cards);
 }));
 test('returning resident Ping er keeps her last actual location',()=>fixture(async root=>{
- await commitMemory(root,sixth);const p=await loadProduction(root,'reception'),fifth=await read(join(root,'data/deepseek-fifth-scene.json')),stage=await read(join(root,'data/waiting-stage.json')),roster=await read(join(root,'data/waiting-characters.json'));
+ await commitMemory(root,sixth);const p=await loadProduction(root,'reception'),fifth=await read(join(root,'data/stories/waiting.json')),stage=await read(join(root,'data/stages/waiting.json')),roster=await read(join(root,'data/characters/waiting.json'));
  const c=compileStory(fifth,stage,roster.filter(a=>fifth.castIds.includes(a.id)));assert.equal(p.seed.initial.actors.ping_er.anchor,stateAt(c,c.duration).actors.ping_er.anchor);
 }));
 test('guest, companion and reporting routes use distinct unobstructed standing positions',()=>fixture(async root=>{
@@ -26,5 +26,5 @@ test('guest, companion and reporting routes use distinct unobstructed standing p
 }));
 test('seventh memory preserves absent family and old ancestor changes invalidate the current reception',()=>fixture(async root=>{
  const m=mergeMemory(sixth.contextMemory,{summary:'来客与平儿相见。',characters:[{id:'ping_er',memory:'平儿首次与刘姥姥本人交谈。'}]},{id:'seventh',beats:[{dialogue:[]}]});assert.equal(m.revision,7);assert.equal(m.characters.gouer,sixth.contextMemory.characters.gouer);
- assert(await lineageCurrent(root,'reception',{carryover:{parentStoryId:sixth.id}}));const fifth=await read(join(root,'data/deepseek-fifth-scene.json'));await writeFile(latestPath(root,'waiting'),JSON.stringify({...fifth,id:'different-fifth'}));assert(!await lineageCurrent(root,'reception',{carryover:{parentStoryId:sixth.id}}));
+ assert(await lineageCurrent(root,'reception',{carryover:{parentStoryId:sixth.id}}));const fifth=await read(join(root,'data/stories/waiting.json'));await writeFile(latestPath(root,'waiting'),JSON.stringify({...fifth,id:'different-fifth'}));assert(!await lineageCurrent(root,'reception',{carryover:{parentStoryId:sixth.id}}));
 }));

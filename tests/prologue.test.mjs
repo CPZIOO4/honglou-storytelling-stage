@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {composePrologue,validatePrologue} from '../backend/prologue.mjs';
 import {compilePresentation} from '../src/presentation.js';
 import {compileSoundtrack} from '../src/soundtrack.js';
-const cards=JSON.parse(await readFile(new URL('../data/cards.json',import.meta.url),'utf8'));
+const cards=JSON.parse(await readFile(new URL('../data/cards/home.json',import.meta.url),'utf8'));
 test('opening narration cannot invent a seated pose for standing actors',()=>{
  assert.throws(()=>validatePrologue({text:'京郊狗儿家，刘姥姥和女儿女婿围坐在屋里，商量过冬衣食未齐的难处。'}),/站姿/);
 });
@@ -21,7 +21,7 @@ test('music can begin in prologue without mistaking it for a later bridge',()=>{
 });
 
 test('both prologue writer and reviewer receive actual curtain state and can repair an inconsistent description',async()=>{
- const room=JSON.parse(await readFile(new URL('../data/report-cards.json',import.meta.url),'utf8'));
+ const room=JSON.parse(await readFile(new URL('../data/cards/report.json',import.meta.url),'utf8'));
  const wrong='平儿来到正房堂屋门前，门帘半垂，窗光落在炕沿，王熙凤在会客炕前等她回话。';
  const correct='平儿来到正房堂屋入口，门帘束在两侧，窗光落在炕沿，王熙凤在会客炕前站着。';
  let reviews=0;

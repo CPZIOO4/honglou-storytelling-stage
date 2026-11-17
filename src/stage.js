@@ -1,3 +1,4 @@
+import {batchStaticModel} from './render/static-batches.js';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {loadResource} from './resource-loader.js';
@@ -13,7 +14,7 @@ export class StageView{
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);
   }
   async load(){
-    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.cutawayMeshes=[];this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(this.stage.cutaway?.prefixes.some(p=>o.name.startsWith(p)))this.cutawayMeshes.push(o);}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入本场人物');
+    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.batchStats=batchStaticModel(this.model,o=>!!this.stage.cutaway?.prefixes.some(p=>o.name.startsWith(p)));this.cutawayMeshes=[];this.model.traverse(o=>{if(o.isMesh&&o.userData.stageCutaway)this.cutawayMeshes.push(o);});this.scene.add(this.model);this.progress('屋舍已就位，正在载入本场人物');
     const loader=new THREE.TextureLoader();let done=0;
     for(const c of this.characters){
       const prefix=`assets/characters/${c.id}/`;const tex={};
@@ -35,7 +36,7 @@ export class StageView{
     }
     this.resize();
   }
-  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.width=width;this.height=height;this.renderer.setSize(width,height);if(this.currentCamera)this.applyCamera(this.currentCamera);}
+  resize(){const {width,height}=this.container.getBoundingClientRect();if(!width||!height)return;this.width=width;this.height=height;this.renderer.setSize(width,height);if(this.currentCamera)this.applyCamera(this.currentCamera);this.invalidate?.();}
   applyCamera(id){let c=this.stage.cameras[id];if(this.width<600&&id==='wide'&&!this.override)c={...this.stage.cameras.family,scale:7.7};if(this.width<600&&c.mobile&&this.override!=='wide')c={...c,...c.mobile};this.currentCamera=id;const aspect=(this.width||800)/(this.height||450);const half=c.scale/2;Object.assign(this.camera,{left:-half,right:half,top:half/aspect,bottom:-half/aspect});this.camera.position.copy(convert(c.position));this.camera.lookAt(convert(c.target));this.camera.updateProjectionMatrix();}
   showWide(){this.override=this.currentCamera==='wide'?'family':'wide';this.applyCamera(this.override);}
   headScreen(id){const a=this.actors.get(id);if(!a?.group.visible)return null;const p=a.group.position.clone();p.y+=a.height+.05;p.project(this.camera);return {x:(p.x*.5+.5)*this.width,y:(-p.y*.5+.5)*this.height};}
@@ -83,5 +84,5 @@ export class StageView{
     for(const [id,g]of this.propMeshes)if(!state.props?.[id])g.visible=false;
     this.layoutNames();this.renderer.render(this.scene,this.camera);
   }
-  dispose(){this.resizeObserver.disconnect();this.scene.traverse(o=>{o.geometry?.dispose();const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats)if(m){m.map?.dispose();m.dispose();}});this.renderer.dispose();}
+  dispose(){this.resizeObserver.disconnect();for(const a of this.actors.values())for(const texture of Object.values(a.tex))texture.dispose();this.scene.traverse(o=>{o.geometry?.dispose();const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats)if(m){m.map?.dispose();m.dispose();}});this.renderer.dispose();}
 }

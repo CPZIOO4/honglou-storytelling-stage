@@ -3,7 +3,7 @@ import {readFile,mkdir,mkdtemp,writeFile,cp,rm} from 'node:fs/promises';import {
 import {loadProduction,lineageCurrent,latestPath} from '../backend/productions.mjs';import {commitMemory,mergeMemory} from '../backend/story-memory.mjs';
 import {validateFactRefs} from '../backend/card-context.mjs';import {route,along} from '../src/engine.js';import {validateConversation} from '../backend/conversation.mjs';
 import {handoffAuditContext} from '../backend/generator.mjs';import {buildHandoff,stageScriptBeat} from '../backend/narrative.mjs';
-const read=async p=>JSON.parse(await readFile(p,'utf8')),seventh=await read(new URL('../data/deepseek-seventh-scene.json',import.meta.url));
+const read=async p=>JSON.parse(await readFile(p,'utf8')),seventh=await read(new URL('../data/stories/reception.json',import.meta.url));
 async function fixture(fn){const root=await mkdtemp(join(tmpdir(),'honglou-report-'));try{await cp(new URL('../data',import.meta.url),join(root,'data'),{recursive:true});await mkdir(join(root,'.runtime'));await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
 test('eighth scene requires accepted seventh and brings only the reporter to the householder',()=>fixture(async root=>{
  await assert.rejects(loadProduction(root,'report'),/确认第七场/);await commitMemory(root,seventh);const p=await loadProduction(root,'report');
@@ -25,7 +25,7 @@ test('permission can be carried back to waiting guests, without unsupported seat
 }));
 test('a private household reply does not update waiting guests and older branch changes invalidate it',()=>fixture(async root=>{
  const m=mergeMemory(seventh.contextMemory,{summary:'平儿到正房回话。',characters:[{id:'ping_er',memory:'平儿听到凤姐的答复。'},{id:'fengjie',memory:'凤姐听到平儿转述。'}]},{id:'eighth',beats:[{dialogue:[]}]});assert.equal(m.revision,8);assert.equal(m.characters.granny,seventh.contextMemory.characters.granny);assert.equal(m.characters.zhou_wife,seventh.contextMemory.characters.zhou_wife);
- assert(await lineageCurrent(root,'report',{carryover:{parentStoryId:seventh.id}}));const sixth=await read(join(root,'data/deepseek-sixth-scene.json'));await writeFile(latestPath(root,'returnhome'),JSON.stringify({...sixth,id:'different-sixth'}));assert(!await lineageCurrent(root,'report',{carryover:{parentStoryId:seventh.id}}));
+ assert(await lineageCurrent(root,'report',{carryover:{parentStoryId:seventh.id}}));const sixth=await read(join(root,'data/stories/returnhome.json'));await writeFile(latestPath(root,'returnhome'),JSON.stringify({...sixth,id:'different-sixth'}));assert(!await lineageCurrent(root,'report',{carryover:{parentStoryId:seventh.id}}));
 }));
 test('handoff review distinguishes going out to notify from later returning with the invited visitor',()=>fixture(async root=>{
  await commitMemory(root,seventh);const p=await loadProduction(root,'report');

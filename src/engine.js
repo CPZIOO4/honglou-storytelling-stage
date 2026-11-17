@@ -141,13 +141,18 @@ export function validateDialogueBlocking(compiled){
   }
   return errors;
 }
+const knowledgeCache=new WeakMap();
 export function personalKnowledge(compiled,time){
+ let cached=knowledgeCache.get(compiled);if(!cached){cached=compileKnowledge(compiled);knowledgeCache.set(compiled,cached);}
+ return Object.fromEntries(Object.entries(cached).map(([id,events])=>[id,events.filter(e=>e.until<=time).map(({until,...e})=>({...e,to:[...e.to]}))]));
+}
+function compileKnowledge(compiled){
   const knowledge=Object.fromEntries(compiled.characters.map(c=>[c.id,[]]));
   for(const b of compiled.beats)for(const [i,d]of b.dialogue.entries()){
-    if(b.start+d.until>time)continue;
+
     const full=new Set(compiled.characters.map(c=>c.id));
     for(let t=b.start+d.at;t<b.start+d.until;t+=.25){const state=stateAt(compiled,t);const heard=listenersFor(compiled.stage,state.actors,d);for(const id of full)if(!heard.includes(id))full.delete(id);}
-    for(const id of full)knowledge[id].push({eventId:`${b.id}:${i}`,speaker:d.speaker,to:d.to,mode:d.mode,text:d.text});
+    for(const id of full)knowledge[id].push({until:b.start+d.until,eventId:`${b.id}:${i}`,speaker:d.speaker,to:d.to,mode:d.mode,text:d.text});
   }
   return knowledge;
 }
@@ -160,6 +165,6 @@ export function buildDirectorContext(cards,compiled,time){
     characterViews:Object.fromEntries(Object.entries(s.actors).map(([id,a])=>[id,{present:a.visible,position:a.position,addressedBy:a.addressedBy,heardUtterances:memories[id]}])),
     currentState:{time,actors:s.actors,props:s.props,camera:s.camera,lighting:s.lighting},
     capabilities:{commands:TYPES,expressions:EXPRESSIONS,anchors:Object.keys(compiled.stage.anchors),cameras:Object.keys(compiled.stage.cameras)},
-    boundaries:['只生成当前第一场的内容','不让观众扮演角色','不执行任意代码','不让人物知道未来的接待结果','只使用现有动作、人物和站位']
+    boundaries:['只生成当前场景内的内容，按实际交接延续','不让观众扮演角色','不执行任意代码','不让人物知道未来的接待结果','只使用现有动作、人物和站位']
   };
 }

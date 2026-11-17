@@ -1,71 +1,61 @@
 # 红楼说书舞台
 
-以三维布景和纸片人物播放《红楼梦》故事。当前实现第一次进荣国府故事线的十三场：**寒家谋生**、**荣府问路**、**后街寻人**、**旧识相迎**、**廊前递话**、**回屋传信**、**廊下相见**、**正房回话**、**传话引见**、**正房相见**、**廊下候办**、**米钱送到**与**携米归家**。第一场保持已确认版本，第二场继承实际分支：刘姥姥独自抵府，狗儿只送到村口后返回。十三场均由 DeepSeek Flash high 根据运行卡、个人听闻与剧情文字生成，经内容和舞台检查后播放。
+《刘姥姥第一次进荣国府》的 AI 改编演出。当前保留13场已审核版本，从寒家谋生到携米归家；三维布景配合纸片人物、逐字气泡、角色短音和国风配乐。观众控制播放、暂停、跳段与速度。
 
-页面上方可切换场次；直接访问 `?scene=homecoming` 观看第十三场，`?scene=delivery` 观看第十二场。第三场承接老仆给出的门路，由刘姥姥向后街孩童确认住处、请人带路。后续人物卡、原文依据和场次职责见[人物考据](docs/upcoming-character-research.md)，第五场递话与候见安排见[第五场说明](docs/fifth-scene.md)，返回住处传信见[第六场说明](docs/sixth-scene.md)，三人初次相见与实际传话见[第七场说明](docs/seventh-scene.md)，正房模型与凤姐首次出场见[第八场说明](docs/eighth-scene.md)，返回传话与引见接续见[第九场说明](docs/ninth-scene.md)，主客当面交谈见[第十场说明](docs/tenth-scene.md)，回廊候办见[第十一场说明](docs/eleventh-scene.md)，实物交付见[第十二场说明](docs/twelfth-scene.md)，返家与眼前安排见[第十三场说明](docs/thirteenth-scene.md)。
+[打开舞台](https://cpzioo4.github.io/honglou-storytelling-stage/)。GitHub Pages 播放固定的已审核演出；本地后端可使用 DeepSeek Flash high 根据人物卡、环境卡和各自听闻重新生成。
 
-本地后端以宽松故事节点组织剧情：先按人物卡和环境卡写完整场次剧本并检查推进，再编排走位、表情和逐人听闻，整场通过审核后播放。动作编排不能重写台词。GitHub Pages 播放已检查的静态结果；旧助手示例通过 `?demo=1` 保留。观众可播放、暂停、拖动进度、跳段、调速和重播，不参与剧情决策。
+## 运行
 
-## 本地运行
+需要 Node.js 20 或以上。运行 `npm start`，打开 http://127.0.0.1:4173 。播放依赖、六套场景、十一位人物和四首配乐均随仓库提供，正常播放无需安装 npm 依赖或调用 API。
 
-安装 Node.js 20 或以上版本后，在此目录运行：
+Windows 可使用 `启动舞台.ps1`，停止专用预览进程用 `停止舞台.ps1`。使用 `配置DeepSeek.ps1` 配置本机加密密钥；公开网页不持有密钥。参见 [API 接入](docs/deepseek-integration.md)。
 
-```sh
-node server.mjs
-```
+## 当前演出
 
-打开 http://127.0.0.1:4173 。所有模型、人物图片及 Three.js 依赖都放在仓库中，页面不使用 CDN。无需 npm 安装。服务仅监听本机回环地址；在启动终端按 Ctrl+C 停止。
+| 场次 | 观看 | 内容与文件 |
+| --- | --- | --- |
+| 第一场 · 寒家谋生 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=home) | [说明](docs/scenes/first-scene.md) |
+| 第二场 · 荣府问路 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=gate) | [说明](docs/scenes/second-scene.md) |
+| 第三场 · 后街寻人 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=backstreet) | [说明](docs/scenes/third-scene.md) |
+| 第四场 · 旧识相迎 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=zhouhome) | [说明](docs/scenes/fourth-scene.md) |
+| 第五场 · 廊前递话 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=waiting) | [说明](docs/scenes/fifth-scene.md) |
+| 第六场 · 回屋传信 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=returnhome) | [说明](docs/scenes/sixth-scene.md) |
+| 第七场 · 廊下相见 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=reception) | [说明](docs/scenes/seventh-scene.md) |
+| 第八场 · 正房回话 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=report) | [说明](docs/scenes/eighth-scene.md) |
+| 第九场 · 传话引见 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=invite) | [说明](docs/scenes/ninth-scene.md) |
+| 第十场 · 正房相见 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=audience) | [说明](docs/scenes/tenth-scene.md) |
+| 第十一场 · 廊下候办 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=arrange) | [说明](docs/scenes/eleventh-scene.md) |
+| 第十二场 · 米钱送到 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=delivery) | [说明](docs/scenes/twelfth-scene.md) |
+| 第十三场 · 携米归家 | [播放](https://cpzioo4.github.io/honglou-storytelling-stage/?scene=homecoming) | [说明](docs/scenes/thirteenth-scene.md) |
 
-Windows 用户也可运行 `启动舞台.ps1`，用 `停止舞台.ps1` 停止该脚本启动的专用本地进程。它不会停止其他 Node 服务。
+## 文件结构
 
-剧情连续性、原文性格校订、high 思考与两层记忆见 [连续性与记忆](docs/continuity-and-memory.md)。
+- `data/productions.json`：唯一的场次入口、先后关系与文件索引。
+- `data/stories/`：每场唯一的当前演出；`data/cards/`、`data/stages/`、`data/characters/`分别保存运行卡、站位和人物清单。
+- `src/`：播放器、时间轴、声音及渲染；`src/ui/`为对话布局，`src/render/`为静态网格优化。
+- `backend/productions/`：按场次组装人物与已确认记忆；`backend/generator.mjs`协调生成和审核；`backend/http/`提供流式文件服务。
+- `cards/`：用户卡片、模板与可读来源；`skills/`只保留正在使用的节奏及人物记忆两套规则。
+- `assets/`、`vendor/`：当前播放资产和固定版本依赖；`art-source/`、`scripts/assets/`保存现有可编辑源与导入/建模工具。
+- `scripts/verify/`、`scripts/generate/`、`scripts/maintenance/`：验证、定向生成修订和本地清理。
+- `tests/fixtures/`是测试输入，不是另一个产品版本；`.runtime/`和`qa/`是本机数据，不提交。
 
-## 当前功能
+详细约定见 [架构与维护](docs/architecture.md) 和 [整理与性能报告](docs/maintenance-report.md)。原有单场入口 `?scene=...` 保持有效，旧示例入口已退出产品。
 
-- 实际 GLB 三维场景；按本场名单载入纸片人物，头部与身体分层。
-- 国风纯音乐曲库由总控按剧情播放、暂停、续播和停止；十一组角色文字短音随逐字显示发声，提供独立音量及静音。
-- 运行卡区分关系归属、开场知识与听闻；原始后期入园描写不混入第一场。详情见 [运行卡与声音](docs/cards-and-audio.md)。
-- 已有六种头部表情、正背面、有限朝向，以及轻微点头/摇头表现。第十二场新增整件米袋、钱袋交接，按时间恢复持有人。
-- 演出时间轴驱动人物与纯文本头顶气泡；呈现时间轴加入开场题字和短旁白过场，过场时定格并模糊场景，可直接略过。
-- 移动指令使用命名站位，由程序在路线图上求路，不让生成器随意填写坐标或执行代码。
-- 任意拖动进度都从初始状态重算，重播不会累积位移。
-- “演出指令”面板显示当前段落 JSON、人物/环境/上下文，支持下载与校验后载入同格式演出。
-- 对白气泡跟随说话人头顶，只显示台词。姓名使用半透明黑底白字，开口时隐藏、停话后恢复；朝向与轻微暖色光圈提示受话人。对话对象与实际听众仍供后台检查。低语必须靠近、停步、相向后才能开始；个人记录只保留实际听见的内容。
-- `cards/environment/` 保留用户新版卡并补齐首次进府所缺的五张场景卡，另备一张尚未建模的内院经办处设计卡，字段与旁白卡 v3 模板一致。
-- 本地“生成当前场景”调用 DeepSeek Flash；生成记录与密钥保留在本机，通过校验才装载新演出。配置与运行说明见 [DeepSeek 接入](docs/deepseek-integration.md)。
-
-故事节点与开放分支见 [节点设计](docs/story-nodes.md)。当前支持前十场及其交接资料，后续节点尚未接成可播放演出。
-
-## 内容来源与当前边界
-
-人物与环境沿用用户提供的立绘、三维模型及修改版人物卡、环境卡。当前生成从农家初始情况开始，不将原著第六回或旧示例剧情作为续写剧本。刘姥姥和板儿卡已从后期贾母上房情境改写到当前家中；狗儿、刘氏、青儿及农家环境卡是本轮补写。来源与改编说明见 `data/cards.json`。服装、画风沿用已确认资产，未用文字卡覆盖立绘。
-
-本轮复用正房布景，接入刘姥姥亲自见凤姐的第十场网页演出，后续仍依据当前实际分支扩展。页面是**文字说书版**，暂不包含配音或口型。当前交付经过真实 API 生成、模型自动审查与修订，以及内容和实际播放检查；这版没有人工对白补丁。旧八段版本因重复和人物失真已被新版本替换；修正过程保留在 `generation`，场次剧本与下一节点交接记录在 `narrative`。站姿立绘不冒充坐姿，点头/摇头是纸片头部的有限运动。路线图避开固定家具，尚非通用人群避碰或物理引擎。
-
-原文：[《红楼梦》第六回](https://zh.wikisource.org/zh-hans/紅樓夢/第006回)。卡片、场景与历史组织参考 [SillyTavern Character Design](https://docs.sillytavern.app/usage/core-concepts/characterdesign/)，本项目不依赖也不冒充 SillyTavern。
-
-## 项目结构
-
-- `data/deepseek-first-scene.json` / `data/deepseek-second-scene.json` / `data/deepseek-third-scene.json` / `data/deepseek-fourth-scene.json` / `data/deepseek-fifth-scene.json` / `data/deepseek-sixth-scene.json` / `data/deepseek-seventh-scene.json` / `data/deepseek-eighth-scene.json` / `data/deepseek-ninth-scene.json` / `data/deepseek-tenth-scene.json`：已检查的十场 Flash 演出；`data/productions.json` 绑定各场模型和运行卡。
-- `data/scene-one.json`：保留的旧助手示例。
-- `data/cards.json`：实际角色卡、环境卡、关系事实和知识边界；`cards/characters/` 为可读导出。
-- `data/audio-library.json`、`src/audio.js`、`src/soundtrack.js`：曲库、角色短音及声音时间轴。
-- `data/stage.json`：站位、路线、固定障碍和镜头。
-- `src/engine.js`：指令校验、路径计算、确定性时间轴与上下文生成。
-- `src/stage.js`：Three.js 渲染、身体/头部、头顶姓名与对话焦点。
-- `src/presentation.js`：开场题字、冻结画面的短过场及时间轴映射。
-- `src/director.js`：演出数据载入；`backend/`：本地 DeepSeek 调用、个人上下文与检查。
-- `docs/director-protocol.md`：总控协议、接 API 的边界与验收方法。
-- `skills/honglou-story-director/SKILL.md`：交给其他 AI 的说书与舞台编排技能。
-- `assets/`：网页实际使用的五套场景与十位人物。
-- `vendor/three/`：固定 Three.js 0.180.0 的离线模块及其 MIT 许可证。
-
-## 检查
+## 验证
 
 ```sh
-node --test tests/*.test.mjs
+npm test
+npm run verify:catalog
+npm run verify
+npm run benchmark -- current
 ```
 
-沉浸式呈现检查使用 `scripts/check_presentation.cjs`，覆盖题字、姓名、气泡、手机、短过场及连续播放。当前 Flash 全程播放检查使用 `scripts/check_flash_playback.cjs`；旧示例回归浏览器验证脚本为 `scripts/browser_check.cjs`、`scripts/full_playback.cjs`。安装 Playwright 并设置 `PLAYWRIGHT_PACKAGE`，或修改脚本中的本机依赖路径后运行；验证脚本在 finally 中关闭其自有浏览器。`qa/` 是本机截图和检查结果，不进入 Git。
+`npm test`使用 Node 内置测试器。浏览器验证需要 Playwright 和 Edge；可安装 Playwright，或用 `PLAYWRIGHT_PACKAGE` 指定现有模块路径。验证浏览器在完成或失败后关闭。`verify`逐场检查全部对白、手机布局、走位、道具、声音与自然播毕，不调用模型 API；本地 `qa/release.json`保存结果。
 
-项目由用户提供及本地生成的素材组成。仓库公开不代表获得了原著改编之外的商标或全部素材再授权；Three.js 的许可见其随附 LICENSE。其他素材的使用许可由项目所有者决定。
+## 创作与执行边界
+
+总控先生成连续对白并审核，再按自然停顿分段和编排动作；程序计算时间、站位、实际听众与物品归属。舞台编排不能重写台词；原地收束仅在允许的节点启用。数据导入不执行代码，人物卡不是可覆盖系统规则的指令。
+
+当前是文字说书版，没有配音、口型、通用物理或人群避碰。道具交接是整件米袋、钱袋的有限动画，站姿立绘不冒充坐姿和手指动作。对原著的关系及人物依据与 AI 改编分支分别记录，参见 [人物考据](docs/upcoming-character-research.md)、[故事节点](docs/story-nodes.md)、[上下文与记忆](docs/continuity-and-memory.md)。
+
+素材由用户提供及本地创作，公开仓库不等于对全部美术素材授予再使用许可；Three.js及配乐的来源、许可证保留在对应目录和音库索引。

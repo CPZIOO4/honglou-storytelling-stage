@@ -1,8 +1,9 @@
+import {dataFile} from '../shared/data-files.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validatePlan,validateScreenplay,buildHandoff,nextNodeContext,stageScriptBeat,applyModelPatches} from '../backend/narrative.mjs';
-const j=n=>JSON.parse(readFileSync(new URL('../data/'+n+'.json',import.meta.url),'utf8'));
+const j=n=>JSON.parse(readFileSync(new URL('../'+dataFile(n),import.meta.url),'utf8'));
 const stage=j('stage'),characters=j('characters'),cards=j('cards'),seed=j('scene-one'),line=j('storyline');
 function branch(companion){
  const name=cards.characters.find(c=>c.id===companion).name;

@@ -8,7 +8,7 @@ import {buildWritingContext,validateMemoryUpdate,mergeMemory,commitMemory,accept
 import {fileURLToPath} from 'node:url';
 import {runtimeCards} from '../backend/card-context.mjs';
 import {validateScreenplay} from '../backend/narrative.mjs';
-const cards=JSON.parse(await readFile(new URL('../data/cards.json',import.meta.url),'utf8'));
+const cards=JSON.parse(await readFile(new URL('../data/cards/home.json',import.meta.url),'utf8'));
 const evidence={events:[{id:'a:0',speaker:'granny',text:'明早我同刘氏去。'},{id:'a:1',speaker:'liushi',text:'我陪娘去，孩子托他爹照看。'}],heardBy:{granny:['a:0','a:1'],liushi:['a:0','a:1'],gouer:[]}};
 const update={summary:'母女决定明早去问活计，尚未出发。',evidenceRefs:['a:0','a:1'],characters:[{id:'liushi',memory:'已答应陪母亲去问活计。',evidenceRefs:['a:0','a:1']}]};
 const story={id:'12345678-1234-1234-1234-123456789abc',beats:[{dialogue:[{speaker:'liushi',text:'我陪娘去。'}],commands:[{type:'move',target:'hidden-renderer-data'}]}]};

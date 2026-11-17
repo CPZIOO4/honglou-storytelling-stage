@@ -1,14 +1,14 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {readFile,mkdir,mkdtemp,writeFile,cp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {loadProduction,lineageCurrent,latestPath} from '../backend/productions.mjs';import {commitMemory,mergeMemory} from '../backend/story-memory.mjs';import {validateFactRefs} from '../backend/card-context.mjs';import {compileStory,stateAt,route,along} from '../src/engine.js';
-const read=async p=>JSON.parse(await readFile(p,'utf8')),eighth=await read(new URL('../data/deepseek-eighth-scene.json',import.meta.url));
+const read=async p=>JSON.parse(await readFile(p,'utf8')),eighth=await read(new URL('../data/stories/report.json',import.meta.url));
 async function fixture(fn){const root=await mkdtemp(join(tmpdir(),'honglou-invite-'));try{await cp(new URL('../data',import.meta.url),join(root,'data'),{recursive:true});await mkdir(join(root,'.runtime'));await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
 test('invitation requires accepted eighth and only the actual reporter returns',()=>fixture(async root=>{
  await assert.rejects(loadProduction(root,'invite'),/确认第八场/);await commitMemory(root,eighth);const p=await loadProduction(root,'invite');assert.deepEqual(p.characters.map(c=>c.id),['granny','zhou_wife','ping_er']);assert.equal(p.previousMemory.revision,8);assert(!p.seed.initial.actors.fengjie);
  const invalid=structuredClone(eighth);invalid.narrative.handoff.decision.party.push('fengjie');await writeFile(latestPath(root,'report'),JSON.stringify(invalid));await assert.rejects(loadProduction(root,'invite'),/独自回廊下/);
 }));
 test('waiting residents retain their actual seventh-scene positions and private memories',()=>fixture(async root=>{
- await commitMemory(root,eighth);const p=await loadProduction(root,'invite'),seventh=await read(join(root,'data/deepseek-seventh-scene.json')),stage=await read(join(root,'data/reception-stage.json')),roster=await read(join(root,'data/waiting-characters.json'));
+ await commitMemory(root,eighth);const p=await loadProduction(root,'invite'),seventh=await read(join(root,'data/stories/reception.json')),stage=await read(join(root,'data/stages/reception.json')),roster=await read(join(root,'data/characters/waiting.json'));
  const c=compileStory(seventh,stage,roster.filter(a=>seventh.castIds.includes(a.id))),end=stateAt(c,c.duration);
  for(const id of ['granny','zhou_wife']){assert.equal(p.seed.initial.actors[id].anchor,end.actors[id].anchor);assert.equal(p.rawCards.characters.find(c=>c.id===id).experiencedMemory,eighth.contextMemory.characters[id]);}
 }));
@@ -23,5 +23,5 @@ test('leading and following end at distinct positions in front of the inner gate
 }));
 test('acceptance does not reach absent Fengjie, and changing an ancestor invalidates the invitation',()=>fixture(async root=>{
  const m=mergeMemory(eighth.contextMemory,{summary:'平儿回廊下传话。',characters:[{id:'ping_er',memory:'平儿传达邀请。'},{id:'granny',memory:'刘姥姥听到邀请。'}]},{id:'ninth',beats:[{dialogue:[]}]});assert.equal(m.revision,9);assert.equal(m.characters.fengjie,eighth.contextMemory.characters.fengjie);
- assert(await lineageCurrent(root,'invite',{carryover:{parentStoryId:eighth.id}}));const seventh=await read(join(root,'data/deepseek-seventh-scene.json'));await writeFile(latestPath(root,'reception'),JSON.stringify({...seventh,id:'different-seventh'}));assert(!await lineageCurrent(root,'invite',{carryover:{parentStoryId:eighth.id}}));
+ assert(await lineageCurrent(root,'invite',{carryover:{parentStoryId:eighth.id}}));const seventh=await read(join(root,'data/stories/reception.json'));await writeFile(latestPath(root,'reception'),JSON.stringify({...seventh,id:'different-seventh'}));assert(!await lineageCurrent(root,'invite',{carryover:{parentStoryId:eighth.id}}));
 }));

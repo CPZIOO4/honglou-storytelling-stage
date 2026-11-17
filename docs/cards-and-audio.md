@@ -2,7 +2,7 @@
 
 ## 人物、环境如何进入模型
 
-`data/cards.json` 是实际运行资料。`backend/card-context.mjs` 生成一次性的精简输入：本场环境、关系事实、各人性格与知识边界。原始人物卡中后期入园的表现保留在 `cards/characters/source-excerpts.json`，不再与第一场运行设定混合注入。人物可读导出在 `cards/characters/`，狗儿家补充卡同步更新在 `cards/environment/10_狗儿家.md`。
+`data/cards/home.json` 是实际运行资料。`backend/card-context.mjs` 生成一次性的精简输入：本场环境、关系事实、各人性格与知识边界。原始人物卡中后期入园的表现保留在 `cards/characters/source-excerpts.json`，不再与第一场运行设定混合注入。人物可读导出在 `cards/characters/`，狗儿家补充卡同步更新在 `cards/environment/10_狗儿家.md`。
 
 新增关系事实把“知道周瑞”“狗儿家的旧交”“早年去过王家”分别列出，包含可用人物与表达边界。每句 `factRefs` 引用自己可用的开场事实；`knowledgeRefs` 引用自己听到的前文。人物可以询问、提出新办法、作承诺，不要求所有创作选择都有既成事实作证。自己未经历的旧事、未知库存、未听见的秘密和未发生的接待结果不能当成事实。
 
@@ -12,7 +12,7 @@
 
 ## 配乐库与总控指令
 
-`data/audio-library.json` 列出四首配乐的来源、用途、避用情境、文件哈希和作者。曲目来自 PeriTune；选用的发布年份适用 CC BY 4.0，完整署名见 `assets/music/CREDITS.md`。录音文件未改写，播放器负责音量、循环与切换。
+`data/audio/library.json` 列出四首配乐的来源、用途、避用情境、文件哈希和作者。曲目来自 PeriTune；选用的发布年份适用 CC BY 4.0，完整署名见 `assets/music/CREDITS.md`。录音文件未改写，播放器负责音量、循环与切换。
 
 总控在写完本场后收到实际剧情、环境和曲库，自行输出 `soundtrack.cues`。指令格式：
 
@@ -31,7 +31,7 @@
 ## 检查入口
 
 - `node --test tests/*.test.mjs`：人物事实权限、动作、听闻、音乐指令、时间轴和文字音效。
-- `node scripts/check_audio.cjs`：解码四首真实录音，检查角色出声、逐字显示、音乐暂停续播、静音及手机布局，录制实际输出到本机 `qa/live-audio.webm`。
-- `node scripts/check_presentation.cjs`：开场题字、气泡、姓名、过场及完整自然播放。
+- `node scripts/verify/check-audio.cjs`：解码四首真实录音，检查角色出声、逐字显示、音乐暂停续播、静音及手机布局，录制实际输出到本机 `qa/live-audio.webm`。
+- `npm run verify:scene -- home`：开场题字、气泡、姓名、过场及完整自然播放。
 
 本轮没有加入人声配音或 TTS。角色短音是项目合成的效果，不使用 Undertale 的音频素材。

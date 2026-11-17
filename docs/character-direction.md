@@ -1,6 +1,6 @@
 # 人物底色、场次职责与开场
 
-稳定性格、当前场景职责、已经发生的个人经历是三层资料。`data/cards.json` 的 personality/characterCore 描述人物底色，sceneRole 与 scene.dramaturgy 标记本场创作要求，动态经历只记录实际演出。后续场景不会把“本场主动出门”误当成所有场合都必须出头的性格模板。
+稳定性格、当前场景职责、已经发生的个人经历是三层资料。`data/cards/home.json` 的 personality/characterCore 描述人物底色，sceneRole 与 scene.dramaturgy 标记本场创作要求，动态经历只记录实际演出。后续场景不会把“本场主动出门”误当成所有场合都必须出头的性格模板。
 
 ## 刘姥姥
 
@@ -15,7 +15,7 @@
 - 刘氏：表达母女牵挂与孩子照料的实际顾虑，参与商议，不只充当阻拦或附和的人。
 - 两个孩子：提供有限、合年龄的生活反应，不承担成人决定或讲解求人道理。
 
-内容审核新增 agency 项，必须引用刘姥姥实际主动承担的发言，并记录之前是否有人推她去。被推派之后的应承不能当作主动担当通过审核。旧版“推岳母去、成败不包”的十三句稿保存在 `tests/fixtures/granny-reluctant-dialogue.json`，使用 `node scripts/check_dialogue_review.mjs agency` 做真实模型回归。
+内容审核新增 agency 项，必须引用刘姥姥实际主动承担的发言，并记录之前是否有人推她去。被推派之后的应承不能当作主动担当通过审核。旧版“推岳母去、成败不包”的十三句稿保存在 `tests/fixtures/granny-reluctant-dialogue.json`，供测试与内容审阅使用。当前发布验证不额外调用模型。
 
 ## 开场背景
 

@@ -10,11 +10,11 @@ import {compileStory,stateAt,route,along} from '../src/engine.js';
 import {auditGeneratedStory} from '../backend/generator.mjs';
 import {stageScriptBeat} from '../backend/narrative.mjs';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
-const fifth=await read(new URL('../data/deepseek-fifth-scene.json',import.meta.url));
+const fifth=await read(new URL('../data/stories/waiting.json',import.meta.url));
 async function fixture(fn){const root=await mkdtemp(join(tmpdir(),'honglou-return-'));try{await cp(new URL('../data',import.meta.url),join(root,'data'),{recursive:true});await mkdir(join(root,'.runtime'));await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
 test('return scene requires accepted fifth, adds only the recorded waiting resident and preserves her actual position',()=>fixture(async root=>{
  await assert.rejects(loadProduction(root,'returnhome'),/确认第五场/);await commitMemory(root,fifth);
- const p=await loadProduction(root,'returnhome'),fourth=await read(join(root,'data/deepseek-fourth-scene.json')),oldStage=await read(join(root,'data/zhouhome-stage.json')),roster=await read(join(root,'data/zhouhome-characters.json'));
+ const p=await loadProduction(root,'returnhome'),fourth=await read(join(root,'data/stories/zhouhome.json')),oldStage=await read(join(root,'data/stages/zhouhome.json')),roster=await read(join(root,'data/characters/zhouhome.json'));
  const c=compileStory(fourth,oldStage,roster.filter(c=>fourth.castIds.includes(c.id)));
  assert.deepEqual(p.characters.map(c=>c.id),['granny','zhou_wife']);assert.equal(p.previousMemory.revision,5);
  assert.equal(p.seed.initial.actors.granny.anchor,stateAt(c,c.duration).actors.granny.anchor);
@@ -30,7 +30,7 @@ test('permission must be relayed before granny can know it',()=>fixture(async ro
 test('a changed return party or missing waiting record cannot be forced into this scene',()=>fixture(async root=>{
  await commitMemory(root,fifth);const invalid=structuredClone(fifth);invalid.narrative.handoff.decision.party.push('granny');
  await writeFile(latestPath(root,'waiting'),JSON.stringify(invalid));await assert.rejects(loadProduction(root,'returnhome'),/独自返回/);
- await writeFile(latestPath(root,'waiting'),JSON.stringify(fifth));const fourth=await read(join(root,'data/deepseek-fourth-scene.json'));
+ await writeFile(latestPath(root,'waiting'),JSON.stringify(fifth));const fourth=await read(join(root,'data/stories/zhouhome.json'));
  fourth.generation.handoffScopeReview.explanations.find(e=>e.actor==='granny').scope='立即行动';
  await writeFile(latestPath(root,'zhouhome'),JSON.stringify(fourth));await assert.rejects(loadProduction(root,'returnhome'),/留在住处/);
 }));

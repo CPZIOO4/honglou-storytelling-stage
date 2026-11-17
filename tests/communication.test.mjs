@@ -1,6 +1,7 @@
+import {dataFile} from '../shared/data-files.js';
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
 import {compileStory,stateAt,personalKnowledge,listenersFor,buildDirectorContext,distance} from '../src/engine.js';
-const j=f=>JSON.parse(readFileSync(new URL('../data/'+f+'.json',import.meta.url),'utf8'));
+const j=f=>JSON.parse(readFileSync(new URL('../'+dataFile(f),import.meta.url),'utf8'));
 const story=j('scene-one'),stage=j('stage'),characters=j('characters'),cards=j('cards');const compiled=compileStory(story,stage,characters);const whisper=compiled.beats.find(b=>b.id==='private-care');
 test('whisper follows approach, stop and mutual facing',()=>{const approaching=stateAt(compiled,whisper.start+2);assert(approaching.actors.liushi.moving);assert.equal(approaching.dialogue,null);const speaking=stateAt(compiled,whisper.start+6);assert.equal(speaking.dialogue.mode,'whisper');assert(!speaking.actors.liushi.moving);assert(distance(speaking.actors.granny.position,speaking.actors.liushi.position)<=.9);assert.deepEqual(new Set(speaking.dialogue.heardBy),new Set(['granny','liushi']));assert.equal(speaking.actors.granny.addressedBy,'liushi');assert.equal(speaking.actors.gouer.addressedBy,null);});
 test('a distant whispered conversation is rejected instead of pretending privacy',()=>{const bad=structuredClone(story);const b=bad.beats.find(b=>b.id==='private-care');b.commands=b.commands.filter(c=>c.type!=='move');assert.throws(()=>compileStory(bad,stage,characters),/尚未靠近/);});

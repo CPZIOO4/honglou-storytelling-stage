@@ -1,105 +1,118 @@
 {
   "home": {
     "title": "第一场 · 寒家谋生",
-    "stage": "data/stage.json",
-    "characters": "data/characters.json",
-    "cards": "data/cards.json",
-    "story": "data/deepseek-first-scene.json",
-    "next": "gate"
+    "stage": "data/stages/home.json",
+    "characters": "data/characters/home.json",
+    "cards": "data/cards/home.json",
+    "story": "data/stories/home.json",
+    "next": "gate",
+    "parent": null
   },
   "gate": {
     "title": "第二场 · 荣府问路",
-    "stage": "data/gate-stage.json",
-    "characters": "data/gate-characters.json",
-    "cards": "data/gate-cards.json",
-    "story": "data/deepseek-second-scene.json",
-    "next": "backstreet"
+    "stage": "data/stages/gate.json",
+    "characters": "data/characters/gate.json",
+    "cards": "data/cards/gate.json",
+    "story": "data/stories/gate.json",
+    "next": "backstreet",
+    "parent": "home"
   },
   "backstreet": {
     "title": "第三场 · 后街寻人",
-    "stage": "data/backstreet-stage.json",
-    "characters": "data/backstreet-characters.json",
-    "cards": "data/backstreet-cards.json",
-    "story": "data/deepseek-third-scene.json",
-    "next": "zhouhome"
+    "stage": "data/stages/backstreet.json",
+    "characters": "data/characters/backstreet.json",
+    "cards": "data/cards/backstreet.json",
+    "story": "data/stories/backstreet.json",
+    "next": "zhouhome",
+    "parent": "gate"
   },
   "zhouhome": {
     "title": "第四场 · 旧识相迎",
-    "stage": "data/zhouhome-stage.json",
-    "characters": "data/zhouhome-characters.json",
-    "cards": "data/zhouhome-cards.json",
-    "story": "data/deepseek-fourth-scene.json",
-    "next": "waiting"
+    "stage": "data/stages/zhouhome.json",
+    "characters": "data/characters/zhouhome.json",
+    "cards": "data/cards/zhouhome.json",
+    "story": "data/stories/zhouhome.json",
+    "next": "waiting",
+    "parent": "backstreet"
   },
   "waiting": {
     "title": "第五场 · 廊前递话",
-    "stage": "data/waiting-stage.json",
-    "characters": "data/waiting-characters.json",
-    "cards": "data/waiting-cards.json",
-    "story": "data/deepseek-fifth-scene.json",
-    "next": "returnhome"
+    "stage": "data/stages/waiting.json",
+    "characters": "data/characters/waiting.json",
+    "cards": "data/cards/waiting.json",
+    "story": "data/stories/waiting.json",
+    "next": "returnhome",
+    "parent": "zhouhome"
   },
   "returnhome": {
     "title": "第六场 · 回屋传信",
-    "stage": "data/returnhome-stage.json",
-    "characters": "data/zhouhome-characters.json",
-    "cards": "data/returnhome-cards.json",
-    "story": "data/deepseek-sixth-scene.json",
-    "next": "reception"
+    "stage": "data/stages/returnhome.json",
+    "characters": "data/characters/zhouhome.json",
+    "cards": "data/cards/returnhome.json",
+    "story": "data/stories/returnhome.json",
+    "next": "reception",
+    "parent": "waiting"
   },
   "reception": {
     "title": "第七场 · 廊下相见",
-    "stage": "data/reception-stage.json",
-    "characters": "data/waiting-characters.json",
-    "cards": "data/reception-cards.json",
-    "story": "data/deepseek-seventh-scene.json",
-    "next": "report"
+    "stage": "data/stages/reception.json",
+    "characters": "data/characters/waiting.json",
+    "cards": "data/cards/reception.json",
+    "story": "data/stories/reception.json",
+    "next": "report",
+    "parent": "returnhome"
   },
   "report": {
     "title": "第八场 · 正房回话",
-    "stage": "data/report-stage.json",
-    "characters": "data/report-characters.json",
-    "cards": "data/report-cards.json",
-    "story": "data/deepseek-eighth-scene.json",
-    "next": "invite"
+    "stage": "data/stages/report.json",
+    "characters": "data/characters/report.json",
+    "cards": "data/cards/report.json",
+    "story": "data/stories/report.json",
+    "next": "invite",
+    "parent": "reception"
   },
   "invite": {
     "title": "第九场 · 传话引见",
-    "stage": "data/invite-stage.json",
-    "characters": "data/waiting-characters.json",
-    "cards": "data/invite-cards.json",
-    "story": "data/deepseek-ninth-scene.json",
-    "next": "audience"
+    "stage": "data/stages/invite.json",
+    "characters": "data/characters/waiting.json",
+    "cards": "data/cards/invite.json",
+    "story": "data/stories/invite.json",
+    "next": "audience",
+    "parent": "report"
   },
   "audience": {
     "title": "第十场 · 正房相见",
-    "stage": "data/audience-stage.json",
-    "characters": "data/report-characters.json",
-    "cards": "data/audience-cards.json",
-    "story": "data/deepseek-tenth-scene.json",
-    "next": "arrange"
+    "stage": "data/stages/audience.json",
+    "characters": "data/characters/report.json",
+    "cards": "data/cards/audience.json",
+    "story": "data/stories/audience.json",
+    "next": "arrange",
+    "parent": "invite"
   },
   "arrange": {
     "title": "第十一场 · 廊下候办",
-    "stage": "data/arrange-stage.json",
-    "characters": "data/waiting-characters.json",
-    "cards": "data/arrange-cards.json",
-    "story": "data/deepseek-eleventh-scene.json",
-    "next": "delivery"
+    "stage": "data/stages/arrange.json",
+    "characters": "data/characters/waiting.json",
+    "cards": "data/cards/arrange.json",
+    "story": "data/stories/arrange.json",
+    "next": "delivery",
+    "parent": "audience"
   },
   "delivery": {
     "title": "第十二场 · 米钱送到",
-    "stage": "data/delivery-stage.json",
-    "characters": "data/waiting-characters.json",
-    "cards": "data/delivery-cards.json",
-    "story": "data/deepseek-twelfth-scene.json",
-    "next": "homecoming"
+    "stage": "data/stages/delivery.json",
+    "characters": "data/characters/waiting.json",
+    "cards": "data/cards/delivery.json",
+    "story": "data/stories/delivery.json",
+    "next": "homecoming",
+    "parent": "arrange"
   },
   "homecoming": {
     "title": "第十三场 · 携米归家",
-    "stage": "data/homecoming-stage.json",
-    "characters": "data/characters.json",
-    "cards": "data/homecoming-cards.json",
-    "story": "data/deepseek-thirteenth-scene.json"
+    "stage": "data/stages/homecoming.json",
+    "characters": "data/characters/home.json",
+    "cards": "data/cards/homecoming.json",
+    "story": "data/stories/homecoming.json",
+    "parent": "delivery"
   }
 }

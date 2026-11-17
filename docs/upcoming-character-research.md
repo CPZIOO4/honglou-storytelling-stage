@@ -16,8 +16,8 @@
 | 王夫人 | 场外传话，不简慢旧亲，让凤姐裁度 | 本回按具体态度修卡；不为凑全员安排登场 |
 | 周瑞 | 此回在外办事，其妻说明职责和旧交 | 现有性格证据少，保留职责与关系；不虚构豪爽或奸猾传记 |
 
-机器可读资料在 `data/upcoming-cards.json`，逐人可读版在 `cards/characters/`。`sourceEvidence.evidence` 是原文情节的概述，`personality` 和 `sceneRoles` 是本项目解释与创作约束。原用户卡选段存档于 `cards/characters/source-ch6/`，哈希记录确认字节未改；源 ZIP 未改动。
+机器可读资料在 `data/cards/upcoming.json`，逐人可读版在 `cards/characters/`。`sourceEvidence.evidence` 是原文情节的概述，`personality` 和 `sceneRoles` 是本项目解释与创作约束。原用户卡选段存档于 `cards/characters/source-ch6/`，哈希记录确认字节未改；源 ZIP 未改动。
 
-原环境卡 `01_荣府角门.md` 保留原样。其中瓜果谢恩、板儿自动同行、平儿倒厅等属于其他时段，本次运行投影改用 `data/gate-cards.json`。舞台资产沿用已确认的角门 GLB 与透明立绘，本轮未重画面容或服装。
+原环境卡 `01_荣府角门.md` 保留原样。其中瓜果谢恩、板儿自动同行、平儿倒厅等属于其他时段，本次运行投影改用 `data/cards/gate.json`。舞台资产沿用已确认的角门 GLB 与透明立绘，本轮未重画面容或服装。
 
 第二场只载入实际同行者和两位门上角色。其余人物卡已准备，后续登场时仍需加入该场运行环境与实际经历；场外人物不会仅因拥有卡片就自动上台。
