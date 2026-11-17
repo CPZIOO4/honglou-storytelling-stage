@@ -62,5 +62,3 @@ def wall(x0,x1,y,h=3.05):
         for i in range(int((x1-x0)/.6)):
             xx=x0+.1+i*.6+(.25 if z>.2 else 0)
             if xx<x1:box('Dado_brick_joint',(xx,y-.19,z),(.008,.008,.25),'joint')
-
-

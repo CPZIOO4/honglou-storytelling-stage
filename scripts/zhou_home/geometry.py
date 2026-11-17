@@ -55,5 +55,3 @@ for name,color in palette.items():
     im.pixels=px;im.pack()
     t=m.node_tree.nodes.new('ShaderNodeTexImage');t.image=im;t.interpolation='Closest'
     m.node_tree.links.new(t.outputs['Color'],bs.inputs['Base Color']);M[name]=m
-
-
