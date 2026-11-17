@@ -1,5 +1,6 @@
 import {validateFactRefs} from './card-context.mjs';
 
+const DELIVERY_VOICE='当前是rongfu-delivery，按当前初态例行备米取钱已由过场略去，平儿携物回来，但尚未交给刘姥姥。允许舞台用afterTransfers交接rice、coins；站姿不变。先说递给来客及应承，在交接处分段，下一段才说已经接下或收好。钱袋表示此前几串钱，不说具体数额；米袋不标斤数。不编新赏赐、借贷或家人已吃到；告辞谁与谁同行由本场自然决定。无需重述困境和正房过程，谢意点到即止，有实际收物与告辞推进。';
 const INVITE_VOICE='当前scene.id=rongfu-invitation，是平儿已问得主人答复后返回传话，不是第五场重新争取许可，也不是第七场初次相见。刘姥姥本场职责是接住消息、主动应下或提出确有必要的顾虑；initiative.volunteerAt可引用她愿随行的回应，不把平儿传邀请当成推派。不得将平儿第八场自己说只领一人说成凤姐禁止周嫂子同行。许可只证明可以相见，不能说米粮已有着落。三两句可说清的事不要拖，避免羞怯、反复感谢、训规矩和再次自我介绍。';
 const AUDIENCE_VOICE='当前scene.id=fengjie-audience是刘姥姥第一次当面见凤姐，平儿已回过话。不要套第八场平儿独自转述的流程，凤姐已知粗略来意，应让本人说话，不重问全部身份。刘姥姥本场主动担当表现为亲自陈说并回应现实问题，不必再宣布自愿出门。凤姐先问难处、平儿引见，均不是推派她出门，不得填入initiative.delegatedBefore；她听问后自己说清所求即可用作volunteerAt，不要求抢在主人发问之前说话。得体的局促和自嘲可以有，不能整场只低头谢恩或要求别人为失败免责。允许凤姐依个性给出新的具体安排，不固定数额、善恶和结局；没有执行米银交付，不能写成已拿到、已备好或已完成交易。太太态度只能问或安排询问，不能假设原著中的回信已经到来。';
 export const DIALOGUE_CHECKS=['responsiveness','helpRoute','decision','voice','redundancy','agency','facts'];
@@ -79,10 +80,10 @@ export async function composeConversation({ask,cards,context,rejected=null,feedb
  let draft=rejected,review,errors=feedback;
  for(let attempt=0;attempt<3;attempt++){
   await onPhase(attempt?'根据接话审核重写完整交谈':'先写人物之间的连续交谈');
-  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='fengjie-audience'?'\n'+AUDIENCE_VOICE:'')+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
+  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='rongfu-delivery'?'\n'+DELIVERY_VOICE:'')+(cards.scene.id==='fengjie-audience'?'\n'+AUDIENCE_VOICE:'')+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
   try{validateConversation(draft,cards);}catch(e){if(attempt===2)throw e;errors=e.message;continue;}
   await onPhase('独立连读对白，逐句核对回应、门路和决定');
-  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='fengjie-audience'?'\n'+AUDIENCE_VOICE:'')+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
+  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='rongfu-delivery'?'\n'+DELIVERY_VOICE:'')+(cards.scene.id==='fengjie-audience'?'\n'+AUDIENCE_VOICE:'')+(cards.scene.id==='rongfu-invitation'?'\n'+INVITE_VOICE:'')+(cards.scene.id==='fengjie-report'?'\n'+REPORT_VOICE:'')+(cards.scene.id==='rongfu-reception'?'\n'+ARRIVAL_VOICE:'')+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
   try{validateDialogueReview(review,draft,cards);}catch(e){if(attempt===2)throw e;errors={validationError:e.message,review};continue;}
   if(review.passed===true)break;
   if(attempt===2)throw Error('连续对白未通过：'+JSON.stringify(review.issues));errors=review;
@@ -90,7 +91,7 @@ export async function composeConversation({ask,cards,context,rejected=null,feedb
  let plan;
  for(let attempt=0;attempt<2;attempt++){
   await onPhase('对白已通过，按交谈自然停顿划分舞台段落');
-  const partition=await ask('只划分已通过审核的对白，不输出或改写任何台词。返回JSON {"segments":[{"id":"短英文段落id","title":"短标题","turnIds":["连续且有序的对白id"],"change":"这几句话实际形成的新变化，不能虚构","intention":"人物交谈目的"}]}。完整覆盖所有对白。尽量在一个问题谈完或场面变化时切分，不切断问答；每段至多8句且按每句字数/5+2估算总长不超过100秒。无固定段数。不为凑段数拆开同行商议。若人物说进前些、近前些等邀请靠近，须把邀请作为一个分段末尾，让实际靠近发生在邀请后；不能把邀请及随后回答放在同段再于段首预先执行。intermediary场若含主人邀请入屋，邀请及应答完成后作为分段点，入屋后的对话放下一段，不能把邀请后的移动倒置到整场开头。',{environment:cards.scene,transcript:transcript(draft,cards),validationErrors:plan?.error},'conversation-partition-'+attempt);
+  const partition=await ask('只划分已通过审核的对白，不输出或改写任何台词。若scene.dramaturgy.supportsTransfers为true，在给予/应承和已收下的感谢之间分段，物品由前段afterTransfers实际交接，后段才能说已经收到。不要把给予与收好全部放在一段而提前完成动作。返回JSON {"segments":[{"id":"短英文段落id","title":"短标题","turnIds":["连续且有序的对白id"],"change":"这几句话实际形成的新变化，不能虚构","intention":"人物交谈目的"}]}。完整覆盖所有对白。尽量在一个问题谈完或场面变化时切分，不切断问答；每段至多8句且按每句字数/5+2估算总长不超过100秒。无固定段数。不为凑段数拆开同行商议。若人物说进前些、近前些等邀请靠近，须把邀请作为一个分段末尾，让实际靠近发生在邀请后；不能把邀请及随后回答放在同段再于段首预先执行。intermediary场若含主人邀请入屋，邀请及应答完成后作为分段点，入屋后的对话放下一段，不能把邀请后的移动倒置到整场开头。',{environment:cards.scene,transcript:transcript(draft,cards),validationErrors:plan?.error},'conversation-partition-'+attempt);
   try{plan=partitionConversation(draft,partition);break;}catch(e){if(attempt===1)throw e;plan={error:e.message};}
  }
  return {conversation:draft,dialogueReview:review,plan};

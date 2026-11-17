@@ -1,0 +1,43 @@
+{
+  "format": "honglou-context-v2",
+  "revision": "delivery-2026-11-17-v1",
+  "scene": {
+    "id": "rongfu-delivery",
+    "title": "米钱送到",
+    "place": "荣府 · 倒厅与院门外",
+    "time": "同一白日，省略例行办理所需的一小段时间",
+    "initialSituation": "依第十一场实际待办与留候终点填入",
+    "availableProps": [
+      "青砖地",
+      "灰墙影壁",
+      "倒厅廊檐",
+      "候见长凳",
+      "敞开的院门",
+      "素色帘边",
+      "米袋（rice，数量未定）",
+      "钱袋（coins，代表先前几串钱，不标具体数目）"
+    ],
+    "boundary": "上一场已约定量米取钱并送回，本场开场用短旁白交代平儿落实例行办理、携物归来；不再另演一轮差使来往。准备不等于交付，来客须在本场实际接到。",
+    "factBoundary": "仅米袋rice与钱袋coins已备妥，初态属平儿；无确定重量、串数、借贷、新条件、新人或太太答复。身体仍站姿，仅支持整件道具交接，没有解袋、点数、扛米、坐下或喝茶。",
+    "dramaturgy": {
+      "standingOnly": true,
+      "supportsTransfers": true,
+      "protagonist": "granny",
+      "initiativeType": "receive-and-decide",
+      "direction": "本场的变化是实际收妥援助，并自然形成离开或下一步安排。平儿说明送来，刘姥姥应承；交接后再感谢或与周嫂子告辞，周嫂子回应自己是否同行、同行到哪。不要把五句事情拖成一串重复谢谢，也不要忽然加报恩、送到家或让孩子来府的新承诺。",
+      "pace": "通常五至八句，交物前后自然分两段。不要再次盘问家计和门路，不重复完整前情。",
+      "movement": "平儿在delivery_giver，刘姥姥hall_wait，两人已经够近可交接。用afterTransfers依次将rice与coins从ping_er交给granny，交接放在递物与应承之后，下一段才是收妥感谢。留候周嫂子在companion_wait；若商定回周嫂子住处，周嫂子先走return_exit，刘姥姥稍后guest_exit；二者目标分开，平儿留在廊下。",
+      "handoff": "收物依据已执行transfer。离开即时party由实际应答产生，若两人同去周嫂子处则intermediary仅zhou_wife、granny；尚未到家也未给孩子糕。不得把没有听到约定的凤姐或家里人加入。"
+    },
+    "environmentCard": {
+      "name": "候见倒厅与院落",
+      "description": "倒厅在院门之外，影壁使内外视线转折。廊下有候见长凳，旁边青砖空地供通报交谈。当前表演在影壁右侧与院门外，不展现凤姐内室。具体尺寸和陈设为舞台设计。",
+      "personality": "离主事者近，消息仍需经实际传递。礼数维持秩序，也需要有人主动说明事情轻重。"
+    },
+    "narrationPolicy": "40至80字明确交代平儿入内传下吩咐，米钱备妥后携回，刘姥姥与周嫂子仍候着；这是依已商定事项省略的例行办理。不要提前写来客已收下、已出府或回家。"
+  },
+  "characters": [],
+  "relationshipFacts": [],
+  "worldbook": [],
+  "knowledgePolicy": "省略办理只进入平儿自己的经历，观众旁白不自动分享给候者；交接由舞台记录，真正看见交接的人才拥有该见闻。凤姐与家里人仍不知本场。"
+}

@@ -69,6 +69,18 @@ export class StageView{
       const tint=state.dialogue&&!speaking&&!receiving ? .93 : 1;for(const mesh of [a.body,a.head,a.back])mesh.material.color.setRGB(tint,tint,tint);
       const head=this.headScreen(id);if(head){a.label.style.left=`${Math.max(34,Math.min(this.width-34,head.x))}px`;a.label.style.top=`${Math.max(25,head.y+3)}px`;}else a.label.hidden=true;a.label.classList.toggle('speaking',speaking);a.label.classList.toggle('receiving',receiving);a.label.dataset.speaking=String(speaking);a.label.dataset.receiving=String(receiving);
     }
+    this.propMeshes??=new Map();
+    for(const [id,p]of Object.entries(state.props||{})){
+      let group=this.propMeshes.get(id);if(!group){group=new THREE.Group();const rice=this.stage.props[id].kind==='rice';
+        const cloth=new THREE.MeshStandardMaterial({color:rice?0xcbb98d:0x884b39,roughness:1,flatShading:true});
+        const bag=new THREE.Mesh(new THREE.CylinderGeometry(rice?.15:.085,rice?.21:.105,rice?.40:.22,8),cloth);bag.castShadow=true;group.add(bag);
+        const neck=new THREE.Mesh(new THREE.CylinderGeometry(rice?.07:.045,rice?.11:.06,.08,8),cloth);neck.position.y=rice?.22:.13;group.add(neck);
+        const tie=new THREE.Mesh(new THREE.TorusGeometry(rice?.075:.045,.018,4,8),new THREE.MeshStandardMaterial({color:0x5c4931,roughness:1}));tie.rotation.x=Math.PI/2;tie.position.y=rice?.21:.125;group.add(tie);
+        if(!rice){const coin=new THREE.Mesh(new THREE.TorusGeometry(.045,.015,4,8),new THREE.MeshStandardMaterial({color:0xb89a57,roughness:.85}));coin.position.set(0,.04,.105);group.add(coin);}
+        this.scene.add(group);this.propMeshes.set(id,group);
+      }group.visible=p.visible;group.position.copy(convert(p.position));
+    }
+    for(const [id,g]of this.propMeshes)if(!state.props?.[id])g.visible=false;
     this.layoutNames();this.renderer.render(this.scene,this.camera);
   }
   dispose(){this.resizeObserver.disconnect();this.scene.traverse(o=>{o.geometry?.dispose();const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats)if(m){m.map?.dispose();m.dispose();}});this.renderer.dispose();}

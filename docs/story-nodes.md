@@ -37,7 +37,7 @@
 
 当前 `transition` 为 `planned-not-travelled`：决定次晨一起去，不代表此刻已到荣府。下一场输入包只是准备材料，必须在演出结束且落实转场后才可推进。当前已有十场按实际分支接续；场次数不等于固定节点数，同一个地点或节点可以因真实决定再次返回。任何新增场次仍需绑定环境卡、入口站位、在场角色和模型。
 
-跨场景协议已保存分支摘要、个人经历、关系与承诺；尚未实现钱财交易和道具操作。记录中的承诺不能当成已经执行的动作。
+跨场景协议已保存分支摘要、个人经历、关系与承诺；第十二场支持两件已设定道具的实际交接及持有人变更；尚无通用交易或清点系统。记录中的承诺不能当成已经执行的动作。
 
 来源：[《红楼梦》第六回](https://zh.wikisource.org/zh-hans/紅樓夢/第006回)，以及用户人物卡、环境卡。节点与开放分支是本项目改编方案，不是原著既定结果。
 
@@ -52,4 +52,4 @@
 
 ## 当前已接入场景
 
-前十一场均已接入；递话与候见安排见[第五场说明](fifth-scene.md)，回屋传信见[第六场说明](sixth-scene.md)，廊下相见见[第七场说明](seventh-scene.md)，正房回话见[第八场说明](eighth-scene.md)，传话引见见[第九场说明](ninth-scene.md)，正房相见见[第十场说明](tenth-scene.md)，廊下候办见[第十一场说明](eleventh-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。
+前十二场均已接入；递话与候见安排见[第五场说明](fifth-scene.md)，回屋传信见[第六场说明](sixth-scene.md)，廊下相见见[第七场说明](seventh-scene.md)，正房回话见[第八场说明](eighth-scene.md)，传话引见见[第九场说明](ninth-scene.md)，正房相见见[第十场说明](tenth-scene.md)，廊下候办见[第十一场说明](eleventh-scene.md)，米钱送到见[第十二场说明](twelfth-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。

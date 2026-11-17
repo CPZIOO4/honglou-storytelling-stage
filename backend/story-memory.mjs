@@ -1,7 +1,7 @@
 import {readFile,mkdir,writeFile,link,unlink} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {join} from 'node:path';
-import {compileStory,personalKnowledge,stateAt} from '../src/engine.js';
+import {compileStory,personalKnowledge,stateAt,soundZone} from '../src/engine.js';
 
 export const MEMORY_LIMITS={summary:900,character:240,recent:600};
 export const MEMORY_REPAIR_PROMPT='只修正rejected中被validationErrors明确指出的记忆字段，保留无误字段，不重写整个对象。输出JSON {"summary":"只有摘要需改时才填，硬上限900字","characters":[{"id":"已存在且需改的人物id","memory":"修正后完整经历，硬上限240字"}]}。未改的summary省略，未改的人物不输出；不改证据引用、身份或性格。明确写谁向谁说/回明，不能把凤姐尚未向太太回话变成太太未答复。人物起初不知道的事若本场实际听到，应按听到的具体范围更新；未听到者仍未知。把命人准备、尚待给付和已经交付分开，不擅加新承诺、批准、库存或动作。';
@@ -20,7 +20,8 @@ const plain=(s,max,label)=>{if(typeof s!=='string')throw Error(label+'必须是�
 export function memoryEvidence(story,stage,characters){
  const c=compileStory(story,stage,characters),heard=personalKnowledge(c,c.duration);
  const end=stateAt(c,c.duration);
- return {events:c.beats.flatMap(b=>b.dialogue.map((d,i)=>({id:b.id+':'+i,speaker:d.speaker,text:d.text}))),heardBy:Object.fromEntries(characters.map(a=>[a.id,heard[a.id].map(e=>e.eventId)])),stageOutcome:{note:'执行结果供总控核对动作，不是所有角色共享的见闻。停在门外不能写成已经进屋。',movements:c.events.filter(e=>e.type==='move').map(e=>({actor:e.actor,destination:stage.anchorDescriptions?.[e.target]||e.target,completed:e.time+e.duration<=c.duration})),finalPositions:Object.fromEntries(characters.map(a=>[a.id,stage.anchorDescriptions?.[end.actors[a.id].anchor]||end.actors[a.id].anchor]))}};
+ const observations=c.events.filter(e=>e.type==='transfer').map(e=>{const s=stateAt(c,e.time+e.duration),a=s.actors[e.actor];return {id:e.beatId+':transfer:'+e.prop,speaker:e.actor,text:stage.props[e.prop].label+'已由'+e.actor+'交给'+e.target,witnesses:characters.filter(x=>s.actors[x.id].visible&&soundZone(stage,s.actors[x.id].position)===soundZone(stage,a.position)&&Math.hypot(...s.actors[x.id].position.map((v,i)=>v-a.position[i]))<=4.5).map(x=>x.id)};});
+ return {events:c.beats.flatMap(b=>b.dialogue.map((d,i)=>({id:b.id+':'+i,speaker:d.speaker,text:d.text}))).concat(observations.map(({witnesses,...e})=>e)),heardBy:Object.fromEntries(characters.map(a=>[a.id,heard[a.id].map(e=>e.eventId).concat(observations.filter(e=>e.witnesses.includes(a.id)).map(e=>e.id))])),stageOutcome:{props:end.props,transfers:c.events.filter(e=>e.type==='transfer').map(e=>({id:e.beatId+':transfer:'+e.prop,prop:stage.props[e.prop].label,from:e.actor,to:e.target,completed:e.time+e.duration<=c.duration})),note:'执行结果供总控核对动作，不是所有角色共享的见闻。停在门外不能写成已经进屋。',movements:c.events.filter(e=>e.type==='move').map(e=>({actor:e.actor,destination:stage.anchorDescriptions?.[e.target]||e.target,completed:e.time+e.duration<=c.duration})),finalPositions:Object.fromEntries(characters.map(a=>[a.id,stage.anchorDescriptions?.[end.actors[a.id].anchor]||end.actors[a.id].anchor]))}};
 }
 export function validateMemoryUpdate(update,evidence,cards){
  if(!update||Object.keys(update).some(k=>!['summary','evidenceRefs','characters'].includes(k)))throw Error('记忆只允许summary、evidenceRefs和characters');

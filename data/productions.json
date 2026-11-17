@@ -84,6 +84,14 @@
     "stage": "data/arrange-stage.json",
     "characters": "data/waiting-characters.json",
     "cards": "data/arrange-cards.json",
-    "story": "data/deepseek-eleventh-scene.json"
+    "story": "data/deepseek-eleventh-scene.json",
+    "next": "delivery"
+  },
+  "delivery": {
+    "title": "第十二场 · 米钱送到",
+    "stage": "data/delivery-stage.json",
+    "characters": "data/waiting-characters.json",
+    "cards": "data/delivery-cards.json",
+    "story": "data/deepseek-twelfth-scene.json"
   }
 }

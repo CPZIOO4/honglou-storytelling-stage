@@ -1,5 +1,6 @@
+import {propState,validateTransfers} from './props.js';
 export const EXPRESSIONS=['neutral','smile','thinking','sad','surprised','laugh'];
-export const TYPES=['move','expression','face','gesture','camera','lighting','visibility'];
+export const TYPES=['move','expression','face','gesture','camera','lighting','visibility','transfer'];
 const finite=n=>typeof n==='number'&&Number.isFinite(n);
 export const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
 export function route(stage,from,to){
@@ -41,7 +42,7 @@ export function validateStory(story,stage,characters){
     const ds=b.dialogue??[];for(let i=1;i<ds.length;i++)check(ds[i].at>=ds[i-1].until,`${b.id} 台词时段重叠`);
     for(const c of [...(b.commands??[])].sort((a,b)=>a.at-b.at)){
       check(TYPES.includes(c.type),`${b.id} 未知指令 ${c.type}`);check(finite(c.at)&&c.at>=0&&c.at<b.duration,`${b.id} 指令时刻不合法`);
-      if(['move','expression','face','gesture','visibility'].includes(c.type))check(ids.has(c.actor),`${b.id} 指令人物不存在`);
+      if(['move','expression','face','gesture','visibility','transfer'].includes(c.type))check(ids.has(c.actor),`${b.id} 指令人物不存在`);
       if(c.type==='move'){
         check(finite(c.duration)&&c.duration>0&&c.at+c.duration<=b.duration,`${b.id} 移动时长不合法`);
         check(Object.hasOwn(stage.anchors,c.target),`${b.id} 目标站位不存在`);
@@ -49,13 +50,14 @@ export function validateStory(story,stage,characters){
         if(Object.hasOwn(stage.anchors,c.target)&&positions[c.actor]){try{route(stage,positions[c.actor],c.target);}catch(e){errors.push(e.message);}}
         positions[c.actor]=c.target;endMove[c.actor]=offset+c.at+c.duration;
       }
+      if(c.type==='transfer'){check(typeof c.prop==='string'&&Object.hasOwn(stage.props||{},c.prop),`${b.id} 未提供的道具`);check(ids.has(c.target)&&c.target!==c.actor,`${b.id} 交接对象无效`);check(finite(c.duration)&&c.duration>0&&c.duration<=5&&c.at+c.duration<=b.duration,`${b.id} 交接时段无效`);}
       if(c.type==='expression')check(EXPRESSIONS.includes(c.value),`${b.id} 未提供的表情 ${c.value}`);
       if(c.type==='face')check(ids.has(c.target)||['front','back','left','right'].includes(c.target),`${b.id} 朝向目标不合法`);
       if(c.type==='gesture'){check(['nod','shake'].includes(c.value),`${b.id} 未支持的动作`);check(finite(c.duration)&&c.duration>0&&c.at+c.duration<=b.duration,`${b.id} 动作时段不合法`);}
       if(c.type==='camera')check(Object.hasOwn(stage.cameras,c.target),`${b.id} 镜头不存在`);
       if(c.type==='lighting')check(['day','night','dawn'].includes(c.value),`${b.id} 光线不合法`);
       if(c.type==='visibility')check(typeof c.value==='boolean',`${b.id} 显示指令不合法`);
-      const allowed={move:['at','type','actor','target','duration'],expression:['at','type','actor','value'],face:['at','type','actor','target'],gesture:['at','type','actor','value','duration'],camera:['at','type','target'],lighting:['at','type','value'],visibility:['at','type','actor','value']}[c.type];
+      const allowed={transfer:['at','type','actor','target','prop','duration'],move:['at','type','actor','target','duration'],expression:['at','type','actor','value'],face:['at','type','actor','target'],gesture:['at','type','actor','value','duration'],camera:['at','type','target'],lighting:['at','type','value'],visibility:['at','type','actor','value']}[c.type];
       if(allowed)check(Object.keys(c).every(k=>allowed.includes(k)),`${b.id} 指令含有未允许的字段`);
     }
     offset+=b.duration;
@@ -77,7 +79,7 @@ export function compileStory(story,stage,characters){
   }
   events.sort((a,b)=>a.time-b.time);
   const compiled={story,stage,characters,beats,events,duration};
-  const blocking=validateDialogueBlocking(compiled);if(blocking.length)throw Error(blocking.join('\n'));
+  const blocking=[...validateDialogueBlocking(compiled),...validateTransfers(compiled,stateAt)];if(blocking.length)throw Error(blocking.join('\n'));
   return compiled;
 }
 export function stateAt(compiled,time){
@@ -104,7 +106,7 @@ export function stateAt(compiled,time){
   const originalDialogue=beat.dialogue.find(d=>local>=d.at&&local<d.until)||null;
   const dialogue=originalDialogue?{...originalDialogue,heardBy:listenersFor(stage,actors,originalDialogue),eventId:`${beat.id}:${beat.dialogue.indexOf(originalDialogue)}`} :null;
   for(const [id,a]of Object.entries(actors)){a.hearing=!!dialogue?.heardBy.includes(id);a.addressedBy=a.hearing&&dialogue?.to.includes(id)?dialogue.speaker:null;}
-  return {time,actors,camera,lighting,index:actualIndex,beat,dialogue,finished:time>=duration};
+  return {time,actors,props:propState(story,stage,events,time,actors),camera,lighting,index:actualIndex,beat,dialogue,finished:time>=duration};
 }
 export function soundZone(stage,p){return stage.acoustics?.zones.find(z=>p[0]>=z.min[0]&&p[0]<=z.max[0]&&p[1]>=z.min[1]&&p[1]<=z.max[1])?.id??'outside';}
 export function listenersFor(stage,actors,dialogue){
@@ -156,7 +158,7 @@ export function buildDirectorContext(cards,compiled,time){
     recentHistory:compiled.beats.filter(b=>b.end<=time).slice(-6).map(b=>({id:b.id,summary:b.memory})),
     historyScope:'recentHistory 仅供总控掌握叙事，不等于每个人物知道。人物发言只依据自己的卡、可见状态和 characterViews 中实际听到的话。',
     characterViews:Object.fromEntries(Object.entries(s.actors).map(([id,a])=>[id,{present:a.visible,position:a.position,addressedBy:a.addressedBy,heardUtterances:memories[id]}])),
-    currentState:{time,actors:s.actors,camera:s.camera,lighting:s.lighting},
+    currentState:{time,actors:s.actors,props:s.props,camera:s.camera,lighting:s.lighting},
     capabilities:{commands:TYPES,expressions:EXPRESSIONS,anchors:Object.keys(compiled.stage.anchors),cameras:Object.keys(compiled.stage.cameras)},
     boundaries:['只生成当前第一场的内容','不让观众扮演角色','不执行任意代码','不让人物知道未来的接待结果','只使用现有动作、人物和站位']
   };

@@ -49,6 +49,7 @@ export function stageScriptBeat(step,blocking){
   if(d.mode==='whisper')commands.push({at:cursor-.2,type:'face',actor:d.to[0],target:d.speaker});
   const line={...d,at:cursor,until:cursor+Math.max(4,Math.ceil(d.text.length/5+1))};cursor=line.until+1;return line;
  });
+ for(const x of blocking.afterTransfers||[]){commands.push({at:cursor,type:'transfer',actor:x.actor,target:x.target,prop:x.prop,duration:1.2});cursor+=1.4;}
  const after=new Set();let afterEnd=cursor;
  for(const m of blocking.afterMoves||[]){
   if(after.has(m.actor))throw Error('收尾移动每人至多一次');after.add(m.actor);
@@ -65,7 +66,7 @@ export function applyModelPatches(story,fixes,issues=[]){
   for(const k of ['narration','memory'])if(patch[k]!==undefined){if(typeof patch[k]!=='string')throw Error('修订文字须为字符串');b[k]=patch[k];}
   const local=issues.filter(i=>i.beatId===b.id),narrationOnly=local.length&&local.every(i=>i.scope==='narration'||/不要动对白/.test(i.reason));
   for(const d of narrationOnly?[]:patch.dialogue||[]){if(!Number.isInteger(d.index)||!b.dialogue[d.index])throw Error(`${b.id} 可修改句子index仅有0到${b.dialogue.length-1}，禁止增加新句子`);if(typeof d.text!=='string'||!Array.isArray(d.knowledgeRefs))throw Error('修订台词缺字段');Object.assign(b.dialogue[d.index],{text:d.text,knowledgeRefs:d.knowledgeRefs,...(d.factRefs?{factRefs:d.factRefs}:{})});}
-  out.beats[index]=stageScriptBeat({...b,change:b.memory}, {narration:b.narration,moves:b.commands.filter(c=>c.type==='move'&&c.at===0).map(({actor,target})=>({actor,target})),afterMoves:b.commands.filter(c=>c.type==='move'&&c.at>0).map(({actor,target,at})=>({actor,target,delay:at-(b.dialogue.at(-1).until+1)})),expressions:b.commands.filter(c=>c.type==='expression').map(({actor,value})=>({actor,value})),camera:b.commands.find(c=>c.type==='camera')?.target});
+  out.beats[index]=stageScriptBeat({...b,change:b.memory}, {narration:b.narration,moves:b.commands.filter(c=>c.type==='move'&&c.at===0).map(({actor,target})=>({actor,target})),afterMoves:b.commands.filter(c=>c.type==='move'&&c.at>0).map(({actor,target,at})=>({actor,target,delay:Math.max(0,Math.min(2,at-(b.dialogue.at(-1).until+1+b.commands.filter(c=>c.type==='transfer').length*1.4)))})),afterTransfers:b.commands.filter(c=>c.type==='transfer').map(({actor,target,prop})=>({actor,target,prop})),expressions:b.commands.filter(c=>c.type==='expression').map(({actor,value})=>({actor,value})),camera:b.commands.find(c=>c.type==='camera')?.target});
  }return out;
 }
 
