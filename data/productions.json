@@ -20,6 +20,14 @@
     "stage": "data/backstreet-stage.json",
     "characters": "data/backstreet-characters.json",
     "cards": "data/backstreet-cards.json",
-    "story": "data/deepseek-third-scene.json"
+    "story": "data/deepseek-third-scene.json",
+    "next": "zhouhome"
+  },
+  "zhouhome": {
+    "title": "第四场 · 旧识相迎",
+    "stage": "data/zhouhome-stage.json",
+    "characters": "data/zhouhome-characters.json",
+    "cards": "data/zhouhome-cards.json",
+    "story": "data/deepseek-fourth-scene.json"
   }
 }

@@ -1,0 +1,383 @@
+{
+  "id": "zhou-wife-home",
+  "model": "assets/scene/zhou-wife-home.glb",
+  "requireAudibleRecipients": true,
+  "anchors": {
+    "visitor_arrival": [
+      -1.1,
+      -1.3,
+      0.03
+    ],
+    "visitor_greet": [
+      -0.3,
+      -0.5,
+      0.03
+    ],
+    "host_door": [
+      1,
+      0.15,
+      0.03
+    ],
+    "door_threshold": [
+      1,
+      0.3,
+      0.18
+    ],
+    "room_entry": [
+      1,
+      0.8,
+      0.15
+    ],
+    "guest_talk": [
+      -0.3,
+      1.55,
+      0.15
+    ],
+    "host_talk": [
+      1.35,
+      2.05,
+      0.15
+    ],
+    "host_near": [
+      0.45,
+      1.9,
+      0.15
+    ],
+    "courtyard_exit": [
+      0.1,
+      -2.2,
+      0.03
+    ],
+    "host_exit": [
+      1,
+      -1.6,
+      0.03
+    ],
+    "companion_one": [
+      -1.6,
+      -1.9,
+      0.03
+    ],
+    "companion_two": [
+      -0.5,
+      -2,
+      0.03
+    ],
+    "companion_three": [
+      1.5,
+      -2.3,
+      0.03
+    ],
+    "companion_four": [
+      2.1,
+      -1.2,
+      0.03
+    ],
+    "companion_five": [
+      2.8,
+      -1.5,
+      0.03
+    ],
+    "companion_six": [
+      3,
+      -2.2,
+      0.03
+    ]
+  },
+  "anchorDescriptions": {
+    "visitor_arrival": "来客到住处门前的小院初站位，尚未获得入屋邀请",
+    "visitor_greet": "屋门前招呼位，可与门边主人正常交谈",
+    "host_door": "周瑞妻子在屋门外边的初站位，与来客同属小院声区",
+    "door_threshold": "开启屋门的门槛通道，不宜久站挡路",
+    "room_entry": "屋门内空地",
+    "guest_talk": "屋内桌旁空地的来客站位，没有坐下动作",
+    "host_talk": "屋内主人侧站位，离桌与椅有空隙",
+    "host_near": "靠近来客的独立站位，和guest_talk相距约0.83米，可低声交谈",
+    "courtyard_exit": "来客回到小院出口，尚未到倒厅",
+    "host_exit": "主人小院出口站位，与来客分别站立",
+    "companion_one": "实际同行者在小院内等候",
+    "companion_two": "实际同行者在小院内等候",
+    "companion_three": "实际同行者在小院内等候",
+    "companion_four": "实际同行者在小院内等候",
+    "companion_five": "实际同行者在小院内等候",
+    "companion_six": "实际同行者在小院内等候"
+  },
+  "edges": [
+    [
+      "visitor_arrival",
+      "visitor_greet"
+    ],
+    [
+      "visitor_greet",
+      "host_door"
+    ],
+    [
+      "host_door",
+      "door_threshold"
+    ],
+    [
+      "door_threshold",
+      "room_entry"
+    ],
+    [
+      "room_entry",
+      "guest_talk"
+    ],
+    [
+      "room_entry",
+      "host_talk"
+    ],
+    [
+      "guest_talk",
+      "host_near"
+    ],
+    [
+      "host_near",
+      "host_talk"
+    ],
+    [
+      "visitor_greet",
+      "courtyard_exit"
+    ],
+    [
+      "host_door",
+      "host_exit"
+    ],
+    [
+      "courtyard_exit",
+      "host_exit"
+    ],
+    [
+      "companion_one",
+      "visitor_arrival"
+    ],
+    [
+      "companion_two",
+      "visitor_arrival"
+    ],
+    [
+      "companion_three",
+      "visitor_arrival"
+    ],
+    [
+      "companion_four",
+      "visitor_arrival"
+    ],
+    [
+      "companion_five",
+      "visitor_arrival"
+    ],
+    [
+      "companion_six",
+      "visitor_arrival"
+    ]
+  ],
+  "obstacles": [
+    {
+      "id": "tea_table",
+      "min": [
+        -2.85,
+        1.6
+      ],
+      "max": [
+        -1.35,
+        2.65
+      ]
+    },
+    {
+      "id": "left_stool",
+      "min": [
+        -3.17,
+        1.1
+      ],
+      "max": [
+        -2.63,
+        1.65
+      ]
+    },
+    {
+      "id": "right_stool",
+      "min": [
+        -1.5,
+        2.3
+      ],
+      "max": [
+        -0.95,
+        2.8
+      ]
+    },
+    {
+      "id": "chest",
+      "min": [
+        2.3,
+        3.5
+      ],
+      "max": [
+        3.5,
+        4.3
+      ]
+    },
+    {
+      "id": "bench",
+      "min": [
+        -3.9,
+        -1.3
+      ],
+      "max": [
+        -2.1,
+        -0.8
+      ]
+    },
+    {
+      "id": "front_left_wall",
+      "min": [
+        -3.75,
+        0.18
+      ],
+      "max": [
+        0,
+        0.42
+      ]
+    },
+    {
+      "id": "front_right_wall",
+      "min": [
+        2,
+        0.18
+      ],
+      "max": [
+        3.75,
+        0.42
+      ]
+    }
+  ],
+  "cameras": {
+    "wide": {
+      "position": [
+        7,
+        -13,
+        10
+      ],
+      "target": [
+        0,
+        0.9,
+        1
+      ],
+      "scale": 12
+    },
+    "family": {
+      "position": [
+        5,
+        -12,
+        8
+      ],
+      "target": [
+        0.25,
+        0.1,
+        1
+      ],
+      "scale": 8.5,
+      "mobile": {
+        "target": [
+          0.35,
+          0,
+          1
+        ],
+        "scale": 5.4
+      }
+    },
+    "room": {
+      "position": [
+        4,
+        -11,
+        9
+      ],
+      "target": [
+        0.3,
+        1.6,
+        1.05
+      ],
+      "scale": 7.8,
+      "mobile": {
+        "target": [
+          0.45,
+          1.7,
+          1.05
+        ],
+        "scale": 5.6
+      }
+    },
+    "door": {
+      "position": [
+        5,
+        -12,
+        8
+      ],
+      "target": [
+        0.5,
+        -0.7,
+        1
+      ],
+      "scale": 8,
+      "mobile": {
+        "target": [
+          0.35,
+          -0.6,
+          1
+        ],
+        "scale": 5.4
+      }
+    }
+  },
+  "acoustics": {
+    "ranges": {
+      "normal": 4.5,
+      "whisper": 0.9,
+      "call": 9
+    },
+    "zones": [
+      {
+        "id": "courtyard",
+        "min": [
+          -4.8,
+          -3.2
+        ],
+        "max": [
+          4.8,
+          0.42
+        ]
+      },
+      {
+        "id": "room",
+        "min": [
+          -3.8,
+          0.421
+        ],
+        "max": [
+          3.8,
+          4.5
+        ]
+      }
+    ],
+    "portals": [
+      {
+        "zones": [
+          "courtyard",
+          "room"
+        ],
+        "open": true,
+        "name": "敞开的屋门"
+      }
+    ]
+  },
+  "cutaway": {
+    "minY": 0.42,
+    "prefixes": [
+      "Door_jamb",
+      "Door_lintel",
+      "Tied_curtain",
+      "Curtain_tie",
+      "Curtain_top"
+    ]
+  }
+}

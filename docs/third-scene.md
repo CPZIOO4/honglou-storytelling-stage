@@ -24,7 +24,7 @@
 - `node scripts/check_model_authorship.mjs backstreet`：核对对白、开场与实际模型返回。
 - `node scripts/check_second_scene.cjs backstreet`：桌面/手机、逐句气泡、先行跟随、音效、自然播毕、记忆确认与返回第一场。
 
-第四场尚未生成。本场交接保留孩子实际答应的带路与代喊承诺，不提前兑现周瑞妻子的接待或援助。
+第四场已接入，见[第四场说明](fourth-scene.md)。本场实际承诺只有孩子带路到门口，没有最终稿之外的代喊或讨赏；下一节点名单仍只有刘姥姥，接待与援助等待后续实际发生。
 
 ## 当前交付验证
 

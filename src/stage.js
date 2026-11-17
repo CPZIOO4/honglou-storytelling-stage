@@ -13,7 +13,7 @@ export class StageView{
     this.resizeObserver=new ResizeObserver(()=>this.resize());this.resizeObserver.observe(container);
   }
   async load(){
-    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入本场人物');
+    const gltfLoader=new GLTFLoader();const gltf=await loadResource('屋舍模型',this.stage.model,url=>gltfLoader.loadAsync(url));this.model=gltf.scene;this.cutawayMeshes=[];this.model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(this.stage.cutaway?.prefixes.some(p=>o.name.startsWith(p)))this.cutawayMeshes.push(o);}});this.scene.add(this.model);this.progress('屋舍已就位，正在载入本场人物');
     const loader=new THREE.TextureLoader();let done=0;
     for(const c of this.characters){
       const prefix=`assets/characters/${c.id}/`;const tex={};
@@ -49,6 +49,7 @@ export class StageView{
     }
   }
   update(state){
+    if(this.stage.cutaway){const indoors=Object.values(state.actors).some(a=>a.visible&&a.position[1]>this.stage.cutaway.minY);for(const mesh of this.cutawayMeshes||[])mesh.visible=!indoors;}
     if(state.camera!==this.cameraId){this.cameraId=state.camera;this.override=null;this.applyCamera(state.camera);}else if(!this.currentCamera)this.applyCamera(state.camera);
     const light={day:[2,3.1,1.4,1.6],night:[.75,.55,.35,1.25],dawn:[1.7,2.4,1.9,1.5]}[state.lighting];this.ambient.intensity=light[0];this.sun.intensity=light[1];this.fill.intensity=light[2];this.renderer.toneMappingExposure=light[3];
     for(const [id,a]of this.actors){
