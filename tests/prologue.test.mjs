@@ -19,3 +19,16 @@ test('music can begin in prologue without mistaking it for a later bridge',()=>{
  const p=compilePresentation(story,{duration:10,beats:[{id:'a',start:0,end:10,duration:10}]});
  const cues=compileSoundtrack(story,p,{tracks:[{id:'music'}]});assert.equal(cues[0].time,3);assert.equal(cues[1].time,25);
 });
+
+test('both prologue writer and reviewer receive actual curtain state and can repair an inconsistent description',async()=>{
+ const room=JSON.parse(await readFile(new URL('../data/report-cards.json',import.meta.url),'utf8'));
+ const wrong='平儿来到正房堂屋门前，门帘半垂，窗光落在炕沿，王熙凤在会客炕前等她回话。';
+ const correct='平儿来到正房堂屋入口，门帘束在两侧，窗光落在炕沿，王熙凤在会客炕前站着。';
+ let reviews=0;
+ const result=await composePrologue({cards:room,ask:async(system,input,phase)=>{
+  const scene=input.background.scene;assert(scene.availableProps.includes('束起的门帘'));assert(scene.environmentCard.description.includes('门帘束起'));assert(scene.narrationPolicy);assert(!('endingAim'in input));
+  if(phase==='prologue-write-0')return {text:wrong};
+  if(phase==='prologue-write-1'){assert(input.issues.includes('门帘实际已束起'));return {text:correct};}
+  reviews++;return input.prologue.text===wrong?{passed:false,issues:['门帘实际已束起']}:{passed:true,issues:[]};
+ }});assert.equal(result.text,correct);assert.equal(reviews,2);
+});

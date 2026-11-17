@@ -52,6 +52,14 @@
     "stage": "data/reception-stage.json",
     "characters": "data/waiting-characters.json",
     "cards": "data/reception-cards.json",
-    "story": "data/deepseek-seventh-scene.json"
+    "story": "data/deepseek-seventh-scene.json",
+    "next": "report"
+  },
+  "report": {
+    "title": "第八场 · 正房回话",
+    "stage": "data/report-stage.json",
+    "characters": "data/report-characters.json",
+    "cards": "data/report-cards.json",
+    "story": "data/deepseek-eighth-scene.json"
   }
 }

@@ -1,0 +1,239 @@
+[
+  {
+    "id": "granny",
+    "name": "刘姥姥",
+    "height": 1.63,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      58,
+      80,
+      454,
+      980
+    ],
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "gouer",
+    "name": "狗儿",
+    "height": 1.85,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      54,
+      80,
+      458,
+      980
+    ],
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "liushi",
+    "name": "刘氏",
+    "height": 1.76,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      55,
+      80,
+      456,
+      980
+    ],
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "baner",
+    "name": "板儿",
+    "height": 1.0,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      33,
+      80,
+      479,
+      980
+    ],
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "qinger",
+    "name": "青儿",
+    "height": 0.92,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      55,
+      80,
+      457,
+      980
+    ],
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "gatekeeper",
+    "name": "门房仆役",
+    "height": 1.82,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      75,
+      80,
+      437,
+      980
+    ],
+    "neckY": 451.18643,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "old_servant",
+    "name": "门房老仆",
+    "height": 1.72,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      77,
+      80,
+      434,
+      980
+    ],
+    "neckY": 443.24548,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "guide_child",
+    "name": "引路孩童",
+    "height": 1.15,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      65,
+      80,
+      446,
+      980
+    ],
+    "neckY": 449.93103,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "zhou_wife",
+    "name": "周瑞妻子",
+    "height": 1.66,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      63,
+      80,
+      449,
+      980
+    ],
+    "neckY": 436.98325,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "ping_er",
+    "name": "平儿",
+    "height": 1.63,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      57,
+      80,
+      455,
+      980
+    ],
+    "neckY": 488.31064,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  },
+  {
+    "id": "fengjie",
+    "name": "王熙凤",
+    "height": 1.68,
+    "width": 512,
+    "canvasHeight": 1024,
+    "alphaBounds": [
+      53,
+      80,
+      459,
+      980
+    ],
+    "neckY": 491.68832,
+    "expressions": [
+      "neutral",
+      "smile",
+      "thinking",
+      "sad",
+      "surprised",
+      "laugh"
+    ]
+  }
+]

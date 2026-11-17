@@ -1,0 +1,276 @@
+{
+  "id": "fengjie-report",
+  "model": "assets/scene/fengjie-room.glb",
+  "requireAudibleRecipients": true,
+  "anchors": {
+    "door_entry": [
+      1,
+      -0.45,
+      0.17
+    ],
+    "hall_entry": [
+      1,
+      0.3,
+      0.17
+    ],
+    "report": [
+      1.25,
+      1.2,
+      0.17
+    ],
+    "host": [
+      -0.6,
+      2.2,
+      0.17
+    ],
+    "attendant": [
+      1.5,
+      2.5,
+      0.17
+    ],
+    "private_near": [
+      0.2,
+      1.9,
+      0.17
+    ],
+    "guest_reply": [
+      -0.4,
+      0.7,
+      0.17
+    ],
+    "threshold": [
+      1,
+      -0.7,
+      0.17
+    ],
+    "return_exit": [
+      1,
+      -2.3,
+      0.03
+    ]
+  },
+  "anchorDescriptions": {
+    "door_entry": "平儿已到堂屋入口内侧，尚未回话，不等于已见来客",
+    "hall_entry": "堂屋中央的进退通道",
+    "report": "平儿停步向凤姐回话的独立位置",
+    "host": "凤姐站在会客炕前空地，未坐上炕，也未在翻簿册",
+    "attendant": "主事者右侧的侍立位置",
+    "private_near": "靠近凤姐的独立低语位，与host相距约0.85米",
+    "guest_reply": "堂屋前侧的来客答话空位，本场没有来客占用",
+    "threshold": "开启入口的门槛通道，门帘已束起",
+    "return_exit": "朝倒厅方向的正房门外终点，尚未到廊下；位置不表示角色缺乏通行权限"
+  },
+  "edges": [
+    [
+      "door_entry",
+      "hall_entry"
+    ],
+    [
+      "hall_entry",
+      "report"
+    ],
+    [
+      "report",
+      "attendant"
+    ],
+    [
+      "report",
+      "private_near"
+    ],
+    [
+      "private_near",
+      "host"
+    ],
+    [
+      "hall_entry",
+      "guest_reply"
+    ],
+    [
+      "guest_reply",
+      "host"
+    ],
+    [
+      "door_entry",
+      "threshold"
+    ],
+    [
+      "threshold",
+      "return_exit"
+    ]
+  ],
+  "obstacles": [
+    {
+      "id": "kang",
+      "min": [
+        -3.6,
+        3.15
+      ],
+      "max": [
+        0.25,
+        5.15
+      ]
+    },
+    {
+      "id": "side_desk",
+      "min": [
+        -4.4,
+        0.9
+      ],
+      "max": [
+        -2.7,
+        2.2
+      ]
+    },
+    {
+      "id": "east_partition",
+      "min": [
+        2.7,
+        1.8
+      ],
+      "max": [
+        3.05,
+        5.4
+      ]
+    },
+    {
+      "id": "east_table",
+      "min": [
+        3.3,
+        3.7
+      ],
+      "max": [
+        4.7,
+        4.85
+      ]
+    },
+    {
+      "id": "front_left",
+      "min": [
+        -5,
+        -0.85
+      ],
+      "max": [
+        -0.1,
+        -0.55
+      ]
+    },
+    {
+      "id": "front_right",
+      "min": [
+        2.1,
+        -0.85
+      ],
+      "max": [
+        5,
+        -0.55
+      ]
+    }
+  ],
+  "cameras": {
+    "wide": {
+      "position": [
+        7,
+        -14,
+        11
+      ],
+      "target": [
+        0,
+        1.4,
+        1
+      ],
+      "scale": 13.3
+    },
+    "family": {
+      "position": [
+        5,
+        -13,
+        9
+      ],
+      "target": [
+        0.3,
+        0.6,
+        1.05
+      ],
+      "scale": 10,
+      "mobile": {
+        "target": [
+          0.3,
+          0.8,
+          1.05
+        ],
+        "scale": 6
+      }
+    },
+    "host": {
+      "position": [
+        4,
+        -12,
+        9
+      ],
+      "target": [
+        0.1,
+        1.6,
+        1.05
+      ],
+      "scale": 8.6,
+      "mobile": {
+        "target": [
+          0.2,
+          1.6,
+          1.05
+        ],
+        "scale": 5.6
+      }
+    }
+  },
+  "acoustics": {
+    "ranges": {
+      "normal": 4.5,
+      "whisper": 0.9,
+      "call": 9
+    },
+    "zones": [
+      {
+        "id": "hall",
+        "min": [
+          -4.7,
+          -0.54
+        ],
+        "max": [
+          2.65,
+          5.3
+        ]
+      },
+      {
+        "id": "courtyard",
+        "min": [
+          -5.3,
+          -3.5
+        ],
+        "max": [
+          5.3,
+          -0.55
+        ]
+      }
+    ],
+    "portals": [
+      {
+        "zones": [
+          "hall",
+          "courtyard"
+        ],
+        "open": true,
+        "name": "敞开的堂屋入口"
+      }
+    ]
+  },
+  "cutaway": {
+    "minY": -0.55,
+    "prefixes": [
+      "Door_jamb",
+      "Door_lintel",
+      "Tied_curtain",
+      "Curtain_tie"
+    ]
+  }
+}

@@ -5,7 +5,7 @@ import {dialogueFrame,compileSoundtrack} from './soundtrack.js';
 import {RecordedDirector} from './director.js';
 import {compilePresentation,presentationAt,presentationTimeForStory} from './presentation.js';
 const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const requestedScene=new URLSearchParams(location.search).get('scene');const sceneKey=['gate','backstreet','zhouhome','waiting','returnhome','reception'].includes(requestedScene)?requestedScene:'home';
+const requestedScene=new URLSearchParams(location.search).get('scene');const sceneKey=['gate','backstreet','zhouhome','waiting','returnhome','reception','report'].includes(requestedScene)?requestedScene:'home';
 const api=path=>'/api/director/'+path+'?scene='+sceneKey;
 const names={};let story,stage,characters,cards,compiled,presentation,view,audioLibrary,sound,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
 async function json(url){const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
@@ -33,11 +33,13 @@ function placeBubble(dialogue,frame){
  const el=$('dialogue');el.classList.toggle('hidden',!dialogue);if(!dialogue)return;
  $('dialogue-text').setAttribute('aria-label',dialogue.text);$('dialogue-visible').textContent=frame.text;$('dialogue-pending').textContent=frame.remaining;el.dataset.fullText=dialogue.text;el.classList.toggle('whisper',dialogue.mode==='whisper');
  const head=view.headScreen(dialogue.speaker);if(!head)return;const w=el.offsetWidth,h=el.offsetHeight;
- const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));const top=clamp(head.y-h-25,8,view.height-h-15);
- const candidates=[head.x-w/2,head.x-w+35,head.x-35].map(x=>clamp(x,8,view.width-w-8));
- const heads=characters.filter(c=>c.id!==dialogue.speaker).map(c=>view.headScreen(c.id)).filter(Boolean);
- const score=x=>heads.reduce((sum,p)=>sum+Math.max(0,Math.min(x+w,p.x+28)-Math.max(x,p.x-28))*Math.max(0,Math.min(top+h,p.y+32)-Math.max(top,p.y-18)),0);
- const left=candidates.sort((a,b)=>score(a)-score(b))[0];el.style.left=`${left}px`;el.style.top=`${top}px`;el.style.setProperty('--tail-x',`${clamp(head.x-left,18,w-18)}px`);
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),baseTop=clamp(head.y-h-25,8,view.height-h-15),baseLeft=clamp(head.x-w/2,8,view.width-w-8);
+ const faces=view.faceRects().map(r=>({...r,left:r.left-8,right:r.right+8,top:Math.min(r.top,view.headScreen(r.id).y-4),bottom:r.bottom+4}));
+ const xs=[head.x-w/2,head.x-w+35,head.x-35].map(x=>clamp(x,8,view.width-w-8));
+ const ys=[baseTop,...faces.map(r=>r.top-h-12)].map(y=>clamp(y,8,view.height-h-15));
+ const score=({left,top})=>faces.reduce((sum,r)=>sum+Math.max(0,Math.min(left+w,r.right)-Math.max(left,r.left))*Math.max(0,Math.min(top+h,r.bottom)-Math.max(top,r.top)),0);
+ const candidates=ys.flatMap(top=>xs.map(left=>({left,top}))),travel=p=>(p.left-baseLeft)**2+(p.top-baseTop)**2;
+ const {left,top}=candidates.sort((a,b)=>score(a)-score(b)||travel(a)-travel(b))[0];el.style.left=`${left}px`;el.style.top=`${top}px`;el.style.setProperty('--tail-x',`${clamp(head.x-left,18,w-18)}px`);
  el.dataset.speaker=dialogue.speaker;el.dataset.to=dialogue.to.join(',');el.dataset.mode=dialogue.mode;
 }
 function draw(){
@@ -85,5 +87,5 @@ try{
  const onward=document.createElement('a');onward.className='scene-onward';onward.href='?scene='+(production.next||'home');onward.textContent=production.next?'继续'+registry[production.next].title:'返回第一场';$('ending').append(onward);
  sound=new StageAudio(audioLibrary);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
  view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;installStory(story);raf=requestAnimationFrame(tick);await connectLocalDirector();
- if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,audio:()=>sound.debug(),startAudioCapture:()=>sound.startCapture(),stopAudioCapture:async()=>Array.from(new Uint8Array(await sound.stopCapture())),cutaway:()=>({total:view.cutawayMeshes?.length||0,hidden:view.cutawayMeshes?.filter(m=>!m.visible).length||0}),heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
+ if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,audio:()=>sound.debug(),startAudioCapture:()=>sound.startCapture(),stopAudioCapture:async()=>Array.from(new Uint8Array(await sound.stopCapture())),cutaway:()=>({total:view.cutawayMeshes?.length||0,hidden:view.cutawayMeshes?.filter(m=>!m.visible).length||0}),faces:()=>view.faceRects(),heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
 }catch(err){if(sceneKey!=='home'&&['127.0.0.1','localhost'].includes(location.hostname)) {$('generation-panel').classList.remove('hidden');$('generate-story').disabled=false;$('generation-status').textContent='可从已确认的前序分支生成当前场';}console.error(err);$('load-status').textContent=err?.message||'加载被中断，请重新加载页面。';$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;const retry=document.createElement('button');retry.textContent='重新加载';retry.onclick=()=>location.reload();$('loading').append(retry);}

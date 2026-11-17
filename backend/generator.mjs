@@ -22,6 +22,11 @@ const SYSTEM=`你是唯一说书总控的舞台编排环节。完整对白已由
 context.currentState是实际站位。必须根据planStep.dialogue里的对象和方式，使对方确实听得见；悄悄话双方需同声区且距离<=0.9，普通交谈<=4.5。旁人靠近可能听见，不能用旁白冒充秘密。
 站位以anchorDescriptions为准，不把屋中右侧说成桌旁，不把屋中后侧说成炕前；没move就不写走动。旁白可以简短交代说话态度，不必全是移动说明。场景以context.scene为准，人物名统一周瑞妻子。`;
 
+export function handoffAuditContext(story,stage,characters,storyline,handoff){
+ const next=nodeFor(storyline,handoff.nextNodeId);
+ const places={SC01_JM:'荣府角门',SC11_HJ:'荣府后街',SC12_ZRZ:'周瑞妻子住处',SC13_DT:'倒厅与院门外的候见处，不是凤姐正房',SC14_FJZF:'王熙凤正房'};
+ return {actualEvents:story.beats.flatMap(b=>b.dialogue.map((d,i)=>({eventId:b.id+':'+i,speaker:d.speaker,to:d.to,text:d.text}))),currentScene:{place:story.cardsSnapshot?.scene?.place||stage.id,cast:characters.map(({id,name})=>({id,name}))},nextDestination:{...next,places:next.scenes.map(id=>({id,name:places[id]||id}))},stageOutcome:memoryEvidence(story,stage,characters).stageOutcome,handoff:{transition:handoff.transition,nextNodeId:handoff.nextNodeId,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),facts:handoff.facts.map(({knownBy,...f})=>f)}};
+}
 export function normalizeModelBeat(beat){
  if(!beat||typeof beat!=='object')return beat;
  const b=structuredClone(beat);
@@ -141,11 +146,11 @@ export function createGenerator(root){
    const actualEvents=story.beats.flatMap(b=>b.dialogue.map((d,i)=>({eventId:b.id+':'+i,speaker:d.speaker,text:d.text})));
    let handoff, handoffReview, rejectedResolution=null, handoffErrors=null;
    for(let attempt=0;attempt<3;attempt++){
-    const resolution=await callModel(key,`只提取实际对白形成的场末决定，输出JSON {"status":"depart/defer/alternative","nextNodeId":"允许的节点ID","party":["实际决定同行人物ID"],"purpose":"去做什么","approach":"怎样开口","departureCondition":"何时及前提","evidenceRefs":["从actualEvents.eventId原样选择"],"facts":[{"kind":"plan/promise/relationship/obstacle","text":"有证据的计划、承诺或事实","evidenceRefs":["从actualEvents.eventId原样选择"]}]}。本场未操作道具或交易，只谈未来，不能把拟备礼物、答应烙饼写成已有库存或resource。party是实际进入下一节点场景的人员，不是所有出过门的人；只送到路口就返回的半程送行者不能放入party，其承诺记在facts中。party不能默认板儿，只提取实际同意的人。若有人先去询问、另一人原地等候，待取得未发生的答复再接过去，party此时只能含先去询问的人；条件性的后续同行写入facts，不能偷渡成当前入场名单。引用必须如b1:0，禁止写b1、b1-d1或人名。拒绝稿有错误时按validationErrors修复，不修改剧本。`,{node,story,actualEvents,allowedNext:node.next.map(id=>nodeFor(storyline,id)),rejected:rejectedResolution,validationErrors:handoffErrors},job,'scene-handoff-'+attempt);
+    const resolution=await callModel(key,`只提取实际对白形成的场末决定，输出JSON {"status":"depart/defer/alternative","nextNodeId":"允许的节点ID","party":["实际决定同行人物ID"],"purpose":"去做什么","approach":"怎样开口","departureCondition":"何时及前提","evidenceRefs":["从actualEvents.eventId原样选择"],"facts":[{"kind":"plan/promise/relationship/obstacle","text":"有证据的计划、承诺或事实","evidenceRefs":["从actualEvents.eventId原样选择"]}]}。本场未操作道具或交易，只谈未来，不能把拟备礼物、答应烙饼写成已有库存或resource。party是实际进入下一节点场景的人员，不是所有出过门的人。主人吩咐请在别处候着的人，传话者先回候见处的这一步仅包含传话者，不能把之后带来客回正房的一程并入；只送到路口就返回的半程送行者不能放入party，其承诺记在facts中。party不能默认板儿，只提取实际同意的人。若有人先去询问、另一人原地等候，待取得未发生的答复再接过去，party此时只能含先去询问的人；条件性的后续同行写入facts，不能偷渡成当前入场名单。引用必须如b1:0，禁止写b1、b1-d1或人名。拒绝稿有错误时按validationErrors修复，不修改剧本。`,{node,story,actualEvents,allowedNext:node.next.map(id=>nodeFor(storyline,id)),rejected:rejectedResolution,validationErrors:handoffErrors},job,'scene-handoff-'+attempt);
     try{
      handoff=buildHandoff(story,stage,characters,storyline,resolution);
      if(handoff.facts.some(f=>f.kind==='resource'))throw Error('本场没有道具交易执行，未来食物衣服只能记plan或promise，不能记resource库存');
-     handoffReview=await callModel(key,`核对交接记录与actualEvents原句的实质一致性。这里所有decision字段都是已商议的未来计划：status=depart表示决定要出发，不是已经出发；departureCondition是计划时间和前提，写明早不等于声称已到明早；plan、promise也明确未完成。父母同意安排孩子同行足够，不要给孩子安排正式表决，不要求儿童发言。party仅指到达下一节点的人员，半程送行后返回的人不能混入。区分立即去询问与取得许可后再带人：原地等候者不能因为未来条件性邀请就出现在本次party，未发生的答复不能自动视作已得到。检查名单与请求是否确有对话依据，是否凭空改成另一人，是否将承诺改成已经拿到钱或完成交易。不要纠缠一般润色、没有立即应答或句子措辞，后文的承诺可支持前文分工。只输出JSON {"passed":true或false,"issues":["最多4项具体实质矛盾"]}。无实质矛盾则passed=true、issues=[]。`,{actualEvents,handoff:{transition:handoff.transition,nextNodeId:handoff.nextNodeId,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),facts:handoff.facts.map(({knownBy,...f})=>f)}},job,'handoff-review-'+attempt);
+     handoffReview=await callModel(key,`核对交接记录与actualEvents原句的实质一致性。先读nextDestination的实际地点，party只对应这一次立即前往该处的人，不能把出去传话与之后带客人回来合并成同一跳。尤其audience-window是倒厅与院门外候见处，不是凤姐正房；主人已许可接见仍不表示客人已经收到口信。若平儿现在先回廊下通知，party仅平儿，之后领来客的约定记作后续计划。不得把未在currentScene.cast的人强加入当前party。这里所有decision字段都是已商议的未来计划：status=depart表示决定要出发，不是已经出发；departureCondition是计划时间和前提，写明早不等于声称已到明早；plan、promise也明确未完成。父母同意安排孩子同行足够，不要给孩子安排正式表决，不要求儿童发言。party仅指到达下一节点的人员，半程送行后返回的人不能混入。区分立即去询问与取得许可后再带人：原地等候者不能因为未来条件性邀请就出现在本次party，未发生的答复不能自动视作已得到。检查名单与请求是否确有对话依据，是否凭空改成另一人，是否将承诺改成已经拿到钱或完成交易。不要纠缠一般润色、没有立即应答或句子措辞，后文的承诺可支持前文分工。只输出JSON {"passed":true或false,"issues":["最多4项具体实质矛盾"]}。无实质矛盾则passed=true、issues=[]。`,handoffAuditContext(story,stage,characters,storyline,handoff),job,'handoff-review-'+attempt);
      if(handoffReview.passed!==true||!Array.isArray(handoffReview.issues)||handoffReview.issues.length)throw Error(JSON.stringify(handoffReview.issues));
      break;
     }catch(e){if(attempt===2)throw Error('场末决定尚未落实：'+e.message);rejectedResolution=resolution;handoffErrors=e.message;}

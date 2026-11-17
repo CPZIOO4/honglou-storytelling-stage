@@ -142,6 +142,14 @@
       "grit": 0.025,
       "duration": 0.06,
       "rate": 10
+    },
+    "fengjie": {
+      "label": "王熙凤：明亮沉稳",
+      "frequency": 235,
+      "wave": "triangle",
+      "grit": 0.035,
+      "duration": 0.055,
+      "rate": 9
     }
   },
   "policy": "只从本库选曲，也可留白；按剧情转折选择，不按每句台词换歌。贫寒焦虑不配欢庆曲。对白时自动压低背景音乐。pause保留进度，resume续播，stop清空。"

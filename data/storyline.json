@@ -58,7 +58,7 @@
       "question": "面对掌事者，来访者怎样开口，对方怎样处置？",
       "requiredChange": "产生可追踪的结果：帮助、条件、承诺、转介或拒绝，以及由此产生的人情关系。",
       "openChoices": ["诉苦、求活、借助旧情等表达方式", "帮助的种类与数量", "是否附带条件", "中途插曲与应对"],
-      "next": ["intermediary", "household-decision"],
+      "next": ["audience-window", "intermediary", "household-decision"],
       "forbiddenAssumptions": ["固定得到二十两银子", "遇到任何分支仍重置为原著祖孙二人", "把未来回报自动写成已完成"]
     }
   ],
