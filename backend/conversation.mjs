@@ -1,6 +1,7 @@
 import {validateFactRefs} from './card-context.mjs';
 
 export const DIALOGUE_CHECKS=['responsiveness','helpRoute','decision','voice','redundancy','agency','facts'];
+const RETURN_VOICE='本场scene.id=zhou-wife-return，是同一intermediary节点的再次返回，优先依当前dramaturgy，不套首次辨认和问来意流程。刘姥姥早已主动求助；周瑞妻子回来告知可候见、邀请同行，不是推她首次出门。initiative.volunteerAt可用刘姥姥主动接住消息、愿意跟去的原句；delegatedBefore不能把这种转达和邀请误作先前推派。周瑞妻子告知谁许可、去哪里、仍待谁答复，刘姥姥自然回应即可，不强求重讲家计或具体米钱。三两句能达成的安排不要重复确认，不加为了戏剧冲突而产生的反悔，不将候见许可说成奶奶已经准见。转告之前刘姥姥未知平儿答复。双方同意后才离开屋子，不能提前走或以旁白代替应承。';
 const RECEPTION_VOICE='audience-window场次特别注意：平儿稳妥利落，也有人情味；说清候见地点与由谁回话即可，不对尚未犯错的来客堆叠别乱走、别张望、别催等禁令。周瑞妻子熟悉府中事务、顾旧情也顾体面，不把递话写成反复壮胆或一味感激免责。站姿是执行限制，不要让人物反复说站着；自然说候着、等回话即可。若追问求米粮还是求见面，下一句应正面接住，而非用别的听奶奶跳开。两人不用重复同一地点、规矩和见不见的未知结果，允许必要的自然答复。';
 export const WRITE_CONVERSATION=`你是红楼说书舞台唯一总控的编剧。先写一场连续交谈，不预设段数，不按节点小标题逐格填台词。当前节点只规定要面对的问题，不规定求助结果或同行者；scene.dramaturgy和每人的sceneRole规定本场职责，必须遵循。先确定各成人眼下想达成什么、怕什么，再让每句话接住刚才的问话、顾虑或提议。可以自然打断、回避，但须让观众看得懂，不用旁白替人物补动机。
 仅household-decision家中节点：刘姥姥主动拿办法并自己决定去试，动机是真心帮衬一家。狗儿可提供周瑞线索、商量分工，不能先推她出门，迫使她勉强应下。她的乡间智慧和善意要体现在回应家人的具体话里，可自嘲，不持续责骂，不要求家人为失败免责；不要写成不敢包、空手回来别怨我、不兴埋怨。未知接待结果可诚实商量，不等于向家人甩责任。也不要把她写成无所不能或满口牺牲的大好人。其他节点依sceneRole履责：gate-access中她主动有礼问路，以陪笑、具体追问、自嘲应对冷遇，不训门役、不重议出发。门役不知来客姓名与家中私事，需在问答里得知。只问到下一步即收束，别让每人重复确认同一路线。
@@ -74,10 +75,10 @@ export async function composeConversation({ask,cards,context,rejected=null,feedb
  let draft=rejected,review,errors=feedback;
  for(let attempt=0;attempt<3;attempt++){
   await onPhase(attempt?'根据接话审核重写完整交谈':'先写人物之间的连续交谈');
-  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
+  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
   try{validateConversation(draft,cards);}catch(e){if(attempt===2)throw e;errors=e.message;continue;}
   await onPhase('独立连读对白，逐句核对回应、门路和决定');
-  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
+  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='zhou-wife-return'?'\n'+RETURN_VOICE:'')+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
   try{validateDialogueReview(review,draft,cards);}catch(e){if(attempt===2)throw e;errors={validationError:e.message,review};continue;}
   if(review.passed===true)break;
   if(attempt===2)throw Error('连续对白未通过：'+JSON.stringify(review.issues));errors=review;

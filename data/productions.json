@@ -36,6 +36,14 @@
     "stage": "data/waiting-stage.json",
     "characters": "data/waiting-characters.json",
     "cards": "data/waiting-cards.json",
-    "story": "data/deepseek-fifth-scene.json"
+    "story": "data/deepseek-fifth-scene.json",
+    "next": "returnhome"
+  },
+  "returnhome": {
+    "title": "第六场 · 回屋传信",
+    "stage": "data/returnhome-stage.json",
+    "characters": "data/zhouhome-characters.json",
+    "cards": "data/returnhome-cards.json",
+    "story": "data/deepseek-sixth-scene.json"
   }
 }

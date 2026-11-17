@@ -58,6 +58,14 @@ export function auditGeneratedStory(story,stage,characters,cards=null){
    const at=stateAt(compiled,b.start+d.at);if(at.actors[d.speaker].facingTarget!==d.to[0])errors.push(`${b.id} ${d.speaker}发话前未朝向 ${d.to[0]}`);
    for(let t=d.at;t<d.until;t+=.25){const s=stateAt(compiled,b.start+t);if(s.actors[d.speaker].moving){errors.push(`${b.id}说话人仍在移动`);break;}}
   }
+  // An explicit immediate lead/follow line constrains the staged departure.
+  // Future plans without both movements remain plans, not forced actions.
+  for(const d of b.dialogue){
+   if(!/我先走[，,、\s]*你跟/.test(d.text))continue;
+   const leader=b.commands.find(c=>c.type==='move'&&c.actor===d.speaker&&c.at>d.until);
+   const follower=b.commands.find(c=>c.type==='move'&&c.actor===d.to[0]&&c.at>d.until);
+   if(leader&&follower&&follower.at<=leader.at)errors.push(`${b.id} “我先走，你跟着”要求${d.speaker}先动、${d.to[0]}稍后跟随；请设置领路者afterMoves.delay=0、跟随者delay=0.8，不能反过来。`);
+  }
  }
  for(const e of compiled.events.filter(e=>e.type==='move')){
   if(e.path.length<2)errors.push(`${e.beatId} ${e.actor}已经在${e.target}，不能再用move假装走动，请删除该move并保持旁白一致`);

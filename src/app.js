@@ -5,7 +5,7 @@ import {dialogueFrame,compileSoundtrack} from './soundtrack.js';
 import {RecordedDirector} from './director.js';
 import {compilePresentation,presentationAt,presentationTimeForStory} from './presentation.js';
 const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const requestedScene=new URLSearchParams(location.search).get('scene');const sceneKey=['gate','backstreet','zhouhome','waiting'].includes(requestedScene)?requestedScene:'home';
+const requestedScene=new URLSearchParams(location.search).get('scene');const sceneKey=['gate','backstreet','zhouhome','waiting','returnhome'].includes(requestedScene)?requestedScene:'home';
 const api=path=>'/api/director/'+path+'?scene='+sceneKey;
 const names={};let story,stage,characters,cards,compiled,presentation,view,audioLibrary,sound,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
 async function json(url){const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
