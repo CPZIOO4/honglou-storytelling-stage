@@ -1,0 +1,43 @@
+{
+  "format": "honglou-context-v2",
+  "revision": "homecoming-2026-11-17-v1",
+  "scene": {
+    "id": "gouer-homecoming",
+    "title": "携米归家",
+    "place": "京郊 · 狗儿家",
+    "time": "同一日返家时，不指定未建立的时辰",
+    "initialSituation": "依实际返家名单与物品归属填入",
+    "availableProps": [
+      "青砖地",
+      "土炕",
+      "木桌",
+      "矮凳",
+      "灶台",
+      "敞开的屋门",
+      "米袋rice",
+      "钱袋coins"
+    ],
+    "boundary": "回到家说明结果、安顿带回的米钱，是这次出行的收束，不是重新商量谁去荣府。帮助解眼前急，不等于从此衣食无忧。新生活安排可以自然谈，但不凭空发生购买、吃饭、还债或新差使。",
+    "factBoundary": "米袋、钱袋从上一场实际持有人刘姥姥继承，家人只看见带回的东西，来由须听她转述。没有糕，不默认路上购买。数量不具体化，没有原著二十两、额外衣裳或新借款。站姿，仅支持整件道具交接，不支持开袋、数钱、放桌、入锅、搂抱或坐下。",
+    "dramaturgy": {
+      "standingOnly": true,
+      "supportsTransfers": true,
+      "protagonist": "granny",
+      "initiativeType": "report-and-settle",
+      "direction": "刘氏关心母亲，狗儿接住实际结果，刘姥姥报个实信并安排眼前家用。反应有温度，不能复读感谢、迫母亲邀功或让狗儿突然自我批斗。板儿可问糕或袋子，若问须得到诚实温和的回答，青儿无对白。",
+      "pace": "通常六至十句即可，围绕到家报信、家人反应与实际安排自然推进。不得用大段复盘把十三场重讲，不为每人轮流发言凑句数。",
+      "movement": "初态刘姥姥door_inside，刘氏liushi_home，狗儿gouer_home，孩子baner_home、qinger_home，均在同屋。可让刘姥姥先走room_center再交谈；如交rice或coins给家人，按对白选择接收者，必要时先走近，双方停步且距离<=1.6。afterTransfers只在交物应承后发生，下段才说收妥。物品可继续由刘姥姥持有，不为动作强行分配。不得给不存在的糕，不把未来烧饭当成已做。",
+      "handoff": "本场允许在家收束，不需要另造障碍或强迫再次出门。若已说明结果、谈妥眼前安排，status=settled，nextNodeId=household-return，party=[]，facts记录实际物品或明确家务计划；收束仅指本场，仍保留未兑现的糕承诺和未来生活难处。若确有新的提议，依实际对话记录，不强制形成新外出。"
+    },
+    "environmentCard": {
+      "name": "狗儿家",
+      "description": "沿用第一场土炕、灶台、木桌与门边空地。演员在屋内站立交谈；院门用于来回通行。",
+      "personality": "屋子仍简陋，带回的米钱使眼前日子有了安排，家人的关心和难为情各有分寸。"
+    },
+    "narrationPolicy": "40至80字交代周瑞妻子送到后门便分手、刘姥姥独自带着米钱回村进屋，家人还不知道来由。省略路途，不概括后面的对白，不写已买糕、家人已吃饭或已替家人分好物品。"
+  },
+  "characters": [],
+  "relationshipFacts": [],
+  "worldbook": [],
+  "knowledgePolicy": "在家四人保留第一场及自己实际经历，不能读取府内总结当已知；刘姥姥只转述自己听到和经历过的事。新话与交物只更新在场见闻，府中人物不获知本场。"
+}

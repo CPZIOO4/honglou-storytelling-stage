@@ -86,6 +86,33 @@
         "尚未递话即已备妥或领取",
         "无根据增加劳役、借贷、担保条件"
       ]
+    },
+    {
+      "id": "household-return",
+      "title": "把带回的帮助落到家里",
+      "arrivalOf": "household-decision",
+      "scenes": [
+        "SC10_GEJ"
+      ],
+      "question": "家里人怎样得知来访结果，怎样安顿带回的东西与未兑现的承诺？",
+      "requiredChange": "实际转述结果并回应家人关心，形成眼前家用安排或完成物品交接；可以在家收束，不强迫再次出发。",
+      "openChoices": [
+        "谁先关心什么",
+        "怎样说明帮助来由而不复述整程",
+        "米钱由谁保管及怎样使用",
+        "孩子问起糕时如何回应"
+      ],
+      "next": [
+        "household-return",
+        "household-decision"
+      ],
+      "allowSettlement": true,
+      "forbiddenAssumptions": [
+        "家人预知府内谈话",
+        "自动买糕或送糕",
+        "固定原著银两或足够过冬",
+        "为了结束而虚构障碍"
+      ]
     }
   ],
   "continuity": {

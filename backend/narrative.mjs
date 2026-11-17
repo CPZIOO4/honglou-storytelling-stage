@@ -74,7 +74,8 @@ export function applyModelPatches(story,fixes,issues=[]){
 export function buildHandoff(story,stage,characters,storyline,resolution){
  const node=nodeFor(storyline,story.narrative.nodeId);
  if(!resolution||!node.next.includes(resolution.nextNodeId))throw Error('不允许的下一节点');
- if(!['depart','defer','alternative'].includes(resolution.status))throw Error('缺少明确的行动状态');
+ if(!['depart','defer','alternative','settled'].includes(resolution.status))throw Error('缺少明确的行动状态');
+ if(resolution.status==='settled'&&(!node.allowSettlement||resolution.nextNodeId!==node.id||resolution.party?.length!==0))throw Error('本节点不允许原地收束或名单无效');
  if(resolution.status==='depart'&&resolution.nextNodeId===node.id)throw Error('出发必须指向后续节点');
  if(resolution.status!=='depart'&&resolution.nextNodeId!==node.id)throw Error('未决定出发时不能自动进入荣府场景');
  for(const key of ['purpose','approach','departureCondition'])if(typeof resolution[key]!=='string'||!resolution[key].trim())throw Error('决定缺少 '+key);
@@ -94,9 +95,10 @@ export function buildHandoff(story,stage,characters,storyline,resolution){
  const decisionEvidence=evidence(resolution.evidenceRefs);
  if(resolution.status==='depart'&&party.filter(id=>!['baner','qinger'].includes(id)).some(id=>!decisionEvidence.knownBy.includes(id)))throw Error('成人同行者必须听见行动决定，不能由旁白暗自安排');
  const facts=(resolution.facts||[]).map(f=>{if(!['plan','promise','relationship','resource','obstacle'].includes(f.kind)||typeof f.text!=='string'||!f.text.trim())throw Error('交接事实格式不合法');return {kind:f.kind,text:f.text,...evidence(f.evidenceRefs)};});
- if(resolution.status!=='depart'&&!facts.some(f=>f.kind==='obstacle'))throw Error('暂缓或另谋出路必须有实质阻碍，不能只说以后再谈');
+ if(resolution.status==='settled'&&!facts.some(f=>['resource','plan'].includes(f.kind)))throw Error('原地收束须有实际物品或明确安排的证据');
+ if(['defer','alternative'].includes(resolution.status)&&!facts.some(f=>f.kind==='obstacle'))throw Error('暂缓或另谋出路必须有实质阻碍，不能只说以后再谈');
  const next=nodeFor(storyline,resolution.nextNodeId);
- return {version:1,sourceStoryId:story.id,sourceNodeId:node.id,nextNodeId:next.id,nextSceneCandidates:next.scenes,transition:'planned-not-travelled',decision:{status:resolution.status,party:[...party],purpose:resolution.purpose,approach:resolution.approach,departureCondition:resolution.departureCondition,...decisionEvidence},facts,characterKnowledge:Object.fromEntries(characters.map(c=>[c.id,knowledge[c.id]]))};
+ return {version:1,sourceStoryId:story.id,sourceNodeId:node.id,nextNodeId:next.id,nextSceneCandidates:next.scenes,transition:resolution.status==='settled'?'settled-in-place':'planned-not-travelled',decision:{status:resolution.status,party:[...party],purpose:resolution.purpose,approach:resolution.approach,departureCondition:resolution.departureCondition,...decisionEvidence},facts,characterKnowledge:Object.fromEntries(characters.map(c=>[c.id,knowledge[c.id]]))};
 }
 
 export function nextNodeContext(handoff,storyline,cards){

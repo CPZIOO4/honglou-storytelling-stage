@@ -32,3 +32,5 @@ test('both prologue writer and reviewer receive actual curtain state and can rep
   reviews++;return input.prologue.text===wrong?{passed:false,issues:['门帘实际已束起']}:{passed:true,issues:[]};
  }});assert.equal(result.text,correct);assert.equal(reviews,2);
 });
+
+test('prologue preserves the user chosen character name',()=>{assert.throws(()=>validatePrologue({text:'周瑞家的送刘姥姥走到后门，刘姥姥带着米袋和钱袋独自回了村，家里人仍在屋中。'}),/统一称/);assert.doesNotThrow(()=>validatePrologue({text:'周瑞妻子送刘姥姥走到后门，刘姥姥带着米袋和钱袋独自回了村，家里人仍在屋中。'}));});

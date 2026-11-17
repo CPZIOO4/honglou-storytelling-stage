@@ -52,4 +52,4 @@
 
 ## 当前已接入场景
 
-前十二场均已接入；递话与候见安排见[第五场说明](fifth-scene.md)，回屋传信见[第六场说明](sixth-scene.md)，廊下相见见[第七场说明](seventh-scene.md)，正房回话见[第八场说明](eighth-scene.md)，传话引见见[第九场说明](ninth-scene.md)，正房相见见[第十场说明](tenth-scene.md)，廊下候办见[第十一场说明](eleventh-scene.md)，米钱送到见[第十二场说明](twelfth-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。
+前十三场均已接入；递话与候见安排见[第五场说明](fifth-scene.md)，回屋传信见[第六场说明](sixth-scene.md)，廊下相见见[第七场说明](seventh-scene.md)，正房回话见[第八场说明](eighth-scene.md)，传话引见见[第九场说明](ninth-scene.md)，正房相见见[第十场说明](tenth-scene.md)，廊下候办见[第十一场说明](eleventh-scene.md)，米钱送到见[第十二场说明](twelfth-scene.md)，携米归家见[第十三场说明](thirteenth-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。

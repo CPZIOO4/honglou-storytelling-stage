@@ -92,6 +92,14 @@
     "stage": "data/delivery-stage.json",
     "characters": "data/waiting-characters.json",
     "cards": "data/delivery-cards.json",
-    "story": "data/deepseek-twelfth-scene.json"
+    "story": "data/deepseek-twelfth-scene.json",
+    "next": "homecoming"
+  },
+  "homecoming": {
+    "title": "第十三场 · 携米归家",
+    "stage": "data/homecoming-stage.json",
+    "characters": "data/characters.json",
+    "cards": "data/homecoming-cards.json",
+    "story": "data/deepseek-thirteenth-scene.json"
   }
 }

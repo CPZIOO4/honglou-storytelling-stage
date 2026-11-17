@@ -45,7 +45,7 @@ export function mergeMemory(previous,update,story){
 }
 export function decisionText(handoff){
  if(!handoff)return '';
- const d=handoff.decision;return `上次交接时已商议，当时尚未实际旅行；现在是否到达，以当前场景初态为准。前往下一处的人为${d.party.join('、')||'尚未决定'}。目的为${d.purpose}。开口方式为${d.approach}。出发条件为${d.departureCondition}。${handoff.facts.map(f=>f.text).join('；')}`;
+ const d=handoff.decision;if(d.status==='settled')return `上一场已在原处谈妥眼前安排，没有新的出行。${d.purpose}。${d.approach}。${handoff.facts.map(f=>f.text).join('；')}`;return `上次交接时已商议，当时尚未实际旅行；现在是否到达，以当前场景初态为准。前往下一处的人为${d.party.join('、')||'尚未决定'}。目的为${d.purpose}。开口方式为${d.approach}。出发条件为${d.departureCondition}。${handoff.facts.map(f=>f.text).join('；')}`;
 }
 export function buildWritingContext(cards,memory=null,{node=null,handoff=null}={}){
  const topic=[node?.question,node?.requiredChange,cards.scene.initialSituation,memory?.summary].filter(Boolean).join('\n');
@@ -54,18 +54,19 @@ export function buildWritingContext(cards,memory=null,{node=null,handoff=null}={
 }
 export async function nextWritingContext(root,cards,line,handoff,memory){
  const node=line.nodes.find(n=>n.id===handoff.nextNodeId);if(!node)throw Error('未知承接节点');
- const files={SC01_JM:'01_荣府角门.md',SC11_HJ:'11_荣府后街.md',SC12_ZRZ:'12_周瑞妻子住处.md',SC13_DT:'13_候见倒厅与院落.md',SC14_FJZF:'14_王熙凤正房.md'};
+ const files={SC10_GEJ:'10_狗儿家.md',SC15_SW:'15_内院经办处.md',SC01_JM:'01_荣府角门.md',SC11_HJ:'11_荣府后街.md',SC12_ZRZ:'12_周瑞妻子住处.md',SC13_DT:'13_候见倒厅与院落.md',SC14_FJZF:'14_王熙凤正房.md'};
  const sceneId=node.scenes[0],file=files[sceneId];let scene=cards.scene;
- if(file){const source=await readFile(join(root,'cards/environment',file),'utf8');const section=name=>{const start=source.indexOf('## '+name+'\n'),crlf=source.indexOf('## '+name+'\r\n');const at=Math.max(start,crlf);if(at<0)return '';const body=source.slice(at+name.length+3);return body.split(/\r?\n## /)[0].replace(/```/g,'').trim();};
+ if(file&&handoff.decision.status!=='settled'){const source=await readFile(join(root,'cards/environment',file),'utf8');const section=name=>{const start=source.indexOf('## '+name+'\n'),crlf=source.indexOf('## '+name+'\r\n');const at=Math.max(start,crlf);if(at<0)return '';const body=source.slice(at+name.length+3);return body.split(/\r?\n## /)[0].replace(/```/g,'').trim();};
   // Import descriptive data, not source-card instructions or a fixed original plot.
   scene={id:sceneId,title:section('name'),description:section('description').replaceAll('周瑞家的','周瑞妻子'),atmosphere:section('personality'),boundary:'下一场的候选环境；尚未到达。只承接已确认分支，不执行来源卡的预定剧情。'};
  }
+ if(handoff.decision.status==='settled')scene={id:sceneId,title:cards.scene.title,description:cards.scene.environmentCard?.description||cards.scene.place,boundary:'已在此处谈妥上一场安排，不重新执行入场初态；新变化须由后续场景明确。'};
  const active=handoff.decision.status==='depart'?handoff.decision.party:cards.characters.map(c=>c.id);
  const nextCards={...cards,scene,characters:cards.characters.filter(c=>active.includes(c.id)).map(c=>{
   if(node.id===line.entryNode)return c;
   // These roles describe the household scene. The next node inherits character
   // identity and experience, not a renewed instruction to decide who sets out.
-  const {sceneRole,...stable}=c;const {atHome,agency,...performance}=stable.performance||{};return {...stable,performance};
+  const {sceneRole,...stable}=c;const {atHome,agency,...performance}=stable.performance||{};return {...stable,performance,experiencedMemory:memory.characters[c.id]||stable.experiencedMemory};
  })};
  return {nextNodeId:node.id,sceneId,cast:active,prompt:buildWritingContext(nextCards,memory,{node,handoff})};
 }
