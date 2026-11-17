@@ -5,7 +5,7 @@ import {dialogueFrame,compileSoundtrack} from './soundtrack.js';
 import {RecordedDirector} from './director.js';
 import {compilePresentation,presentationAt,presentationTimeForStory} from './presentation.js';
 const $=id=>document.getElementById(id);const format=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const sceneKey=new URLSearchParams(location.search).get('scene')==='gate'?'gate':'home';
+const requestedScene=new URLSearchParams(location.search).get('scene');const sceneKey=['gate','backstreet'].includes(requestedScene)?requestedScene:'home';
 const api=path=>'/api/director/'+path+'?scene='+sceneKey;
 const names={};let story,stage,characters,cards,compiled,presentation,view,audioLibrary,sound,playing=false,time=0,speed=1,lastFrame=0,lastBeat=-1,tab='beat',lastState,presentState,ready=false,raf;
 async function json(url){const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(`文件读取失败：${url}`);return r.json();}
@@ -25,7 +25,7 @@ async function connectLocalDirector(){
  if(!['127.0.0.1','localhost'].includes(location.hostname))return;
  try{const status=await json(api('status'));$('generation-panel').classList.remove('hidden');$('generate-story').disabled=!status.configured;$('generation-status').textContent=status.configured?'可根据人物卡、环境卡和个人听闻生成新一场':'请在本机配置 DeepSeek 密钥';
   if(new URLSearchParams(location.search).has('demo'))return;
-  if(status.stale){$('generation-status').textContent='第一场分支已改变，请重新生成第二场';$('play').disabled=true;playing=false;return;}
+  if(status.stale){$('generation-status').textContent='前序分支已改变，请重新生成当前场';$('play').disabled=true;playing=false;return;}
   if(status.active&&status.active.scene===sceneKey){$('generate-story').disabled=true;pollGeneration(status.active.id);}else if(status.latest){installStory(await json(api('latest')));$('generation-status').textContent='已载入上次检查通过的 Flash 演出';$('generate-story').textContent='重新生成';}
  }catch{/* Static preview is still available without a local API server. */}
 }
@@ -76,14 +76,14 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){playing=fa
 window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);clearTimeout(generationTimer);view?.dispose();sound?.dispose();});
 try{
  const registry=await json('data/productions.json'),production=registry[sceneKey];
- $('generate-story').textContent=sceneKey==='gate'?'生成第二场':'生成第一场';
- document.querySelector('#ending > span').textContent=sceneKey==='gate'?'第二场 · 完':'第一场 · 完';$('stage').setAttribute('aria-label',sceneKey==='gate'?'荣府门前的三维舞台与纸片人物':'狗儿家的三维舞台与纸片人物');
+ $('generate-story').textContent='生成'+production.title.split(' · ')[0];
+ document.querySelector('#ending > span').textContent=production.title.split(' · ')[0]+' · 完';$('stage').setAttribute('aria-label',production.title+'的三维舞台与纸片人物');
  const nav=document.createElement('nav');nav.className='scene-navigation';nav.setAttribute('aria-label','演出场次');for(const [key,item]of Object.entries(registry)){const link=document.createElement('a');link.href='?scene='+key;link.textContent=item.title;if(key===sceneKey)link.setAttribute('aria-current','page');nav.append(link);}document.querySelector('main').prepend(nav);
- let localStory=null;if(['127.0.0.1','localhost'].includes(location.hostname)&&!new URLSearchParams(location.search).has('demo')){try{const status=await json(api('status'));if(status.stale)throw Error('第一场已更换分支，请重新生成第二场，不能播放旧分支。');if(status.latest)localStory=await json(api('latest'));}catch(e){if(e.message.includes('分支'))throw e;}}
+ let localStory=null;if(['127.0.0.1','localhost'].includes(location.hostname)&&!new URLSearchParams(location.search).has('demo')){try{const status=await json(api('status'));if(status.stale)throw Error('前序演出已更换分支，请重新生成当前场，不能播放旧分支。');if(status.latest)localStory=await json(api('latest'));}catch(e){if(e.message.includes('分支'))throw e;}}
  [story,stage,characters,cards,audioLibrary]=await Promise.all([localStory||new RecordedDirector().load(new URLSearchParams(location.search).has('demo')&&sceneKey==='home'?'data/scene-one.json':production.story),json(production.stage),json(production.characters),json(production.cards),json('data/audio-library.json')]);
  if(story.castIds)characters=characters.filter(c=>story.castIds.includes(c.id));cards=story.cardsSnapshot||cards;
- const onward=document.createElement('a');onward.className='scene-onward';onward.href=sceneKey==='home'?'?scene=gate':'?scene=home';onward.textContent=sceneKey==='home'?'继续第二场 · 荣府问路':'返回第一场';$('ending').append(onward);
+ const onward=document.createElement('a');onward.className='scene-onward';onward.href='?scene='+(production.next||'home');onward.textContent=production.next?'继续'+registry[production.next].title:'返回第一场';$('ending').append(onward);
  sound=new StageAudio(audioLibrary);characters.forEach(c=>names[c.id]=c.name);compiled=compileStory(story,stage,characters);
  view=new StageView($('stage'),stage,characters,text=>$('load-status').textContent=text);await view.load();ready=true;$('loading').classList.add('hidden');$('play').disabled=false;installStory(story);raf=requestAnimationFrame(tick);await connectLocalDirector();
  if(new URLSearchParams(location.search).has('qa'))window.__STAGE_TEST__={seek:t=>seek(presentationTimeForStory(presentation,t)),seekPresentation:seek,presentation:()=>presentation,audio:()=>sound.debug(),startAudioCapture:()=>sound.startCapture(),stopAudioCapture:async()=>Array.from(new Uint8Array(await sound.stopCapture())),heads:()=>Object.fromEntries([...view.actors.keys()].map(id=>[id,view.headScreen(id)])),focus:()=>Object.fromEntries([...view.actors].map(([id,a])=>[id,a.cue.visible])),play:()=>{playing=true;},pause:()=>{playing=false;},state:()=>({time,playing,ready,presentation:presentState,state:lastState,drawCalls:view.renderer.info.render.calls,triangles:view.renderer.info.render.triangles}),context:()=>buildDirectorContext(cards,compiled,presentState?.storyTime||0)};
-}catch(err){if(sceneKey==='gate'&&['127.0.0.1','localhost'].includes(location.hostname)) {$('generation-panel').classList.remove('hidden');$('generate-story').disabled=false;$('generation-status').textContent='可从已确认的第一场分支生成第二场';}console.error(err);$('load-status').textContent=err?.message||'加载被中断，请重新加载页面。';$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;const retry=document.createElement('button');retry.textContent='重新加载';retry.onclick=()=>location.reload();$('loading').append(retry);}
+}catch(err){if(sceneKey!=='home'&&['127.0.0.1','localhost'].includes(location.hostname)) {$('generation-panel').classList.remove('hidden');$('generate-story').disabled=false;$('generation-status').textContent='可从已确认的前序分支生成当前场';}console.error(err);$('load-status').textContent=err?.message||'加载被中断，请重新加载页面。';$('loading').querySelector('strong').textContent='舞台未能载入';$('loading').querySelector('.spinner').hidden=true;const retry=document.createElement('button');retry.textContent='重新加载';retry.onclick=()=>location.reload();$('loading').append(retry);}

@@ -52,4 +52,4 @@
 
 ## 当前已接入场景
 
-第一场与第二场均已接入；实际承接、接口和边界见[第二场说明](second-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。
+前三场均已接入；实际承接、说后再走、接口和边界见[第三场说明](third-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。

@@ -8,7 +8,7 @@
 
 本地生成：`POST /api/director/generate` 提交 `{"scene":"gate"}`。查询 `status`、`latest`、`next-context`、提交 `complete` 时使用 `?scene=gate`。第一场仍使用默认 `home`。生成记录独立保存在 `.runtime/latest-gate.json`，第一场不覆盖。记忆确认后沿用原branchId、revision递增，离场家人不获得门前新知识。换掉第一场后，旧第二场被标为过期，不允许当作新分支播放或确认。
 
-公开网站播放审核后发布的两场固定结果；本机可以重新生成。当前没有自动生成第三场，第二场交接只保存下一步的实际决定和可用上下文。
+公开网站播放审核后发布的固定结果；本机可以重新生成。第三场现已接入，承接本场实际决定，详见[第三场说明](third-scene.md)。
 
 ## 本版验证
 

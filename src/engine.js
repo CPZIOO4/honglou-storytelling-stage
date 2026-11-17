@@ -128,7 +128,7 @@ export function validateDialogueBlocking(compiled){
       const s=stateAt(compiled,t);const speaker=s.actors[d.speaker];
       if(!speaker.visible){errors.push(`${b.id} 发话人物不在场`);break;}
       if(d.to.some(id=>!s.actors[id].visible)){errors.push(`${b.id} 对话对象不在场`);break;}
-      if(compiled.stage.id==='rongfu-gate'&&d.to.some(id=>!listenersFor(compiled.stage,s.actors,d).includes(id))){errors.push(`${b.id} 普通交谈对象超出听闻范围，须走近或使用call`);break;}
+      if((compiled.stage.requireAudibleRecipients||compiled.stage.id==='rongfu-gate')&&d.to.some(id=>!listenersFor(compiled.stage,s.actors,d).includes(id))){errors.push(`${b.id} 普通交谈对象超出听闻范围，须走近或使用call`);break;}
       if(d.mode==='whisper'){
         const recipient=s.actors[d.to[0]];
         if(!listenersFor(compiled.stage,s.actors,d).includes(d.to[0])){errors.push(`${b.id} 悄悄话双方尚未靠近或不在同一声区`);break;}

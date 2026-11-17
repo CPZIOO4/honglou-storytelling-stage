@@ -1,0 +1,242 @@
+{
+  "id": "rongfu-backstreet",
+  "model": "assets/scene/rongfu-backstreet.glb",
+  "requireAudibleRecipients": true,
+  "coordinates": "Blender Z-up; renderer converts to glTF Y-up",
+  "anchors": {
+    "arrive_from_corner": [
+      -0.65,
+      -2.7,
+      0.03
+    ],
+    "liu_laolao_ask": [
+      -0.25,
+      -0.38,
+      0.03
+    ],
+    "child_reply": [
+      1.62,
+      0.12,
+      0.03
+    ],
+    "child_gate": [
+      1.8,
+      1.47,
+      0.08
+    ],
+    "granny_gate": [
+      0.35,
+      1.05,
+      0.03
+    ],
+    "companion_one": [
+      -1.18,
+      -1.2,
+      0.03
+    ],
+    "companion_two": [
+      -1.6,
+      -2.4,
+      0.03
+    ],
+    "companion_three": [
+      -2.3,
+      -2.4,
+      0.03
+    ],
+    "companion_four": [
+      -0.8,
+      -3.4,
+      0.03
+    ],
+    "companion_five": [
+      -1.6,
+      -3.4,
+      0.03
+    ],
+    "companion_six": [
+      0.2,
+      -3.4,
+      0.03
+    ]
+  },
+  "anchorDescriptions": {
+    "arrive_from_corner": "从角门绕到后街的来客初站位，尚未问孩童",
+    "liu_laolao_ask": "街面问话空地，距孩童约2米",
+    "child_reply": "熟悉街坊的孩童初站位",
+    "child_gate": "后门外靠近入口的领路位；孩子答应领路后可先走到这里",
+    "granny_gate": "后门外跟上孩子的独立站位，尚未进入周瑞妻子屋内",
+    "companion_one": "实际同行者街面等候位",
+    "companion_two": "实际同行者街面等候位",
+    "companion_three": "实际同行者街面等候位",
+    "companion_four": "实际同行者街面等候位",
+    "companion_five": "实际同行者街面等候位",
+    "companion_six": "实际同行者街面等候位"
+  },
+  "edges": [
+    [
+      "arrive_from_corner",
+      "liu_laolao_ask"
+    ],
+    [
+      "liu_laolao_ask",
+      "granny_gate"
+    ],
+    [
+      "child_reply",
+      "child_gate"
+    ],
+    [
+      "liu_laolao_ask",
+      "child_reply"
+    ],
+    [
+      "companion_one",
+      "arrive_from_corner"
+    ],
+    [
+      "companion_two",
+      "arrive_from_corner"
+    ],
+    [
+      "companion_three",
+      "arrive_from_corner"
+    ],
+    [
+      "companion_four",
+      "arrive_from_corner"
+    ],
+    [
+      "companion_five",
+      "arrive_from_corner"
+    ],
+    [
+      "companion_six",
+      "arrive_from_corner"
+    ]
+  ],
+  "obstacles": [
+    {
+      "id": "rear_wall_left",
+      "min": [
+        -6.6,
+        2.08
+      ],
+      "max": [
+        0.4,
+        2.42
+      ]
+    },
+    {
+      "id": "rear_wall_right",
+      "min": [
+        2.8,
+        2.08
+      ],
+      "max": [
+        6.6,
+        2.42
+      ]
+    },
+    {
+      "id": "food_stall",
+      "min": [
+        -5.9,
+        0.4
+      ],
+      "max": [
+        -3.3,
+        2
+      ]
+    },
+    {
+      "id": "toy_stall",
+      "min": [
+        -2.7,
+        0.6
+      ],
+      "max": [
+        -0.65,
+        1.9
+      ]
+    }
+  ],
+  "cameras": {
+    "wide": {
+      "position": [
+        8,
+        -18,
+        10.7
+      ],
+      "target": [
+        0,
+        1,
+        1.1
+      ],
+      "scale": 16
+    },
+    "family": {
+      "position": [
+        5.5,
+        -16,
+        7.6
+      ],
+      "target": [
+        0.5,
+        0.2,
+        1
+      ],
+      "scale": 9,
+      "mobile": {
+        "target": [
+          0.5,
+          -0.1,
+          1
+        ],
+        "scale": 5.8
+      }
+    },
+    "door": {
+      "position": [
+        4.8,
+        -10.5,
+        7.5
+      ],
+      "target": [
+        1,
+        1.2,
+        1.1
+      ],
+      "scale": 7.8,
+      "mobile": {
+        "target": [
+          1,
+          0.6,
+          1
+        ],
+        "scale": 5.5
+      }
+    }
+  },
+  "acoustics": {
+    "ranges": {
+      "normal": 4.5,
+      "whisper": 0.9,
+      "call": 9
+    },
+    "zones": [
+      {
+        "id": "street",
+        "min": [
+          -8,
+          -5
+        ],
+        "max": [
+          8,
+          2
+        ]
+      }
+    ],
+    "portals": []
+  }
+}

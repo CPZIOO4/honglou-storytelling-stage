@@ -1,6 +1,6 @@
 import {readFile,readdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-const scene=process.argv[2]==='gate'?'gate':'home';const read=async p=>JSON.parse(await readFile(p,'utf8'));const story=await read(scene==='gate'?'.runtime/latest-gate.json':'.runtime/latest-story.json');
+const scene=['gate','backstreet'].includes(process.argv[2])?process.argv[2]:'home';const read=async p=>JSON.parse(await readFile(p,'utf8'));const story=await read(scene==='home'?'.runtime/latest-story.json':`.runtime/latest-${scene}.json`);
 const ids=new Set(story.generation.calls.map(c=>c.responseId)),texts=new Map();
 function collect(v,receipt){if(!v||typeof v!=='object')return;if(typeof v.text==='string')texts.set(v.text,{responseId:receipt.responseId,phase:receipt.phase});for(const value of Object.values(v))collect(value,receipt);}
 for(const dir of await readdir('.runtime/generations',{withFileTypes:true})){if(!dir.isDirectory())continue;for(const f of await readdir('.runtime/generations/'+dir.name)){if(!f.endsWith('-response.json'))continue;const r=await read('.runtime/generations/'+dir.name+'/'+f);if(!ids.has(r.responseId)||r.finishReason!=='stop')continue;try{collect(JSON.parse(r.content),r);}catch{}}}

@@ -4,13 +4,22 @@
     "stage": "data/stage.json",
     "characters": "data/characters.json",
     "cards": "data/cards.json",
-    "story": "data/deepseek-first-scene.json"
+    "story": "data/deepseek-first-scene.json",
+    "next": "gate"
   },
   "gate": {
     "title": "第二场 · 荣府问路",
     "stage": "data/gate-stage.json",
     "characters": "data/gate-characters.json",
     "cards": "data/gate-cards.json",
-    "story": "data/deepseek-second-scene.json"
+    "story": "data/deepseek-second-scene.json",
+    "next": "backstreet"
+  },
+  "backstreet": {
+    "title": "第三场 · 后街寻人",
+    "stage": "data/backstreet-stage.json",
+    "characters": "data/backstreet-characters.json",
+    "cards": "data/backstreet-cards.json",
+    "story": "data/deepseek-third-scene.json"
   }
 }

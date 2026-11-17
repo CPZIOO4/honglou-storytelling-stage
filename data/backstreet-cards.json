@@ -1,0 +1,38 @@
+{
+  "format": "honglou-context-v2",
+  "revision": "backstreet-ch6-2026-11-17-continuity",
+  "scene": {
+    "id": "rongfu-backstreet",
+    "title": "后街寻人",
+    "place": "荣国府 · 后街与后门",
+    "time": "秋尽冬初，承接上一场的同一白日",
+    "initialSituation": "由上场实际交接填入",
+    "availableProps": [
+      "食物摊担",
+      "玩具摊架",
+      "敞开的后门",
+      "墙面",
+      "门内短巷"
+    ],
+    "boundary": "第三场只在后街、后门外寻找住处与带路人；本次动作止于后门入口。下一场才见周瑞妻子，不生成场外回应。",
+    "factBoundary": "未购入食物或玩具，没有新增钱袋或酬谢物；带糕给板儿的承诺尚未兑现。孩童不知来客家中或角门对话。没有小贩或其他孩子演员，不给他们台词或可见动作。",
+    "dramaturgy": {
+      "protagonist": "granny",
+      "initiativeType": "locate-house",
+      "direction": "承接已经知道的太太陪房周瑞家线索，主动友善地向孩子问住处。孩子熟悉近邻，短而具体；称呼明确就直接辨认，不刻意制造哪位周大娘的重复误会。刘姥姥有家常温度，可笑着应答，不训孩子、不对孩子完整诉苦。",
+      "pace": "问清住处、得到愿意带路或有效指点即可推进，通常几句即可，不为凑时长反复复述。",
+      "movement": "答应带路之后才安排孩子先行、来客跟上，可用blocking.afterMoves在交谈结束后走向child_gate/granny_gate；不越入住处，不旁白冒充已见到周瑞妻子。"
+    },
+    "environmentCard": {
+      "name": "荣府后街",
+      "description": "荣府后门外的小街与门内一段仆役巷道。墙边摆食物与玩具摊担，中间留人走动，后门敞开，里面可见砖地。具体摊物与建筑尺寸是既有舞台设计。",
+      "personality": "比正门多些日常街坊气息；住户称呼可能重名，孩子按自己熟悉的邻里辨认。",
+      "scenario": "依当前实际名单到达；是否带路须由孩子回应。只有已配置的演员参与对白。"
+    },
+    "narrationPolicy": "短过场只说沿府墙绕到后街与看到的摊担、门口和孩子，不重复家计，也不预告孩子将答应或已经找到住处。"
+  },
+  "relationshipFacts": [],
+  "characters": [],
+  "worldbook": [],
+  "knowledgePolicy": "老仆指路只属来客已听到的经历；孩子不继承总控摘要。能认住处不等于知道周瑞妻子此刻愿意帮忙。"
+}

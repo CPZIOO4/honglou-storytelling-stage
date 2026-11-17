@@ -118,6 +118,14 @@
       "grit": 0.2,
       "duration": 0.065,
       "rate": 9
+    },
+    "guide_child": {
+      "label": "引路孩童：明快清脆",
+      "frequency": 355,
+      "wave": "triangle",
+      "grit": 0.025,
+      "duration": 0.045,
+      "rate": 8
     }
   },
   "policy": "只从本库选曲，也可留白；按剧情转折选择，不按每句台词换歌。贫寒焦虑不配欢庆曲。对白时自动压低背景音乐。pause保留进度，resume续播，stop清空。"

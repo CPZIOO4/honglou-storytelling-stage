@@ -1,13 +1,14 @@
 import {readFile,mkdir,writeFile,link,unlink} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {join} from 'node:path';
-import {compileStory,personalKnowledge} from '../src/engine.js';
+import {compileStory,personalKnowledge,stateAt} from '../src/engine.js';
 
 export const MEMORY_LIMITS={summary:900,character:240,recent:600};
 const plain=(s,max,label)=>{if(typeof s!=='string'||s.length>max||/[{}]|"(?:commands|duration|eventId)"/.test(s))throw Error(label+'必须是预算内的剧情文字');return s;};
 export function memoryEvidence(story,stage,characters){
  const c=compileStory(story,stage,characters),heard=personalKnowledge(c,c.duration);
- return {events:c.beats.flatMap(b=>b.dialogue.map((d,i)=>({id:b.id+':'+i,speaker:d.speaker,text:d.text}))),heardBy:Object.fromEntries(characters.map(a=>[a.id,heard[a.id].map(e=>e.eventId)]))};
+ const end=stateAt(c,c.duration);
+ return {events:c.beats.flatMap(b=>b.dialogue.map((d,i)=>({id:b.id+':'+i,speaker:d.speaker,text:d.text}))),heardBy:Object.fromEntries(characters.map(a=>[a.id,heard[a.id].map(e=>e.eventId)])),stageOutcome:{note:'执行结果供总控核对动作，不是所有角色共享的见闻。停在门外不能写成已经进屋。',movements:c.events.filter(e=>e.type==='move').map(e=>({actor:e.actor,destination:stage.anchorDescriptions?.[e.target]||e.target,completed:e.time+e.duration<=c.duration})),finalPositions:Object.fromEntries(characters.map(a=>[a.id,stage.anchorDescriptions?.[end.actors[a.id].anchor]||end.actors[a.id].anchor]))}};
 }
 export function validateMemoryUpdate(update,evidence,cards){
  if(!update||Object.keys(update).some(k=>!['summary','evidenceRefs','characters'].includes(k)))throw Error('记忆只允许summary、evidenceRefs和characters');

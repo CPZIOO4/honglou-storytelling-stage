@@ -1,7 +1,7 @@
 import {compileStory,personalKnowledge} from '../src/engine.js';
 import {validateFactRefs} from './card-context.mjs';
 
-export const NARRATIVE_VERSION=7;
+export const NARRATIVE_VERSION=8;
 export function nodeFor(storyline,id){const n=storyline.nodes.find(n=>n.id===id);if(!n)throw Error('未知故事节点 '+id);return n;}
 export function validatePlan(plan,maxBeats=8){
  if(!plan||!Array.isArray(plan.beats)||plan.beats.length<1||plan.beats.length>maxBeats)throw Error('场次提纲须为1到预算上限段，不为凑满段数拖延');
@@ -49,6 +49,13 @@ export function stageScriptBeat(step,blocking){
   if(d.mode==='whisper')commands.push({at:cursor-.2,type:'face',actor:d.to[0],target:d.speaker});
   const line={...d,at:cursor,until:cursor+Math.max(4,Math.ceil(d.text.length/5+1))};cursor=line.until+1;return line;
  });
+ const after=new Set();let afterEnd=cursor;
+ for(const m of blocking.afterMoves||[]){
+  if(after.has(m.actor))throw Error('收尾移动每人至多一次');after.add(m.actor);
+  const delay=m.delay??0;if(!Number.isFinite(delay)||delay<0||delay>2)throw Error('收尾跟随延迟须为0至2秒');
+  commands.push({at:cursor+delay,type:'move',actor:m.actor,target:m.target,duration:4});afterEnd=Math.max(afterEnd,cursor+delay+4);
+ }
+ cursor=afterEnd;
  return {id:step.id,title:step.title||step.question,duration:Math.ceil(cursor+1),narration:blocking.narration,dialogue,commands,memory:step.change};
 }
 export function applyModelPatches(story,fixes,issues=[]){
@@ -58,7 +65,7 @@ export function applyModelPatches(story,fixes,issues=[]){
   for(const k of ['narration','memory'])if(patch[k]!==undefined){if(typeof patch[k]!=='string')throw Error('修订文字须为字符串');b[k]=patch[k];}
   const local=issues.filter(i=>i.beatId===b.id),narrationOnly=local.length&&local.every(i=>i.scope==='narration'||/不要动对白/.test(i.reason));
   for(const d of narrationOnly?[]:patch.dialogue||[]){if(!Number.isInteger(d.index)||!b.dialogue[d.index])throw Error(`${b.id} 可修改句子index仅有0到${b.dialogue.length-1}，禁止增加新句子`);if(typeof d.text!=='string'||!Array.isArray(d.knowledgeRefs))throw Error('修订台词缺字段');Object.assign(b.dialogue[d.index],{text:d.text,knowledgeRefs:d.knowledgeRefs,...(d.factRefs?{factRefs:d.factRefs}:{})});}
-  out.beats[index]=stageScriptBeat({...b,change:b.memory}, {narration:b.narration,moves:b.commands.filter(c=>c.type==='move').map(({actor,target})=>({actor,target})),expressions:b.commands.filter(c=>c.type==='expression').map(({actor,value})=>({actor,value})),camera:b.commands.find(c=>c.type==='camera')?.target});
+  out.beats[index]=stageScriptBeat({...b,change:b.memory}, {narration:b.narration,moves:b.commands.filter(c=>c.type==='move'&&c.at===0).map(({actor,target})=>({actor,target})),afterMoves:b.commands.filter(c=>c.type==='move'&&c.at>0).map(({actor,target,at})=>({actor,target,delay:at-(b.dialogue.at(-1).until+1)})),expressions:b.commands.filter(c=>c.type==='expression').map(({actor,value})=>({actor,value})),camera:b.commands.find(c=>c.type==='camera')?.target});
  }return out;
 }
 
