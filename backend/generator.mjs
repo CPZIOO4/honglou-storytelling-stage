@@ -9,7 +9,7 @@ import {defaultPresentation,compilePresentation} from '../src/presentation.js';
 import {compileSoundtrack} from '../src/soundtrack.js';
 import {validateFactRefs,runtimeCards} from './card-context.mjs';
 import {MODEL,THINKING,MODEL_TIMEOUT_MS,modelRequest} from './model-config.mjs';
-import {buildWritingContext,memoryEvidence,validateMemoryUpdate,mergeMemory,commitMemory,acceptedMemory,nextWritingContext} from './story-memory.mjs';
+import {buildWritingContext,memoryEvidence,validateMemoryUpdate,mergeMemoryPatch,MEMORY_REPAIR_PROMPT,mergeMemory,commitMemory,acceptedMemory,nextWritingContext} from './story-memory.mjs';
 import {composeConversation,assertDialoguePreserved} from './conversation.mjs';
 import {composePrologue} from './prologue.mjs';
 export {MODEL};
@@ -18,7 +18,7 @@ const load=async p=>JSON.parse(await readFile(p,'utf8'));
 const save=async(p,v)=>writeFile(p,JSON.stringify(v,null,2),'utf8');
 const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const SYSTEM=`你是唯一说书总控的舞台编排环节。完整对白已由场次剧本确定，你不能重写或添加对白。只输出JSON {"blocking":{"narration":"<=100字，准确描述本段实际动作与说话，不写内心或未实现的动作","moves":[{"actor":"人物id","target":"站位名"}],"expressions":[{"actor":"人物id","value":"现有表情名"}],"camera":"可选镜头名"}}。
-程序会把moves安排在本段开头，4秒完成；可另给afterMoves数组[{actor,target,delay:0到2}]，在本段最后一句说完后才移动，适合先答应领路再走，孩子先行delay=0、来客跟随可delay=0.8。afterMoves每人最多一次，可与开头moves同一个人但不得目标相同；没有后续对话，不要求人物走后仍能听见已结束的话。所有移动停止后才逐句说话，并自动转向第一收话人，按字数给足显示时间。因此不要给at/duration，不要重写剧本。无理由就不移动，不重复已有站位，不让两个人到同一站位。不要添加端碗、搀扶、坐下、拿衣裳等未支持动作。
+程序会把moves安排在本段开头，4秒完成；可另给afterMoves数组[{actor,target,delay:0到2}]，在本段最后一句说完后才移动，适合先答应领路再走，孩子先行delay=0、来客跟随可delay=0.8。afterMoves每人最多一次，可与开头moves同一个人但不得目标相同；没有后续对话，不要求人物走后仍能听见已结束的话。若邀请进前些等话尚未说出，不能放在本段开头moves预先执行；用该句之后的afterMoves，或在下一段开头再靠近。所有移动停止后才逐句说话，并自动转向第一收话人，按字数给足显示时间。因此不要给at/duration，不要重写剧本。无理由就不移动，不重复已有站位，不让两个人到同一站位。不要添加端碗、搀扶、坐下、拿衣裳等未支持动作。
 context.currentState是实际站位。必须根据planStep.dialogue里的对象和方式，使对方确实听得见；悄悄话双方需同声区且距离<=0.9，普通交谈<=4.5。旁人靠近可能听见，不能用旁白冒充秘密。
 站位以anchorDescriptions为准，不把屋中右侧说成桌旁，不把屋中后侧说成炕前；没move就不写走动。旁白可以简短交代说话态度，不必全是移动说明。场景以context.scene为准，人物名统一周瑞妻子。`;
 
@@ -66,6 +66,7 @@ export function auditGeneratedStory(story,stage,characters,cards=null){
   // An explicit immediate lead/follow line constrains the staged departure.
   // Future plans without both movements remain plans, not forced actions.
   for(const d of b.dialogue){
+   if(/进前些|近前些/.test(d.text)&&b.commands.some(c=>c.type==='move'&&d.to.includes(c.actor)&&c.target==='private_near'&&c.at<d.until))errors.push(`${b.id} 靠近邀请尚未说完，不能提前把受话人移到private_near；改到本段afterMoves或下一段开头执行。`);
    if(!/我先走[，,、\s]*你跟/.test(d.text))continue;
    const leader=b.commands.find(c=>c.type==='move'&&c.actor===d.speaker&&c.at>d.until);
    const follower=b.commands.find(c=>c.type==='move'&&c.actor===d.to[0]&&c.at>d.until);
@@ -174,7 +175,10 @@ export function createGenerator(root){
    const turnMap=Object.fromEntries(story.beats.flatMap(b=>b.dialogue.map((d,i)=>[d.sourceTurnId,b.id+':'+i])));const conversationThreads=story.narrative.dialogueReview.concerns.map(c=>({raisedAt:turnMap[c.raisedAt],responseAt:c.responseAt.map(id=>turnMap[id]),kind:c.kind,status:c.status}));
    const evidence=memoryEvidence(story,stage,characters);let memoryUpdate,memoryReview,memoryErrors=null;
    for(let attempt=0;attempt<3;attempt++){
-    memoryUpdate=await callModel(key,'生成本场待确认记忆。仅仅没有参加后续场景的人记为未参与，离开须有实际移动依据。不要把每句台词重复存一遍，按目的、关系、许可范围、当前去向与未兑现承诺压缩。个人记录使用人物姓名作主语的第三人称；每项是谁说的、谁听见的须对照evidence.events.speaker，不能把听见的发问记成自己问过。若提议后来改变，旧提议只写成最初提过，当前承诺采用最后说定的版本，并交代改变原因；不能把等待和送到即返并列为同时有效。若有rejected，保留其中无误的内容，只修validationErrors指出的问题，再输出完整对象。除决定结果外，还须保留主要顾虑、回应及改变人选的实际原因，未解决的顾虑保持未解决，不用摘要补对白缺口。只输出JSON {"summary":"建议500至700字，硬上限900字，保留剧情因果与未兑现承诺","evidenceRefs":["本场事件id"],"characters":[{"id":"人物id","memory":"建议150至200字，硬上限240字的本人动态经历","evidenceRefs":["本人确实听见的本场事件id"]}]}。无新经历的人省略。保留姓名与既定性格，仅补经历。previousMemory若存在，summary须保留其中尚有效的目的和未兑现承诺并加入本场变化；角色memory整合本人的旧经历与新听闻。新增信息引用本场事件，旧信息来自对应个人旧卡；不复制其他分支、不把总控摘要写入不知情者。', {cards,previousMemory,evidence,conversationThreads,rejected:memoryUpdate||null,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),validationErrors:memoryErrors},job,'memory-update-'+attempt);
+    if(attempt&&Array.isArray(memoryUpdate?.characters)&&typeof memoryUpdate.summary==='string'){
+     const patch=await callModel(key,MEMORY_REPAIR_PROMPT,{cards,previousMemory,evidence,conversationThreads,rejected:memoryUpdate,validationErrors:memoryErrors},job,'memory-patch-'+attempt);
+     try{memoryUpdate=mergeMemoryPatch(memoryUpdate,patch);validateMemoryUpdate(memoryUpdate,evidence,cards);}catch(e){if(attempt===2)throw e;memoryErrors=e.message;continue;}
+    }else memoryUpdate=await callModel(key,'生成本场待确认记忆。仅仅没有参加后续场景的人记为未参与，离开须有实际移动依据。不要把每句台词重复存一遍，按目的、关系、许可范围、当前去向与未兑现承诺压缩。个人记录使用人物姓名作主语的第三人称；每项是谁说的、谁听见的须对照evidence.events.speaker，不能把听见的发问记成自己问过。若提议后来改变，旧提议只写成最初提过，当前承诺采用最后说定的版本，并交代改变原因；不能把等待和送到即返并列为同时有效。若有rejected，保留其中无误的内容，只修validationErrors指出的问题，再输出完整对象。除决定结果外，还须保留主要顾虑、回应及改变人选的实际原因，未解决的顾虑保持未解决，不用摘要补对白缺口。只输出JSON {"summary":"建议500至700字，硬上限900字，保留剧情因果与未兑现承诺","evidenceRefs":["本场事件id"],"characters":[{"id":"人物id","memory":"建议150至200字，硬上限240字的本人动态经历","evidenceRefs":["本人确实听见的本场事件id"]}]}。无新经历的人省略。保留姓名与既定性格，仅补经历。previousMemory若存在，summary须保留其中尚有效的目的和未兑现承诺并加入本场变化；角色memory整合本人的旧经历与新听闻。新增信息引用本场事件，旧信息来自对应个人旧卡；不复制其他分支、不把总控摘要写入不知情者。', {cards,previousMemory,evidence,conversationThreads,rejected:memoryUpdate||null,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),validationErrors:memoryErrors},job,'memory-update-'+attempt);
     try{
      validateMemoryUpdate(memoryUpdate,evidence,cards);
      memoryReview=await callModel(key,'只审核update中的摘要与动态卡，逐条对照真实对白及previousMemory。cards、evidence和conversationThreads是输入依据或索引，不是本次待审输出，不能把输入索引的格式意见当作update失败。以evidence.events原句为准。逐个核对每句话是谁提出、谁回应，人物听见不等于自己说过。计划前后调整时检查是否清楚标明先后及理由，不能把被替代的旧提议与最终承诺并列。检查同行者、拒绝范围、改变原因、计划未完成、儿童理解能力、私语边界。不能把只送村口写成进府，也不能将总控摘要泄露到不知情人物卡。输出JSON {"passed":true或false,"issues":["具体问题"]}。', {cards,previousMemory,evidence,conversationThreads,update:memoryUpdate,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy'))},job,'memory-review-'+attempt);

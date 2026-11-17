@@ -4,6 +4,18 @@ import {join} from 'node:path';
 import {compileStory,personalKnowledge,stateAt} from '../src/engine.js';
 
 export const MEMORY_LIMITS={summary:900,character:240,recent:600};
+export const MEMORY_REPAIR_PROMPT='只修正rejected中被validationErrors明确指出的记忆字段，保留无误字段，不重写整个对象。输出JSON {"summary":"只有摘要需改时才填，硬上限900字","characters":[{"id":"已存在且需改的人物id","memory":"修正后完整经历，硬上限240字"}]}。未改的summary省略，未改的人物不输出；不改证据引用、身份或性格。明确写谁向谁说/回明，不能把凤姐尚未向太太回话变成太太未答复。人物起初不知道的事若本场实际听到，应按听到的具体范围更新；未听到者仍未知。把命人准备、尚待给付和已经交付分开，不擅加新承诺、批准、库存或动作。';
+export function mergeMemoryPatch(original,patch){
+ if(!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(k=>!['summary','characters'].includes(k)))throw Error('记忆补丁只能修改摘要和已有个人经历');
+ const out=structuredClone(original);
+ if(Object.hasOwn(patch,'summary'))out.summary=patch.summary;
+ if(patch.characters!==undefined){
+  if(!Array.isArray(patch.characters)||new Set(patch.characters.map(c=>c.id)).size!==patch.characters.length)throw Error('记忆补丁人物必须唯一');
+  for(const c of patch.characters){if(Object.keys(c).some(k=>!['id','memory'].includes(k)))throw Error('记忆补丁不能改身份、性格或证据引用');const target=out.characters?.find(a=>a.id===c.id);if(!target)throw Error('记忆补丁不能添加未在原稿中的人物');target.memory=c.memory;}
+ }
+ return out;
+}
+export function applyMemoryPatch(original,patch,evidence,cards){return validateMemoryUpdate(mergeMemoryPatch(original,patch),evidence,cards);}
 const plain=(s,max,label)=>{if(typeof s!=='string')throw Error(label+'必须是剧情文字字符串');if(s.length>max)throw Error(`${label}超过预算：当前${s.length}字符，上限${max}；只压缩这一字段，保留无误的其他字段。`);if(/[{}]|"(?:commands|duration|eventId)"/.test(s))throw Error(label+'必须是剧情文字，不能夹带动作JSON');return s;};
 export function memoryEvidence(story,stage,characters){
  const c=compileStory(story,stage,characters),heard=personalKnowledge(c,c.duration);

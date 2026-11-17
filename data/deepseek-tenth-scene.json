@@ -1,0 +1,3041 @@
+{
+  "version": 1,
+  "communicationVersion": 1,
+  "id": "9102445c-c558-4468-a578-ed1207703ac5",
+  "title": "正房相见",
+  "subtitle": "荣府 · 王熙凤正房",
+  "production": "audience",
+  "castIds": [
+    "granny",
+    "ping_er",
+    "fengjie"
+  ],
+  "cardsSnapshot": {
+    "format": "honglou-context-v2",
+    "revision": "audience-2026-11-17-v2",
+    "scene": {
+      "id": "fengjie-audience",
+      "title": "正房相见",
+      "place": "荣府 · 王熙凤正房",
+      "time": "秋尽冬初，承接第九场的同一白日",
+      "initialSituation": "按第九场实际应允和引路，平儿已带刘姥姥走完余下路途，来到王熙凤正房堂屋。刘姥姥在来客答话空地，平儿在侍立位，凤姐仍在第八场结束的会客炕前空地。三人尚未开始当面交谈，没有礼物、茶水或钱米交接。周瑞妻子仍在廊下等刘姥姥出来，没有跟进；凤姐不知道廊下两人出来再一道走的约定。",
+      "availableProps": [
+        "堂屋入口",
+        "束起的门帘",
+        "会客炕与坐褥",
+        "漆木侧桌",
+        "合上的簿册",
+        "茶碗",
+        "东间隔扇",
+        "自鸣钟陈设",
+        "青绿山水小屏"
+      ],
+      "boundary": "本场主客当面交谈，已有接见许可不重议。可以作新的援助、条件、查询或拒绝决定，不固定原著结局。没有实际给付动作，口头吩咐或承诺不能记作来客已经拿到钱米。周瑞妻子在廊下，不在场也听不见本场。",
+      "factBoundary": "凤姐已经听平儿转述来客关系与米粮所求，但不知道第九场私下交谈。刘姥姥只知道实际转告的请见，未知太太处是否问过。不得凭空说原文的二十两已给、已问太太并获答、礼物已送、家中只剩具体几碗米或场外孩子生病。可在当前交谈形成新的提议与承诺，不能把新提议伪装成旧事实。门帘已束起，钟、茶碗、簿册、坐褥均是静态陈设；只有站姿、走动、转向和有限表情动作，不坐下、不跪拜、不端茶、不掀帘、不翻账或递物。",
+      "dramaturgy": {
+        "standingOnly": true,
+        "protagonist": "granny",
+        "initiativeType": "make-personal-case",
+        "direction": "平儿可简短引见，随后让刘姥姥亲自开口，凤姐接住她的话并给出一个具体回应。刘姥姥为一家谋生，虽面对豪门生疏仍有乡间生活的老练、自尊与人情味；不写成只会谢恩、自轻自贱或把出门责任推给女婿。凤姐精明、有体面也有分寸，不能只反复核身份、训规矩或套办事流程。 开口可以客气，但回应要像替自家商量过冬生计的乡间长者，不反复用厚着脸、不敢多话、不敢催收尾。家中同住五人，人数只能按current_household_members，不编第六口。",
+        "pace": "这是核心求助交谈，给必要的问答、顾虑与处置留空间，通常六至十句可完成，不按固定句数填充。每句话推进一个实际问题，已经说过的关系和请求只做简短承接。结尾形成具体帮助、附带条件、待查事项或明确拒绝，不只换词说稍候再问。不能为了求热闹强添贾蓉、丫鬟或场外口信。",
+        "movement": "开场已按上场许可与应允抵达答话位，不重复走一段无意义路途。三人停步相向交谈；低语才需靠近private_near。说定离开之后再afterMoves，若平儿带刘姥姥出去，分别用return_exit与guest_exit，平儿先行、来客随后。凤姐若留屋保持在host；任何物品准备只作为未完成的吩咐。",
+        "handoff": "按本场真实决定提取下个地点和实际行动者。若出去找周嫂子、传达安排或到廊下候办，下一节点audience-window；若另有明确目的再用其他允许节点。未在场的周瑞妻子不能提前加入本次离开名单；她与刘姥姥出来再同行的约定仍待实际碰头落实。待准备或待交付的米银不能记作已取得资源。"
+      },
+      "environmentCard": {
+        "name": "王熙凤正房",
+        "description": "堂屋通向会客炕前与东间，窗光落在青绿坐褥、深色漆木桌和浅色砖地上，门帘束起，钟与簿册仅作静态陈设。舞台降低前墙和右墙、移去全顶。具体尺寸、家具与山水装饰为本项目演出设计。",
+        "personality": "较仆役住处齐整精致，办事与待客共处。身份决定分工，不替代实际回应。"
+      },
+      "narrationPolicy": "30至60字交代平儿已把刘姥姥引到正房来客答话位、凤姐仍在炕前、三人尚未交谈。只落实已定路途，不先总结结局或给人物灌入未知消息，不编精确院落数量、坐姿、钟声或掀帘动作。"
+    },
+    "characters": [
+      {
+        "id": "granny",
+        "name": "刘姥姥",
+        "description": "狗儿的岳母、刘氏的母亲，帮女儿女婿照看孩子。",
+        "personality": "真心帮衬女儿女婿过日子的乡间老人，有生活见识和人情分寸，心疼家人，也敢说女婿的不是。遇难愿拿办法、自己担事；能以自嘲缓和窘迫，既有自尊也肯为家计放下面子。面对豪门会局促，尚不知道对方是否愿帮，但不把家人当成需要预先免责的对象。",
+        "motivation": "让一家人有过冬的着落，护住女儿孩子的日子；发现可试的门路后，自己决定走一趟。",
+        "speech": "对家人直白有烟火气，话里可以带一点刺，但说完能给人出路；责备不能连成全程。自嘲化解自己的尴尬，不拿家人当笑料。对女儿的担心有回应，愿意承担体现为具体办法，不喊牺牲口号、不摆功劳、不先索取免责保证。",
+        "source": "来自用户人物卡_修改版.zip；家庭身份与当前场次覆盖旧的贾母上房情境，外貌以已确认立绘为准。",
+        "knowledgeSources": {
+          "zhouRui": "第六回先由狗儿提出父亲与周瑞的旧交，刘姥姥随后说“我也知道他的”；知道这个人与拥有可用旧交须区别。",
+          "wangFamily": "刘姥姥先提出王家联宗旧亲及早年见过王夫人的经验。"
+        },
+        "sourceMaterial": "原始性格片段存于 cards/characters/source-excerpts.json，仅作考据；当前生成只读取本运行卡。",
+        "unknownAtStart": [
+          "凤姐与平儿第八场没有向自己转达的私下回话，包括太太是否问过",
+          "凤姐这次会如何处置，接见不等于已答应周济"
+        ],
+        "characterCore": {
+          "basis": "第六回写她一心帮趁女儿女婿过活，先提出谋生办法和王家门路；面对豪门有踌躇，最终愿舍老脸去试，并能把窘迫说得让一家笑起来。",
+          "stable": "心疼一家、懂生活、肯担事、能自嘲；会顾脸面但不被脸面困死。",
+          "pressure": "难处来时先想能试的办法；对女婿可说短处，对女儿的牵挂有体谅。顾虑落在门路和礼数上，不落在预先撇清自己责任上。",
+          "change": "可以因实际消息改变办法或承认困难，但不把一场求助写成性格忽然冷硬；在豪门前也不必装成老练万能的人。"
+        },
+        "performance": {
+          "source": "原著第六回人物底色与用户明确的本场主动承担方向分开记录",
+          "atOthersDoor": "懂得陪笑、问话、观察分寸，也会局促；第一次求助不提前搬入后来宴席逗趣的表演。",
+          "avoid": [
+            "被狗儿推出门后才委屈承担",
+            "以成不成不敢包、空手回来别怨我、不兴埋怨等话向家人预先免责",
+            "把刘姥姥写成处处训人、计较谁占便宜或冷硬分配任务的长辈",
+            "为讨喜而变成无所不知、全无顾虑、每句都开导别人的圣人"
+          ]
+        },
+        "sceneRole": "已主动来求周济、听到邀请并随平儿入内，现在亲自面对主事者。有礼而不卑怯，局促可以有，却不反复自贬免责。用自己的话说清当下实际难处与所求，接住凤姐问题；亲切、自嘲和老练应落在具体回应里，不替人物卡背标签。",
+        "experiencedMemory": "刘姥姥随周瑞妻子到倒厅旁院门外见平儿，答只求过冬米粮、别的不敢多话，与周瑞妻子在廊下候信。平儿回来传奶奶请她进去、米粮当面问，并说只领她一人进正房，周嫂子在廊下稍候。刘姥姥应允随去，请周嫂子略等，出来还寻她一道走；周瑞妻子答在廊下等。平儿引路，刘姥姥随后到内院入口前，尚未进正房见奶奶，米粮之事尚未当面陈说。她仍记着给板儿带糕，尚未兑现。",
+        "knownFactIds": [
+          "arriving_waiting_prior_arriver_family_roles",
+          "arriving_waiting_prior_arriver_wang_old_kinship",
+          "arriving_waiting_prior_arriver_granny_wang_visit",
+          "arriving_waiting_prior_arriver_granny_zhou_awareness",
+          "arriving_waiting_prior_arriver_previous_backstreet_fact_0",
+          "arriving_waiting_prior_arriver_previous_backstreet_fact_1",
+          "arriving_waiting_prior_arriver_previous_backstreet_fact_2",
+          "arriving_waiting_prior_arriver_zhou_old_acquaintance",
+          "arriving_waiting_prior_previous_home_0",
+          "arriving_waiting_prior_previous_home_1",
+          "arriving_waiting_prior_previous_home_2",
+          "arriving_waiting_prior_previous_home_3",
+          "arriving_waiting_heard_0",
+          "arriving_waiting_heard_1",
+          "arriving_waiting_heard_2",
+          "arriving_waiting_heard_3",
+          "arrival_heard_0",
+          "arrival_heard_1",
+          "arrival_heard_2",
+          "arrival_heard_3",
+          "current_household_members"
+        ],
+        "knowledge": [
+          "刘姥姥是刘氏母亲、狗儿岳母；狗儿与刘氏是板儿和青儿的父母。",
+          "狗儿祖上与金陵王家连过宗，不是近亲；多年疏远。",
+          "刘姥姥早年与刘氏去过王家，记得当时二小姐待人爽快，如今是王夫人。",
+          "刘姥姥早年知道周瑞，但多年未与之来往；新近情况以实际听闻为准。",
+          "刘姥姥问明太太陪房周瑞家在后门进去靠左手第二家，并打算去寻周瑞媳妇递话。",
+          "引路孩童答应领刘姥姥从后门进去，到左手第二家周瑞家门口。",
+          "刘姥姥向孩童说明自己不是周瑞家亲戚，只是寻周嫂子递句话。",
+          "周瑞妻子和刘姥姥早年见过，多年不曾走动；可能需要稍作辨认，认出后可按旧识招呼。",
+          "平儿许周瑞妻子领刘姥姥到倒厅廊下候着；平儿得空回奶奶，见不见、怎么周济还得听奶奶示下。",
+          "奶奶是否接见、如何周济尚未定，刘姥姥也自知做不得主。",
+          "有人问起时，刘姥姥照平儿姑娘的话说是周嫂子带来等回话的，旁的由周瑞妻子答。",
+          "刘姥姥应承随周瑞妻子同去，因脚底下慢，请她前头略等；周瑞妻子答应先行，刘姥姥跟着。",
+          "平儿把刘姥姥“只求过冬的米粮”的话照实回明奶奶。",
+          "周瑞妻子答应陪刘姥姥在倒厅廊下候信。",
+          "刘姥姥与周瑞妻子留在廊下候着，平儿独自去回话。",
+          "奶奶是否接见、是否周济尚无答复，平儿只应承照实回，未许钱米。",
+          "奶奶请刘姥姥进正房，米粮的事当面问。",
+          "平儿只领刘姥姥一人进正房，周瑞妻子在廊下稍候。",
+          "刘姥姥应承周瑞妻子，出来后还寻她一道走；周瑞妻子答应在廊下等着。",
+          "米粮尚未有着落，须进正房当面说。",
+          "当前同住的一家共五人：狗儿、刘氏、板儿、青儿和刘姥姥。没有已设定的第六位同住家人。"
+        ]
+      },
+      {
+        "id": "ping_er",
+        "name": "平儿",
+        "description": "王熙凤身边心腹通房大丫鬟，有处理接待事务的实际权限。",
+        "personality": "稳妥利落，懂得拿捏分寸，能替主人分流事务，也能照顾客人的处境；不是知道全府一切的全知中间人。",
+        "motivation": "把来客与待回事的人安排妥当，让凤姐可以掌握轻重缓急。",
+        "speech": "简洁平稳，有安排就说清，既不对谁都低声下气，也不抢主人的决定。",
+        "characterCore": {
+          "basis": "她听完周瑞妻子说明便让来客进来等；凤姐陪客时，她询问众人的事是否紧急并分流。",
+          "stable": "稳妥利落，懂得拿捏分寸，能替主人分流事务，也能照顾客人的处境；不是知道全府一切的全知中间人。",
+          "pressure": "听周瑞妻子说明后才判断能否引入；需要主人裁决的事不自行承诺。",
+          "limits": "原卡“知道所有人的事”不作为知识权限；不能未听传话便了解门外和家中对话。"
+        },
+        "sceneRoles": {
+          "audience-window": "接到传话后作接待层面的安排，说明何时等、何时可进。",
+          "make-case": "处理干扰、问清紧急程度，执行已明确的吩咐。"
+        },
+        "unknownAtStart": [
+          "主客当面交谈后形成的新决定",
+          "未亲见或未听见的场外消息"
+        ],
+        "participation": "后续场景出场",
+        "sourceEvidence": {
+          "chapter": 6,
+          "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
+          "evidence": "她听完周瑞妻子说明便让来客进来等；凤姐陪客时，她询问众人的事是否紧急并分流。",
+          "interpretation": "结合本回实际举止形成的运行解释；无名角色的独立年龄、家世及长期经历不作补造。"
+        },
+        "sourceMaterial": "用户原卡如涉及后期游园场景，仅存档参考，不直接覆盖首次进府。",
+        "performance": {},
+        "sceneRole": "已将来客带到，知道前几次自己亲耳听到的消息。可简短引见，必要时答所问，不替刘姥姥包办每句回应。接到吩咐可应承安排，但不能把米银说成已备齐、已经递到来客手中。",
+        "experiencedMemory": "平儿在倒厅旁院门外听刘姥姥只说求过冬米粮、别的不敢多话，便答应照实回，嘱她与周瑞妻子在廊下候信，自己到正房。她向凤姐回明来客身份、旧亲疏远、所求与太太处未问过；凤姐问清后命她请刘姥姥进来见面，米粮当面问。平儿应声，自己说只领刘姥姥一人进正房，随即回来传话。刘姥姥应允随行，请周嫂子略等，出来还寻她一道走；周瑞妻子应承在廊下等。平儿引刘姥姥到内院入口前，尚未到正房，也未替奶奶许钱米。",
+        "knownFactIds": [
+          "arriving_ping_prior_report_prior_ping_prior_ping_reception_authority",
+          "arriving_ping_prior_report_prior_ping_prior_waiting_initial_order",
+          "arriving_ping_prior_report_prior_ping_heard_0",
+          "arriving_ping_prior_report_prior_ping_heard_1",
+          "arriving_ping_prior_report_prior_ping_heard_2",
+          "arriving_ping_prior_report_prior_ping_heard_3",
+          "arriving_ping_prior_report_prior_ping_heard_4",
+          "arriving_ping_prior_report_heard_0",
+          "arriving_ping_prior_report_heard_1",
+          "arriving_ping_prior_report_heard_2",
+          "arriving_ping_prior_report_heard_3",
+          "arriving_ping_prior_local_gate_zhou_role",
+          "arriving_ping_prior_local_fengjie_household_authority",
+          "arriving_ping_prior_fengjie_own_family",
+          "arriving_new_reply_0",
+          "arriving_new_reply_1",
+          "arriving_new_reply_2",
+          "arriving_new_reply_3",
+          "arrival_heard_0",
+          "arrival_heard_1",
+          "arrival_heard_2",
+          "arrival_heard_3"
+        ],
+        "knowledge": [
+          "平儿是王熙凤身边处理接待事务的心腹丫鬟；能安排来人等候、询问轻重缓急和传话，不能替王熙凤决定是否给钱米。",
+          "当前倒厅与院门外可短暂交谈。本场开始时，平儿尚未接到关于这次来客的召见或资助答复。",
+          "周瑞妻子回去领刘姥姥到倒厅廊下候着，并以“周嫂子带来等回话的”应对询问。",
+          "平儿答应得空便向琏二奶奶回明；见不见、如何周济由奶奶示下。",
+          "来客是狗儿家的刘姥姥，狗儿祖上与王夫人娘家连过宗，多年不走动。",
+          "刘姥姥家今年过冬衣食短缺，想求府里周济；先求见奶奶一面，若不得见再求递话。",
+          "刘姥姥眼下仍在周瑞妻子屋里，尚未到倒厅；平儿没有允诺接见或周济。",
+          "平儿把刘姥姥“只求过冬的米粮”的话照实回明奶奶。",
+          "周瑞妻子答应陪刘姥姥在倒厅廊下候信。",
+          "刘姥姥与周瑞妻子留在廊下候着，平儿独自去回话。",
+          "奶奶是否接见、是否周济尚无答复，平儿只应承照实回，未许钱米。",
+          "周瑞是王夫人的陪房，在荣府办事。",
+          "王夫人不大管日常接待与家务，王熙凤主持许多事务，平儿能安排候见与传话。",
+          "王熙凤是贾琏之妻、王夫人的内侄女，府中可称琏二奶奶；平儿是身边办事的心腹丫鬟。",
+          "王熙凤决定当面见刘姥姥并问米粮之事，命平儿去请。",
+          "平儿答应就去请，并说明只领刘姥姥进正房，周瑞妻子在廊下陪着。",
+          "太太那边尚未问过，平儿不敢替凤姐做主。",
+          "刘姥姥是周瑞妻子领来的，狗儿祖上与太太娘家连过宗，多年不走动。",
+          "奶奶请刘姥姥进正房，米粮的事当面问。",
+          "平儿只领刘姥姥一人进正房，周瑞妻子在廊下稍候。",
+          "刘姥姥应承周瑞妻子，出来后还寻她一道走；周瑞妻子答应在廊下等着。",
+          "米粮尚未有着落，须进正房当面说。"
+        ]
+      },
+      {
+        "id": "fengjie",
+        "name": "王熙凤",
+        "description": "贾琏之妻、王夫人内侄女，正在主持荣府家务。",
+        "personality": "精明能干、重体面与秩序，善于掌握接待节奏。可以笑着说客气话，也保留地位差与实际权力；本回施予不能简化为纯善或阴谋。",
+        "motivation": "问清来意、确认太太态度，在自己权限内处置请求并维持门面。",
+        "speech": "礼数周全，措辞灵活，能把场面转开；本场也有慢问和停顿，不固定快语连珠，更不句句挖苦贫客。",
+        "characterCore": {
+          "basis": "初见先慢问、后满面春风问好；让周瑞妻子询问王夫人意思，分流家事，听难处后安排饭食并给资助。",
+          "stable": "精明能干、重体面与秩序，善于掌握接待节奏。可以笑着说客气话，也保留地位差与实际权力；本回施予不能简化为纯善或阴谋。",
+          "pressure": "繁忙时能先筛轻重；面对穷亲既可关照，也会说自家艰难，给多少和附何条件须在本分支实际形成。",
+          "limits": "不把后期狠辣事件当成本场预设动作；原卡“每件施予都记着要回来”不作为本场既定动机；不预知陌生来客全部身世。"
+        },
+        "sceneRoles": {
+          "make-case": "接住来客求助，依据情分、家务和体面给出具体回应，不机械复演二十两。"
+        },
+        "unknownAtStart": [
+          "廊下第九场具体交谈与刘姥姥、周瑞妻子的私下约定，尚未向自己转述",
+          "刘姥姥本人这次将怎样陈说和回应"
+        ],
+        "participation": "后续场景出场",
+        "sourceEvidence": {
+          "chapter": 6,
+          "url": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回",
+          "evidence": "初见先慢问、后满面春风问好；让周瑞妻子询问王夫人意思，分流家事，听难处后安排饭食并给资助。",
+          "interpretation": "结合本回实际举止形成的运行解释；无名角色的独立年龄、家世及长期经历不作补造。"
+        },
+        "sourceMaterial": "用户原卡如涉及后期游园场景，仅存档参考，不直接覆盖首次进府。",
+        "performance": {},
+        "sceneRole": "已听平儿回明身份、关系与米粮所求，也已经决定接见；本场首次见本人，不重演完全不知谁来的盘问。用必要追问和实际决定掌握场面，既顾体面也有自己的判断，不句句挖苦或纯粹宣讲善心。不强制二十两或先问太太；若需要查问、安排或给付，要在本场说清而非假定已办。",
+        "experiencedMemory": "王熙凤在正房听平儿回话，先问刘姥姥是哪一门亲戚、上门求什么、太太是否知道；得知狗儿祖上与太太娘家连过宗、多年不走动，刘姥姥只求过冬米粮，别的不敢多话，太太处尚未问过。凤姐不愿叫来客干站着，命平儿请刘姥姥进来见面，米粮之事当面问。平儿已动身去请，刘姥姥尚未进正房；凤姐未给米粮，太太态度也未问过。",
+        "knownFactIds": [
+          "host_prior_local_gate_zhou_role",
+          "host_prior_local_fengjie_household_authority",
+          "host_prior_fengjie_own_family",
+          "host_heard_0",
+          "host_heard_1",
+          "host_heard_2",
+          "host_heard_3"
+        ],
+        "knowledge": [
+          "周瑞是王夫人的陪房，在荣府办事。",
+          "王夫人不大管日常接待与家务，王熙凤主持许多事务，平儿能安排候见与传话。",
+          "王熙凤是贾琏之妻、王夫人的内侄女，府中可称琏二奶奶；平儿是身边办事的心腹丫鬟。",
+          "王熙凤决定当面见刘姥姥并问米粮之事，命平儿去请。",
+          "平儿答应就去请，并说明只领刘姥姥进正房，周瑞妻子在廊下陪着。",
+          "太太那边尚未问过，平儿不敢替凤姐做主。",
+          "刘姥姥是周瑞妻子领来的，狗儿祖上与太太娘家连过宗，多年不走动。"
+        ]
+      }
+    ],
+    "relationshipFacts": [
+      {
+        "id": "arriving_waiting_prior_arriver_family_roles",
+        "claim": "刘姥姥是刘氏母亲、狗儿岳母；狗儿与刘氏是板儿和青儿的父母。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "亲属称呼",
+        "source": "第六回家庭介绍"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_wang_old_kinship",
+        "claim": "狗儿祖上与金陵王家连过宗，不是近亲；多年疏远。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "可提旧亲，不可夸成亲密往来",
+        "source": "第六回家中商议"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_granny_wang_visit",
+        "claim": "刘姥姥早年与刘氏去过王家，记得当时二小姐待人爽快，如今是王夫人。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "过去的见闻，不保证现在仍愿接待",
+        "source": "第六回家中商议"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_granny_zhou_awareness",
+        "claim": "刘姥姥早年知道周瑞，但多年未与之来往；新近情况以实际听闻为准。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "可以说知道、听说过，不能自行声称周瑞与自己交情深、欠自己恩情或必肯帮自己",
+        "source": "第六回刘姥姥回应"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_previous_backstreet_fact_0",
+        "claim": "刘姥姥问明太太陪房周瑞家在后门进去靠左手第二家，并打算去寻周瑞媳妇递话。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "只属于上场实际听见此话的人；带路承诺在本场开头落实到住处门前，不自动变成接待或获助。"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_previous_backstreet_fact_1",
+        "claim": "引路孩童答应领刘姥姥从后门进去，到左手第二家周瑞家门口。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "只属于上场实际听见此话的人；带路承诺在本场开头落实到住处门前，不自动变成接待或获助。"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_previous_backstreet_fact_2",
+        "claim": "刘姥姥向孩童说明自己不是周瑞家亲戚，只是寻周嫂子递句话。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "只属于上场实际听见此话的人；带路承诺在本场开头落实到住处门前，不自动变成接待或获助。"
+      },
+      {
+        "id": "arriving_waiting_prior_arriver_zhou_old_acquaintance",
+        "claim": "周瑞妻子和刘姥姥早年见过，多年不曾走动；可能需要稍作辨认，认出后可按旧识招呼。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "第六回认了半日再招呼的情节依据；不意味着知道今日来意或近年频繁往来。"
+      },
+      {
+        "id": "arriving_waiting_prior_previous_home_0",
+        "claim": "平儿许周瑞妻子领刘姥姥到倒厅廊下候着；平儿得空回奶奶，见不见、怎么周济还得听奶奶示下。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_waiting_prior_previous_home_1",
+        "claim": "奶奶是否接见、如何周济尚未定，刘姥姥也自知做不得主。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_waiting_prior_previous_home_2",
+        "claim": "有人问起时，刘姥姥照平儿姑娘的话说是周嫂子带来等回话的，旁的由周瑞妻子答。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_waiting_prior_previous_home_3",
+        "claim": "刘姥姥应承随周瑞妻子同去，因脚底下慢，请她前头略等；周瑞妻子答应先行，刘姥姥跟着。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_waiting_heard_0",
+        "claim": "平儿把刘姥姥“只求过冬的米粮”的话照实回明奶奶。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_waiting_heard_1",
+        "claim": "周瑞妻子答应陪刘姥姥在倒厅廊下候信。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_waiting_heard_2",
+        "claim": "刘姥姥与周瑞妻子留在廊下候着，平儿独自去回话。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_waiting_heard_3",
+        "claim": "奶奶是否接见、是否周济尚无答复，平儿只应承照实回，未许钱米。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_prior_ping_reception_authority",
+        "claim": "平儿是王熙凤身边处理接待事务的心腹丫鬟；能安排来人等候、询问轻重缓急和传话，不能替王熙凤决定是否给钱米。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "身份与本职权限，不等于已经答应本次请求。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_prior_waiting_initial_order",
+        "claim": "当前倒厅与院门外可短暂交谈。本场开始时，平儿尚未接到关于这次来客的召见或资助答复。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "本轮环境初态；不凭空添加奶奶吃饭、午睡或已派丫鬟回报的具体消息。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_heard_0",
+        "claim": "周瑞妻子回去领刘姥姥到倒厅廊下候着，并以“周嫂子带来等回话的”应对询问。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_heard_1",
+        "claim": "平儿答应得空便向琏二奶奶回明；见不见、如何周济由奶奶示下。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_heard_2",
+        "claim": "来客是狗儿家的刘姥姥，狗儿祖上与王夫人娘家连过宗，多年不走动。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_heard_3",
+        "claim": "刘姥姥家今年过冬衣食短缺，想求府里周济；先求见奶奶一面，若不得见再求递话。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_ping_prior_report_prior_ping_heard_4",
+        "claim": "刘姥姥眼下仍在周瑞妻子屋里，尚未到倒厅；平儿没有允诺接见或周济。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；消息未向不在场的人自动同步，约定不等于已经完成。"
+      },
+      {
+        "id": "arriving_ping_prior_report_heard_0",
+        "claim": "平儿把刘姥姥“只求过冬的米粮”的话照实回明奶奶。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "平儿亲耳听到的消息；待回话不是已经回话，来客未准见。保留“奶奶若问”的语境，当前米粮所求不等于衣食难处已解决。"
+      },
+      {
+        "id": "arriving_ping_prior_report_heard_1",
+        "claim": "周瑞妻子答应陪刘姥姥在倒厅廊下候信。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "平儿亲耳听到的消息；待回话不是已经回话，来客未准见。保留“奶奶若问”的语境，当前米粮所求不等于衣食难处已解决。"
+      },
+      {
+        "id": "arriving_ping_prior_report_heard_2",
+        "claim": "刘姥姥与周瑞妻子留在廊下候着，平儿独自去回话。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "平儿亲耳听到的消息；待回话不是已经回话，来客未准见。保留“奶奶若问”的语境，当前米粮所求不等于衣食难处已解决。"
+      },
+      {
+        "id": "arriving_ping_prior_report_heard_3",
+        "claim": "奶奶是否接见、是否周济尚无答复，平儿只应承照实回，未许钱米。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "平儿亲耳听到的消息；待回话不是已经回话，来客未准见。保留“奶奶若问”的语境，当前米粮所求不等于衣食难处已解决。"
+      },
+      {
+        "id": "arriving_ping_prior_local_gate_zhou_role",
+        "claim": "周瑞是王夫人的陪房，在荣府办事。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "身份，不等于此刻在家或愿意接待。",
+        "source": "第六回门前问路与周瑞妻子的说明"
+      },
+      {
+        "id": "arriving_ping_prior_local_fengjie_household_authority",
+        "claim": "王夫人不大管日常接待与家务，王熙凤主持许多事务，平儿能安排候见与传话。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "当前家务分工，不等于任何人能替王熙凤决定资助。",
+        "source": "第六回周瑞妻子说明及平儿接待"
+      },
+      {
+        "id": "arriving_ping_prior_fengjie_own_family",
+        "claim": "王熙凤是贾琏之妻、王夫人的内侄女，府中可称琏二奶奶；平儿是身边办事的心腹丫鬟。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "既有身份，不等于知道这次来客的亲缘、请求或已获得王夫人答复。"
+      },
+      {
+        "id": "arriving_new_reply_0",
+        "claim": "王熙凤决定当面见刘姥姥并问米粮之事，命平儿去请。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_new_reply_1",
+        "claim": "平儿答应就去请，并说明只领刘姥姥进正房，周瑞妻子在廊下陪着。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_new_reply_2",
+        "claim": "太太那边尚未问过，平儿不敢替凤姐做主。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arriving_new_reply_3",
+        "claim": "刘姥姥是周瑞妻子领来的，狗儿祖上与太太娘家连过宗，多年不走动。",
+        "knownBy": [
+          "ping_er"
+        ],
+        "scope": "此前本人实际听闻；只领一人是平儿自己的应答，不升级成凤姐另下禁令；未传达的许可不共享给等候者。"
+      },
+      {
+        "id": "arrival_heard_0",
+        "claim": "奶奶请刘姥姥进正房，米粮的事当面问。",
+        "knownBy": [
+          "granny",
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "arrival_heard_1",
+        "claim": "平儿只领刘姥姥一人进正房，周瑞妻子在廊下稍候。",
+        "knownBy": [
+          "granny",
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "arrival_heard_2",
+        "claim": "刘姥姥应承周瑞妻子，出来后还寻她一道走；周瑞妻子答应在廊下等着。",
+        "knownBy": [
+          "granny",
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "arrival_heard_3",
+        "claim": "米粮尚未有着落，须进正房当面说。",
+        "knownBy": [
+          "granny",
+          "ping_er"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "host_prior_local_gate_zhou_role",
+        "claim": "周瑞是王夫人的陪房，在荣府办事。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "身份，不等于此刻在家或愿意接待。",
+        "source": "第六回门前问路与周瑞妻子的说明"
+      },
+      {
+        "id": "host_prior_local_fengjie_household_authority",
+        "claim": "王夫人不大管日常接待与家务，王熙凤主持许多事务，平儿能安排候见与传话。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "当前家务分工，不等于任何人能替王熙凤决定资助。",
+        "source": "第六回周瑞妻子说明及平儿接待"
+      },
+      {
+        "id": "host_prior_fengjie_own_family",
+        "claim": "王熙凤是贾琏之妻、王夫人的内侄女，府中可称琏二奶奶；平儿是身边办事的心腹丫鬟。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "既有身份，不等于知道这次来客的亲缘、请求或已获得王夫人答复。"
+      },
+      {
+        "id": "host_heard_0",
+        "claim": "王熙凤决定当面见刘姥姥并问米粮之事，命平儿去请。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "host_heard_1",
+        "claim": "平儿答应就去请，并说明只领刘姥姥进正房，周瑞妻子在廊下陪着。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "host_heard_2",
+        "claim": "太太那边尚未问过，平儿不敢替凤姐做主。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "host_heard_3",
+        "claim": "刘姥姥是周瑞妻子领来的，狗儿祖上与太太娘家连过宗，多年不走动。",
+        "knownBy": [
+          "fengjie"
+        ],
+        "scope": "此前实际听闻；未向另一方传达的事情不自动共享，未兑现的承诺保持未兑现。"
+      },
+      {
+        "id": "current_household_members",
+        "claim": "当前同住的一家共五人：狗儿、刘氏、板儿、青儿和刘姥姥。没有已设定的第六位同住家人。",
+        "knownBy": [
+          "granny"
+        ],
+        "scope": "第六回先写狗儿夫妇和两个孩子一家四口，再接岳母同住；与本项目初始家庭卡一致。凤姐和平儿须听实际回答才得知人数。",
+        "source": "https://zh.wikisource.org/zh-hans/紅樓夢/第006回"
+      }
+    ],
+    "worldbook": [],
+    "knowledgePolicy": "来客、引路者、主人分别承接自己的真实经历。凤姐不知廊下私约，刘姥姥不知未转告的正房谈话；本场形成的新决定只进入实际听到的人物记忆。"
+  },
+  "carryover": {
+    "parentStoryId": "fc75da40-b6fd-47db-86bd-b306c7001616",
+    "branchId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+    "parentRevision": 9,
+    "transition": "按第九场实际应允和引路，平儿已带刘姥姥走完余下路途，来到王熙凤正房堂屋。刘姥姥在来客答话空地，平儿在侍立位，凤姐仍在第八场结束的会客炕前空地。三人尚未开始当面交谈，没有礼物、茶水或钱米交接。周瑞妻子仍在廊下等刘姥姥出来，没有跟进；凤姐不知道廊下两人出来再一道走的约定。"
+  },
+  "scene": "fengjie-audience",
+  "mode": "deepseek-generated",
+  "summary": "DeepSeek Flash 根据当前场景、人物与个人听闻生成的演出。",
+  "initial": {
+    "camera": "family",
+    "lighting": "day",
+    "actors": {
+      "granny": {
+        "anchor": "guest_reply",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "ping_er": {
+        "anchor": "attendant",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      },
+      "fengjie": {
+        "anchor": "host",
+        "expression": "neutral",
+        "facing": "front",
+        "visible": true
+      }
+    }
+  },
+  "beats": [
+    {
+      "id": "intro-invite",
+      "title": "引见与请进",
+      "duration": 20,
+      "narration": "平儿向凤姐通报刘姥姥已到；凤姐请刘姥姥进前说话，问家中过冬如何艰难。凤姐说罢，刘姥姥移步近前。",
+      "dialogue": [
+        {
+          "speaker": "ping_er",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "奶奶，刘姥姥到了。",
+          "knowledgeRefs": [],
+          "factRefs": [
+            "arrival_heard_0"
+          ],
+          "respondsTo": [],
+          "sourceTurnId": "t1",
+          "actionIntent": "none",
+          "at": 1,
+          "until": 5
+        },
+        {
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？",
+          "knowledgeRefs": [
+            "intro-invite:0"
+          ],
+          "factRefs": [
+            "host_heard_0",
+            "host_heard_3"
+          ],
+          "respondsTo": [
+            "intro-invite:0"
+          ],
+          "sourceTurnId": "t2",
+          "actionIntent": "turn",
+          "at": 6,
+          "until": 13
+        }
+      ],
+      "commands": [
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0.8,
+          "type": "face",
+          "actor": "ping_er",
+          "target": "fengjie"
+        },
+        {
+          "at": 5.8,
+          "type": "face",
+          "actor": "fengjie",
+          "target": "granny"
+        },
+        {
+          "at": 14.2,
+          "type": "move",
+          "actor": "granny",
+          "target": "private_near",
+          "duration": 4
+        }
+      ],
+      "memory": "平儿通报刘姥姥已到，凤姐随即请她进前说话，并问起家中过冬难处。"
+    },
+    {
+      "id": "hardship-request",
+      "title": "诉说难处与求米粮",
+      "duration": 49,
+      "narration": "刘姥姥在凤姐近前答话，说明一家五口冬粮接不上；凤姐追问狗儿营生，又提到府里紧、太太处未回话；刘姥姥只说但求章程，米粮多少不争。",
+      "dialogue": [
+        {
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。",
+          "knowledgeRefs": [
+            "intro-invite:1"
+          ],
+          "factRefs": [
+            "current_household_members",
+            "arriving_waiting_prior_arriver_family_roles"
+          ],
+          "respondsTo": [
+            "intro-invite:1"
+          ],
+          "sourceTurnId": "t3",
+          "actionIntent": "none",
+          "at": 1,
+          "until": 11
+        },
+        {
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "狗儿年轻力壮，怎么不寻个长些的营生？",
+          "knowledgeRefs": [
+            "hardship-request:0"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "hardship-request:0"
+          ],
+          "sourceTurnId": "t4",
+          "actionIntent": "none",
+          "at": 12,
+          "until": 17
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。",
+          "knowledgeRefs": [
+            "hardship-request:1"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "hardship-request:1"
+          ],
+          "sourceTurnId": "t5",
+          "actionIntent": "none",
+          "at": 18,
+          "until": 29
+        },
+        {
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。",
+          "knowledgeRefs": [
+            "hardship-request:2"
+          ],
+          "factRefs": [
+            "host_heard_2",
+            "host_prior_local_fengjie_household_authority"
+          ],
+          "respondsTo": [
+            "hardship-request:2"
+          ],
+          "sourceTurnId": "t6",
+          "actionIntent": "none",
+          "at": 30,
+          "until": 37
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。",
+          "knowledgeRefs": [
+            "hardship-request:3"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "hardship-request:3"
+          ],
+          "sourceTurnId": "t7",
+          "actionIntent": "none",
+          "at": 38,
+          "until": 47
+        }
+      ],
+      "commands": [
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "fengjie",
+          "value": "thinking"
+        },
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "granny",
+          "value": "neutral"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0.8,
+          "type": "face",
+          "actor": "granny",
+          "target": "fengjie"
+        },
+        {
+          "at": 11.8,
+          "type": "face",
+          "actor": "fengjie",
+          "target": "granny"
+        },
+        {
+          "at": 17.8,
+          "type": "face",
+          "actor": "granny",
+          "target": "fengjie"
+        },
+        {
+          "at": 29.8,
+          "type": "face",
+          "actor": "fengjie",
+          "target": "granny"
+        },
+        {
+          "at": 37.8,
+          "type": "face",
+          "actor": "granny",
+          "target": "fengjie"
+        }
+      ],
+      "memory": "刘姥姥说明一家五口和冬粮接不上，凤姐追问狗儿营生，又提到府里紧、太太处未回话；刘姥姥表示只求章程，米粮多少不争。"
+    },
+    {
+      "id": "order-leave",
+      "title": "吩咐候办与随出",
+      "duration": 32,
+      "narration": "凤姐吩咐平儿领刘姥姥到廊下候办，安排量米取钱；平儿应承，刘姥姥谢过并说廊下有周嫂子等着。随后平儿先出门，刘姥姥跟随。",
+      "dialogue": [
+        {
+          "speaker": "fengjie",
+          "to": [
+            "ping_er"
+          ],
+          "mode": "normal",
+          "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。",
+          "knowledgeRefs": [
+            "hardship-request:4"
+          ],
+          "factRefs": [
+            "host_prior_local_fengjie_household_authority"
+          ],
+          "respondsTo": [
+            "hardship-request:4"
+          ],
+          "sourceTurnId": "t8",
+          "actionIntent": "turn",
+          "at": 1,
+          "until": 10
+        },
+        {
+          "speaker": "ping_er",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。",
+          "knowledgeRefs": [
+            "order-leave:0"
+          ],
+          "factRefs": [
+            "arriving_ping_prior_report_prior_ping_prior_ping_reception_authority"
+          ],
+          "respondsTo": [
+            "order-leave:0"
+          ],
+          "sourceTurnId": "t9",
+          "actionIntent": "none",
+          "at": 11,
+          "until": 17
+        },
+        {
+          "speaker": "granny",
+          "to": [
+            "fengjie",
+            "ping_er"
+          ],
+          "mode": "normal",
+          "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。",
+          "knowledgeRefs": [
+            "order-leave:0",
+            "order-leave:1"
+          ],
+          "factRefs": [
+            "arrival_heard_2"
+          ],
+          "respondsTo": [
+            "order-leave:0",
+            "order-leave:1"
+          ],
+          "sourceTurnId": "t10",
+          "actionIntent": "none",
+          "at": 18,
+          "until": 25
+        }
+      ],
+      "commands": [
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "fengjie",
+          "value": "neutral"
+        },
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "ping_er",
+          "value": "neutral"
+        },
+        {
+          "at": 0.6,
+          "type": "expression",
+          "actor": "granny",
+          "value": "smile"
+        },
+        {
+          "at": 0,
+          "type": "camera",
+          "target": "family"
+        },
+        {
+          "at": 0.8,
+          "type": "face",
+          "actor": "fengjie",
+          "target": "ping_er"
+        },
+        {
+          "at": 10.8,
+          "type": "face",
+          "actor": "ping_er",
+          "target": "fengjie"
+        },
+        {
+          "at": 17.8,
+          "type": "face",
+          "actor": "granny",
+          "target": "fengjie"
+        },
+        {
+          "at": 26,
+          "type": "move",
+          "actor": "ping_er",
+          "target": "return_exit",
+          "duration": 4
+        },
+        {
+          "at": 26.8,
+          "type": "move",
+          "actor": "granny",
+          "target": "guest_exit",
+          "duration": 4
+        }
+      ],
+      "memory": "凤姐吩咐平儿带刘姥姥到廊下候着并安排量米取钱，平儿应承，刘姥姥谢过并说明廊下还有周嫂子等着，正好一道出去。"
+    }
+  ],
+  "narrative": {
+    "version": 8,
+    "nodeId": "make-case",
+    "conversation": {
+      "intentions": [
+        {
+          "actor": "granny",
+          "aim": "当面说清一家五口过冬缺粮的实情，只求些米粮，接住奶奶的问话",
+          "concern": "怕被当作打秋风，求多了反惹人厌；心里也挂着家里孩子怎么捱冷受饿"
+        },
+        {
+          "actor": "fengjie",
+          "aim": "问明难处，在自己能做的范围内给个具体安排，也留出向太太回话的余地",
+          "concern": "府里近来也紧，不好开滥例；太太那边尚未问过，不能假称已得示下"
+        },
+        {
+          "actor": "ping_er",
+          "aim": "把来客引到、照奶奶吩咐安排候处和米钱，不越位",
+          "concern": "不替奶奶许钱米，也不能把还没办的米钱说成已经备好"
+        }
+      ],
+      "turns": [
+        {
+          "id": "t1",
+          "speaker": "ping_er",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "奶奶，刘姥姥到了。",
+          "knowledgeRefs": [],
+          "factRefs": [
+            "arrival_heard_0"
+          ],
+          "respondsTo": [],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t2",
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？",
+          "knowledgeRefs": [
+            "t1"
+          ],
+          "factRefs": [
+            "host_heard_0",
+            "host_heard_3"
+          ],
+          "respondsTo": [
+            "t1"
+          ],
+          "actionIntent": "turn"
+        },
+        {
+          "id": "t3",
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。",
+          "knowledgeRefs": [
+            "t2"
+          ],
+          "factRefs": [
+            "current_household_members",
+            "arriving_waiting_prior_arriver_family_roles"
+          ],
+          "respondsTo": [
+            "t2"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t4",
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "狗儿年轻力壮，怎么不寻个长些的营生？",
+          "knowledgeRefs": [
+            "t3"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "t3"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t5",
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。",
+          "knowledgeRefs": [
+            "t4"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "t4"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t6",
+          "speaker": "fengjie",
+          "to": [
+            "granny"
+          ],
+          "mode": "normal",
+          "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。",
+          "knowledgeRefs": [
+            "t5"
+          ],
+          "factRefs": [
+            "host_heard_2",
+            "host_prior_local_fengjie_household_authority"
+          ],
+          "respondsTo": [
+            "t5"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t7",
+          "speaker": "granny",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。",
+          "knowledgeRefs": [
+            "t6"
+          ],
+          "factRefs": [],
+          "respondsTo": [
+            "t6"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t8",
+          "speaker": "fengjie",
+          "to": [
+            "ping_er"
+          ],
+          "mode": "normal",
+          "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。",
+          "knowledgeRefs": [
+            "t7"
+          ],
+          "factRefs": [
+            "host_prior_local_fengjie_household_authority"
+          ],
+          "respondsTo": [
+            "t7"
+          ],
+          "actionIntent": "turn"
+        },
+        {
+          "id": "t9",
+          "speaker": "ping_er",
+          "to": [
+            "fengjie"
+          ],
+          "mode": "normal",
+          "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。",
+          "knowledgeRefs": [
+            "t8"
+          ],
+          "factRefs": [
+            "arriving_ping_prior_report_prior_ping_prior_ping_reception_authority"
+          ],
+          "respondsTo": [
+            "t8"
+          ],
+          "actionIntent": "none"
+        },
+        {
+          "id": "t10",
+          "speaker": "granny",
+          "to": [
+            "fengjie",
+            "ping_er"
+          ],
+          "mode": "normal",
+          "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。",
+          "knowledgeRefs": [
+            "t8",
+            "t9"
+          ],
+          "factRefs": [
+            "arrival_heard_2"
+          ],
+          "respondsTo": [
+            "t8",
+            "t9"
+          ],
+          "actionIntent": "none"
+        }
+      ],
+      "endingAim": "凤姐当面应下先由平儿带刘姥姥到廊下候着，吩咐人量些米、取几串钱送出去；太太跟前凤姐自会回话。米粮钱文尚未实际交付，数目也未定。"
+    },
+    "dialogueReview": {
+      "passed": true,
+      "checks": [
+        {
+          "kind": "responsiveness",
+          "passed": true,
+          "evidenceRefs": [
+            "t2",
+            "t3",
+            "t4",
+            "t5",
+            "t6",
+            "t7",
+            "t8",
+            "t9",
+            "t10"
+          ],
+          "reason": "t2问难处，t3直接报五口与冬粮接不上；t4由“打短工”追问长营生，t5答无本钱、无人引荐并回到求米粮；t6就请求说府里紧、太太未回话，t7接住并表示不争多寡；t8作出安排，t9、t10应承执行。问答连续，没有无故换题。"
+        },
+        {
+          "kind": "helpRoute",
+          "passed": true,
+          "evidenceRefs": [
+            "t1",
+            "t2",
+            "t5",
+            "t8"
+          ],
+          "reason": "t1平儿向“奶奶”引到，t2凤姐直接问难处；t5刘姥姥把所求说成“只求过冬的米粮”；t8凤姐吩咐量米取钱并说太太跟前自会回。找谁、求什么、下一步如何办都对得上。"
+        },
+        {
+          "kind": "decision",
+          "passed": true,
+          "evidenceRefs": [
+            "t8",
+            "t9",
+            "t10"
+          ],
+          "reason": "t8明确：平儿带刘姥姥到廊下候着，吩咐人量些米、取几串钱送出去，太太处由凤姐回；t9复述执行，t10接受并提周嫂子在廊下。决定具体，且未写成已经交付。"
+        },
+        {
+          "kind": "voice",
+          "passed": true,
+          "evidenceRefs": [
+            "t3",
+            "t5",
+            "t7",
+            "t8",
+            "t10"
+          ],
+          "reason": "刘姥姥t3报家中实情、t5提出“只求过冬的米粮”、t7说“奶奶看着给，我不争”，有局促但有生活分寸，不是整场谢恩或预先免责；凤姐t8用具体吩咐掌握场面，不是只训规矩。"
+        },
+        {
+          "kind": "redundancy",
+          "passed": true,
+          "evidenceRefs": [
+            "t8",
+            "t9",
+            "t10"
+          ],
+          "reason": "t9是对t8的必要应承，t10补充周嫂子在廊下等候并接受同行，均增加执行或关系信息；没有换词重复愁、怕白跑或明早再说。"
+        },
+        {
+          "kind": "agency",
+          "passed": true,
+          "evidenceRefs": [
+            "t3",
+            "t5",
+            "t7",
+            "t10"
+          ],
+          "reason": "刘姥姥在t3说清家中五口和冬粮困境，t5自己把请求定为“只求过冬的米粮”，t7接住府里紧的限制，t10应承随平儿出去；不是被推着走，也不是先向人免责。"
+        },
+        {
+          "kind": "facts",
+          "passed": true,
+          "evidenceRefs": [
+            "t3",
+            "t5",
+            "t6",
+            "t8",
+            "t10"
+          ],
+          "reason": "t3的五口之家与current_household_members一致；t5只求米粮，没有把旧亲说成亲密或声称已获准；t6、t8明说太太处未回、凤姐自会回，米钱只是吩咐未交付；t10周嫂子在廊下等候，未进入正房，也未把周瑞家说成已答应钱米。"
+        }
+      ],
+      "initiative": {
+        "volunteerAt": "t5",
+        "delegatedBefore": [],
+        "reason": "刘姥姥先在t3答明五口与冬粮困境，随后在t5自己把请求落成“只求过冬的米粮”，t7又接住凤姐所说府里紧、太太未回话；不是被谁推派出门，故delegatedBefore为空。"
+      },
+      "connections": [
+        {
+          "turnId": "t2",
+          "connectsTo": [
+            "t1"
+          ],
+          "reason": "平儿报“刘姥姥到了”，凤姐随即让进前问难处，承接引见。"
+        },
+        {
+          "turnId": "t3",
+          "connectsTo": [
+            "t2"
+          ],
+          "reason": "直接回答“怎么个难法”，报五口和冬粮接不上。"
+        },
+        {
+          "turnId": "t4",
+          "connectsTo": [
+            "t3"
+          ],
+          "reason": "由“狗儿打短工”追问为何不寻长些的营生。"
+        },
+        {
+          "turnId": "t5",
+          "connectsTo": [
+            "t4",
+            "t3"
+          ],
+          "reason": "先答无本钱、无人引荐，再重申只求过冬米粮。"
+        },
+        {
+          "turnId": "t6",
+          "connectsTo": [
+            "t5"
+          ],
+          "reason": "评价“说得实在”，同时说明府里紧、太太未回话，是对请求的现实限制。"
+        },
+        {
+          "turnId": "t7",
+          "connectsTo": [
+            "t6"
+          ],
+          "reason": "应承理解府里紧和未回话，表示米粮多少由奶奶定，不争。"
+        },
+        {
+          "turnId": "t8",
+          "connectsTo": [
+            "t7",
+            "t6"
+          ],
+          "reason": "接住“看着给”的请求，给出量米取钱并去廊下候着的具体安排，回应太太处由自己回。"
+        },
+        {
+          "turnId": "t9",
+          "connectsTo": [
+            "t8"
+          ],
+          "reason": "复述执行步骤：带人去廊下，再叫人量米取钱送出。"
+        },
+        {
+          "turnId": "t10",
+          "connectsTo": [
+            "t8",
+            "t9"
+          ],
+          "reason": "谢安排，随平儿出去，并补充周嫂子在廊下可一道，衔接此前等候。"
+        }
+      ],
+      "concerns": [
+        {
+          "raisedAt": "t6",
+          "responseAt": [
+            "t7",
+            "t8"
+          ],
+          "kind": "external-uncertainty",
+          "status": "deferred",
+          "reason": "凤姐说府里紧、太太处未回话；刘姥姥t7表示懂且不争多寡，凤姐t8说“太太跟前我自会回”，把太太态度留待后续，并未假称已获答复。"
+        }
+      ],
+      "issues": []
+    },
+    "plan": {
+      "endingAim": "凤姐当面应下先由平儿带刘姥姥到廊下候着，吩咐人量些米、取几串钱送出去；太太跟前凤姐自会回话。米粮钱文尚未实际交付，数目也未定。",
+      "beats": [
+        {
+          "id": "intro-invite",
+          "title": "引见与请进",
+          "question": "引见与请进",
+          "change": "平儿通报刘姥姥已到，凤姐随即请她进前说话，并问起家中过冬难处。",
+          "intention": "完成当面引见，让刘姥姥走近答话。",
+          "dialogue": [
+            {
+              "speaker": "ping_er",
+              "to": [
+                "fengjie"
+              ],
+              "mode": "normal",
+              "text": "奶奶，刘姥姥到了。",
+              "knowledgeRefs": [],
+              "factRefs": [
+                "arrival_heard_0"
+              ],
+              "respondsTo": [],
+              "sourceTurnId": "t1",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "fengjie",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？",
+              "knowledgeRefs": [
+                "intro-invite:0"
+              ],
+              "factRefs": [
+                "host_heard_0",
+                "host_heard_3"
+              ],
+              "respondsTo": [
+                "intro-invite:0"
+              ],
+              "sourceTurnId": "t2",
+              "actionIntent": "turn"
+            }
+          ]
+        },
+        {
+          "id": "hardship-request",
+          "title": "诉说难处与求米粮",
+          "question": "诉说难处与求米粮",
+          "change": "刘姥姥说明一家五口和冬粮接不上，凤姐追问狗儿营生，又提到府里紧、太太处未回话；刘姥姥表示只求章程，米粮多少不争。",
+          "intention": "让刘姥姥亲自陈情，同时探明凤姐能给到何种帮助。",
+          "dialogue": [
+            {
+              "speaker": "granny",
+              "to": [
+                "fengjie"
+              ],
+              "mode": "normal",
+              "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。",
+              "knowledgeRefs": [
+                "intro-invite:1"
+              ],
+              "factRefs": [
+                "current_household_members",
+                "arriving_waiting_prior_arriver_family_roles"
+              ],
+              "respondsTo": [
+                "intro-invite:1"
+              ],
+              "sourceTurnId": "t3",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "fengjie",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "狗儿年轻力壮，怎么不寻个长些的营生？",
+              "knowledgeRefs": [
+                "hardship-request:0"
+              ],
+              "factRefs": [],
+              "respondsTo": [
+                "hardship-request:0"
+              ],
+              "sourceTurnId": "t4",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "fengjie"
+              ],
+              "mode": "normal",
+              "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。",
+              "knowledgeRefs": [
+                "hardship-request:1"
+              ],
+              "factRefs": [],
+              "respondsTo": [
+                "hardship-request:1"
+              ],
+              "sourceTurnId": "t5",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "fengjie",
+              "to": [
+                "granny"
+              ],
+              "mode": "normal",
+              "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。",
+              "knowledgeRefs": [
+                "hardship-request:2"
+              ],
+              "factRefs": [
+                "host_heard_2",
+                "host_prior_local_fengjie_household_authority"
+              ],
+              "respondsTo": [
+                "hardship-request:2"
+              ],
+              "sourceTurnId": "t6",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "fengjie"
+              ],
+              "mode": "normal",
+              "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。",
+              "knowledgeRefs": [
+                "hardship-request:3"
+              ],
+              "factRefs": [],
+              "respondsTo": [
+                "hardship-request:3"
+              ],
+              "sourceTurnId": "t7",
+              "actionIntent": "none"
+            }
+          ]
+        },
+        {
+          "id": "order-leave",
+          "title": "吩咐候办与随出",
+          "question": "吩咐候办与随出",
+          "change": "凤姐吩咐平儿带刘姥姥到廊下候着并安排量米取钱，平儿应承，刘姥姥谢过并说明廊下还有周嫂子等着，正好一道出去。",
+          "intention": "落实待办安排，并让来客依吩咐离场。",
+          "dialogue": [
+            {
+              "speaker": "fengjie",
+              "to": [
+                "ping_er"
+              ],
+              "mode": "normal",
+              "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。",
+              "knowledgeRefs": [
+                "hardship-request:4"
+              ],
+              "factRefs": [
+                "host_prior_local_fengjie_household_authority"
+              ],
+              "respondsTo": [
+                "hardship-request:4"
+              ],
+              "sourceTurnId": "t8",
+              "actionIntent": "turn"
+            },
+            {
+              "speaker": "ping_er",
+              "to": [
+                "fengjie"
+              ],
+              "mode": "normal",
+              "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。",
+              "knowledgeRefs": [
+                "order-leave:0"
+              ],
+              "factRefs": [
+                "arriving_ping_prior_report_prior_ping_prior_ping_reception_authority"
+              ],
+              "respondsTo": [
+                "order-leave:0"
+              ],
+              "sourceTurnId": "t9",
+              "actionIntent": "none"
+            },
+            {
+              "speaker": "granny",
+              "to": [
+                "fengjie",
+                "ping_er"
+              ],
+              "mode": "normal",
+              "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。",
+              "knowledgeRefs": [
+                "order-leave:0",
+                "order-leave:1"
+              ],
+              "factRefs": [
+                "arrival_heard_2"
+              ],
+              "respondsTo": [
+                "order-leave:0",
+                "order-leave:1"
+              ],
+              "sourceTurnId": "t10",
+              "actionIntent": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "partitionRevision": {
+      "sourceJobId": "0976d850-0d08-465b-a31c-804964b202be",
+      "source": "DeepSeek Flash model repartition",
+      "reason": "靠近邀请先说出，再在下一段走近；原对白不变"
+    },
+    "handoff": {
+      "version": 1,
+      "sourceStoryId": "9102445c-c558-4468-a578-ed1207703ac5",
+      "sourceNodeId": "make-case",
+      "nextNodeId": "audience-window",
+      "nextSceneCandidates": [
+        "SC13_DT"
+      ],
+      "transition": "planned-not-travelled",
+      "decision": {
+        "status": "depart",
+        "party": [
+          "ping_er",
+          "granny"
+        ],
+        "purpose": "到廊下候着，等吩咐人量些米、取几串钱送出来；刘姥姥随平儿出去，预备与在廊下等着的周嫂子会合。",
+        "approach": "平儿照奶奶吩咐领刘姥姥到廊下候办，只说先带人到廊下，再叫人量米取钱送出来，不替奶奶许定数目。",
+        "departureCondition": "奶奶吩咐后即随平儿出正房；前提是到廊下候着并等量米取钱送出，米粮钱文尚未实际交付。",
+        "evidenceRefs": [
+          "order-leave:0",
+          "order-leave:1",
+          "order-leave:2"
+        ],
+        "knownBy": [
+          "granny",
+          "ping_er",
+          "fengjie"
+        ]
+      },
+      "facts": [
+        {
+          "kind": "plan",
+          "text": "凤姐吩咐平儿带刘姥姥到廊下候着，并吩咐人量些米、取几串钱送出去；平儿应承先带人到廊下，再叫人量米取钱送出来。",
+          "evidenceRefs": [
+            "order-leave:0",
+            "order-leave:1"
+          ],
+          "knownBy": [
+            "granny",
+            "ping_er",
+            "fengjie"
+          ]
+        },
+        {
+          "kind": "plan",
+          "text": "太太跟前由凤姐自会回话；太太处此前尚未回过话。",
+          "evidenceRefs": [
+            "order-leave:0"
+          ],
+          "knownBy": [
+            "granny",
+            "ping_er",
+            "fengjie"
+          ]
+        },
+        {
+          "kind": "promise",
+          "text": "刘姥姥随平儿出去，并说廊下还有周嫂子等着，正好一道。",
+          "evidenceRefs": [
+            "order-leave:2"
+          ],
+          "knownBy": [
+            "granny",
+            "ping_er",
+            "fengjie"
+          ]
+        },
+        {
+          "kind": "obstacle",
+          "text": "米粮钱文只是吩咐待办，尚未实际交付，数目也未定。",
+          "evidenceRefs": [
+            "order-leave:0",
+            "order-leave:1"
+          ],
+          "knownBy": [
+            "granny",
+            "ping_er",
+            "fengjie"
+          ]
+        }
+      ],
+      "characterKnowledge": {
+        "granny": [
+          {
+            "eventId": "intro-invite:0",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶，刘姥姥到了。"
+          },
+          {
+            "eventId": "intro-invite:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？"
+          },
+          {
+            "eventId": "hardship-request:0",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。"
+          },
+          {
+            "eventId": "hardship-request:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "狗儿年轻力壮，怎么不寻个长些的营生？"
+          },
+          {
+            "eventId": "hardship-request:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。"
+          },
+          {
+            "eventId": "hardship-request:3",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。"
+          },
+          {
+            "eventId": "hardship-request:4",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。"
+          },
+          {
+            "eventId": "order-leave:0",
+            "speaker": "fengjie",
+            "to": [
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。"
+          },
+          {
+            "eventId": "order-leave:1",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。"
+          },
+          {
+            "eventId": "order-leave:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie",
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。"
+          }
+        ],
+        "ping_er": [
+          {
+            "eventId": "intro-invite:0",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶，刘姥姥到了。"
+          },
+          {
+            "eventId": "intro-invite:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？"
+          },
+          {
+            "eventId": "hardship-request:0",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。"
+          },
+          {
+            "eventId": "hardship-request:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "狗儿年轻力壮，怎么不寻个长些的营生？"
+          },
+          {
+            "eventId": "hardship-request:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。"
+          },
+          {
+            "eventId": "hardship-request:3",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。"
+          },
+          {
+            "eventId": "hardship-request:4",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。"
+          },
+          {
+            "eventId": "order-leave:0",
+            "speaker": "fengjie",
+            "to": [
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。"
+          },
+          {
+            "eventId": "order-leave:1",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。"
+          },
+          {
+            "eventId": "order-leave:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie",
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。"
+          }
+        ],
+        "fengjie": [
+          {
+            "eventId": "intro-invite:0",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶，刘姥姥到了。"
+          },
+          {
+            "eventId": "intro-invite:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？"
+          },
+          {
+            "eventId": "hardship-request:0",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。"
+          },
+          {
+            "eventId": "hardship-request:1",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "狗儿年轻力壮，怎么不寻个长些的营生？"
+          },
+          {
+            "eventId": "hardship-request:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。"
+          },
+          {
+            "eventId": "hardship-request:3",
+            "speaker": "fengjie",
+            "to": [
+              "granny"
+            ],
+            "mode": "normal",
+            "text": "你倒说得实在。只是府里近来也紧，太太那边我还没回过话。"
+          },
+          {
+            "eventId": "hardship-request:4",
+            "speaker": "granny",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。"
+          },
+          {
+            "eventId": "order-leave:0",
+            "speaker": "fengjie",
+            "to": [
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。"
+          },
+          {
+            "eventId": "order-leave:1",
+            "speaker": "ping_er",
+            "to": [
+              "fengjie"
+            ],
+            "mode": "normal",
+            "text": "是。我先带姥姥到廊下，再叫人量米取钱送出来。"
+          },
+          {
+            "eventId": "order-leave:2",
+            "speaker": "granny",
+            "to": [
+              "fengjie",
+              "ping_er"
+            ],
+            "mode": "normal",
+            "text": "多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。"
+          }
+        ]
+      }
+    },
+    "handoffReview": {
+      "passed": true,
+      "issues": []
+    }
+  },
+  "prologue": {
+    "text": "平儿引刘姥姥至正房来客答话处，凤姐仍在会客炕前，门帘束起，三人尚未交谈。",
+    "review": {
+      "passed": true,
+      "issues": []
+    }
+  },
+  "presentation": {
+    "opening": {
+      "title": "正房相见",
+      "subtitle": "荣府 · 王熙凤正房",
+      "duration": 3.2
+    },
+    "prologue": {
+      "text": "平儿引刘姥姥至正房来客答话处，凤姐仍在会客炕前，门帘束起，三人尚未交谈。",
+      "duration": 10
+    },
+    "interludes": []
+  },
+  "soundtrack": {
+    "version": 1,
+    "cues": [
+      {
+        "section": "opening",
+        "offset": 0,
+        "action": "play",
+        "track": "shenxian",
+        "volume": 0.18,
+        "reason": "正房堂屋初见主事者，府中礼序与庄重感贴合环境，音量压低，不压对白。"
+      },
+      {
+        "section": "hardship-request",
+        "offset": 0,
+        "action": "play",
+        "track": "wuxia_plucked",
+        "volume": 0.16,
+        "reason": "进入刘姥姥当面陈情、凤姐试探追问的核心段落，筝琵琶的商议感贴合求助交谈，不用欢庆曲。"
+      },
+      {
+        "section": "order-leave",
+        "offset": 0,
+        "action": "play",
+        "track": "taohua",
+        "volume": 0.14,
+        "reason": "凤姐给出量米取钱的具体吩咐，温和转机而非喜庆，衬托安排落定与来客随出。"
+      },
+      {
+        "section": "order-leave",
+        "offset": 30,
+        "action": "stop",
+        "reason": "来客随平儿退出正房，本场收束，停止音乐避免延续到下一场。"
+      }
+    ]
+  },
+  "contextMemory": {
+    "version": 1,
+    "branchId": "91f94e53-5089-4241-b8a2-cc14a7188536",
+    "revision": 10,
+    "sourceStoryId": "9102445c-c558-4468-a578-ed1207703ac5",
+    "summary": "秋尽冬初，狗儿家过冬衣食未齐。刘姥姥因狗儿祖上与金陵王家连过宗、王夫人在荣府，自愿去求周济；家中商定板儿留家，刘姥姥答应给板儿带糕，尚未兑现。门房推诿，老仆指她到后街问周瑞妻子；周瑞妻子带她见平儿。平儿问明刘姥姥只求过冬米粮、别的不敢多话，答应照实回。平儿向凤姐回明来客是狗儿家的、与太太娘家连过宗而多年不走动、太太处未问过；凤姐决定请刘姥姥进来当面问米粮。平儿传话只领刘姥姥一人进正房，周瑞妻子留在廊下；刘姥姥应允随去，请周嫂子略等，说好出来还寻她一道走，周瑞妻子答在廊下等着。\n本场刘姥姥进正房见凤姐，答一家五口：狗儿、刘氏和两个小的，年成不好，狗儿打短工，冬粮接不上。凤姐问狗儿年轻力壮为何不寻长些营生；刘姥姥答他没本钱、无人引荐，有活就做，没活便闲，自己不敢替他说嘴，只求过冬米粮。凤姐说府里近来也紧，自己尚未向太太回明；刘姥姥表示懂，请奶奶替他们想个章程，米粮多少看着给，不争。凤姐最后决定命平儿带刘姥姥到廊下候着，吩咐人量些米、取几串钱送出去，太太跟前自己会回。平儿应承先带人到廊下，再叫人量米取钱送出。刘姥姥谢过，随平儿出正房，说廊下还有周嫂子等着，正好一道。当前二人到正房门外，尚未到廊下，也未实际量米取钱交付；周瑞妻子仍在廊下等，刘姥姥尚未与她碰头。太太处尚未回明、是否知晓未定，米钱具体多少未定；带板儿的糕仍未兑现。凤姐听见周嫂子在廊下等着、刘姥姥要一道走，但不知道此前二人私下交谈的具体经过。",
+    "characters": {
+      "granny": "刘姥姥进正房见凤姐，答一家五口：狗儿、刘氏和两个小的；年成不好，狗儿打短工，冬粮接不上。凤姐问狗儿为何不寻长些营生，她答没本钱、无人引荐，有活做没活闲，自己不敢替他说嘴，只求过冬米粮。凤姐说府里紧、自己尚未向太太回明，之后自会回；刘姥姥表示懂，请奶奶想章程，米粮多少看着给，不争。凤姐命平儿带她到廊下候着，叫人量些米、取几串钱送出。刘姥姥谢过随平儿出正房，还没到廊下见周嫂子，米钱未到手，带糕也未兑现。",
+      "gouer": "狗儿先抱怨天冷、柴米无着；听岳母提出自己去荣府，他提醒两家虽连过宗却多年没走动，贸然登门门房未必肯通传。听岳母问有无当差熟人，他提出周瑞曾与父亲办过事、又是王夫人陪房，但不知是否还认旧。刘氏担心母亲独去，他提出清早送到村口，余路刘姥姥自走；听刘姥姥答应，家中孩子留家照看。周瑞肯不肯帮仍未定。",
+      "liushi": "刘氏先说孩子夜里喊冷，想先把厚被子匀给孩子；听母亲提出去荣府，她担心路远、娘一个人去不放心，又怕大户门房难缠、穷亲戚上门不肯传话。狗儿提出清早送到村口，刘姥姥答应并让家里看好孩子；家中遂由刘氏留家照看孩子。门房是否通传、周瑞是否认旧仍未解决。",
+      "baner": "板儿听见家里说天冷、姥姥要出门，便问姥姥去哪儿，说自己也去；姥姥只说去讨过冬的吃食，让他在家听娘话，回来给他带糕。他只知道姥姥要出门讨吃食并答应带糕，不懂周瑞、门房和求助的门路。",
+      "gatekeeper": "门房仆役在角门听见刘姥姥自称姓刘、乡下来，寻周瑞，说女婿家与金陵王家连过宗、过冬衣食没着落，想托周瑞递话求太太周济米粮。他问哪门子亲戚、找周瑞做什么，又说周瑞是太太陪房，门上不能随便找，让她靠边等别堵门。她追问周瑞在不在、要等多久，他推说只看着门说不清，爱等就等。老仆出言别耽误人家，说明周瑞今日往南边办事不在门上，指她沿墙绕到后街后门问周瑞家，其媳妇能递话。门房仆役由此知道周瑞去向和后街投问处。",
+      "old_servant": "门房老仆听见刘姥姥向门房自称姓刘、乡下来，寻周瑞，说女婿家与金陵王家连过宗、过冬衣食没着落，想托周瑞递话求太太周济米粮。门房问亲戚、来意，又说周瑞是太太陪房，门上不能随便找，让她靠边等；她追问周瑞在不在、等多久，门房推说说不清、爱等就等。老仆出言别耽误人家，告诉她周瑞今日往南边办事不在门上，可沿墙绕到后街后门问太太陪房周瑞家，其媳妇在家能替她递话。刘姥姥谢过，照所指去后街。",
+      "guide_child": "引路孩童听见刘姥姥问太太陪房周瑞家怎么走，答认得周大娘、指进去靠左手第二家，并问是否亲戚；听刘姥姥说不是亲戚、只寻周嫂子递句话、请领到门口，便答应带路。二人只到后门外入口，尚未进后门或到周家。他不知来客求助详情，也不知周瑞媳妇是否接待。",
+      "zhou_wife": "周瑞妻子因狗儿曾帮周瑞的旧情，领刘姥姥到倒厅旁院门外见平儿，陪她在廊下候信。平儿回来传奶奶请刘姥姥进去当面问米粮，并自说只领刘姥姥一人进正房，请周嫂子在廊下稍候。刘姥姥向她告一声，请她略等，出来还寻她一道走；周瑞妻子答在此廊下等着，出来一道走。她留在原处候着，未听见正房内后来之事，也不能替奶奶应承周济。",
+      "ping_er": "平儿引刘姥姥到正房，报“刘姥姥到了”。她听凤姐问难处；刘姥姥答一家五口、狗儿打短工、冬粮接不上。凤姐问狗儿为何不寻长营生，刘姥姥答无本钱无人引荐、只求米粮。凤姐说府里紧、自己尚未向太太回明，之后自会回；刘姥姥表示懂、不争、请给章程。凤姐命平儿带姥姥到廊下候着，安排人量些米、取几串钱送出去。平儿应承先带人到廊下，再叫人量米取钱送出。她领刘姥姥出正房，听见刘姥姥说廊下还有周嫂子等着正好一道；当前到门外，尚未到廊下，也没实际吩咐量米取钱，米钱未交付。",
+      "fengjie": "王熙凤在正房见刘姥姥，问过冬难处；听答一家五口、狗儿打短工、冬粮接不上。她问狗儿为何不寻长营生，刘答无本钱、无人引荐，只求米粮。凤姐说府里紧、自己尚未向太太回明，之后自会回；刘表示懂、不争、请给章程。凤姐命平儿带刘到廊下候着，吩咐量些米、取几串钱送出。平儿应承。刘随平儿出，说周嫂子在廊下等；凤姐只听见这些，不知私下交谈。米钱尚未交付。"
+    },
+    "recentDialogue": "ping_er说：“奶奶，刘姥姥到了。”\nfengjie说：“老人家，进前些说话。平儿说你家里过冬艰难，是怎么个难法？”\ngranny说：“回奶奶，一家五口，姑爷狗儿、我闺女，还有两个小的。年成不好，狗儿打短工，冬粮接不上。”\nfengjie说：“狗儿年轻力壮，怎么不寻个长些的营生？”\ngranny说：“奶奶问得是。他没本钱，长工也没人引荐；有活就做，没活便闲着。我不敢替他说嘴，只求过冬的米粮。”\nfengjie说：“你倒说得实在。只是府里近来也紧，太太那边我还没回过话。”\ngranny说：“这个我懂。奶奶能替我们想个章程，我们就感念；米粮多少，奶奶看着给，我不争。”\nfengjie说：“平儿，你带姥姥到廊下候着，吩咐人量些米、取几串钱送出去。太太跟前我自会回。”\nping_er说：“是。我先带姥姥到廊下，再叫人量米取钱送出来。”\ngranny说：“多谢奶奶。我随平儿姑娘出去，廊下还有周嫂子等着，正好一道。”"
+  },
+  "memoryReview": {
+    "passed": true,
+    "issues": []
+  },
+  "generation": {
+    "authoring": {
+      "dialogue": "DeepSeek Flash 原始生成及模型自动修订，无人工改写台词",
+      "cardsRevision": "audience-2026-11-17-v2",
+      "cardHash": "a4de5c8ad86e1bad76914999a5760fae80b97ac1af7779f0fb4e0b38f615362b"
+    },
+    "provider": "DeepSeek",
+    "model": "deepseek-flash",
+    "thinking": {
+      "type": "enabled"
+    },
+    "reasoning_effort": "high",
+    "generatedAt": "2026-11-17T07:57:57.103Z",
+    "source": "live-api",
+    "jobId": "9102445c-c558-4468-a578-ed1207703ac5",
+    "calls": [
+      {
+        "phase": "conversation-write-0",
+        "responseId": "26fb14f0-4fdc-4074-9b3f-4b4697bccbcb",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 12412,
+          "completion_tokens": 4092,
+          "total_tokens": 16504,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2980
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 11900
+        }
+      },
+      {
+        "phase": "conversation-review-0",
+        "responseId": "e2a03ec8-d3ae-4303-8e8e-b68221b7121b",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 11214,
+          "completion_tokens": 10894,
+          "total_tokens": 22108,
+          "prompt_tokens_details": {
+            "cached_tokens": 1024
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 9502
+          },
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 10190
+        }
+      },
+      {
+        "phase": "conversation-partition-0",
+        "responseId": "c666deef-409c-4e60-a29a-5b3f285eadce",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2845,
+          "completion_tokens": 1097,
+          "total_tokens": 3942,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 704
+          },
+          "prompt_cache_hit_tokens": 1280,
+          "prompt_cache_miss_tokens": 1565
+        }
+      },
+      {
+        "phase": "beat-1",
+        "responseId": "d3346204-878c-42e3-badd-4597614eb5f6",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9226,
+          "completion_tokens": 1008,
+          "total_tokens": 10234,
+          "prompt_tokens_details": {
+            "cached_tokens": 1408
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 933
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 7818
+        }
+      },
+      {
+        "phase": "beat-2",
+        "responseId": "522fb6da-7c26-4929-a969-67e5152a622c",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9253,
+          "completion_tokens": 542,
+          "total_tokens": 9795,
+          "prompt_tokens_details": {
+            "cached_tokens": 2432
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 465
+          },
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 6821
+        }
+      },
+      {
+        "phase": "beat-3",
+        "responseId": "d8465112-a044-4cd8-bb74-689b618b0ec7",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9324,
+          "completion_tokens": 664,
+          "total_tokens": 9988,
+          "prompt_tokens_details": {
+            "cached_tokens": 2432
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 571
+          },
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 6892
+        }
+      },
+      {
+        "phase": "beat-4",
+        "responseId": "9af04664-f3cb-4167-b933-d6f06d6c728e",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9466,
+          "completion_tokens": 1017,
+          "total_tokens": 10483,
+          "prompt_tokens_details": {
+            "cached_tokens": 2432
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 883
+          },
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 7034
+        }
+      },
+      {
+        "phase": "execution-review-0",
+        "responseId": "343b08e9-f148-4298-b05b-2c3e1923ae8b",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 10933,
+          "completion_tokens": 3275,
+          "total_tokens": 14208,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3147
+          },
+          "prompt_cache_hit_tokens": 1280,
+          "prompt_cache_miss_tokens": 9653
+        }
+      },
+      {
+        "phase": "execution-review-1",
+        "responseId": "fa537715-ce1a-4b44-86ee-cbec934d2ca5",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 10937,
+          "completion_tokens": 3974,
+          "total_tokens": 14911,
+          "prompt_tokens_details": {
+            "cached_tokens": 10240
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3957
+          },
+          "prompt_cache_hit_tokens": 10240,
+          "prompt_cache_miss_tokens": 697
+        }
+      },
+      {
+        "phase": "conversation-write-0",
+        "responseId": "76ba163e-dc82-441f-8ee0-740a5270356b",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13783,
+          "completion_tokens": 4442,
+          "total_tokens": 18225,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3311
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 13143
+        }
+      },
+      {
+        "phase": "conversation-review-0",
+        "responseId": "33723d37-394e-43e5-b929-4b598b3c13a9",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 11234,
+          "completion_tokens": 10633,
+          "total_tokens": 21867,
+          "prompt_tokens_details": {
+            "cached_tokens": 10624
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 9386
+          },
+          "prompt_cache_hit_tokens": 10624,
+          "prompt_cache_miss_tokens": 610
+        }
+      },
+      {
+        "phase": "conversation-partition-0",
+        "responseId": "51b31b00-0248-4485-8ed0-8a6b6b500a6f",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2865,
+          "completion_tokens": 1012,
+          "total_tokens": 3877,
+          "prompt_tokens_details": {
+            "cached_tokens": 2304
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 812
+          },
+          "prompt_cache_hit_tokens": 2304,
+          "prompt_cache_miss_tokens": 561
+        }
+      },
+      {
+        "phase": "beat-1",
+        "responseId": "d605c591-f397-4735-8d68-15bb97c91c75",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9447,
+          "completion_tokens": 1712,
+          "total_tokens": 11159,
+          "prompt_tokens_details": {
+            "cached_tokens": 7168
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1574
+          },
+          "prompt_cache_hit_tokens": 7168,
+          "prompt_cache_miss_tokens": 2279
+        }
+      },
+      {
+        "phase": "beat-2",
+        "responseId": "e74dd716-48bf-4ead-af09-3d205448ae02",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9229,
+          "completion_tokens": 160,
+          "total_tokens": 9389,
+          "prompt_tokens_details": {
+            "cached_tokens": 2432
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 2432,
+          "prompt_cache_miss_tokens": 6797
+        }
+      },
+      {
+        "phase": "beat-2-repair-1",
+        "responseId": "0ee5bdc2-cffc-454b-94e5-da23421167bd",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9451,
+          "completion_tokens": 716,
+          "total_tokens": 10167,
+          "prompt_tokens_details": {
+            "cached_tokens": 9216
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 580
+          },
+          "prompt_cache_hit_tokens": 9216,
+          "prompt_cache_miss_tokens": 235
+        }
+      },
+      {
+        "phase": "execution-review-0",
+        "responseId": "b34ff758-a920-438f-9d57-0447bd54abcf",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 10923,
+          "completion_tokens": 4851,
+          "total_tokens": 15774,
+          "prompt_tokens_details": {
+            "cached_tokens": 9600
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4834
+          },
+          "prompt_cache_hit_tokens": 9600,
+          "prompt_cache_miss_tokens": 1323
+        }
+      },
+      {
+        "phase": "scene-handoff-0",
+        "responseId": "8567671f-4cfb-4e50-9440-5e272eead4bf",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 17193,
+          "completion_tokens": 3665,
+          "total_tokens": 20858,
+          "prompt_tokens_details": {
+            "cached_tokens": 1536
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3275
+          },
+          "prompt_cache_hit_tokens": 1536,
+          "prompt_cache_miss_tokens": 15657
+        }
+      },
+      {
+        "phase": "handoff-review-0",
+        "responseId": "b8930af7-5ea6-4a30-8908-4b845e0604f8",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2885,
+          "completion_tokens": 8060,
+          "total_tokens": 10945,
+          "prompt_tokens_details": {
+            "cached_tokens": 1408
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 8050
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 1477
+        }
+      },
+      {
+        "phase": "prologue-write-0",
+        "responseId": "bbaa9964-8106-4198-80a2-86a4cfdc4682",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2033,
+          "completion_tokens": 508,
+          "total_tokens": 2541,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 470
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2033
+        }
+      },
+      {
+        "phase": "prologue-review-0",
+        "responseId": "3d301f27-972b-4b86-9e6f-a74606ded3d1",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2091,
+          "completion_tokens": 1758,
+          "total_tokens": 3849,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1748
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 939
+        }
+      },
+      {
+        "phase": "soundtrack-0",
+        "responseId": "737cb60e-80bd-4448-89e5-91db91f3f83f",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 20870,
+          "completion_tokens": 1088,
+          "total_tokens": 21958,
+          "prompt_tokens_details": {
+            "cached_tokens": 1280
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 886
+          },
+          "prompt_cache_hit_tokens": 1280,
+          "prompt_cache_miss_tokens": 19590
+        }
+      },
+      {
+        "phase": "memory-update-0",
+        "responseId": "1877da5d-d3eb-4ea5-9bc7-39bdbdd24028",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 12508,
+          "completion_tokens": 8068,
+          "total_tokens": 20576,
+          "prompt_tokens_details": {
+            "cached_tokens": 896
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 6718
+          },
+          "prompt_cache_hit_tokens": 896,
+          "prompt_cache_miss_tokens": 11612
+        }
+      },
+      {
+        "phase": "memory-review-0",
+        "responseId": "c7b46fa5-f20e-43c5-8fcf-33e733f7cbe9",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13675,
+          "completion_tokens": 7014,
+          "total_tokens": 20689,
+          "prompt_tokens_details": {
+            "cached_tokens": 768
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 7004
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 12907
+        }
+      },
+      {
+        "phase": "conversation-repartition-0",
+        "responseId": "ccfe1cb9-e725-463c-a4ce-2a561962bb89",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2859,
+          "completion_tokens": 776,
+          "total_tokens": 3635,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 500
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2859
+        }
+      },
+      {
+        "phase": "beat-1",
+        "responseId": "1a75fdf2-bc4a-4027-ad67-f663ef602ad8",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9027,
+          "completion_tokens": 2531,
+          "total_tokens": 11558,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2446
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 9027
+        }
+      },
+      {
+        "phase": "beat-2",
+        "responseId": "eef3fca8-5dfa-4f67-9d1e-a5c5e5777c57",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9504,
+          "completion_tokens": 1259,
+          "total_tokens": 10763,
+          "prompt_tokens_details": {
+            "cached_tokens": 2560
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1163
+          },
+          "prompt_cache_hit_tokens": 2560,
+          "prompt_cache_miss_tokens": 6944
+        }
+      },
+      {
+        "phase": "beat-3",
+        "responseId": "d6e377f5-a16f-489c-b462-cb0c4a014390",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 9362,
+          "completion_tokens": 1217,
+          "total_tokens": 10579,
+          "prompt_tokens_details": {
+            "cached_tokens": 2560
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1076
+          },
+          "prompt_cache_hit_tokens": 2560,
+          "prompt_cache_miss_tokens": 6802
+        }
+      },
+      {
+        "phase": "execution-review-0",
+        "responseId": "4b7b4b51-651e-41cd-b869-27dd5e821290",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 10958,
+          "completion_tokens": 3185,
+          "total_tokens": 14143,
+          "prompt_tokens_details": {
+            "cached_tokens": 9600
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 3168
+          },
+          "prompt_cache_hit_tokens": 9600,
+          "prompt_cache_miss_tokens": 1358
+        }
+      },
+      {
+        "phase": "scene-handoff-0",
+        "responseId": "bf7927c5-eab0-471c-93db-6be55448ce8f",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 17338,
+          "completion_tokens": 2122,
+          "total_tokens": 19460,
+          "prompt_tokens_details": {
+            "cached_tokens": 1536
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1753
+          },
+          "prompt_cache_hit_tokens": 1536,
+          "prompt_cache_miss_tokens": 15802
+        }
+      },
+      {
+        "phase": "handoff-review-0",
+        "responseId": "a499414a-2ab5-48a8-9a92-33e276c27401",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2851,
+          "completion_tokens": 14390,
+          "total_tokens": 17241,
+          "prompt_tokens_details": {
+            "cached_tokens": 1408
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 14380
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 1443
+        }
+      },
+      {
+        "phase": "prologue-write-0",
+        "responseId": "8891b42c-48c2-4f86-91b1-024a41e568b5",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2033,
+          "completion_tokens": 683,
+          "total_tokens": 2716,
+          "prompt_tokens_details": {
+            "cached_tokens": 1792
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 647
+          },
+          "prompt_cache_hit_tokens": 1792,
+          "prompt_cache_miss_tokens": 241
+        }
+      },
+      {
+        "phase": "prologue-review-0",
+        "responseId": "a9a75f62-94d1-4eae-af33-d005f9ca6858",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 2089,
+          "completion_tokens": 449,
+          "total_tokens": 2538,
+          "prompt_tokens_details": {
+            "cached_tokens": 1920
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 439
+          },
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 169
+        }
+      },
+      {
+        "phase": "soundtrack-0",
+        "responseId": "bebe3e6b-23f6-4f19-a5ae-8c05bdcd1253",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 20958,
+          "completion_tokens": 2226,
+          "total_tokens": 23184,
+          "prompt_tokens_details": {
+            "cached_tokens": 2304
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2002
+          },
+          "prompt_cache_hit_tokens": 2304,
+          "prompt_cache_miss_tokens": 18654
+        }
+      },
+      {
+        "phase": "memory-update-0",
+        "responseId": "0fafcdf4-96d0-401d-a8b7-0d0d1f06b890",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 12450,
+          "completion_tokens": 6546,
+          "total_tokens": 18996,
+          "prompt_tokens_details": {
+            "cached_tokens": 11136
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5071
+          },
+          "prompt_cache_hit_tokens": 11136,
+          "prompt_cache_miss_tokens": 1314
+        }
+      },
+      {
+        "phase": "memory-update-1",
+        "responseId": "6f7ccdbd-3012-4a1e-82e9-028cd9cb4c6a",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13945,
+          "completion_tokens": 6136,
+          "total_tokens": 20081,
+          "prompt_tokens_details": {
+            "cached_tokens": 12032
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 4797
+          },
+          "prompt_cache_hit_tokens": 12032,
+          "prompt_cache_miss_tokens": 1913
+        }
+      },
+      {
+        "phase": "memory-review-1",
+        "responseId": "39b1c05e-779e-42cb-a13f-2ae17ff363e1",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13606,
+          "completion_tokens": 12185,
+          "total_tokens": 25791,
+          "prompt_tokens_details": {
+            "cached_tokens": 11008
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 12103
+          },
+          "prompt_cache_hit_tokens": 11008,
+          "prompt_cache_miss_tokens": 2598
+        }
+      },
+      {
+        "phase": "memory-update-2",
+        "responseId": "b67f4c1e-72dc-4625-8ca1-cd7d1fd2a6b1",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13860,
+          "completion_tokens": 4255,
+          "total_tokens": 18115,
+          "prompt_tokens_details": {
+            "cached_tokens": 12160
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2885
+          },
+          "prompt_cache_hit_tokens": 12160,
+          "prompt_cache_miss_tokens": 1700
+        }
+      },
+      {
+        "phase": "memory-review-2",
+        "responseId": "2ec6800c-b0d2-451a-af0f-1454ba1527df",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13637,
+          "completion_tokens": 18055,
+          "total_tokens": 31692,
+          "prompt_tokens_details": {
+            "cached_tokens": 12416
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 17912
+          },
+          "prompt_cache_hit_tokens": 12416,
+          "prompt_cache_miss_tokens": 1221
+        }
+      },
+      {
+        "phase": "memory-field-repair-0",
+        "responseId": "36e7e561-0331-4912-a815-d4946fe50e39",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 15147,
+          "completion_tokens": 3844,
+          "total_tokens": 18991,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 2755
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 15147
+        }
+      },
+      {
+        "phase": "memory-field-repair-1",
+        "responseId": "e464209f-1edb-4042-a255-343479ebc414",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 15070,
+          "completion_tokens": 1439,
+          "total_tokens": 16509,
+          "prompt_tokens_details": {
+            "cached_tokens": 13696
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 1277
+          },
+          "prompt_cache_hit_tokens": 13696,
+          "prompt_cache_miss_tokens": 1374
+        }
+      },
+      {
+        "phase": "memory-field-review-1",
+        "responseId": "6df0c99c-65ac-4cd4-bb04-46a57a0069f9",
+        "model": "deepseek-flash",
+        "thinking": {
+          "type": "enabled"
+        },
+        "reasoning_effort": "high",
+        "usage": {
+          "prompt_tokens": 13594,
+          "completion_tokens": 19885,
+          "total_tokens": 33479,
+          "prompt_tokens_details": {
+            "cached_tokens": 12160
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 19875
+          },
+          "prompt_cache_hit_tokens": 12160,
+          "prompt_cache_miss_tokens": 1434
+        }
+      }
+    ],
+    "recovery": {
+      "scope": "Model field-level memory repair; original dialogue, staging and approved postproduction preserved"
+    },
+    "validation": {
+      "passed": true,
+      "beats": 3,
+      "duration": 101,
+      "dialogues": 10,
+      "moves": 3,
+      "whispers": 0,
+      "semanticReview": {
+        "passed": true,
+        "issues": [],
+        "narrationPatches": []
+      }
+    }
+  }
+}

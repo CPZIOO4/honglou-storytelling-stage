@@ -68,6 +68,14 @@
     "stage": "data/invite-stage.json",
     "characters": "data/waiting-characters.json",
     "cards": "data/invite-cards.json",
-    "story": "data/deepseek-ninth-scene.json"
+    "story": "data/deepseek-ninth-scene.json",
+    "next": "audience"
+  },
+  "audience": {
+    "title": "第十场 · 正房相见",
+    "stage": "data/audience-stage.json",
+    "characters": "data/report-characters.json",
+    "cards": "data/audience-cards.json",
+    "story": "data/deepseek-tenth-scene.json"
   }
 }
