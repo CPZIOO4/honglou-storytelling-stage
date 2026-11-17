@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {compileStory,personalKnowledge,stateAt} from '../src/engine.js';
 
 export const MEMORY_LIMITS={summary:900,character:240,recent:600};
-const plain=(s,max,label)=>{if(typeof s!=='string'||s.length>max||/[{}]|"(?:commands|duration|eventId)"/.test(s))throw Error(label+'必须是预算内的剧情文字');return s;};
+const plain=(s,max,label)=>{if(typeof s!=='string')throw Error(label+'必须是剧情文字字符串');if(s.length>max)throw Error(`${label}超过预算：当前${s.length}字符，上限${max}；只压缩这一字段，保留无误的其他字段。`);if(/[{}]|"(?:commands|duration|eventId)"/.test(s))throw Error(label+'必须是剧情文字，不能夹带动作JSON');return s;};
 export function memoryEvidence(story,stage,characters){
  const c=compileStory(story,stage,characters),heard=personalKnowledge(c,c.duration);
  const end=stateAt(c,c.duration);
@@ -17,7 +17,7 @@ export function validateMemoryUpdate(update,evidence,cards){
  const refs=(v,allowed)=>{if(!Array.isArray(v)||!v.length||v.some(x=>!allowed.has(x)))throw Error('记忆引用了未发生或本人未听见的事件');};
  refs(update.evidenceRefs,ids);
  if(!Array.isArray(update.characters)||new Set(update.characters.map(c=>c.id)).size!==update.characters.length)throw Error('动态人物卡格式无效');
- for(const c of update.characters){if(!cards.characters.some(a=>a.id===c.id)||Object.keys(c).some(k=>!['id','memory','evidenceRefs'].includes(k)))throw Error('不得改动人物稳定字段');plain(c.memory,MEMORY_LIMITS.character,'人物经历');refs(c.evidenceRefs,new Set(evidence.heardBy[c.id]||[]));}
+ for(const c of update.characters){if(!cards.characters.some(a=>a.id===c.id)||Object.keys(c).some(k=>!['id','memory','evidenceRefs'].includes(k)))throw Error('不得改动人物稳定字段');plain(c.memory,MEMORY_LIMITS.character,c.id+'人物经历');refs(c.evidenceRefs,new Set(evidence.heardBy[c.id]||[]));}
  // This executor supports standing sprites, not sitting. Rhetorical speech is
  // not evidence of a physical pose; reject the common leakage into summaries.
  if([update.summary,...update.characters.map(c=>c.memory)].some(s=>/(?:狗儿|刘姥姥|刘氏|他|她)(?:先|正|仍)?坐(?:着|在|下)/.test(s)))throw Error('台词修辞不能记成已执行的坐姿；摘要只记催促、顾虑、门路和决定');

@@ -134,6 +134,14 @@
       "grit": 0.055,
       "duration": 0.06,
       "rate": 10
+    },
+    "ping_er": {
+      "label": "平儿：清柔平稳",
+      "frequency": 285,
+      "wave": "sine",
+      "grit": 0.025,
+      "duration": 0.06,
+      "rate": 10
     }
   },
   "policy": "只从本库选曲，也可留白；按剧情转折选择，不按每句台词换歌。贫寒焦虑不配欢庆曲。对白时自动压低背景音乐。pause保留进度，resume续播，stop清空。"

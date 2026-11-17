@@ -1,6 +1,7 @@
 import {validateFactRefs} from './card-context.mjs';
 
 export const DIALOGUE_CHECKS=['responsiveness','helpRoute','decision','voice','redundancy','agency','facts'];
+const RECEPTION_VOICE='audience-window场次特别注意：平儿稳妥利落，也有人情味；说清候见地点与由谁回话即可，不对尚未犯错的来客堆叠别乱走、别张望、别催等禁令。周瑞妻子熟悉府中事务、顾旧情也顾体面，不把递话写成反复壮胆或一味感激免责。站姿是执行限制，不要让人物反复说站着；自然说候着、等回话即可。若追问求米粮还是求见面，下一句应正面接住，而非用别的听奶奶跳开。两人不用重复同一地点、规矩和见不见的未知结果，允许必要的自然答复。';
 export const WRITE_CONVERSATION=`你是红楼说书舞台唯一总控的编剧。先写一场连续交谈，不预设段数，不按节点小标题逐格填台词。当前节点只规定要面对的问题，不规定求助结果或同行者；scene.dramaturgy和每人的sceneRole规定本场职责，必须遵循。先确定各成人眼下想达成什么、怕什么，再让每句话接住刚才的问话、顾虑或提议。可以自然打断、回避，但须让观众看得懂，不用旁白替人物补动机。
 仅household-decision家中节点：刘姥姥主动拿办法并自己决定去试，动机是真心帮衬一家。狗儿可提供周瑞线索、商量分工，不能先推她出门，迫使她勉强应下。她的乡间智慧和善意要体现在回应家人的具体话里，可自嘲，不持续责骂，不要求家人为失败免责；不要写成不敢包、空手回来别怨我、不兴埋怨。未知接待结果可诚实商量，不等于向家人甩责任。也不要把她写成无所不能或满口牺牲的大好人。其他节点依sceneRole履责：gate-access中她主动有礼问路，以陪笑、具体追问、自嘲应对冷遇，不训门役、不重议出发。门役不知来客姓名与家中私事，需在问答里得知。只问到下一步即收束，别让每人重复确认同一路线。
 只输出JSON {"intentions":[{"actor":"id","aim":"当下目的","concern":"顾虑"}],"turns":[{"id":"t1等唯一id","speaker":"id","to":["id"],"mode":"normal/whisper/call","text":"说出口的自然短句，不超过65字","knowledgeRefs":["本人此前听见的turn id"],"factRefs":["本人卡片事实id"],"respondsTo":["正在回应的此前turn id，可为空"],"actionIntent":"none/approach/turn/nod/shake之一，指发话人靠近收话人、转向、点头或摇头；无需动作选none"}],"endingAim":"实际商议形成的决定"}。
@@ -10,7 +11,7 @@ export const REVIEW_CONVERSATION=`独立审核一场戏。你只有实际对白�
 重点核对：亲人对受委屈的担心是否被回应；中间人的关系、递话对象与求助目的是否清楚；同行提议被改动时缘由是否可见、实际去向是否一致。求助目的要有实际对白支持，如求活、借米、临时周济；不能仅凭说过冬事和去求人就补出具体请求。不要为了修复旧稿而要求新稿必须包含同样的担忧或同行者。
 输出JSON {"passed":true或false,"checks":[{"kind":"responsiveness/helpRoute/decision/voice/redundancy/agency/facts，七项各一次","passed":true或false,"evidenceRefs":["实际turn id"],"reason":"指出原话及其联系，不能泛说符合"}],"initiative":{"volunteerAt":"刘姥姥主动承担本场职责的id（家中自愿出门、门前主动问路、后街主动确认住处、住处主动向旧识说明来意），无则null","delegatedBefore":["此前别人先推她出门的id，无则空数组"],"reason":"主动承担或被推后的应承，用实际原话说明"},"connections":[{"turnId":"除第一句外每句id","connectsTo":["此前id，可空"],"reason":"如何接话或转换，跳脱则指出"}],"concerns":[{"raisedAt":"提出实质顾虑的turn id","responseAt":["后续回应id"],"kind":"external-uncertainty或actionable","status":"answered/deferred/evaded/unresolved","reason":"顾虑怎样被处理，或仍悬而未决"}],"issues":[{"turnIds":["id"],"reason":"具体需要重写的断裂、重复、失真或关系错误"}]}。
 facts逐条核对关系、过去经历和路线的归属与范围。早年与女儿去过王家，不等于与狗儿夫妻都去过，也不等于去过荣府、熟悉荣府路线或周瑞今日住处。知道旧交不等于知道能否见到人。不能为显得能干而凭空给人物添已经确认的经历或资源。
-agency检查以scene.dramaturgy和sceneRole为准。仅家中household-decision节点由刘姥姥自愿提出出门，不是狗儿先让她去后她无奈应下。人物有顾虑不等于推脱责任；她可以商量门路，但若反复要求家人别埋怨、预先免责，或全场只冷硬数落人，agency/voice应不通过。不要用她最后确实答应去来掩盖主动性被别人取代。initiative.delegatedBefore不包含仅提供周瑞线索的句子。gate-access依主动问路评判，不要求重新决定出发，不要求门役讨论家中求活或借米细节；本场helpRoute只需确认找谁、问到可用下一步，不能泄露尚未得知的后台信息。backstreet-contact只需把已知的太太陪房周瑞家身份说给孩子、问清近处住处或获得带路，不要求向孩子重讲求米借钱或家中顾虑。孩子答应领路即可，不需要成人式同行表决；称呼已经明确时无需重演哪位周大娘的误会。intermediary节点的职责是刘姥姥主动向旧识说明来意、周瑞妻子辨认和问清后衡量帮助。她知道府内分工但不知今日来客家中细节；可提议带去找平儿候见，不要求先获取未在场者的同意，也不能把能通报等同已准见。若邀入屋，应在邀请结束处分段，下一段才展开屋内谈事。后续其他节点按environment.dramaturgy判断。
+agency检查以scene.dramaturgy和sceneRole为准。仅家中household-decision节点由刘姥姥自愿提出出门，不是狗儿先让她去后她无奈应下。人物有顾虑不等于推脱责任；她可以商量门路，但若反复要求家人别埋怨、预先免责，或全场只冷硬数落人，agency/voice应不通过。不要用她最后确实答应去来掩盖主动性被别人取代。initiative.delegatedBefore不包含仅提供周瑞线索的句子。gate-access依主动问路评判，不要求重新决定出发，不要求门役讨论家中求活或借米细节；本场helpRoute只需确认找谁、问到可用下一步，不能泄露尚未得知的后台信息。backstreet-contact只需把已知的太太陪房周瑞家身份说给孩子、问清近处住处或获得带路，不要求向孩子重讲求米借钱或家中顾虑。孩子答应领路即可，不需要成人式同行表决；称呼已经明确时无需重演哪位周大娘的误会。intermediary节点的职责是刘姥姥主动向旧识说明来意、周瑞妻子辨认和问清后衡量帮助。她知道府内分工但不知今日来客家中细节；可提议带去找平儿候见，不要求先获取未在场者的同意，也不能把能通报等同已准见。若邀入屋，应在邀请结束处分段，下一段才展开屋内谈事。audience-window节点按当前出场者审核：若来者是周瑞妻子，就由她主动递话，平儿先听后回应；不要强求未在场的刘姥姥主动发言。区分平儿本职范围内安排候见与凤姐亲自答应接见；平儿还没有听到的身份与求助详情不能预知。眼下只需把来客身份、所求及实际等待处说明，不能让双方复述前四场。后续其他节点按environment.dramaturgy判断。
 external-uncertainty指对方在不在、愿不愿帮忙等必须到后续才能知道的结果，可以暂未解决。actionable指本场谁去、谁看孩子、反对同行、拒绝范围等人物当场可回应的问题。actionable若unresolved不能通过；deferred或evaded必须有对白证据表明主动保留、回避或仍有分歧，不能把沉默或换话题当作同意。尤其不能把“我反对两人同去，但我只送到街口”误读为反对已经消失。
 不接话、无意义重复、人物只替提纲宣读、接话对象含混，均属于内容失败，不是可忽略的润色。需有可追踪的实际决定，不能用尚未谈过的结局补足。事实只依稳定卡、本人experiencedMemory和实际听闻，未知只能询问或推测。passed=true要求七项检查全过且issues为空。`;
 
@@ -29,7 +30,7 @@ export function validateConversation(draft,cards){
   if(typeof t.text!=='string'||!t.text.trim()||t.text.length>80||/[:：]|周瑞家的/.test(t.text))throw Error('对白须为80字内口语，不含冒号或周瑞家的');
   if(t.speaker==='baner'&&t.text.length>18)throw Error('板儿只说眼前具体事情的短句，最多18字');
   if(t.speaker==='guide_child'&&t.text.length>30)throw Error('引路孩童的话须短而具体，最多30字，不讲成人求援策略');
-  if(cards.scene.id==='zhou-wife-home'&&/坐吧|坐罢|讨个坐|进屋坐|先坐|坐坐|坐下|落座|坐定|端.{0,3}茶|喝.{0,3}茶/.test(t.text))throw Error('本场仅站姿，不能邀请或接受坐下、端茶喝茶；可邀请进屋说话或稍候，再以真实走位兑现。');
+  if((cards.scene.id==='zhou-wife-home'||cards.scene.dramaturgy?.standingOnly)&&/坐(?:吧|罢|等|候|着|在|下|坐|定)|讨个坐|进屋坐|先坐|落座|端.{0,3}茶|喝.{0,3}茶/.test(t.text))throw Error('本场仅站姿，不能邀请或接受坐下、坐等、端茶喝茶；可邀请说话或稍候，再以真实走位兑现。');
   if(t.speaker==='qinger')throw Error('青儿本场不承担对白');
   if(cards.scene?.dramaturgy?.protagonist==='granny'&&t.speaker==='granny'&&/不敢包|别怨我|不兴埋怨|不许.{0,3}埋怨|成不成.{0,8}[包怨怪]/.test(t.text))throw Error(`${t.id} 本场刘姥姥主动承担，不向家人预先免责；可谈门路的未知，不能索取别埋怨的保证`);
   if(t.actionIntent!==undefined&&!['none','approach','turn','nod','shake'].includes(t.actionIntent))throw Error(`${t.id} actionIntent只允许none/approach/turn/nod/shake；没有坐下、摸头、拉衣服等动作，请连同指向该动作的对白一起重写`);
@@ -73,10 +74,10 @@ export async function composeConversation({ask,cards,context,rejected=null,feedb
  let draft=rejected,review,errors=feedback;
  for(let attempt=0;attempt<3;attempt++){
   await onPhase(attempt?'根据接话审核重写完整交谈':'先写人物之间的连续交谈');
-  draft=await ask(WRITE_CONVERSATION+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
+  draft=await ask(WRITE_CONVERSATION+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE:'')+(draft?'\n这是修订。可以增删、合并或重写一段乃至整场交谈，重新编号并修复引用，保留合理内容，不受旧句数和原句index限制。':''),{writingContext:context,rejected:draft,feedback:errors},'conversation-write-'+attempt);
   try{validateConversation(draft,cards);}catch(e){if(attempt===2)throw e;errors=e.message;continue;}
   await onPhase('独立连读对白，逐句核对回应、门路和决定');
-  review=await ask(REVIEW_CONVERSATION,{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
+  review=await ask(REVIEW_CONVERSATION+(cards.scene.id==='rongfu-waiting'?'\n'+RECEPTION_VOICE+'若把性格、节奏要求写成同一安排的反复确认，或无故堆叠训诫，voice/redundancy不能判通过。':''),{characters:cards.characters,relationshipFacts:cards.relationshipFacts,environment:cards.scene,transcript:transcript(draft,cards)},'conversation-review-'+attempt);
   try{validateDialogueReview(review,draft,cards);}catch(e){if(attempt===2)throw e;errors={validationError:e.message,review};continue;}
   if(review.passed===true)break;
   if(attempt===2)throw Error('连续对白未通过：'+JSON.stringify(review.issues));errors=review;

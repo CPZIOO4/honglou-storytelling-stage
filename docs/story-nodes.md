@@ -52,4 +52,4 @@
 
 ## 当前已接入场景
 
-前四场均已接入；住处接待的实际承接、接口和边界见[第四场说明](fourth-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。
+前五场均已接入；递话与候见安排的实际承接、接口和边界见[第五场说明](fifth-scene.md)。后续人格卡见[考据记录](upcoming-character-research.md)。

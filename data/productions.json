@@ -28,6 +28,14 @@
     "stage": "data/zhouhome-stage.json",
     "characters": "data/zhouhome-characters.json",
     "cards": "data/zhouhome-cards.json",
-    "story": "data/deepseek-fourth-scene.json"
+    "story": "data/deepseek-fourth-scene.json",
+    "next": "waiting"
+  },
+  "waiting": {
+    "title": "第五场 · 廊前递话",
+    "stage": "data/waiting-stage.json",
+    "characters": "data/waiting-characters.json",
+    "cards": "data/waiting-cards.json",
+    "story": "data/deepseek-fifth-scene.json"
   }
 }
