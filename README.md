@@ -69,4 +69,3 @@ node --test tests/*.test.mjs
 沉浸式呈现检查使用 `scripts/check_presentation.cjs`，覆盖题字、姓名、气泡、手机、短过场及连续播放。当前 Flash 全程播放检查使用 `scripts/check_flash_playback.cjs`；旧示例回归浏览器验证脚本为 `scripts/browser_check.cjs`、`scripts/full_playback.cjs`。安装 Playwright 并设置 `PLAYWRIGHT_PACKAGE`，或修改脚本中的本机依赖路径后运行；验证脚本在 finally 中关闭其自有浏览器。`qa/` 是本机截图和检查结果，不进入 Git。
 
 项目由用户提供及本地生成的素材组成。仓库公开不代表获得了原著改编之外的商标或全部素材再授权；Three.js 的许可见其随附 LICENSE。其他素材的使用许可由项目所有者决定。
-
