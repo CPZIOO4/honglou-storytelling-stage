@@ -24,7 +24,7 @@ context.currentState是实际站位。必须根据planStep.dialogue里的对象�
 
 export function handoffAuditContext(story,stage,characters,storyline,handoff){
  const next=nodeFor(storyline,handoff.nextNodeId);
- const places={SC01_JM:'荣府角门',SC11_HJ:'荣府后街',SC12_ZRZ:'周瑞妻子住处',SC13_DT:'倒厅与院门外的候见处，不是凤姐正房',SC14_FJZF:'王熙凤正房'};
+ const places={SC15_SW:'内院经办处，落实既有量米取钱吩咐；不是重新请凤姐许可',SC01_JM:'荣府角门',SC11_HJ:'荣府后街',SC12_ZRZ:'周瑞妻子住处',SC13_DT:'倒厅与院门外的候见处，不是凤姐正房',SC14_FJZF:'王熙凤正房'};
  return {actualEvents:story.beats.flatMap(b=>b.dialogue.map((d,i)=>({eventId:b.id+':'+i,speaker:d.speaker,to:d.to,text:d.text}))),currentScene:{place:story.cardsSnapshot?.scene?.place||stage.id,cast:characters.map(({id,name})=>({id,name}))},nextDestination:{...next,places:next.scenes.map(id=>({id,name:places[id]||id}))},stageOutcome:memoryEvidence(story,stage,characters).stageOutcome,handoff:{transition:handoff.transition,nextNodeId:handoff.nextNodeId,decision:Object.fromEntries(Object.entries(handoff.decision).filter(([k])=>k!=='knownBy')),facts:handoff.facts.map(({knownBy,...f})=>f)}};
 }
 export function normalizeModelBeat(beat){

@@ -797,6 +797,101 @@
           "memory": "只把人物实际听见的话写入其个人记忆"
         }
       }
+    },
+    {
+      "file": "15_内院经办处.md",
+      "scene": {
+        "scene_id": "SC15_SW",
+        "display_name": "内院经办处",
+        "inject": {
+          "position": 4,
+          "depth": 1,
+          "role": "system",
+          "mode": "on_enter_then_diff"
+        },
+        "anchors": [
+          {
+            "id": "A1",
+            "name": "经办处门外",
+            "desc": "传达既有吩咐者到达，不表示已办妥。",
+            "capacity": 2,
+            "layer": "outer"
+          },
+          {
+            "id": "A2",
+            "name": "回话处",
+            "desc": "在场者听明授权和待办事项，尚未出现的人不能自动答话。",
+            "capacity": 2,
+            "layer": "work"
+          },
+          {
+            "id": "A3",
+            "name": "备物处",
+            "desc": "只有对应道具和动作已接入才表现量取、整理。",
+            "capacity": 2,
+            "layer": "work"
+          },
+          {
+            "id": "A4",
+            "name": "送出通路",
+            "desc": "送回廊下；谁去由实际应答和行动确定。",
+            "capacity": 2,
+            "layer": "outer"
+          },
+          {
+            "id": "A5",
+            "name": "旁候处",
+            "desc": "经办暂未结束时的独立等候位置，不占用回话处。",
+            "capacity": 2,
+            "layer": "outer"
+          }
+        ],
+        "default_spawn": {},
+        "exits": [
+          {
+            "to": "SC13_DT",
+            "via": "内院入口至候见廊下",
+            "gate": "依已说明的办理和送出安排",
+            "hidden": false
+          }
+        ],
+        "capacity": 6,
+        "ambient": {
+          "light": "门外日光，室内较暗",
+          "sound": [
+            "脚步"
+          ],
+          "smell": [],
+          "temp": "秋尽冬初，廊口较冷"
+        },
+        "triggers": [
+          {
+            "id": "T1",
+            "when": "实际传达吩咐",
+            "then": "只更新听见者的知识，不自动完成量取",
+            "once": false
+          }
+        ],
+        "props": [],
+        "camera": {
+          "entry": "先交代来者与经办者是否在场",
+          "focus": [
+            "回话处",
+            "送出通路"
+          ]
+        },
+        "art_ref": "ENV15_SW",
+        "implementation": {
+          "status": "design-only",
+          "note": "本次仅为下一故事节点准备环境卡，未绑定新3D模型、经办者或物品操作。第十一场只走到既有模型内院入口。"
+        },
+        "communication": {
+          "normal": "同声区按实际距离判定听众",
+          "whisper": "先靠近并停步再低语，实际可闻者均记录",
+          "recipients": "收话对象不等同全部听众",
+          "memory": "只存本人实际听闻或观察"
+        }
+      }
     }
   ],
   "originalFiles": {

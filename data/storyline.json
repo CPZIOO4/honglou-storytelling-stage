@@ -46,10 +46,10 @@
       "id": "audience-window",
       "title": "争取能够说上话的时机",
       "scenes": ["SC13_DT"],
-      "question": "能否获准见面，等待时如何应对规矩和临时变化？",
-      "requiredChange": "获得会面许可、改约、转达结果或明确拒绝。",
+      "question": "会面前怎样获知准见安排，会面后怎样传达结果并落实后续办理？",
+      "requiredChange": "依据当前经历获得会面许可、改约、转达结果或明确拒绝；若会面已经结束，传达真实结果并落实新分工，不重新争取已得许可。",
       "openChoices": ["谁传话", "等待期间的交谈", "同行者不同带来的礼数与误会", "是否调整请求"],
-      "next": ["make-case", "intermediary", "household-decision"]
+      "next": ["make-case", "intermediary", "household-decision", "aid-fulfillment"]
     },
     {
       "id": "make-case",
@@ -60,6 +60,32 @@
       "openChoices": ["诉苦、求活、借助旧情等表达方式", "帮助的种类与数量", "是否附带条件", "中途插曲与应对"],
       "next": ["audience-window", "intermediary", "household-decision"],
       "forbiddenAssumptions": ["固定得到二十两银子", "遇到任何分支仍重置为原著祖孙二人", "把未来回报自动写成已完成"]
+    },
+    {
+      "id": "aid-fulfillment",
+      "title": "落实已经答应的帮助",
+      "scenes": [
+        "SC15_SW",
+        "SC13_DT"
+      ],
+      "question": "已承诺的帮助如何传给经办者、备妥并实际交到来客手里？",
+      "requiredChange": "明确当下已经办理到哪一步及下一行动者；准备、送达、领取分别有实际依据，不能把计划当到账。",
+      "openChoices": [
+        "在既有授权内的办理方式",
+        "来客与帮忙者的实际应答",
+        "确有依据的办理困难及应对"
+      ],
+      "next": [
+        "aid-fulfillment",
+        "audience-window",
+        "intermediary",
+        "household-decision"
+      ],
+      "forbiddenAssumptions": [
+        "固定得到原著二十两",
+        "尚未递话即已备妥或领取",
+        "无根据增加劳役、借贷、担保条件"
+      ]
     }
   ],
   "continuity": {

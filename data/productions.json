@@ -76,6 +76,14 @@
     "stage": "data/audience-stage.json",
     "characters": "data/report-characters.json",
     "cards": "data/audience-cards.json",
-    "story": "data/deepseek-tenth-scene.json"
+    "story": "data/deepseek-tenth-scene.json",
+    "next": "arrange"
+  },
+  "arrange": {
+    "title": "第十一场 · 廊下候办",
+    "stage": "data/arrange-stage.json",
+    "characters": "data/waiting-characters.json",
+    "cards": "data/arrange-cards.json",
+    "story": "data/deepseek-eleventh-scene.json"
   }
 }
